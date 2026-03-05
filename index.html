@@ -9,13 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* --------------------------------------------------
-   CORE VARIABLES & RESET 
+   CORE VARIABLES 
    --------------------------------------------------
 */
 :root {
   --bg-depth: #050505;
   --bg-surface: #0f0f10;
   --bg-card: #141415;
+  --bg-highlight: #1a1a1c;
   
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-focus: rgba(255, 255, 255, 0.2);
@@ -24,13 +25,10 @@
   --text-secondary: #a1a1aa;
   --text-tertiary: #52525b;
   
-  /* METALLIC ACCENTS */
-  --gold: #D4AF37; 
-  --gold-dim: rgba(212, 175, 55, 0.15);
-  --platinum: #E5E4E2;
-  --platinum-dim: rgba(229, 228, 226, 0.15);
-  --bronze: #CD7F32;
-  --bronze-dim: rgba(205, 127, 50, 0.15);
+  /* PILLAR COLORS */
+  --accent-gold: #D4AF37;       /* Career / Prestige */
+  --accent-indigo: #6366f1;     /* Fellowships / Diplomacy */
+  --accent-emerald: #14b8a6;    /* Admissions / Growth */
   
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'DM Sans', sans-serif;
@@ -50,8 +48,11 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  background-image: radial-gradient(circle at 50% 0%, #1a1a2e 0%, transparent 60%);
-  background-repeat: no-repeat;
+  /* Fixed background that doesn't fade */
+  background-image: 
+    radial-gradient(circle at 15% 10%, rgba(212, 175, 55, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.04) 0%, transparent 40%);
+  background-attachment: fixed;
 }
 
 h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.03em; color: var(--text-primary); }
@@ -78,35 +79,30 @@ nav.scrolled {
 }
 
 .nav-brand { font-family: var(--font-serif); font-size: 1.25rem; letter-spacing: -0.02em; font-weight: 500; }
-
 .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-.nav-links a {
-  color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500;
-  transition: color 0.3s;
-}
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.3s; }
 .nav-links a:hover { color: var(--text-primary); }
 
 .btn-nav {
   padding: 0.6rem 1.4rem;
-  background: var(--gold);
-  color: #000;
+  background: var(--text-primary);
+  color: var(--bg-depth);
   border-radius: 4px;
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
   transition: transform 0.2s;
 }
-.btn-nav:hover { transform: translateY(-1px); background: #fff; }
-
+.btn-nav:hover { transform: translateY(-1px); }
 .menu-toggle { display: none; background: none; border: none; cursor: pointer; color: white; }
 .menu-toggle svg { width: 24px; height: 24px; }
 
 /* --------------------------------------------------
-   HERO SECTION 
+   HERO SECTION & FLOATING ASSETS
    --------------------------------------------------
 */
 .hero {
-  min-height: 90vh;
+  min-height: 95vh;
   display: flex; flex-direction: column; justify-content: center; align-items: center;
   text-align: center;
   padding: 8rem 2rem 4rem;
@@ -115,39 +111,29 @@ nav.scrolled {
   z-index: 1;
 }
 
-.hero::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: linear-gradient(var(--border-subtle) 1px, transparent 1px),
-  linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: 0.07;
-  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
-  pointer-events: none;
-  z-index: -2;
-}
-
-/* FLOATING ASSETS */
+/* Floating 3D Elements Container */
 .floating-assets {
-  position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+  position: absolute; inset: 0; pointer-events: none; z-index: -1;
+  overflow: hidden;
 }
-.float-item {
-  position: absolute; opacity: 0.06;
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
-  animation: floatDrift 20s ease-in-out infinite;
-}
-.float-item svg { width: 100%; height: 100%; fill: none; stroke: var(--text-primary); stroke-width: 1.5px; }
 
-/* Positions */
-.f-cap { top: 15%; left: 10%; width: 140px; animation-duration: 25s; }
-.f-briefcase { bottom: 20%; right: 8%; width: 160px; animation-duration: 22s; animation-delay: -5s; }
-.f-globe { top: 25%; right: 15%; width: 100px; animation-duration: 28s; animation-delay: -10s; }
-.f-scroll { bottom: 15%; left: 15%; width: 120px; animation-duration: 24s; animation-delay: -2s; }
+.float-item {
+  position: absolute;
+  opacity: 0.15; /* Subtle blend */
+  filter: blur(1px);
+  animation: floatDrift 20s infinite ease-in-out alternate;
+}
+
+/* Individual Item Positioning */
+.fi-grad-cap { top: 15%; left: 10%; width: 180px; animation-duration: 25s; }
+.fi-diploma { bottom: 20%; right: 8%; width: 200px; animation-duration: 22s; animation-delay: 2s; }
+.fi-passport { top: 25%; right: 15%; width: 140px; animation-duration: 28s; animation-delay: 5s; opacity: 0.12; }
+.fi-briefcase { bottom: 15%; left: 15%; width: 160px; animation-duration: 24s; animation-delay: 1s; opacity: 0.1; }
 
 @keyframes floatDrift {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-20px) rotate(2deg); }
-  50% { transform: translateY(-35px) rotate(-2deg); }
-  75% { transform: translateY(-15px) rotate(1deg); }
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  50% { transform: translateY(-20px) rotate(3deg) scale(1.02); }
+  100% { transform: translateY(10px) rotate(-2deg) scale(1); }
 }
 
 .hero-pill {
@@ -171,7 +157,7 @@ h1.hero-title {
   -webkit-text-fill-color: transparent;
   opacity: 0; animation: fadeUp 1s 0.2s var(--ease-out) forwards;
 }
-h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--gold); -webkit-text-fill-color: initial; }
+h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--text-primary); -webkit-text-fill-color: initial; }
 
 .hero-desc {
   max-width: 680px;
@@ -188,14 +174,14 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--g
 
 .btn-primary {
   padding: 1rem 2rem;
-  background: var(--gold);
-  color: #000;
+  background: var(--text-primary);
+  color: var(--bg-depth);
   font-weight: 600;
   text-decoration: none;
   border-radius: 4px;
   transition: all 0.3s var(--ease-out);
 }
-.btn-primary:hover { transform: translateY(-2px); background: #fff; box-shadow: 0 10px 30px -10px rgba(255,255,255,0.3); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(255,255,255,0.3); }
 
 .btn-secondary {
   padding: 1rem 2rem;
@@ -207,7 +193,7 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--g
   border-radius: 4px;
   transition: all 0.3s;
 }
-.btn-secondary:hover { border-color: var(--gold); color: var(--gold); background: rgba(255,255,255,0.02); }
+.btn-secondary:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.05); }
 
 /* --------------------------------------------------
    TICKER 
@@ -216,7 +202,6 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--g
 .ticker-wrap {
   width: 100%; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
   background: var(--bg-surface); padding: 1.5rem 0; overflow: hidden;
-  position: relative; z-index: 2;
 }
 .ticker {
   display: flex; gap: 4rem; justify-content: center; align-items: center;
@@ -258,13 +243,52 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--g
 .stat-desc { font-size: 0.9rem; color: var(--text-tertiary); line-height: 1.5; }
 
 /* --------------------------------------------------
+   SERVICES - DISTINCT CONTRAST
+   --------------------------------------------------
+*/
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;
+}
+
+.service-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.service-card:hover { transform: translateY(-5px); }
+
+/* ADMISSIONS - Emerald */
+.service-card.s-admissions:hover { border-color: var(--accent-emerald); box-shadow: 0 10px 40px -10px rgba(20, 184, 166, 0.15); }
+.service-card.s-admissions .svc-icon { color: var(--accent-emerald); border-color: rgba(20, 184, 166, 0.3); }
+.service-card.s-admissions .svc-list li::before { background: var(--accent-emerald); }
+
+/* FELLOWSHIPS - Indigo */
+.service-card.s-fellowships:hover { border-color: var(--accent-indigo); box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.15); }
+.service-card.s-fellowships .svc-icon { color: var(--accent-indigo); border-color: rgba(99, 102, 241, 0.3); }
+.service-card.s-fellowships .svc-list li::before { background: var(--accent-indigo); }
+
+/* CAREER - Gold */
+.service-card.s-career:hover { border-color: var(--accent-gold); box-shadow: 0 10px 40px -10px rgba(212, 175, 55, 0.15); }
+.service-card.s-career .svc-icon { color: var(--accent-gold); border-color: rgba(212, 175, 55, 0.3); }
+.service-card.s-career .svc-list li::before { background: var(--accent-gold); }
+
+.svc-icon { font-family:var(--font-mono); font-size:0.75rem; font-weight: 500; margin-bottom: 1.5rem; border: 1px solid var(--border-subtle); width:fit-content; padding:6px 10px; border-radius:4px; letter-spacing: 0.05em; }
+.svc-title { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 500; color: var(--text-primary); margin-bottom: 1rem; }
+.svc-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.svc-list li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); }
+.svc-list li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; }
+
+/* --------------------------------------------------
    ABOUT / METHODOLOGY
    --------------------------------------------------
 */
 .about-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5rem; align-items: start; }
-
 .about-content blockquote {
-  border-left: 2px solid var(--gold);
+  border-left: 2px solid var(--accent-gold);
   padding-left: 2rem; margin-bottom: 2rem;
   font-family: var(--font-serif); font-size: 1.4rem; font-style: italic; color: var(--text-primary);
   line-height: 1.4;
@@ -272,7 +296,7 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--g
 .about-text { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem; }
 
 /* --------------------------------------------------
-   TIMELINE
+   TIMELINE (4-STEP)
    --------------------------------------------------
 */
 .timeline-container {
@@ -288,65 +312,14 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--g
   transition: background 0.3s;
 }
 .time-step:last-child { border-right: none; }
-.time-step:hover { background: var(--bg-surface); }
-
+.time-step:hover { background: var(--bg-highlight); }
 .step-num {
   font-family: var(--font-mono); font-size: 3rem; color: var(--border-focus);
   opacity: 0.3; margin-bottom: 1.5rem; display: block;
 }
-.time-step:hover .step-num { color: var(--gold); opacity: 1; }
-
+.time-step:hover .step-num { color: var(--accent-gold); opacity: 1; }
 .step-title { font-size: 1.1rem; font-weight: 500; color: var(--text-primary); margin-bottom: 0.5rem; }
 .step-desc { font-size: 0.85rem; color: var(--text-tertiary); line-height: 1.6; }
-
-/* --------------------------------------------------
-   SERVICES - HIGH CONTRAST
-   --------------------------------------------------
-*/
-.services-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;
-  background: transparent; border: none; overflow: visible;
-}
-
-/* Service Card Base */
-.service-card {
-  background: var(--bg-card);
-  padding: 3rem 2rem;
-  transition: transform 0.3s, box-shadow 0.3s;
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  position: relative;
-  overflow: hidden;
-}
-.service-card:hover { transform: translateY(-6px); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.7); }
-
-/* Distinction: Gold (Admissions) */
-.svc-gold { border-top: 3px solid var(--gold); }
-.svc-gold .svc-icon { color: var(--gold); border-color: var(--gold); background: var(--gold-dim); }
-.svc-gold .svc-list li::before { background: var(--gold); }
-.svc-gold:hover { border-color: var(--gold); }
-
-/* Distinction: Platinum (Fellowships) */
-.svc-platinum { border-top: 3px solid var(--platinum); }
-.svc-platinum .svc-icon { color: var(--platinum); border-color: var(--platinum); background: var(--platinum-dim); }
-.svc-platinum .svc-list li::before { background: var(--platinum); }
-.svc-platinum:hover { border-color: var(--platinum); }
-
-/* Distinction: Bronze (Career) */
-.svc-bronze { border-top: 3px solid var(--bronze); }
-.svc-bronze .svc-icon { color: var(--bronze); border-color: var(--bronze); background: var(--bronze-dim); }
-.svc-bronze .svc-list li::before { background: var(--bronze); }
-.svc-bronze:hover { border-color: var(--bronze); }
-
-.svc-icon { 
-  font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; 
-  margin-bottom: 1.5rem; border: 1px solid transparent; 
-  width: fit-content; padding: 6px 12px; border-radius: 4px; 
-}
-.svc-title { font-family: var(--font-sans); font-size: 1.75rem; font-weight: 500; color: var(--text-primary); margin-bottom: 1rem; }
-.svc-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
-.svc-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; }
-.svc-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; margin-top: 8px; flex-shrink: 0; }
 
 /* --------------------------------------------------
    PRICING
@@ -364,14 +337,14 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--g
 }
 .price-card.featured {
   background: var(--bg-highlight);
-  border: 1px solid var(--gold);
+  border: 1px solid var(--accent-gold);
   padding: 3.5rem 2.5rem;
   position: relative;
   transform: scale(1.05);
   z-index: 2;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
-.price-tag { font-family: var(--font-mono); color: var(--gold); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
+.price-tag { font-family: var(--font-mono); color: var(--accent-gold); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
 .price-amount { font-family: var(--font-serif); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 0.5rem; }
 .price-btn {
   width: 100%; padding: 1rem; margin-top: 2rem;
@@ -379,8 +352,8 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--g
   transition: all 0.2s;
 }
 .price-btn.outline { border: 1px solid var(--border-focus); color: var(--text-primary); }
-.price-btn.outline:hover { border-color: var(--gold); background: rgba(255,255,255,0.05); }
-.price-btn.solid { background: var(--gold); color: #000; }
+.price-btn.outline:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.05); }
+.price-btn.solid { background: var(--text-primary); color: var(--bg-depth); }
 .price-btn.solid:hover { background: #fff; }
 
 /* --------------------------------------------------
@@ -398,10 +371,6 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --------------------------------------------------
-   RESPONSIVE 
-   --------------------------------------------------
-*/
 @media (max-width: 900px) {
   .hero-title { font-size: 3.5rem; }
   .bento-grid { grid-template-columns: 1fr; }
@@ -413,7 +382,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
   .price-card.featured { transform: scale(1); }
   .nav-links { display: none; }
   .menu-toggle { display: block; }
-  .floating-assets { opacity: 0.5; }
+  .floating-assets { display: none; } /* Hide heavy visuals on mobile */
 }
 </style>
 </head>
@@ -438,18 +407,29 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
 <section class="hero">
   
   <div class="floating-assets">
-    <div class="float-item f-cap">
-      <svg viewBox="0 0 24 24"><path d="M22 10l-10-5L2 10l10 5 10-5z"/><path d="M6 12v5c0 0 3 3 6 3s6-3 6-3v-5"/><line x1="22" y1="10" x2="22" y2="16"/></svg>
-    </div>
-    <div class="float-item f-briefcase">
-      <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-    </div>
-    <div class="float-item f-globe">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-    </div>
-    <div class="float-item f-scroll">
-      <svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-    </div>
+    <svg class="float-item fi-grad-cap" viewBox="0 0 24 24" fill="none" stroke="rgba(20, 184, 166, 0.4)" stroke-width="0.5">
+      <path d="M22 10l-10-5L2 10l10 5 10-5z"></path>
+      <path d="M6 12v5c0 0 3 3 6 3s6-3 6-3v-5"></path>
+      <line x1="22" y1="10" x2="22" y2="16"></line>
+    </svg>
+    
+    <svg class="float-item fi-briefcase" viewBox="0 0 24 24" fill="none" stroke="rgba(212, 175, 55, 0.4)" stroke-width="0.5">
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+    </svg>
+    
+    <svg class="float-item fi-diploma" viewBox="0 0 24 24" fill="none" stroke="rgba(255, 255, 255, 0.3)" stroke-width="0.5">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+      <polyline points="14 2 14 8 20 8"></polyline>
+      <line x1="16" y1="13" x2="8" y2="13"></line>
+      <line x1="16" y1="17" x2="8" y2="17"></line>
+    </svg>
+
+    <svg class="float-item fi-passport" viewBox="0 0 24 24" fill="none" stroke="rgba(99, 102, 241, 0.4)" stroke-width="0.5">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="2" y1="12" x2="22" y2="12"></line>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
   </div>
 
   <div class="hero-pill">
@@ -533,7 +513,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       </p>
     </div>
     
-    <div style="background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:12px; height:100%; min-height:400px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+    <div style="background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:12px; height:100%; min-height:400px; display:flex; align-items:center; justify-content:center;">
         <span style="font-family:var(--font-serif); font-size:8rem; opacity:0.05; font-style:italic;">AS</span>
     </div>
   </div>
@@ -576,7 +556,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
   </div>
   
   <div class="services-grid">
-    <div class="service-card svc-gold">
+    <div class="service-card s-admissions">
       <div class="svc-icon">ADMISSIONS</div>
       <h3 class="svc-title">College & Grad School</h3>
       <p>Built for transfer students and first-gen applicants targeting selective schools. School lists, fit analysis, and essays that sound like you.</p>
@@ -587,7 +567,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       </ul>
     </div>
     
-    <div class="service-card svc-platinum">
+    <div class="service-card s-fellowships">
       <div class="svc-icon">FELLOWSHIPS</div>
       <h3 class="svc-title">Fellowship Advising</h3>
       <p>Fulbright, Rangel, Boren, Gilman. I know these applications from the inside. We focus on the narrative arc that reviewers look for.</p>
@@ -598,7 +578,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       </ul>
     </div>
     
-    <div class="service-card svc-bronze">
+    <div class="service-card s-career">
       <div class="svc-icon">CAREER</div>
       <h3 class="svc-title">Policy Careers</h3>
       <p>For those pivoting to policy, nonprofits, or federal roles. We translate your background into a compelling professional case.</p>
