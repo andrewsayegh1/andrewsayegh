@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* --------------------------------------------------
-   CORE VARIABLES & RESET 
+   CORE VARIABLES 
    --------------------------------------------------
 */
 :root {
@@ -21,16 +21,15 @@
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-focus: rgba(255, 255, 255, 0.2);
   
-  /* Updated Text Colors */
   --text-primary: #f2f2f2;
   --text-secondary: #a1a1aa;
   --text-tertiary: #52525b;
   
-  /* Updated Metallic Silver Primary */
+  /* Primary Metallic Accent (Silver) */
   --accent-primary: #B0B0B8; 
   --accent-glow: rgba(176, 176, 184, 0.4);
 
-  /* Service Specific Accents */
+  /* Distinct Service Colors */
   --accent-admissions: #6B8CAE;   /* Muted Blue */
   --accent-fellowships: #C9A962;  /* Muted Gold */
   --accent-career: #6BAA8E;       /* Muted Green */
@@ -53,7 +52,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  /* Fixed background texture */
+  /* Fixed Background (No Fade) */
   background-image: radial-gradient(circle at 50% 0%, #1a1a2e 0%, transparent 60%);
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -83,12 +82,8 @@ nav.scrolled {
 }
 
 .nav-brand { font-family: var(--font-serif); font-size: 1.25rem; letter-spacing: -0.02em; font-weight: 500; }
-
 .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-.nav-links a {
-  color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500;
-  transition: color 0.3s;
-}
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.3s; }
 .nav-links a:hover { color: var(--text-primary); }
 
 .btn-nav {
@@ -102,13 +97,11 @@ nav.scrolled {
   transition: transform 0.2s;
 }
 .btn-nav:hover { transform: translateY(-1px); }
-
-/* Mobile Menu Toggle */
 .menu-toggle { display: none; background: none; border: none; cursor: pointer; color: white; }
 .menu-toggle svg { width: 24px; height: 24px; }
 
 /* --------------------------------------------------
-   FLOATING ICONS ANIMATION
+   FLOATING BACKGROUND ICONS 
    --------------------------------------------------
 */
 .floating-icons {
@@ -122,7 +115,7 @@ nav.scrolled {
   position: absolute;
   bottom: -10%;
   opacity: 0;
-  filter: grayscale(100%) brightness(0.6); /* Muted look */
+  filter: grayscale(100%) brightness(0.6);
   pointer-events: none;
   user-select: none;
   animation: floatUp linear infinite;
@@ -130,7 +123,7 @@ nav.scrolled {
 }
 @keyframes floatUp {
   0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.07; } /* Very subtle opacity */
+  10% { opacity: 0.07; } 
   90% { opacity: 0.07; }
   100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
 }
@@ -147,8 +140,6 @@ nav.scrolled {
   position: relative;
   overflow: hidden;
 }
-
-/* Ensure hero content sits above icons */
 .hero > *:not(.floating-icons) { position: relative; z-index: 2; }
 
 .hero-pill {
@@ -229,7 +220,7 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 .ticker-item strong { color: var(--text-secondary); font-weight: 600; margin-right: 6px; }
 
 /* --------------------------------------------------
-   BENTO GRID (Results)
+   BENTO GRID 
    --------------------------------------------------
 */
 .section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
@@ -252,7 +243,6 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 }
 .bento-card:hover { border-color: var(--border-focus); transform: translateY(-4px); }
 .bento-card.wide { grid-column: span 2; }
-.bento-card.tall { grid-row: span 2; }
 
 .stat-num { font-family: var(--font-serif); font-size: 3.5rem; line-height: 1; color: var(--text-primary); margin-bottom: 0.5rem; }
 .stat-label { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; display: block; }
@@ -263,7 +253,6 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
    --------------------------------------------------
 */
 .about-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5rem; align-items: start; }
-
 .about-content blockquote {
   border-left: 2px solid var(--accent-primary);
   padding-left: 2rem; margin-bottom: 2rem;
@@ -273,7 +262,7 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 .about-text { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem; }
 
 /* --------------------------------------------------
-   TIMELINE
+   TIMELINE (4-STEP)
    --------------------------------------------------
 */
 .timeline-container {
@@ -290,18 +279,16 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 }
 .time-step:last-child { border-right: none; }
 .time-step:hover { background: var(--bg-highlight); }
-
 .step-num {
   font-family: var(--font-mono); font-size: 3rem; color: var(--border-focus);
   opacity: 0.3; margin-bottom: 1.5rem; display: block;
 }
 .time-step:hover .step-num { color: var(--accent-primary); opacity: 1; }
-
 .step-title { font-size: 1.1rem; font-weight: 500; color: var(--text-primary); margin-bottom: 0.5rem; }
 .step-desc { font-size: 0.85rem; color: var(--text-tertiary); line-height: 1.6; }
 
 /* --------------------------------------------------
-   SERVICES - DISTINCT STYLES
+   SERVICES - DISTINCT COLORS
    --------------------------------------------------
 */
 .services-grid {
@@ -318,13 +305,10 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
   overflow: hidden;
 }
 .service-card:hover { transform: translateY(-5px); }
-
-/* Top Border Gradient */
 .service-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
 }
 
-/* Service Card Typography & Icons */
 .svc-icon { 
   font-family:var(--font-mono); font-size:0.9rem; color:var(--text-tertiary); margin-bottom: 1.5rem; 
   border: 1px solid var(--border-subtle); width:fit-content; padding:4px 8px; border-radius:4px;
@@ -334,19 +318,19 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 .svc-list li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); }
 .svc-list li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; }
 
-/* --- Admissions Specific --- */
+/* Admissions: Blue */
 .service-card[data-type="admissions"]::before { background: linear-gradient(90deg, var(--accent-admissions), transparent); }
 .service-card[data-type="admissions"] .svc-icon { border-color: var(--accent-admissions); color: var(--accent-admissions); }
 .service-card[data-type="admissions"] .svc-list li::before { background: var(--accent-admissions); }
 .service-card[data-type="admissions"]:hover { background: linear-gradient(180deg, rgba(107,140,174,0.08) 0%, var(--bg-card) 30%); }
 
-/* --- Fellowships Specific --- */
+/* Fellowships: Gold */
 .service-card[data-type="fellowships"]::before { background: linear-gradient(90deg, var(--accent-fellowships), transparent); }
 .service-card[data-type="fellowships"] .svc-icon { border-color: var(--accent-fellowships); color: var(--accent-fellowships); }
 .service-card[data-type="fellowships"] .svc-list li::before { background: var(--accent-fellowships); }
 .service-card[data-type="fellowships"]:hover { background: linear-gradient(180deg, rgba(201,169,98,0.08) 0%, var(--bg-card) 30%); }
 
-/* --- Career Specific --- */
+/* Career: Green */
 .service-card[data-type="career"]::before { background: linear-gradient(90deg, var(--accent-career), transparent); }
 .service-card[data-type="career"] .svc-icon { border-color: var(--accent-career); color: var(--accent-career); }
 .service-card[data-type="career"] .svc-list li::before { background: var(--accent-career); }
@@ -403,10 +387,6 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --------------------------------------------------
-   RESPONSIVE 
-   --------------------------------------------------
-*/
 @media (max-width: 900px) {
   .hero-title { font-size: 3.5rem; }
   .bento-grid { grid-template-columns: 1fr; }
@@ -669,9 +649,8 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
     });
   });
 
-  // Floating background icons script
+  // Floating background icons generator
   (function() {
-    // Graduation Cap, Scroll, Briefcase, Building, Airplane, Clipboard
     var icons = ['\u{1F393}', '\u{1F4DC}', '\u{1F4BC}', '\u{1F3DB}', '\u2708\uFE0F', '\u{1F4CB}'];
     var container = document.querySelector('.floating-icons');
     if (!container) return;
@@ -680,13 +659,10 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       var el = document.createElement('span');
       el.className = 'floating-icon';
       el.textContent = icons[i % icons.length];
-      
-      // Random positioning and timing
       el.style.left = (Math.random() * 95) + '%';
       el.style.fontSize = (1.5 + Math.random() * 3) + 'rem';
       el.style.animationDuration = (20 + Math.random() * 30) + 's';
       el.style.animationDelay = '-' + (Math.random() * 40) + 's';
-      
       container.appendChild(el);
     }
   })();
