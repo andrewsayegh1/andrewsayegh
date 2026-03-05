@@ -52,7 +52,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  /* Fixed Background (No Fade) */
+  /* Original Clean Background */
   background-image: radial-gradient(circle at 50% 0%, #1a1a2e 0%, transparent 60%);
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -101,34 +101,6 @@ nav.scrolled {
 .menu-toggle svg { width: 24px; height: 24px; }
 
 /* --------------------------------------------------
-   FLOATING BACKGROUND ICONS 
-   --------------------------------------------------
-*/
-.floating-icons {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 1;
-}
-.floating-icon {
-  position: absolute;
-  bottom: -10%;
-  opacity: 0;
-  filter: grayscale(100%) brightness(0.6);
-  pointer-events: none;
-  user-select: none;
-  animation: floatUp linear infinite;
-  color: var(--text-tertiary);
-}
-@keyframes floatUp {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.07; } 
-  90% { opacity: 0.07; }
-  100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
-}
-
-/* --------------------------------------------------
    HERO SECTION 
    --------------------------------------------------
 */
@@ -140,7 +112,6 @@ nav.scrolled {
   position: relative;
   overflow: hidden;
 }
-.hero > *:not(.floating-icons) { position: relative; z-index: 2; }
 
 .hero-pill {
   display: inline-flex; align-items: center; gap: 8px;
@@ -207,7 +178,7 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 */
 .ticker-wrap {
   width: 100%; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
-  background: var(--bg-surface); padding: 1.5rem 0; overflow: hidden; position: relative; z-index: 2;
+  background: var(--bg-surface); padding: 1.5rem 0; overflow: hidden;
 }
 .ticker {
   display: flex; gap: 4rem; justify-content: center; align-items: center;
@@ -223,7 +194,7 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
    BENTO GRID 
    --------------------------------------------------
 */
-.section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+.section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; }
 .section-header { margin-bottom: 4rem; max-width: 600px; }
 .section-header h2 { font-size: 3rem; margin-bottom: 1rem; }
 
@@ -376,7 +347,7 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
    FOOTER 
    --------------------------------------------------
 */
-footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-align: center; margin-top: 4rem; position: relative; z-index: 2; }
+footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-align: center; margin-top: 4rem; }
 .footer-logo { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem; display: block; color: var(--text-primary); text-decoration: none; }
 .socials { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
 .socials a { color: var(--text-tertiary); text-decoration: none; transition: color 0.3s; }
@@ -420,8 +391,6 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
 </nav>
 
 <section class="hero">
-  <div class="floating-icons"></div>
-
   <div class="hero-pill">
     <span class="dot"></span>
     <span>ACCEPTING CLIENTS FOR SPRING 2026</span>
@@ -648,24 +617,6 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       }
     });
   });
-
-  // Floating background icons generator
-  (function() {
-    var icons = ['\u{1F393}', '\u{1F4DC}', '\u{1F4BC}', '\u{1F3DB}', '\u2708\uFE0F', '\u{1F4CB}'];
-    var container = document.querySelector('.floating-icons');
-    if (!container) return;
-
-    for (var i = 0; i < 20; i++) {
-      var el = document.createElement('span');
-      el.className = 'floating-icon';
-      el.textContent = icons[i % icons.length];
-      el.style.left = (Math.random() * 95) + '%';
-      el.style.fontSize = (1.5 + Math.random() * 3) + 'rem';
-      el.style.animationDuration = (20 + Math.random() * 30) + 's';
-      el.style.animationDelay = '-' + (Math.random() * 40) + 's';
-      container.appendChild(el);
-    }
-  })();
 </script>
 
 </body>
