@@ -1,500 +1,571 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andrew Sayegh | Elite Admissions Strategy</title>
-<meta name="description" content="Strategic application coaching for the ambitious. UCLA Transfer, Rangel Finalist, Sciences Po.">
+<title>Andrew Sayegh | Elite Admissions & Career Strategy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════
-   CORE DESIGN SYSTEM
-   ═══════════════════════════════════════════ */
+/* --------------------------------------------------
+   CORE VARIABLES & RESET 
+   --------------------------------------------------
+*/
 :root {
-  --bg-body: #FAFAF9;
-  --bg-surface: #ffffff;
-  --bg-surface-alt: #F4F4F5;
-  --text-main: #18181B;
-  --text-muted: #71717A;
-  --text-light: #A1A1AA;
+  --bg-depth: #050505;
+  --bg-surface: #0f0f10;
+  --bg-card: #141415;
+  --bg-highlight: #1a1a1c;
   
-  --accent-primary: #2e1065; /* Deep Regal Indigo */
-  --accent-vibrant: #4F46E5; /* Electric Indigo */
-  --accent-glow: rgba(79, 70, 229, 0.15);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(255, 255, 255, 0.2);
   
-  --border-light: rgba(0,0,0,0.06);
-  --border-dark: rgba(255,255,255,0.08);
+  --text-primary: #f2f2f2;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #52525b;
+  
+  --accent-primary: #4f46e5; /* Indigo */
+  --accent-glow: rgba(79, 70, 229, 0.4);
+  --accent-gold: #d4af37; /* Prestige accent */
 
   --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
 
-  --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
-  --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-/* Dark Mode Tokens for Specific Sections */
-.dark-theme {
-  --bg-body: #09090b;
-  --bg-surface: #18181b;
-  --bg-surface-alt: #27272a;
-  --text-main: #ffffff;
-  --text-muted: #a1a1aa;
-  --border-light: rgba(255,255,255,0.1);
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { font-size: 16px; scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
 body {
+  background-color: var(--bg-depth);
+  color: var(--text-primary);
   font-family: var(--font-sans);
-  background-color: var(--bg-body);
-  color: var(--text-main);
   line-height: 1.6;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  background-image: radial-gradient(circle at 50% 0%, #1a1a2e 0%, transparent 60%);
+  background-repeat: no-repeat;
 }
 
-/* FILM GRAIN OVERLAY - Adds texture/premium feel */
-.noise-overlay {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 9999; opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
-}
+/* Typography Utilities */
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.03em; color: var(--text-primary); }
+p { color: var(--text-secondary); }
+em { font-family: var(--font-serif); font-style: italic; color: var(--text-primary); }
+.mono { font-family: var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.75rem; color: var(--text-tertiary); }
 
-/* ═══════════════════════════════════════════
-   TYPOGRAPHY
-   ═══════════════════════════════════════════ */
-h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; line-height: 1.1; letter-spacing: -0.03em; }
-p { letter-spacing: -0.01em; }
-
-.text-display { font-size: clamp(3.5rem, 8vw, 6rem); line-height: 0.95; }
-.text-h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
-.text-h3 { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; }
-.text-label { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
-
-em { font-family: var(--font-serif); font-style: italic; color: var(--accent-vibrant); font-weight: 400; }
-
-/* ═══════════════════════════════════════════
-   UI COMPONENTS
-   ═══════════════════════════════════════════ */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-  padding: 1rem 2rem; border-radius: 99px;
-  font-weight: 500; font-size: 0.95rem; text-decoration: none;
-  transition: all 0.4s var(--ease-out);
-  position: relative; overflow: hidden; z-index: 1;
-}
-.btn-primary {
-  background: var(--text-main); color: var(--bg-body);
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
-}
-.btn-secondary {
-  background: transparent; color: var(--text-main);
-  border: 1px solid var(--border-light);
-}
-.btn-secondary:hover {
-  background: var(--bg-surface-alt);
-  border-color: var(--text-main);
-}
-
-.card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: 1.5rem;
-  padding: 2rem;
-  transition: all 0.4s var(--ease-out);
-}
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05);
-  border-color: rgba(0,0,0,0.1);
-}
-
-/* ═══════════════════════════════════════════
-   NAVIGATION
-   ═══════════════════════════════════════════ */
+/* --------------------------------------------------
+   NAVIGATION 
+   --------------------------------------------------
+*/
 nav {
-  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-  padding: 1.5rem 2rem;
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  padding: 1.2rem 2rem;
   display: flex; justify-content: space-between; align-items: center;
-  transition: padding 0.3s ease;
+  border-bottom: 1px solid transparent;
+  transition: all 0.4s var(--ease-out);
+  backdrop-filter: blur(0px);
 }
 nav.scrolled {
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
   padding: 1rem 2rem;
-  background: rgba(250, 250, 249, 0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-light);
 }
-.nav-logo { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; }
-.nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+
+.nav-brand { font-family: var(--font-serif); font-size: 1.25rem; letter-spacing: -0.02em; font-weight: 500; }
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
 .nav-links a {
-  font-size: 0.9rem; color: var(--text-muted); text-decoration: none;
-  transition: color 0.2s; position: relative;
+  color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500;
+  transition: color 0.3s;
 }
-.nav-links a:hover { color: var(--text-main); }
-.nav-cta {
-  background: var(--text-main); color: var(--bg-body);
-  padding: 0.5rem 1.25rem; border-radius: 99px; font-size: 0.85rem;
+.nav-links a:hover { color: var(--text-primary); }
+
+.btn-nav {
+  padding: 0.6rem 1.4rem;
+  background: var(--text-primary);
+  color: var(--bg-depth);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
   transition: transform 0.2s;
 }
-.nav-cta:hover { transform: scale(1.05); }
+.btn-nav:hover { transform: translateY(-1px); }
 
 /* Mobile Menu Toggle */
-.mobile-toggle { display: none; cursor: pointer; z-index: 101; }
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .mobile-toggle { display: block; }
-}
+.menu-toggle { display: none; background: none; border: none; cursor: pointer; color: white; }
+.menu-toggle svg { width: 24px; height: 24px; }
 
-/* ═══════════════════════════════════════════
-   SECTIONS
-   ═══════════════════════════════════════════ */
-.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-section { padding: 6rem 0; }
-
-/* HERO */
+/* --------------------------------------------------
+   HERO SECTION 
+   --------------------------------------------------
+*/
 .hero {
-  min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden; padding-top: 80px;
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  padding: 8rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
 }
-.hero-bg-blob {
-  position: absolute; width: 60vw; height: 60vw;
-  background: radial-gradient(circle, rgba(79,70,229,0.12) 0%, rgba(255,255,255,0) 70%);
-  border-radius: 50%; top: -20%; left: 50%; transform: translateX(-50%);
-  animation: pulseBlob 8s infinite alternate; z-index: -1;
+
+/* Subtle grid background */
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(var(--border-subtle) 1px, transparent 1px),
+  linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.07;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  pointer-events: none;
 }
-@keyframes pulseBlob { 0% { opacity: 0.5; transform: translateX(-50%) scale(1); } 100% { opacity: 0.8; transform: translateX(-50%) scale(1.2); } }
 
-.hero-content { text-align: center; max-width: 900px; }
-.hero-badges { display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
-.badge {
-  background: rgba(255,255,255,0.6); border: 1px solid var(--border-light);
-  padding: 0.4rem 1rem; border-radius: 99px;
-  font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted);
-  backdrop-filter: blur(4px);
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 2rem;
+  animation: fadeUp 0.8s ease-out forwards;
 }
-.hero-sub { font-size: 1.25rem; color: var(--text-muted); margin: 2rem auto; max-width: 600px; }
+.hero-pill .dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px #22c55e; }
+.hero-pill span { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); letter-spacing: 0.05em; }
 
-/* CREDENTIALS - DARK MODE BREAK */
-.credentials { background: #111111; color: white; padding: 4rem 0; overflow: hidden; }
-.ticker-wrap { width: 100%; overflow: hidden; white-space: nowrap; }
-.ticker { display: inline-block; animation: ticker 20s linear infinite; }
-.ticker-item { display: inline-block; padding: 0 3rem; font-family: var(--font-serif); font-size: 2rem; opacity: 0.5; transition: opacity 0.3s; }
-.ticker-item:hover { opacity: 1; color: var(--accent-vibrant); }
-@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+h1.hero-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.95;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to bottom right, #fff 30%, #999 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0; animation: fadeUp 1s 0.2s var(--ease-out) forwards;
+}
+h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--text-primary); -webkit-text-fill-color: initial; }
 
-/* BENTO GRID SERVICES */
+.hero-desc {
+  max-width: 600px;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp 1s 0.4s var(--ease-out) forwards;
+}
+
+.hero-btns {
+  display: flex; gap: 1rem;
+  opacity: 0; animation: fadeUp 1s 0.6s var(--ease-out) forwards;
+}
+
+.btn-primary {
+  padding: 1rem 2rem;
+  background: var(--text-primary);
+  color: var(--bg-depth);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s var(--ease-out);
+  position: relative; overflow: hidden;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(255,255,255,0.3); }
+
+.btn-secondary {
+  padding: 1rem 2rem;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-focus);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+.btn-secondary:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.05); }
+
+/* --------------------------------------------------
+   TICKER / LOGOS 
+   --------------------------------------------------
+*/
+.ticker-wrap {
+  width: 100%; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface); padding: 1.5rem 0; overflow: hidden;
+}
+.ticker {
+  display: flex; gap: 4rem; justify-content: center; align-items: center;
+  flex-wrap: wrap; text-align: center;
+}
+.ticker-item {
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-tertiary); letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.ticker-item strong { color: var(--text-secondary); font-weight: 600; margin-right: 6px; }
+
+/* --------------------------------------------------
+   BENTO GRID LAYOUTS (Results)
+   --------------------------------------------------
+*/
+.section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 4rem; max-width: 600px; }
+.section-header h2 { font-size: 3rem; margin-bottom: 1rem; }
+
 .bento-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 1.5rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  margin-bottom: 4rem;
 }
 .bento-card {
-  padding: 2.5rem; border-radius: 1.5rem; background: var(--bg-surface);
-  border: 1px solid var(--border-light); transition: all 0.4s;
-  display: flex; flex-direction: column; justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: 2.5rem;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
 }
-.bento-card:hover { border-color: var(--accent-vibrant); transform: translateY(-4px); }
-.bento-span-2 { grid-column: span 2; background: var(--text-main); color: white; }
-.bento-span-2 .text-label { color: rgba(255,255,255,0.6); }
-.bento-span-2 .text-h3 { color: white; }
-.bento-span-2 p { color: rgba(255,255,255,0.8); }
+.bento-card:hover { border-color: var(--border-focus); transform: translateY(-4px); }
+.bento-card.wide { grid-column: span 2; }
+.bento-card.tall { grid-row: span 2; }
 
-@media (max-width: 900px) { .bento-grid { grid-template-columns: 1fr; } .bento-span-2 { grid-column: auto; } }
+.stat-num { font-family: var(--font-serif); font-size: 4rem; line-height: 1; color: var(--text-primary); margin-bottom: 0.5rem; }
+.stat-label { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-desc { margin-top: 1rem; font-size: 0.9rem; color: var(--text-tertiary); }
 
-/* PROCESS */
-.process-step { border-left: 1px solid var(--border-light); padding-left: 2rem; position: relative; padding-bottom: 3rem; }
-.process-step::before {
-  content: ''; position: absolute; left: -5px; top: 0; width: 9px; height: 9px;
-  background: var(--text-main); border-radius: 50%;
+/* --------------------------------------------------
+   SERVICES (Cards)
+   --------------------------------------------------
+*/
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px;
+  background: var(--border-subtle); /* border trick */
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px; overflow: hidden;
 }
-.process-step:last-child { border-left: transparent; }
-
-/* PRICING */
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-.price-tag { font-family: var(--font-serif); font-size: 3rem; line-height: 1; margin: 1rem 0; }
-
-/* FOOTER */
-footer { border-top: 1px solid var(--border-light); padding: 4rem 0; margin-top: 4rem; }
-
-/* ANIMATION UTILS */
-.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s var(--ease-out); }
-.reveal.active { opacity: 1; transform: translateY(0); }
-
-/* Mobile Menu Overlay */
-.mobile-menu {
-  position: fixed; inset: 0; background: var(--bg-body); z-index: 100;
-  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
-  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+.service-card {
+  background: var(--bg-surface);
+  padding: 3rem 2rem;
+  transition: background 0.3s;
 }
-.mobile-menu.open { opacity: 1; pointer-events: all; }
-.mobile-menu a { font-family: var(--font-serif); font-size: 2rem; text-decoration: none; color: var(--text-main); }
+.service-card:hover { background: var(--bg-card); }
+.svc-icon { width: 40px; height: 40px; border: 1px solid var(--border-focus); border-radius: 8px; display: grid; place-items: center; margin-bottom: 2rem; color: var(--text-primary); }
+.svc-title { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 500; color: var(--text-primary); margin-bottom: 1rem; }
+.svc-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.svc-list li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); }
+.svc-list li::before { content: ''; width: 6px; height: 6px; background: var(--accent-primary); border-radius: 50%; opacity: 0.6; }
 
+/* --------------------------------------------------
+   ABOUT (Split)
+   --------------------------------------------------
+*/
+.about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-img-box {
+  width: 100%; height: 100%; min-height: 500px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  display: grid; place-items: center;
+}
+/* Placeholder for visual interest if no image */
+.about-img-box::after {
+  content: 'AS'; font-family: var(--font-serif); font-size: 10rem; opacity: 0.05; font-style: italic;
+}
+
+.about-content blockquote {
+  border-left: 2px solid var(--accent-primary);
+  padding-left: 2rem; margin-bottom: 2rem;
+  font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; color: var(--text-primary);
+}
+
+/* --------------------------------------------------
+   PRICING (Comparison)
+   --------------------------------------------------
+*/
+.pricing-wrapper {
+  display: grid; grid-template-columns: 1.2fr 1.5fr 1.2fr;
+  align-items: center; gap: 2rem; margin-top: 4rem;
+}
+.price-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  padding: 2.5rem; border-radius: 12px;
+  display: flex; flex-direction: column;
+}
+.price-card.featured {
+  background: var(--bg-highlight);
+  border: 1px solid var(--accent-primary);
+  padding: 3.5rem 2.5rem;
+  box-shadow: 0 0 40px rgba(79, 70, 229, 0.1);
+  position: relative;
+  z-index: 10;
+}
+.price-tag { font-family: var(--font-mono); color: var(--accent-primary); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
+.price-amount { font-family: var(--font-serif); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+.price-feat li { color: var(--text-secondary); margin-bottom: 0.8rem; font-size: 0.9rem; }
+.price-btn {
+  width: 100%; padding: 1rem; margin-top: 2rem;
+  text-align: center; border-radius: 4px; text-decoration: none; font-weight: 600;
+  transition: all 0.2s;
+}
+.price-btn.outline { border: 1px solid var(--border-focus); color: var(--text-primary); }
+.price-btn.outline:hover { border-color: var(--text-primary); }
+.price-btn.solid { background: var(--text-primary); color: var(--bg-depth); }
+.price-btn.solid:hover { background: #fff; transform: scale(1.02); }
+
+/* --------------------------------------------------
+   FOOTER 
+   --------------------------------------------------
+*/
+footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-align: center; margin-top: 4rem; }
+.footer-logo { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem; display: block; color: var(--text-primary); text-decoration: none; }
+.socials { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
+.socials a { color: var(--text-tertiary); text-decoration: none; transition: color 0.3s; }
+.socials a:hover { color: var(--text-primary); }
+
+/* Animation Keyframes */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------
+   RESPONSIVE 
+   --------------------------------------------------
+*/
+@media (max-width: 900px) {
+  .hero-title { font-size: 3.5rem; }
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-card.wide { grid-column: span 1; }
+  .about-layout { grid-template-columns: 1fr; }
+  .pricing-wrapper { grid-template-columns: 1fr; gap: 1rem; }
+  .price-card.featured { padding: 2.5rem; border-color: var(--border-focus); }
+  .nav-links { display: none; } /* Simplified for demo */
+  .menu-toggle { display: block; }
+}
 </style>
 </head>
 <body>
 
-<div class="noise-overlay"></div>
-
 <nav id="navbar">
-  <div class="nav-logo">Andrew Sayegh.</div>
+  <div class="nav-brand">Andrew Sayegh</div>
   <ul class="nav-links">
-    <li><a href="#results">Results</a></li>
+    <li><a href="#results">Track Record</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#pricing">Pricing</a></li>
   </ul>
-  <a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="nav-cta hidden-mobile">Book Strategy Call</a>
-  <div class="mobile-toggle" onclick="toggleMenu()">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+  <div style="display:flex; align-items:center; gap:1rem;">
+    <a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="btn-nav">Book Strategy Call</a>
+    <button class="menu-toggle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
   </div>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#results" onclick="toggleMenu()">Results</a>
-  <a href="#services" onclick="toggleMenu()">Services</a>
-  <a href="#about" onclick="toggleMenu()">About</a>
-  <a href="#pricing" onclick="toggleMenu()">Pricing</a>
-  <a href="https://forms.gle/bTyhCoAabwYHnzwp9" style="font-size: 1rem; color: var(--accent-vibrant);">Book Free Call →</a>
-  <button onclick="toggleMenu()" style="position:absolute; top: 2rem; right: 2rem; background:none; border:none; font-size:1.5rem;">✕</button>
+<section class="hero">
+  <div class="hero-pill">
+    <span class="dot"></span>
+    <span>ACCEPTING CLIENTS FOR SPRING 2026</span>
+  </div>
+  
+  <h1 class="hero-title">
+    Your unfair advantage<br>
+    <span class="italic">for getting in.</span>
+  </h1>
+  
+  <p class="hero-desc">
+    I navigated the path from community college to UCLA, competitive fellowships, and policy careers without insider connections. Now, I build that roadmap for you.
+  </p>
+  
+  <div class="hero-btns">
+    <a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="btn-primary">Book 15-Min Intro</a>
+    <a href="#services" class="btn-secondary">View Services</a>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item"><strong>UCLA</strong> Transfer Alum</div>
+    <div class="ticker-item"><strong>Columbia SIPA</strong> Admit</div>
+    <div class="ticker-item"><strong>Rangel & Pickering</strong> Finalist</div>
+    <div class="ticker-item"><strong>Dep. of State</strong> Experience</div>
+  </div>
 </div>
 
-<section class="hero">
-  <div class="hero-bg-blob"></div>
-  <div class="container hero-content">
-    <div class="hero-badges reveal">
-      <span class="badge">UC TRANSFER SPECIALIST</span>
-      <span class="badge">RANGEL FINALIST</span>
-      <span class="badge">SCIENCES PO</span>
+<section id="results" class="section">
+  <div class="section-header">
+    <span class="mono">Proven Results</span>
+    <h2>Credentials that <span style="color:var(--text-tertiary)">speak loudly.</span></h2>
+  </div>
+  
+  <div class="bento-grid">
+    <div class="bento-card wide">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">First-Gen Success</div>
+      <p class="stat-desc">Built from scratch. I specialize in helping students who don't have a family legacy map out the hidden curriculum of elite admissions.</p>
     </div>
-    <h1 class="text-display reveal" style="transition-delay: 0.1s;">
-      The unfair advantage <br> for <em style="color:var(--accent-vibrant)">getting in.</em>
-    </h1>
-    <p class="hero-sub reveal" style="transition-delay: 0.2s;">
-      I navigated from community college to UCLA, competitive fellowships, and global policy roles without insider connections. Now, I build that roadmap for you.
-    </p>
-    <div class="reveal" style="transition-delay: 0.3s; margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
-      <a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="btn btn-primary">Book 15-Min Intro</a>
-      <a href="#services" class="btn btn-secondary">Explore Services</a>
+    <div class="bento-card">
+      <div class="stat-num">2+</div>
+      <div class="stat-label">National Fellowships</div>
+      <p class="stat-desc">Winner of competitive federal awards including FLAS.</p>
+    </div>
+    <div class="bento-card">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Policy Internships</div>
+      <p class="stat-desc">From CAIR National to the U.S. House of Representatives.</p>
     </div>
   </div>
 </section>
 
-<section class="credentials" id="results">
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <div class="ticker-item">Columbia SIPA Admit</div>
-      <div class="ticker-item">UCLA Transfer</div>
-      <div class="ticker-item">Rangel Finalist</div>
-      <div class="ticker-item">Boren Scholarship</div>
-      <div class="ticker-item">Congressional Intern</div>
-      <div class="ticker-item">FLAS Fellow</div>
-      <div class="ticker-item">Columbia SIPA Admit</div>
-      <div class="ticker-item">UCLA Transfer</div>
-      <div class="ticker-item">Rangel Finalist</div>
-      <div class="ticker-item">Boren Scholarship</div>
-      <div class="ticker-item">Congressional Intern</div>
-      <div class="ticker-item">FLAS Fellow</div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="reveal">
-      <div class="text-label">The Challenge</div>
-      <h2 class="text-h2" style="max-width: 800px; margin-top: 1rem;">The people who get in know things you don't. <em style="color: var(--accent-vibrant)">Yet.</em></h2>
-      <p style="max-width: 600px; margin-top: 1.5rem; font-size: 1.1rem; color: var(--text-muted);">
-        Competitive applications aren't just about credentials. They're about narrative architecture. I help you translate lived experience into the specific language committees are listening for.
+<section id="about" class="section">
+  <div class="about-layout">
+    <div class="about-content">
+      <span class="mono">The Methodology</span>
+      <h2>I didn't have a guide.<br><span style="font-style:italic; color:var(--text-tertiary);">You do now.</span></h2>
+      <br>
+      <blockquote>
+        "The system wasn't built with us in mind. But we can learn to navigate it—and change it from the inside."
+      </blockquote>
+      <p>
+        I grew up in Murrieta, California and started at community college without a counselor who understood what "competitive applications" meant. I figured it out through relentless research and iteration.
+      </p>
+      <br>
+      <p>
+        That process took me to UCLA, through two nationally competitive fellowships, and internships at TIMEP and Congress. Today, as a Case Manager at City Net and incoming Master's candidate at Sciences Po, I turn that lived experience into strategy for you.
       </p>
     </div>
+    <div class="about-img-box">
+      </div>
   </div>
 </section>
 
-<section id="services" style="background: var(--bg-surface-alt);">
-  <div class="container">
-    <div class="text-label" style="margin-bottom: 2rem;">My Expertise</div>
-    <div class="bento-grid">
-      
-      <div class="bento-card bento-span-2 reveal">
-        <div>
-          <div class="text-label" style="color: rgba(255,255,255,0.7);">Most Popular</div>
-          <h3 class="text-h3" style="font-size: 1.75rem; margin-top: 0.5rem; margin-bottom: 1rem;">Fellowship Strategy</h3>
-          <p>Fulbright, Rangel, Pickering, Boren. I know these applications from the inside out. We build a narrative that makes reviewers stop skimming and start reading.</p>
-        </div>
-        <div style="margin-top: 2rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-          <span class="badge" style="background: rgba(255,255,255,0.1); border:none; color:white;">Essay Drafting</span>
-          <span class="badge" style="background: rgba(255,255,255,0.1); border:none; color:white;">Mock Interviews</span>
-          <span class="badge" style="background: rgba(255,255,255,0.1); border:none; color:white;">Strategy</span>
-        </div>
-      </div>
-
-      <div class="bento-card reveal" style="transition-delay: 0.1s;">
-        <h3 class="text-h3">College Transfer</h3>
-        <p style="font-size: 0.9rem; margin-top: 1rem; color: var(--text-muted);">
-          Specialized coaching for community college students targeting top-tier universities (UCs and Privates).
-        </p>
-        <div style="margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--border-light);">
-          <span style="font-weight: 600;">From $500</span>
-        </div>
-      </div>
-
-      <div class="bento-card reveal" style="transition-delay: 0.2s;">
-        <h3 class="text-h3">Grad School & Law</h3>
-        <p style="font-size: 0.9rem; margin-top: 1rem; color: var(--text-muted);">
-          Personal statements that define your "Why." For Policy, IR, and Law School applicants.
-        </p>
-        <div style="margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--border-light);">
-          <span style="font-weight: 600;">From $150</span>
-        </div>
-      </div>
-
-      <div class="bento-card reveal" style="transition-delay: 0.3s;">
-        <h3 class="text-h3">Career Positioning</h3>
-        <p style="font-size: 0.9rem; margin-top: 1rem; color: var(--text-muted);">
-          Resumes and cover letters for federal, nonprofit, and policy roles that actually get interviews.
-        </p>
-        <div style="margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--border-light);">
-          <span style="font-weight: 600;">From $75</span>
-        </div>
-      </div>
-
-      <div class="bento-card reveal" style="transition-delay: 0.4s; background: transparent; border: 1px dashed var(--text-light);">
-        <h3 class="text-h3" style="color: var(--text-muted);">Ad-Hoc Consulting</h3>
-        <p style="font-size: 0.9rem; margin-top: 1rem; color: var(--text-muted);">
-          Just need a second pair of eyes? Single sessions available.
-        </p>
-        <a href="https://forms.gle/bTyhCoAabwYHnzwp9" style="margin-top: auto; text-decoration: underline; color: var(--text-main);">Book 1hr Session →</a>
-      </div>
-
-    </div>
+<section id="services" class="section">
+  <div class="section-header">
+    <span class="mono">Services</span>
+    <h2>Strategic Consulting</h2>
   </div>
-</section>
-
-<section id="about">
-  <div class="container">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
-      <div class="reveal">
-        <div class="text-label">My Story</div>
-        <h2 class="text-h2" style="margin-top: 1rem;">I didn't have a guide. <br><em>You do now.</em></h2>
-        <div style="width: 50px; height: 2px; background: var(--accent-vibrant); margin: 2rem 0;"></div>
-        <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-          I grew up in Murrieta, CA. I started at community college without a counselor who understood what "competitive fellowships" even were.
-        </p>
-        <p style="font-size: 1.1rem; color: var(--text-muted);">
-          Through rejection and iteration, I built a system. That system took me to UCLA, the U.S. House of Representatives, and now Sciences Po in Paris. I coach because talent is distributed equally, but access to the "codes" of admissions is not.
-        </p>
-      </div>
-      <div class="reveal" style="background: var(--bg-surface-alt); padding: 3rem; border-radius: 2rem; position: relative;">
-        <span style="font-family: var(--font-serif); font-size: 6rem; position: absolute; top: -2rem; left: 1rem; color: var(--accent-vibrant); opacity: 0.2;">“</span>
-        <h3 style="font-family: var(--font-serif); font-size: 2rem; position: relative; z-index: 1;">
-          The system wasn't built with us in mind. But we can learn to navigate it — and change it from the inside.
-        </h3>
-        <div style="margin-top: 2rem; font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.1em;">
-          — ANDREW SAYEGH
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="pricing" style="background: #0f172a; color: white;">
-  <div class="container">
-    <div class="text-label" style="color: rgba(255,255,255,0.6);">Investment</div>
-    <h2 class="text-h2" style="margin-bottom: 3rem;">Simple, transparent pricing.</h2>
-    
-    <div class="pricing-grid">
-      <div class="card reveal" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: white;">
-        <div class="text-label">Starter</div>
-        <div class="price-tag">$75</div>
-        <p style="color: rgba(255,255,255,0.6); margin-bottom: 2rem;">Perfect for a focused resume audit or essay review.</p>
-        <ul style="list-style: none; margin-bottom: 2rem; color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 2;">
-          <li>✓ 60-Minute Session</li>
-          <li>✓ Action Plan</li>
-          <li>✓ Email Summary</li>
-        </ul>
-        <a href="mailto:contact@andrewsayegh.com" class="btn btn-secondary" style="width: 100%; border-color: rgba(255,255,255,0.3); color: white;">Get Started</a>
-      </div>
-
-      <div class="card reveal" style="background: white; color: var(--text-main); transform: scale(1.05); border: none;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div class="text-label" style="color: var(--accent-vibrant);">Recommended</div>
-          <span style="font-size: 0.7rem; background: var(--accent-vibrant); color: white; padding: 2px 8px; border-radius: 4px;">BEST VALUE</span>
-        </div>
-        <div class="price-tag">$200+</div>
-        <p style="color: var(--text-muted); margin-bottom: 2rem;">Full application packages for fellowships or grad school.</p>
-        <ul style="list-style: none; margin-bottom: 2rem; font-size: 0.9rem; line-height: 2;">
-          <li>✓ Everything in Starter</li>
-          <li>✓ Full Essay Drafting</li>
-          <li>✓ Multiple Revisions</li>
-          <li>✓ Mock Interviews</li>
-        </ul>
-        <a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="btn btn-primary" style="width: 100%;">Book Free Call</a>
-      </div>
-
-      <div class="card reveal" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: white;">
-        <div class="text-label">Comprehensive</div>
-        <div class="price-tag">$500+</div>
-        <p style="color: rgba(255,255,255,0.6); margin-bottom: 2rem;">Full-cycle coaching for transfer or college admissions.</p>
-        <ul style="list-style: none; margin-bottom: 2rem; color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 2;">
-          <li>✓ School List Strategy</li>
-          <li>✓ All Application Essays</li>
-          <li>✓ Priority Support</li>
-          <li>✓ Timeline Management</li>
-        </ul>
-        <a href="mailto:contact@andrewsayegh.com" class="btn btn-secondary" style="width: 100%; border-color: rgba(255,255,255,0.3); color: white;">Contact Me</a>
-      </div>
+  
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="svc-icon">01</div>
+      <h3 class="svc-title">College Admissions</h3>
+      <p>Built for transfer students and first-gen applicants targeting selective schools. School lists, fit analysis, and essays that sound like you.</p>
+      <ul class="svc-list">
+        <li>Personal Statement Strategy</li>
+        <li>Transfer Essay Coaching</li>
+        <li>UC Insight Questions</li>
+      </ul>
     </div>
     
-    <div style="text-align: center; margin-top: 3rem; color: rgba(255,255,255,0.5); font-size: 0.9rem;">
-      *Sliding scale pricing available for students with financial need. Just ask.
+    <div class="service-card" style="background:var(--bg-card);">
+      <div class="svc-icon" style="border-color:var(--accent-primary); color:var(--accent-primary);">02</div>
+      <h3 class="svc-title">Fellowship Advising</h3>
+      <p>Fulbright, Rangel, Boren, Gilman. I know these applications from the inside. We focus on the narrative arc that reviewers look for.</p>
+      <ul class="svc-list">
+        <li>Narrative Development</li>
+        <li>Faculty Advisor Outreach</li>
+        <li>Mock Interviews</li>
+      </ul>
+    </div>
+    
+    <div class="service-card">
+      <div class="svc-icon">03</div>
+      <h3 class="svc-title">Career & Policy</h3>
+      <p>For those pivoting to policy, non-profits, or federal roles. We translate your background into a compelling professional case.</p>
+      <ul class="svc-list">
+        <li>Federal Resume Audit</li>
+        <li>Cover Letter Coaching</li>
+        <li>Interview Prep (STAR)</li>
+      </ul>
     </div>
   </div>
+</section>
+
+<section id="pricing" class="section">
+  <div class="section-header" style="text-align:center; max-width:100%;">
+    <span class="mono">Investment</span>
+    <h2>Transparent Rates</h2>
+  </div>
+  
+  <div class="pricing-wrapper">
+    <div class="price-card">
+      <span class="price-tag">Starter</span>
+      <div class="price-amount">$75</div>
+      <p>Single Session</p>
+      <hr style="border:0; border-top:1px solid var(--border-subtle); margin:1.5rem 0;">
+      <ul class="price-feat" style="list-style:none;">
+        <li>Resume or Essay Audit</li>
+        <li>60-Min Strategy Call</li>
+        <li>Action Plan</li>
+      </ul>
+      <a href="mailto:contact@andrewsayegh.com" class="price-btn outline">Get Started</a>
+    </div>
+    
+    <div class="price-card featured">
+      <span class="price-tag">Most Popular</span>
+      <div class="price-amount">$200+</div>
+      <p>Application Package</p>
+      <hr style="border:0; border-top:1px solid var(--border-subtle); margin:1.5rem 0;">
+      <ul class="price-feat" style="list-style:none;">
+        <li><strong>Full Essay Drafting</strong></li>
+        <li>Multiple Revision Rounds</li>
+        <li>Mock Interview Prep</li>
+        <li>Final Review Polish</li>
+      </ul>
+      <a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="price-btn solid">Book Free Consult</a>
+    </div>
+    
+    <div class="price-card">
+      <span class="price-tag">Comprehensive</span>
+      <div class="price-amount">$500+</div>
+      <p>Full Cycle Coaching</p>
+      <hr style="border:0; border-top:1px solid var(--border-subtle); margin:1.5rem 0;">
+      <ul class="price-feat" style="list-style:none;">
+        <li>School List Strategy</li>
+        <li>All Application Essays</li>
+        <li>Priority Response Time</li>
+        <li>Unlimited Email Support</li>
+      </ul>
+      <a href="mailto:contact@andrewsayegh.com" class="price-btn outline">Contact Me</a>
+    </div>
+  </div>
+  
+  <p style="text-align:center; margin-top:3rem; font-size:0.875rem; color:var(--text-tertiary);">
+    Sliding scale available for students with financial need. Just ask.
+  </p>
 </section>
 
 <footer>
-  <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
-    <div>
-      <h4 style="font-family: var(--font-serif); font-size: 1.5rem;">Andrew Sayegh</h4>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Admissions & Career Strategy</p>
-    </div>
-    <div style="display: flex; gap: 2rem;">
-      <a href="https://linkedin.com/in/andrewsayegh" target="_blank" style="color: var(--text-main); text-decoration: none;">LinkedIn</a>
-      <a href="mailto:contact@andrewsayegh.com" style="color: var(--text-main); text-decoration: none;">Email</a>
-    </div>
-    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">
-      © 2025 Andrew Sayegh. All Rights Reserved.
-    </div>
+  <a href="#" class="footer-logo">Andrew Sayegh</a>
+  <div class="socials">
+    <a href="https://linkedin.com/in/andrewsayegh" target="_blank">LinkedIn</a>
+    <a href="mailto:contact@andrewsayegh.com">Email</a>
   </div>
+  <p class="mono">© 2026 Andrew Sayegh. Murrieta, CA.</p>
 </footer>
 
 <script>
-  // Navbar Scroll Effect
+  // Navbar blur effect on scroll
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
-    if (window.scrollY > 50) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
   });
 
-  // Mobile Menu Toggle
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  }
-
-  // Scroll Reveal Observer
+  // Reveal animations on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('active');
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0)';
       }
     });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  });
 </script>
 
 </body>
