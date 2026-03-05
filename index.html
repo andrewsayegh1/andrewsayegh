@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andrew Sayegh | Elite Admissions & Career Strategy</title>
+<title>Andrew Sayegh | Admissions & Career Consulting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -19,14 +19,16 @@
   --bg-highlight: #1a1a1c;
   
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-focus: rgba(255, 255, 255, 0.2);
+  --border-focus: rgba(212, 175, 55, 0.3); /* Gold focus */
   
   --text-primary: #f2f2f2;
   --text-secondary: #a1a1aa;
   --text-tertiary: #52525b;
   
-  --accent-primary: #4f46e5; /* Indigo */
-  --accent-glow: rgba(79, 70, 229, 0.4);
+  /* LUXURY GOLD PALETTE */
+  --accent-primary: #D4AF37; 
+  --accent-bright: #F4C430;
+  --accent-glow: rgba(212, 175, 55, 0.15);
   
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'DM Sans', sans-serif;
@@ -46,7 +48,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  background-image: radial-gradient(circle at 50% 0%, #1a1a2e 0%, transparent 60%);
+  background-image: radial-gradient(circle at 50% 0%, #1c1910 0%, transparent 60%);
   background-repeat: no-repeat;
 }
 
@@ -80,21 +82,20 @@ nav.scrolled {
   color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500;
   transition: color 0.3s;
 }
-.nav-links a:hover { color: var(--text-primary); }
+.nav-links a:hover { color: var(--accent-primary); }
 
 .btn-nav {
   padding: 0.6rem 1.4rem;
-  background: var(--text-primary);
-  color: var(--bg-depth);
+  background: var(--accent-primary);
+  color: #000;
   border-radius: 4px;
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
-  transition: transform 0.2s;
+  transition: transform 0.2s, background 0.2s;
 }
-.btn-nav:hover { transform: translateY(-1px); }
+.btn-nav:hover { transform: translateY(-1px); background: var(--accent-bright); }
 
-/* Mobile Menu Toggle */
 .menu-toggle { display: none; background: none; border: none; cursor: pointer; color: white; }
 .menu-toggle svg { width: 24px; height: 24px; }
 
@@ -116,7 +117,7 @@ nav.scrolled {
   background-image: linear-gradient(var(--border-subtle) 1px, transparent 1px),
   linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
   background-size: 60px 60px;
-  opacity: 0.07;
+  opacity: 0.05;
   mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
   pointer-events: none;
 }
@@ -125,19 +126,19 @@ nav.scrolled {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 6px 16px;
   border-radius: 100px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(212, 175, 55, 0.05);
   border: 1px solid var(--border-subtle);
   margin-bottom: 2rem;
   animation: fadeUp 0.8s ease-out forwards;
 }
-.hero-pill .dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px #22c55e; }
-.hero-pill span { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); letter-spacing: 0.05em; }
+.hero-pill .dot { width: 6px; height: 6px; background: var(--accent-primary); border-radius: 50%; box-shadow: 0 0 8px var(--accent-primary); }
+.hero-pill span { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-primary); letter-spacing: 0.05em; }
 
 h1.hero-title {
   font-size: clamp(3rem, 8vw, 6rem);
   line-height: 0.95;
   margin-bottom: 1.5rem;
-  background: linear-gradient(to bottom right, #fff 30%, #999 100%);
+  background: linear-gradient(to bottom right, #fff 30%, #a1a1aa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   opacity: 0; animation: fadeUp 1s 0.2s var(--ease-out) forwards;
@@ -159,26 +160,26 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 
 .btn-primary {
   padding: 1rem 2rem;
-  background: var(--text-primary);
-  color: var(--bg-depth);
+  background: var(--accent-primary);
+  color: #000;
   font-weight: 600;
   text-decoration: none;
   border-radius: 4px;
   transition: all 0.3s var(--ease-out);
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(255,255,255,0.3); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.2); background: var(--accent-bright); }
 
 .btn-secondary {
   padding: 1rem 2rem;
   background: transparent;
   color: var(--text-primary);
-  border: 1px solid var(--border-focus);
+  border: 1px solid var(--border-subtle);
   font-weight: 500;
   text-decoration: none;
   border-radius: 4px;
   transition: all 0.3s;
 }
-.btn-secondary:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.05); }
+.btn-secondary:hover { border-color: var(--accent-primary); color: var(--accent-primary); background: rgba(255,255,255,0.02); }
 
 /* --------------------------------------------------
    TICKER 
@@ -222,10 +223,9 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 }
 .bento-card:hover { border-color: var(--border-focus); transform: translateY(-4px); }
 .bento-card.wide { grid-column: span 2; }
-.bento-card.tall { grid-row: span 2; }
 
 .stat-num { font-family: var(--font-serif); font-size: 3.5rem; line-height: 1; color: var(--text-primary); margin-bottom: 0.5rem; }
-.stat-label { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; display: block; }
+.stat-label { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; display: block; }
 .stat-desc { font-size: 0.9rem; color: var(--text-tertiary); line-height: 1.5; }
 
 /* --------------------------------------------------
@@ -262,8 +262,8 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 .time-step:hover { background: var(--bg-highlight); }
 
 .step-num {
-  font-family: var(--font-mono); font-size: 3rem; color: var(--border-focus);
-  opacity: 0.3; margin-bottom: 1.5rem; display: block;
+  font-family: var(--font-mono); font-size: 3rem; color: var(--border-subtle);
+  opacity: 0.5; margin-bottom: 1.5rem; display: block; transition: color 0.3s;
 }
 .time-step:hover .step-num { color: var(--accent-primary); opacity: 1; }
 
@@ -287,6 +287,8 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 }
 .service-card:hover { background: var(--bg-card); }
 .svc-icon { font-family:var(--font-mono); font-size:0.9rem; color:var(--text-tertiary); margin-bottom: 1.5rem; border: 1px solid var(--border-subtle); width:fit-content; padding:4px 8px; border-radius:4px;}
+.service-card:hover .svc-icon { color: var(--accent-primary); border-color: var(--accent-primary); }
+
 .svc-title { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 500; color: var(--text-primary); margin-bottom: 1rem; }
 .svc-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
 .svc-list li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); }
@@ -313,7 +315,7 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
   position: relative;
   transform: scale(1.05);
   z-index: 2;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 .price-tag { font-family: var(--font-mono); color: var(--accent-primary); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
 .price-amount { font-family: var(--font-serif); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 0.5rem; }
@@ -322,10 +324,10 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
   text-align: center; border-radius: 4px; text-decoration: none; font-weight: 600;
   transition: all 0.2s;
 }
-.price-btn.outline { border: 1px solid var(--border-focus); color: var(--text-primary); }
-.price-btn.outline:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.05); }
-.price-btn.solid { background: var(--text-primary); color: var(--bg-depth); }
-.price-btn.solid:hover { background: #fff; }
+.price-btn.outline { border: 1px solid var(--border-subtle); color: var(--text-primary); }
+.price-btn.outline:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+.price-btn.solid { background: var(--accent-primary); color: #000; }
+.price-btn.solid:hover { background: var(--accent-bright); }
 
 /* --------------------------------------------------
    FOOTER 
@@ -335,7 +337,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
 .footer-logo { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem; display: block; color: var(--text-primary); text-decoration: none; }
 .socials { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
 .socials a { color: var(--text-tertiary); text-decoration: none; transition: color 0.3s; }
-.socials a:hover { color: var(--text-primary); }
+.socials a:hover { color: var(--accent-primary); }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(30px); }
@@ -390,7 +392,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
   </h1>
   
   <p class="hero-desc">
-    I transferred from community college to UCLA, secured competitive internships, national fellowships, and graduate school admissions without insider connections. Now, I built a roadmap for you.
+    I transferred to UCLA from community college, secured competitive internships, won national fellowships, and gained admission to graduate school without connections. Now, I built a roadmap for you.
   </p>
   
   <div class="hero-btns">
@@ -401,10 +403,10 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
 
 <div class="ticker-wrap">
   <div class="ticker">
-    <div class="ticker-item"><strong>UCLA</strong> Transfer Alum</div>
-    <div class="ticker-item"><strong>Columbia SIPA</strong> Admit</div>
-    <div class="ticker-item"><strong>Rangel & Pickering</strong> Finalist</div>
-    <div class="ticker-item"><strong>State Dept</strong> Intern</div>
+    <div class="ticker-item"><strong>UCLA</strong> ALUM</div>
+    <div class="ticker-item"><strong>CONGRESS</strong> INTERN</div>
+    <div class="ticker-item"><strong>STATE DEPT</strong> FELLOW</div>
+    <div class="ticker-item"><strong>100%</strong> FIRST GEN</div>
   </div>
 </div>
 
@@ -436,7 +438,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
         <div class="stat-num">5+</div>
         <span class="stat-label">Policy Internships</span>
       </div>
-      <p class="stat-desc">From Capitol Hill to International NGOs.</p>
+      <p class="stat-desc">From Capitol Hill to international NGOs.</p>
     </div>
   </div>
 </section>
@@ -452,7 +454,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       </blockquote>
       
       <p class="about-text">
-        I grew up in California, and started at community college without a counselor who understood what "competitive applications" meant. I figured it out through relentless research and iteration.
+        I grew up in California and started at community college without a counselor who understood what "competitive applications" meant. I figured it out through relentless research and iteration.
       </p>
       
       <p class="about-text">
@@ -508,8 +510,8 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       <h3 class="svc-title">College & Grad School</h3>
       <p>Built for transfer students and first-gen applicants targeting selective schools. School lists, fit analysis, and essays that sound like you.</p>
       <ul class="svc-list">
-        <li>Personal Statement Strategy</li>
-        <li>Transfer Essay Coaching</li>
+        <li>Personal statement strategy</li>
+        <li>Transfer essay coaching</li>
         <li>UC Insight Questions</li>
       </ul>
     </div>
@@ -519,20 +521,20 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       <h3 class="svc-title">Fellowship Advising</h3>
       <p>Fulbright, Rangel, Boren, Gilman. I know these applications from the inside. We focus on the narrative arc that reviewers look for.</p>
       <ul class="svc-list">
-        <li>Narrative Development</li>
-        <li>Faculty Advisor Outreach</li>
-        <li>Mock Interviews</li>
+        <li>Narrative development</li>
+        <li>Faculty adviser outreach</li>
+        <li>Mock interviews</li>
       </ul>
     </div>
     
     <div class="service-card">
       <div class="svc-icon">CAREER</div>
       <h3 class="svc-title">Policy Careers</h3>
-      <p>For those pivoting to policy, non-profits, or federal roles. We translate your background into a compelling professional case.</p>
+      <p>For those pivoting to policy, nonprofits, or federal roles. We translate your background into a compelling professional case.</p>
       <ul class="svc-list">
-        <li>Federal Resume Audit</li>
-        <li>Cover Letter Coaching</li>
-        <li>Interview Prep (STAR)</li>
+        <li>Federal resume audit</li>
+        <li>Cover letter coaching</li>
+        <li>Interview prep (STAR)</li>
       </ul>
     </div>
   </div>
@@ -581,7 +583,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
     <a href="https://linkedin.com/in/andrewsayegh" target="_blank">LinkedIn</a>
     <a href="mailto:contact@andrewsayegh.com">Email</a>
   </div>
-  <p class="mono">© 2026 Andrew Sayegh. Murrieta, CA.</p>
+  <p class="mono">© 2026 Andrew Sayegh. Los Angeles, CA.</p>
 </footer>
 
 <script>
