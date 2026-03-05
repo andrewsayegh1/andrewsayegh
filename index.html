@@ -3,39 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andrew Sayegh | College & Career Coaching</title>
+<title>Andrew Sayegh | Strategic Admissions & Career Advisory</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM: SAGE & GOLD
+   ═══════════════════════════════════════════ */
 :root {
-  --black: #111110;
-  --black-soft: #1a1a19;
-  --gray-900: #222221;
-  --gray-800: #333332;
-  --gray-700: #444443;
-  --gray-600: #555554;
-  --gray-500: #777776;
-  --gray-400: #999998;
-  --gray-300: #b5b5b4;
-  --gray-200: #d4d4d3;
-  --gray-100: #ebebea;
-  --gray-50: #f5f5f4;
-  --section-alt: #f6f7f8;
-  --white: #fafaf9;
-  --pure-white: #ffffff;
-  --warm-white: #fdfcfa;
-  --accent: #4F46E5;
-  --accent-blue: #3B82F6;
-  --accent-soft: #EEF2FF;
-  --accent-glow: rgba(79,70,229,0.15);
-  --accent-glow-blue: rgba(59,130,246,0.1);
-  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --mono: 'DM Mono', 'SF Mono', 'Fira Code', monospace;
+  /* Core Palette */
+  --sage-deep: #4F6F63;       /* Primary Brand */
+  --sage-medium: #628276;     /* Hover states */
+  --sage-soft: #7E9C8E;       /* Secondary/Borders */
+  --sage-light: #F1F5F2;      /* Section Backgrounds */
+  --sage-mist: #E8EFE9;       /* Subtle interactions */
+  
+  --gold: #C8A96A;            /* Accent */
+  --gold-dim: #B09255;        /* Darker Gold */
+  --gold-light: #F0E6CF;      /* Light Tint */
+  
+  --white: #FAFAF8;           /* Main Background */
+  --pure-white: #FFFFFF;      /* Card Backgrounds */
+  
+  --black: #1E1E1E;           /* Primary Text */
+  --gray-dark: #3A3A3A;       /* Headings */
+  --gray-text: #5A5A5A;       /* Body Text */
+  --gray-light: #A0A09F;      /* Meta text */
+  --border-light: rgba(79, 111, 99, 0.12);
+  
+  /* Effects */
+  --shadow-sm: 0 2px 8px rgba(79, 111, 99, 0.06);
+  --shadow-md: 0 8px 24px rgba(79, 111, 99, 0.08), 0 2px 4px rgba(79, 111, 99, 0.04);
+  --shadow-lg: 0 20px 48px rgba(30, 30, 30, 0.08);
+  --glow-sage: radial-gradient(circle at center, rgba(79, 111, 99, 0.15) 0%, transparent 70%);
+  
+  /* Type */
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
 }
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; font-size: 16px; }
 body {
@@ -48,1519 +57,919 @@ body {
   overflow-x: hidden;
 }
 
-::selection { background: var(--black); color: var(--white); }
+::selection { background: var(--sage-deep); color: var(--pure-white); }
 
 /* ═══════════════════════════════════════════
-   NAVIGATION — Apple/NDS style: minimal, transparent
+   UTILITIES
+   ═══════════════════════════════════════════ */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+.container { max-width: 1140px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+.container-narrow { max-width: 760px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
    ═══════════════════════════════════════════ */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-  padding: 0 max(24px, env(safe-area-inset-left));
-  height: 52px;
+  padding: 0 max(32px, env(safe-area-inset-left));
+  height: 72px;
   display: flex; align-items: center; justify-content: space-between;
-  background: rgba(250,250,249,0.85);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 0.5px solid rgba(0,0,0,0.08);
-  transition: all 0.35s;
+  background: rgba(250, 250, 248, 0.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid rgba(79, 111, 99, 0.08);
+  transition: all 0.4s ease;
 }
 nav.scrolled {
-  background: rgba(250,250,249,0.96);
-  box-shadow: 0 1px 12px rgba(0,0,0,0.04);
+  height: 60px;
+  background: rgba(250, 250, 248, 0.98);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
 }
 
 .nav-logo {
   font-family: var(--serif);
-  font-size: 1.15rem; font-weight: 600;
-  color: var(--black); letter-spacing: -0.02em;
+  font-size: 1.25rem; font-weight: 600;
+  color: var(--sage-deep); 
+  letter-spacing: -0.01em;
 }
 
 .nav-links {
-  display: flex; align-items: center; gap: 2rem; list-style: none;
+  display: flex; align-items: center; gap: 2.5rem; list-style: none;
 }
 .nav-links a {
-  font-size: 0.75rem; font-weight: 400;
-  color: var(--gray-600); text-decoration: none;
+  font-size: 0.8rem; font-weight: 500;
+  color: var(--gray-text); text-decoration: none;
   transition: color 0.2s;
-  letter-spacing: 0.01em;
-  position: relative;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
 }
-.nav-links a::after {
-  content: ''; position: absolute;
-  bottom: -2px; left: 0; width: 0; height: 1px;
-  background: var(--black);
-  transition: width 0.3s cubic-bezier(0.25, 0.1, 0, 1);
-}
-.nav-links a:hover { color: var(--black); }
-.nav-links a:hover::after { width: 100%; }
+.nav-links a:not(.nav-cta-btn):hover { color: var(--sage-deep); }
 
 .nav-cta-btn {
-  background: linear-gradient(135deg, var(--accent), var(--accent-blue)) !important;
+  background: var(--sage-deep) !important;
   color: var(--pure-white) !important;
-  padding: 8px 20px !important;
-  border-radius: 980px;
+  padding: 10px 24px !important;
+  border-radius: 2px; /* Institutional sharper corner */
   font-weight: 500 !important;
-  font-size: 0.72rem !important;
-  transition: opacity 0.2s !important;
+  letter-spacing: 0.05em !important;
+  transition: all 0.3s ease !important;
+  border: 1px solid var(--sage-deep);
 }
 .nav-cta-btn:hover {
+  background: var(--sage-medium) !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(79, 111, 99, 0.25);
 }
-.nav-cta-btn::after { display: none !important; }
 
+/* Mobile Toggle */
 .nav-toggle {
   display: none; background: none; border: none;
-  cursor: pointer; padding: 8px;
-  width: 44px; height: 44px;
-  flex-direction: column; align-items: center;
-  justify-content: center; gap: 5px;
+  cursor: pointer; width: 44px; height: 44px;
+  flex-direction: column; align-items: center; justify-content: center; gap: 6px;
 }
 .nav-toggle span {
-  width: 18px; height: 1.5px;
-  background: var(--black); border-radius: 2px;
-  transition: all 0.35s cubic-bezier(0.25, 0.1, 0, 1);
-  transform-origin: center;
-}
-.nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(2.3px, 2.3px); }
-.nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(2.3px, -2.3px); }
-
-/* ─── Mobile Menu Overlay ─── */
-.mobile-menu {
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: var(--white); z-index: 899;
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.4s cubic-bezier(0.25, 0.1, 0, 1);
-}
-.mobile-menu.open { opacity: 1; pointer-events: all; }
-.mobile-menu a {
-  font-family: var(--serif); font-size: 2rem; font-weight: 400;
-  color: var(--black); text-decoration: none;
-  padding: 0.6rem 0;
-  opacity: 0; transform: translateY(12px);
-  transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s;
-}
-.mobile-menu.open a { opacity: 1; transform: translateY(0); }
-.mobile-menu.open a:nth-child(1) { transition-delay: 0.08s; }
-.mobile-menu.open a:nth-child(2) { transition-delay: 0.14s; }
-.mobile-menu.open a:nth-child(3) { transition-delay: 0.20s; }
-.mobile-menu.open a:nth-child(4) { transition-delay: 0.26s; }
-.mobile-menu.open a:nth-child(5) { transition-delay: 0.32s; }
-.mobile-menu a:hover { color: var(--gray-500); }
-.mobile-menu .mobile-cta {
-  font-family: var(--sans); font-size: 0.85rem; font-weight: 500;
-  background: linear-gradient(135deg, var(--accent), var(--accent-blue));
-  color: var(--pure-white);
-  padding: 16px 36px; border-radius: 980px; margin-top: 2rem;
-  opacity: 0; transform: translateY(12px);
-  transition: opacity 0.35s ease 0.38s, transform 0.35s ease 0.38s;
-}
-.mobile-menu.open .mobile-cta { opacity: 1; transform: translateY(0); }
-
-/* ═══════════════════════════════════════════
-   FLOATING CTA
-   ═══════════════════════════════════════════ */
-.floating-cta {
-  position: fixed; bottom: 24px; right: 24px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-blue));
-  color: var(--pure-white);
-  padding: 14px 24px; border-radius: 980px;
-  font-family: var(--sans); font-size: 0.78rem; font-weight: 500;
-  text-decoration: none;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  z-index: 800;
-  display: flex; align-items: center; gap: 8px;
-  opacity: 0; transform: translateY(20px) scale(0.9);
-  transition: all 0.4s cubic-bezier(0.25, 0.1, 0, 1);
-  pointer-events: none;
-}
-.floating-cta.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
-.floating-cta:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 40px rgba(0,0,0,0.28); }
-.floating-cta .float-pulse {
-  width: 6px; height: 6px; background: var(--pure-white); border-radius: 50%;
-  animation: floatPulse 2s infinite;
-}
-@keyframes floatPulse {
-  0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
-  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(255,255,255,0); }
+  width: 24px; height: 1.5px;
+  background: var(--sage-deep);
+  transition: all 0.3s;
 }
 
 /* ═══════════════════════════════════════════
-   HERO — Massive, full viewport, Apple-scale
+   HERO SECTION
    ═══════════════════════════════════════════ */
 .hero {
   min-height: 100vh;
-  min-height: 100dvh;
-  padding: 120px 24px 60px;
+  padding: 140px 24px 80px;
   display: flex; flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; align-items: center;
   text-align: center;
   position: relative;
   overflow: hidden;
-  max-width: 100%;
+  background: var(--white);
 }
+
+/* Background Atmosphere */
 .hero::before {
   content: ''; position: absolute;
-  width: 900px; height: 900px;
-  background: radial-gradient(circle at center, var(--accent-glow), transparent 65%);
-  top: -250px; left: 50%; transform: translateX(-50%);
-  filter: blur(50px);
+  width: 120%; height: 120%;
+  background: radial-gradient(circle at 50% 30%, rgba(79, 111, 99, 0.08), transparent 60%);
+  top: -10%; left: -10%;
   z-index: 0; pointer-events: none;
 }
 .hero::after {
   content: ''; position: absolute;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, var(--accent-glow-blue), transparent 65%);
-  bottom: -200px; right: -100px;
-  filter: blur(60px);
+  inset: 0;
+  background-image: linear-gradient(var(--border-light) 1px, transparent 1px),
+  linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+  background-size: 100px 100px;
+  opacity: 0.3;
   z-index: 0; pointer-events: none;
-}
-.hero > * { position: relative; z-index: 1; }
-
-/* ─── Hero particles ─── */
-.hero-particles {
-  position: absolute; inset: 0;
-  background-image:
-    radial-gradient(circle at 15% 25%, rgba(79,70,229,0.045) 2px, transparent 2px),
-    radial-gradient(circle at 85% 15%, rgba(59,130,246,0.035) 2px, transparent 2px),
-    radial-gradient(circle at 45% 80%, rgba(79,70,229,0.03) 1.5px, transparent 1.5px),
-    radial-gradient(circle at 70% 55%, rgba(59,130,246,0.04) 2px, transparent 2px);
-  background-size: 140px 140px, 180px 180px, 100px 100px, 160px 160px;
-  opacity: 0.5; pointer-events: none; z-index: 0;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
 }
 
-/* ─── Floating thematic icons ─── */
-.floating-icons {
-  position: absolute; inset: 0;
-  pointer-events: none; overflow: hidden; z-index: 0;
-}
+/* Floating Icons */
+.floating-icons { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 .float-icon {
-  position: absolute;
-  opacity: 0.05;
-  animation: floatDrift 18s ease-in-out infinite;
+  position: absolute; opacity: 0.12; /* Slightly higher visibility for Sage style */
+  animation: floatDrift 20s ease-in-out infinite;
 }
-.float-icon svg { width: 100%; height: 100%; stroke: var(--accent); stroke-width: 1; fill: none; }
-.fi-1 { width: 100px; top: 8%; left: 6%; animation-delay: 0s; }
-.fi-2 { width: 80px; top: 60%; left: 8%; animation-delay: 5s; opacity: 0.04; }
-.fi-3 { width: 90px; top: 15%; right: 8%; animation-delay: 3s; }
-.fi-4 { width: 70px; bottom: 15%; right: 12%; animation-delay: 7s; opacity: 0.04; }
-.fi-5 { width: 60px; top: 45%; right: 5%; animation-delay: 10s; opacity: 0.035; }
-.fi-6 { width: 85px; bottom: 25%; left: 15%; animation-delay: 2s; opacity: 0.04; }
+.float-icon svg { 
+  width: 100%; height: 100%; 
+  stroke: var(--sage-deep); stroke-width: 1.2; fill: none; 
+}
+/* Specific Gold Highlights */
+.fi-1 svg, .fi-6 svg { stroke: var(--gold); opacity: 0.8; } /* Cap and Medal in Gold */
+
+.fi-1 { width: 120px; top: 12%; left: 8%; animation-delay: 0s; }
+.fi-2 { width: 90px; top: 65%; left: 5%; animation-delay: 5s; opacity: 0.08; }
+.fi-3 { width: 100px; top: 18%; right: 10%; animation-delay: 3s; }
+.fi-4 { width: 80px; bottom: 18%; right: 15%; animation-delay: 7s; opacity: 0.08; }
+.fi-5 { width: 70px; top: 48%; right: 6%; animation-delay: 10s; opacity: 0.06; }
+.fi-6 { width: 95px; bottom: 28%; left: 18%; animation-delay: 2s; }
 
 @keyframes floatDrift {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-14px) rotate(1.5deg); }
-  50% { transform: translateY(-22px) rotate(-1deg); }
-  75% { transform: translateY(-10px) rotate(0.5deg); }
+  50% { transform: translateY(-20px) rotate(2deg); }
 }
 
+/* Hero Content */
 .hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--gray-50);
-  border: 1px solid var(--gray-100);
-  padding: 6px 16px; border-radius: 980px;
-  font-family: var(--mono);
-  font-size: 0.6rem; font-weight: 400;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--gray-500);
-  margin-bottom: 2rem;
-  opacity: 0; animation: fadeUp 0.8s 0.1s forwards;
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--gold);
+  padding: 8px 20px; 
+  border-radius: 100px;
+  font-family: var(--mono); font-size: 0.65rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 2.5rem;
+  box-shadow: 0 4px 12px rgba(200, 169, 106, 0.15);
+  position: relative; z-index: 1;
+  opacity: 0; animation: fadeUp 1s 0.2s forwards;
 }
 .hero-badge .dot {
-  width: 5px; height: 5px;
-  background: var(--accent); border-radius: 50%;
-  animation: pulse 2.5s infinite;
-  box-shadow: 0 0 8px var(--accent-glow);
-}
-
-/* ─── Hero Trust Bullets ─── */
-.hero-bullets {
-  display: flex; gap: 20px; flex-wrap: wrap;
-  justify-content: center; margin-bottom: 2rem;
-  opacity: 0; animation: fadeUp 0.7s 0.38s forwards;
-}
-.hero-bullets span {
-  font-size: 0.82rem; color: var(--gray-600); font-weight: 400;
-  display: flex; align-items: center; gap: 6px;
-}
-.hero-bullets span::before {
-  content: '✓'; font-weight: 700; color: var(--accent); font-size: 0.75rem;
+  width: 6px; height: 6px; background: var(--gold); border-radius: 50%;
+  box-shadow: 0 0 6px var(--gold);
 }
 
 .hero-h1 {
   font-family: var(--serif);
-  font-size: clamp(2.8rem, 8vw, 5.5rem);
-  font-weight: 400; line-height: 1.05;
-  letter-spacing: -0.03em;
-  color: var(--black);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 500; line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--sage-deep);
   margin-bottom: 1.5rem;
-  max-width: 800px;
-  opacity: 0; animation: fadeUp 0.8s 0.25s forwards;
+  max-width: 900px;
+  position: relative; z-index: 1;
+  opacity: 0; animation: fadeUp 1s 0.4s forwards;
 }
 .hero-h1 em {
   font-style: italic;
-  background: linear-gradient(transparent 62%, rgba(79,70,229,0.12) 62%);
-  padding-bottom: 2px;
+  font-weight: 400;
+  background: linear-gradient(transparent 65%, rgba(200, 169, 106, 0.2) 65%);
+  padding: 0 4px;
 }
 
 .hero-sub {
-  font-size: clamp(0.9rem, 2.2vw, 1.05rem);
-  line-height: 1.8; font-weight: 300;
-  color: var(--gray-600);
-  max-width: 560px;
-  margin: 0 auto 2.5rem;
-  opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.7; font-weight: 300;
+  color: var(--gray-text);
+  max-width: 640px; margin: 0 auto 3rem;
+  position: relative; z-index: 1;
+  opacity: 0; animation: fadeUp 1s 0.6s forwards;
 }
 .hero-sub strong { color: var(--black); font-weight: 500; }
 
+/* Institutional Buttons */
 .hero-ctas {
-  display: flex; gap: 12px; flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 3rem;
-  opacity: 0; animation: fadeUp 0.8s 0.55s forwards;
+  display: flex; gap: 16px; justify-content: center;
+  position: relative; z-index: 1;
+  opacity: 0; animation: fadeUp 1s 0.8s forwards;
 }
-
-/* ─── Buttons: Apple style pills ─── */
 .btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 14px 28px; border-radius: 980px;
-  font-family: var(--sans); font-size: 0.82rem;
-  font-weight: 500; letter-spacing: 0.01em;
-  text-decoration: none; border: none; cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.25,0.1,0,1),
-              box-shadow 0.2s cubic-bezier(0.25,0.1,0,1),
-              background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
-  position: relative;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 36px; 
+  border-radius: 3px; /* Sharper, more professional */
+  font-family: var(--sans); font-size: 0.85rem;
+  font-weight: 500; letter-spacing: 0.02em;
+  text-decoration: none; cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25,0.1,0,1);
 }
-.btn:active { transform: scale(0.97); }
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+  background: var(--sage-deep);
   color: var(--pure-white);
-  box-shadow: 0 2px 12px rgba(79,70,229,0.25);
+  border: 1px solid var(--sage-deep);
+  box-shadow: 0 4px 16px rgba(79, 111, 99, 0.2);
 }
 .btn-primary:hover {
+  background: var(--sage-medium);
+  border-color: var(--sage-medium);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(79,70,229,0.3);
-  filter: brightness(1.08);
+  box-shadow: 0 8px 24px rgba(79, 111, 99, 0.25);
 }
 .btn-secondary {
-  background: transparent; color: var(--black);
-  border: 1px solid var(--gray-200);
+  background: transparent;
+  color: var(--sage-deep);
+  border: 1px solid var(--sage-soft);
 }
-.btn-secondary:hover { background: var(--gray-50); border-color: var(--gray-300); transform: translateY(-1px); }
-.btn-text {
-  background: none; color: var(--black);
-  padding: 14px 4px;
-  font-weight: 500;
-  border-bottom: 1px solid var(--gray-300);
-  border-radius: 0;
+.btn-secondary:hover {
+  background: var(--sage-light);
+  border-color: var(--sage-deep);
+  transform: translateY(-2px);
 }
-.btn-text:hover { border-color: var(--black); }
 
-.social-proof {
-  display: flex; align-items: center; gap: 12px;
-  opacity: 0; animation: fadeUp 0.8s 0.7s forwards;
+.hero-bullets {
+  margin-top: 3rem;
+  display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
+  font-family: var(--mono); font-size: 0.7rem; color: var(--gray-text);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  opacity: 0; animation: fadeUp 1s 1s forwards;
+  position: relative; z-index: 1;
 }
-.avatars { display: flex; }
-.avatar {
-  width: 30px; height: 30px; border-radius: 50%;
-  border: 2px solid var(--white);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.6rem; font-weight: 600; color: var(--white);
-  margin-left: -6px;
-}
-.avatar:first-child { margin-left: 0; }
-.avatar:nth-child(1) { background: var(--gray-700); }
-.avatar:nth-child(2) { background: var(--gray-500); }
-.avatar:nth-child(3) { background: var(--gray-800); }
-.avatar:nth-child(4) { background: var(--gray-400); }
-.avatar:hover { transform: scale(1.15) translateY(-2px); z-index: 1; }
-.proof-text {
-  font-size: 0.72rem; color: var(--gray-500);
-  line-height: 1.4; font-weight: 300; text-align: left;
-}
-.proof-text strong { color: var(--black); font-weight: 500; }
+.hero-bullets span::before { content: '✦'; color: var(--gold); margin-right: 6px; }
 
 /* ═══════════════════════════════════════════
-   SHARED SECTION STYLES
-   ═══════════════════════════════════════════ */
-section { padding: 88px 24px; max-width: 100%; }
-.section-alt { background: var(--section-alt); }
-
-/* ─── Credibility Bar ─── */
-.cred-bar {
-  display: flex; justify-content: center; align-items: center;
-  gap: 40px; flex-wrap: wrap;
-  padding: 22px 24px;
-  border-top: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100);
-  font-family: var(--mono); font-size: 0.68rem; font-weight: 400;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400);
-}
-.cred-bar span { transition: color 0.2s; white-space: nowrap; }
-.cred-bar span:hover { color: var(--accent); }
-
-.container { max-width: 1080px; margin: 0 auto; }
-.container-narrow { max-width: 720px; margin: 0 auto; }
-
-.section-label {
-  font-family: var(--mono);
-  font-size: 0.58rem; font-weight: 400;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--gray-400); margin-bottom: 0.75rem;
-}
-
-.section-h2 {
-  font-family: var(--serif);
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 400; line-height: 1.1;
-  letter-spacing: -0.025em;
-  color: var(--black); margin-bottom: 1rem;
-}
-.section-h2 em {
-  font-style: italic;
-  background: linear-gradient(transparent 62%, rgba(79,70,229,0.15) 62%);
-  padding-bottom: 2px;
-}
-
-.section-desc {
-  font-size: 0.92rem; font-weight: 300;
-  color: var(--gray-600); line-height: 1.8;
-  max-width: 520px;
-}
-
-.section-divider {
-  height: 0.5px;
-  background: var(--gray-100);
-  max-width: 1080px;
-  margin: 0 auto;
-}
-
-/* Dark section */
-.dark {
-  background: var(--black); color: var(--white);
-}
-.dark .section-label { color: var(--gray-500); }
-.dark .section-h2 { color: var(--white); }
-.dark .section-desc { color: var(--gray-400); }
-
-/* ═══════════════════════════════════════════
-   CREDENTIALS — NDS stat block style
+   CREDENTIALS (The Authority Bar)
    ═══════════════════════════════════════════ */
 .credentials {
-  background: linear-gradient(135deg, #111110, #1a1f2e);
-  padding: 80px 24px;
-  position: relative; overflow: hidden;
+  background: var(--sage-deep);
+  color: var(--pure-white);
+  padding: 100px 24px;
+  position: relative;
+  overflow: hidden;
 }
-.credentials::before {
+.credentials::after {
   content: ''; position: absolute;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(79,70,229,0.1), transparent 70%);
-  top: -200px; right: -100px;
-  filter: blur(50px); pointer-events: none;
+  top: 0; right: 0; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(200, 169, 106, 0.1), transparent 70%);
+  filter: blur(80px); pointer-events: none;
 }
+
 .cred-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: rgba(255,255,255,0.06);
-  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: rgba(255, 255, 255, 0.15); /* Divider lines */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  max-width: 1140px; margin: 3rem auto 0;
 }
 .cred-block {
-  background: var(--black);
-  padding: 2.5rem 1.75rem;
+  background: var(--sage-deep);
+  padding: 3rem 2rem;
+  text-align: left;
   transition: background 0.3s;
 }
-.cred-block:hover { background: var(--black-soft); }
+.cred-block:hover { background: rgba(255,255,255,0.03); }
+
 .cred-num {
   font-family: var(--serif);
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  font-weight: 400; color: var(--white);
-  line-height: 1; margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
+  font-size: 3.5rem; color: var(--gold);
+  line-height: 1; margin-bottom: 0.75rem;
 }
 .cred-label {
-  font-size: 0.72rem; font-weight: 300;
-  color: var(--gray-500); line-height: 1.5;
+  font-family: var(--sans);
+  font-size: 0.85rem; font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+.section-tag {
+  font-family: var(--mono); font-size: 0.7rem;
+  color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 1rem; display: block;
+}
+.section-h2-light {
+  font-family: var(--serif); font-size: 3rem; color: var(--pure-white);
+  line-height: 1.1; max-width: 600px;
 }
 
 /* ═══════════════════════════════════════════
    PROBLEM
    ═══════════════════════════════════════════ */
-.problem { padding: 100px 24px; text-align: center; background: var(--section-alt); }
-.problem .section-h2 { max-width: 640px; margin: 0 auto 1rem; }
-.problem .section-desc { max-width: 540px; margin: 0 auto 4rem; }
+.problem { padding: 120px 24px; background: var(--sage-light); position: relative; }
+.problem::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(var(--border-light) 1px, transparent 1px);
+  background-size: 40px 40px; opacity: 0.5;
+}
+
+.section-center { text-align: center; max-width: 700px; margin: 0 auto 4rem; position: relative; z-index: 2; }
+.section-h2 {
+  font-family: var(--serif); font-size: 3rem;
+  color: var(--sage-deep); margin-bottom: 1rem; line-height: 1.15;
+}
+.section-desc {
+  font-size: 1.05rem; color: var(--gray-text); font-weight: 300;
+}
 
 .pain-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1px; background: var(--gray-100);
-  max-width: 960px; margin: 0 auto;
-  border-radius: 16px; overflow: hidden;
+  gap: 30px; max-width: 1140px; margin: 0 auto;
+  position: relative; z-index: 2;
 }
 .pain-card {
-  background: var(--white);
-  padding: 2.25rem 1.75rem; text-align: left;
-  transition: background 0.3s;
+  background: var(--pure-white);
+  padding: 3rem 2rem;
+  border-top: 4px solid var(--sage-soft);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.pain-card:hover { background: var(--gray-50); }
+.pain-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+  border-top-color: var(--gold);
+}
 .pain-icon {
-  width: 44px; height: 44px; border-radius: 12px;
-  background: linear-gradient(135deg, rgba(79,70,229,0.1), rgba(59,130,246,0.08));
+  width: 48px; height: 48px;
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--sage-deep);
 }
-.pain-icon svg { width: 20px; height: 20px; stroke: var(--accent) !important; stroke-width: 1.8; }
+.pain-icon svg { width: 32px; height: 32px; stroke-width: 1.2; }
 .pain-title {
-  font-size: 0.88rem; font-weight: 600;
-  color: var(--black); margin-bottom: 0.5rem;
-  line-height: 1.35;
+  font-family: var(--serif); font-size: 1.25rem;
+  color: var(--black); margin-bottom: 1rem;
 }
 .pain-desc {
-  font-size: 0.78rem; font-weight: 300;
-  color: var(--gray-500); line-height: 1.75;
+  font-size: 0.9rem; color: var(--gray-text); line-height: 1.7;
 }
 
 /* ═══════════════════════════════════════════
    SERVICES
    ═══════════════════════════════════════════ */
-.services { padding: 100px 24px; position: relative; overflow: hidden; }
-.services::before {
-  content: ''; position: absolute;
-  width: 600px; height: 600px;
-  background:
-    linear-gradient(transparent 96%, rgba(79,70,229,0.04) 96%),
-    linear-gradient(90deg, transparent 96%, rgba(79,70,229,0.04) 96%);
-  background-size: 44px 44px;
-  opacity: 0.4; top: -100px; right: -150px;
-  transform: rotate(12deg); pointer-events: none;
+.services { padding: 120px 24px; background: var(--white); position: relative; overflow: hidden; }
+
+/* Decorative Background Element */
+.bg-graphic-1 {
+  position: absolute; right: -5%; top: 10%; width: 400px; height: 400px;
+  border: 1px solid var(--border-light); border-radius: 50%;
+  opacity: 0.6; pointer-events: none;
 }
+.bg-graphic-2 {
+  position: absolute; right: -2%; top: 12%; width: 300px; height: 300px;
+  border: 1px solid var(--border-light); border-radius: 50%;
+  opacity: 0.6; pointer-events: none;
+}
+
 .services-grid {
   display: grid; grid-template-columns: repeat(2, 1fr);
-  gap: 1px; background: var(--gray-100);
-  max-width: 1080px; margin: 2.5rem auto 0;
-  border-radius: 20px; overflow: hidden;
+  gap: 2rem; max-width: 1140px; margin: 3rem auto 0;
 }
 
 .svc-card {
-  background: var(--white);
-  padding: 2.5rem 2rem;
-  transition: background 0.3s, transform 0.35s cubic-bezier(0.25,0.1,0,1), box-shadow 0.35s;
+  background: var(--pure-white);
+  border: 1px solid var(--border-light);
+  padding: 3rem;
+  position: relative;
+  transition: all 0.3s ease;
 }
-.svc-card:hover { background: var(--gray-50); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.04); z-index: 1; position: relative; }
+.svc-card:hover {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-md);
+}
 
 .svc-card.featured {
-  background: var(--black);
+  background: var(--sage-deep);
   grid-column: span 2;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 3rem; align-items: start;
-  position: relative;
-}
-.svc-card.featured:hover { background: var(--black-soft); }
-
-.featured-tag {
-  position: absolute; top: 1.5rem; right: 1.5rem;
-  background: linear-gradient(135deg, var(--accent), var(--accent-blue));
   color: var(--pure-white);
-  font-family: var(--mono);
-  font-size: 0.52rem; font-weight: 500;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 5px 14px; border-radius: 980px;
-  box-shadow: 0 2px 8px rgba(79,70,229,0.25);
+  border: none;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
 }
 
 .svc-num {
-  font-family: var(--mono);
-  font-size: 0.6rem; font-weight: 400;
-  color: var(--gray-400);
-  letter-spacing: 0.1em;
-  margin-bottom: 1rem;
+  font-family: var(--mono); font-size: 3rem;
+  color: var(--sage-light); opacity: 0.3; margin-bottom: 1rem;
+  font-weight: 500;
 }
-.svc-card.featured .svc-num { color: var(--gray-600); }
+.svc-card.featured .svc-num { color: var(--gold); opacity: 0.4; }
 
 .svc-title {
-  font-family: var(--serif);
-  font-size: 1.65rem; font-weight: 500;
-  color: var(--black); margin-bottom: 0.75rem;
-  line-height: 1.2; letter-spacing: -0.01em;
+  font-family: var(--serif); font-size: 1.75rem;
+  color: var(--sage-deep); margin-bottom: 1rem;
 }
-.svc-card.featured .svc-title { color: var(--white); }
+.svc-card.featured .svc-title { color: var(--pure-white); font-size: 2.25rem; }
 
-.svc-desc {
-  font-size: 0.82rem; font-weight: 300;
-  line-height: 1.8; color: var(--gray-500);
-  margin-bottom: 1.25rem;
-}
+.svc-desc { font-size: 0.95rem; color: var(--gray-text); margin-bottom: 1.5rem; }
+.svc-card.featured .svc-desc { color: rgba(255,255,255,0.8); }
 
-.svc-includes {
-  list-style: none; display: flex;
-  flex-direction: column; gap: 0.5rem;
-  margin-bottom: 1.5rem;
+.svc-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+.svc-list li {
+  font-size: 0.85rem; color: var(--gray-text); display: flex; align-items: flex-start; gap: 10px;
 }
-.svc-includes li {
-  font-size: 0.78rem; color: var(--gray-600);
-  display: flex; align-items: center; gap: 10px;
-  font-weight: 400;
+.svc-list li::before {
+  content: '✓'; color: var(--gold); font-weight: bold; font-size: 0.8rem;
 }
-.svc-includes li::before {
-  content: '✓'; font-size: 0.62rem; font-weight: 700;
-  color: var(--accent);
-  flex-shrink: 0;
-}
-.svc-card.featured .svc-includes li { color: var(--gray-400); }
-.svc-card.featured .svc-includes li::before { color: rgba(79,70,229,0.6); }
+.svc-card.featured .svc-list li { color: rgba(255,255,255,0.9); }
 
-.svc-price {
-  font-family: var(--serif);
-  font-size: 1.25rem; font-weight: 500;
-  color: var(--black);
+.price-tag {
+  margin-top: 2rem; font-family: var(--mono);
+  font-size: 0.9rem; color: var(--black); padding-top: 1rem; border-top: 1px solid var(--border-light);
 }
-.svc-card.featured .svc-price { color: var(--white); }
-.svc-price-note {
-  font-size: 0.65rem; color: var(--gray-400);
-  margin-top: 2px; font-weight: 300;
-}
+.svc-card.featured .price-tag { color: var(--gold); border-top-color: rgba(255,255,255,0.2); }
 
 /* ═══════════════════════════════════════════
-   TESTIMONIALS
+   TESTIMONIALS (REPLACED WITH INSTITUTIONAL EXPERIENCE)
    ═══════════════════════════════════════════ */
-.testimonials { padding: 100px 24px; background: var(--section-alt); position: relative; overflow: hidden; }
-.testimonials::before {
-  content: ''; position: absolute;
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(59,130,246,0.07), transparent 70%);
-  top: -200px; left: -250px;
-  filter: blur(60px); pointer-events: none;
-}
-.testimonials::after {
-  content: ''; position: absolute;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(79,70,229,0.05), transparent 70%);
-  bottom: -150px; right: -150px;
-  filter: blur(50px); pointer-events: none;
+.testimonials {
+  padding: 120px 24px; background: var(--sage-light);
+  border-top: 1px solid var(--border-light);
 }
 .testi-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem; max-width: 1080px;
-  margin: 2.5rem auto 0;
+  gap: 2rem; max-width: 1140px; margin: 3rem auto 0;
 }
-.testi {
-  background: var(--white);
-  border: 0.5px solid var(--gray-100);
-  border-radius: 16px;
-  padding: 2rem 1.75rem;
-  display: flex; flex-direction: column;
-  transition: transform 0.35s cubic-bezier(0.25,0.1,0,1), box-shadow 0.35s cubic-bezier(0.25,0.1,0,1);
+.testi-card {
+  background: var(--pure-white);
+  padding: 2.5rem;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; justify-content: center;
 }
-.testi:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.06);
-}
+/* Removed quote mark */
+.testi-card::before { display: none; }
+
 .testi-text {
-  font-family: var(--serif);
-  font-size: 1rem; font-style: italic;
-  color: var(--gray-700);
-  line-height: 1.65; margin-bottom: 1.5rem;
-  flex: 1;
+  font-family: var(--sans); font-size: 0.95rem;
+  color: var(--gray-text); margin-bottom: 1rem; position: relative; z-index: 1;
+  line-height: 1.6;
 }
 .testi-author {
-  font-size: 0.72rem; font-weight: 600;
-  color: var(--black);
-  letter-spacing: 0.04em;
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 500;
+  color: var(--sage-deep); margin-bottom: 0.5rem;
 }
-.testi-detail {
-  font-size: 0.65rem; font-weight: 300;
-  color: var(--gray-400); margin-top: 2px;
+.testi-role {
+  font-size: 0.75rem; color: var(--gold-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
 }
 
 /* ═══════════════════════════════════════════
-   ABOUT
+   ABOUT / STORY
    ═══════════════════════════════════════════ */
 .about {
-  padding: 100px 24px;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 5rem; align-items: center;
-  max-width: 1080px; margin: 0 auto;
+  padding: 120px 24px;
+  display: grid; grid-template-columns: 5fr 7fr;
+  gap: 6rem; align-items: center;
+  max-width: 1140px; margin: 0 auto;
 }
-
-.about-quote-block {
-  background: var(--section-alt);
-  border-radius: 20px; padding: 3rem 2.5rem;
-  position: relative;
-  border-left: 3px solid var(--accent);
-  transition: transform 0.4s cubic-bezier(0.25,0.1,0,1);
-}
-.about-quote-block:hover { transform: translateY(-4px); }
-.about-quote {
-  font-family: var(--serif);
-  font-size: 1.4rem; font-style: italic;
-  color: var(--black); line-height: 1.5;
-  margin-bottom: 1.5rem;
-}
-.about-attr {
-  font-family: var(--mono);
-  font-size: 0.6rem; font-weight: 400;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--gray-400);
-}
-.about-tags {
-  display: flex; flex-wrap: wrap; gap: 6px;
-  margin-top: 1.5rem;
-}
-.atag {
-  background: var(--white);
-  border: 0.5px solid var(--gray-200);
-  border-radius: 980px;
-  color: var(--gray-600);
-  font-family: var(--mono);
-  font-size: 0.55rem; font-weight: 400;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 4px 12px;
-}
-
-.about-text .section-h2 { margin-bottom: 1.25rem; }
-.about-body {
-  font-size: 0.9rem; font-weight: 300;
-  line-height: 1.9; color: var(--gray-600);
-  margin-bottom: 0.75rem;
-}
-.about-body strong { color: var(--black); font-weight: 500; }
-
-/* ═══════════════════════════════════════════
-   PROCESS
-   ═══════════════════════════════════════════ */
-.process { padding: 100px 24px; background: var(--gray-50); }
-.process-steps {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 0; margin-top: 3rem;
-  max-width: 960px; margin-left: auto; margin-right: auto;
-  position: relative;
-}
-.process-steps::before {
-  content: ''; position: absolute;
-  top: 20px; left: 8%; right: 8%;
-  height: 0.5px; background: var(--gray-200);
-}
-.proc-step { text-align: center; padding: 0 1rem; position: relative; }
-.proc-num {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+.about-quote-box {
+  background: var(--sage-deep);
   color: var(--pure-white);
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 1.25rem;
-  font-family: var(--serif); font-size: 0.95rem; font-weight: 500;
-  position: relative; z-index: 1;
-  transition: transform 0.3s;
+  padding: 4rem 3rem;
+  position: relative;
 }
-.proc-step:hover .proc-num { transform: scale(1.1); }
-.proc-title {
-  font-size: 0.85rem; font-weight: 600;
-  color: var(--black); margin-bottom: 0.4rem;
+.about-quote-box::after {
+  content: ''; position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px;
+  border: 1px solid var(--gold); opacity: 0.3; pointer-events: none;
 }
-.proc-desc {
-  font-size: 0.75rem; font-weight: 300;
-  color: var(--gray-500); line-height: 1.6;
+.quote-lg {
+  font-family: var(--serif); font-size: 1.6rem;
+  line-height: 1.4; margin-bottom: 2rem;
+  color: var(--pure-white);
+}
+.quote-cite {
+  font-family: var(--mono); color: var(--gold);
+  font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.about-content h2 {
+  font-family: var(--serif); font-size: 2.8rem; color: var(--sage-deep);
+  margin-bottom: 1.5rem; line-height: 1.1;
+}
+.about-content p {
+  font-size: 1rem; color: var(--gray-text); margin-bottom: 1.5rem;
 }
 
 /* ═══════════════════════════════════════════
-   PRICING — TrumpRx comparison style
+   PRICING
    ═══════════════════════════════════════════ */
-.pricing { padding: 100px 24px; }
+.pricing { padding: 120px 24px; background: var(--white); }
 .pricing-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 0; align-items: stretch;
-  max-width: 1080px; margin: 2.5rem auto 0;
-  border-radius: 20px; overflow: visible;
+  gap: 2rem; max-width: 1140px; margin: 3rem auto 0;
+  align-items: center;
 }
-.price-card {
+.p-card {
   background: var(--pure-white);
-  border: 1px solid var(--gray-100);
-  padding: 2.5rem 2rem;
-  transition: transform 0.35s cubic-bezier(0.25,0.1,0,1), box-shadow 0.35s;
-  display: flex; flex-direction: column;
-  border-radius: 16px; margin: 0 -0.5px;
+  border: 1px solid var(--border-light);
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: all 0.3s;
 }
-.price-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.06); z-index: 1; }
-.price-card.best {
-  background: var(--black);
-  border-color: var(--black);
-  transform: scale(1.04);
-  z-index: 2;
-  box-shadow: 0 25px 70px rgba(0,0,0,0.15);
-  border-radius: 20px; position: relative;
-}
-.price-card.best:hover { transform: scale(1.04) translateY(-4px); box-shadow: 0 30px 80px rgba(0,0,0,0.22); }
+.p-card:hover { border-color: var(--gold); box-shadow: var(--shadow-md); transform: translateY(-5px); }
 
-.price-best-badge {
-  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+.p-card.featured {
+  background: var(--sage-deep);
   color: var(--pure-white);
-  border: 2px solid var(--white);
-  font-family: var(--mono); font-size: 0.52rem; font-weight: 500;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 4px 16px; border-radius: 980px; white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  padding: 4rem 2.5rem;
+  box-shadow: var(--shadow-lg);
+  border: none;
+  position: relative;
+  transform: scale(1.05);
+  z-index: 5;
 }
+.p-card.featured:hover { transform: scale(1.05) translateY(-5px); }
 
-.price-tier {
-  font-family: var(--mono);
-  font-size: 0.55rem; font-weight: 400;
-  letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--gray-400); margin-bottom: 0.75rem;
+.p-tier {
+  font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--gray-light); margin-bottom: 1rem;
 }
-.price-title {
-  font-family: var(--serif);
-  font-size: 1.3rem; font-weight: 500;
-  color: var(--black); margin-bottom: 0.5rem;
-  line-height: 1.2;
-}
-.price-card.best .price-title { color: var(--white); }
+.p-card.featured .p-tier { color: var(--gold); }
 
-.price-amount {
-  font-family: var(--serif);
-  font-size: 2.8rem; font-weight: 400;
-  color: var(--black); line-height: 1;
-  margin-bottom: 0.25rem;
-  letter-spacing: -0.02em;
+.p-price {
+  font-family: var(--serif); font-size: 3rem; color: var(--black);
+  margin-bottom: 0.5rem;
 }
-.price-card.best .price-amount { color: var(--white); }
-.price-note {
-  font-size: 0.68rem; font-weight: 300;
-  color: var(--gray-400); margin-bottom: 1.75rem;
-}
+.p-card.featured .p-price { color: var(--pure-white); }
 
-.price-divider {
-  height: 0.5px; margin-bottom: 1.5rem;
-  background: var(--gray-100);
-}
-.price-card.best .price-divider { background: rgba(255,255,255,0.08); }
+.p-sub { font-size: 0.8rem; color: var(--gray-text); margin-bottom: 2rem; }
+.p-card.featured .p-sub { color: rgba(255,255,255,0.7); }
 
-.price-features {
-  list-style: none; display: flex;
-  flex-direction: column; gap: 0.5rem;
-  margin-bottom: 2rem; flex: 1;
+.p-btn {
+  display: block; padding: 14px; width: 100%;
+  border: 1px solid var(--border-light);
+  color: var(--black); text-decoration: none; font-weight: 500; font-size: 0.85rem;
+  margin-top: 2rem; transition: all 0.2s;
 }
-.price-features li {
-  font-size: 0.78rem; font-weight: 400;
-  color: var(--gray-600);
-  display: flex; align-items: flex-start; gap: 10px;
-  line-height: 1.5;
+.p-btn:hover { background: var(--black); color: var(--pure-white); }
+.p-card.featured .p-btn {
+  background: var(--gold); border-color: var(--gold); color: #3E3218;
 }
-.price-card.best .price-features li { color: var(--gray-400); }
-.price-features li::before {
-  content: '✓'; font-size: 0.7rem; font-weight: 600;
-  color: var(--accent); margin-top: 1px; flex-shrink: 0;
-}
-.price-card.best .price-features li::before { color: rgba(79,70,229,0.65); }
-
-.price-btn {
-  display: block; text-align: center;
-  padding: 12px; border-radius: 980px;
-  font-size: 0.78rem; font-weight: 500;
-  letter-spacing: 0.01em; text-decoration: none;
-  transition: all 0.25s;
-  border: 1px solid var(--gray-200);
-  color: var(--black); background: transparent;
-}
-.price-btn:hover { background: var(--black); color: var(--white); border-color: var(--black); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
-.price-card.best .price-btn {
-  background: var(--white); border-color: var(--white);
-  color: var(--black);
-}
-.price-card.best .price-btn:hover { opacity: 0.85; }
-
-.pricing-note {
-  text-align: center; margin-top: 2rem;
-  font-size: 0.78rem; font-weight: 300;
-  color: var(--gray-500);
-  max-width: 600px; margin-left: auto; margin-right: auto;
-}
-.pricing-note strong { color: var(--black); font-weight: 500; }
+.p-card.featured .p-btn:hover { background: var(--pure-white); color: var(--sage-deep); }
 
 /* ═══════════════════════════════════════════
-   FAQ — Clean accordion style
+   CTA SECTION
    ═══════════════════════════════════════════ */
-.faq { padding: 100px 24px; background: var(--gray-50); }
-.faq-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 0 3rem; max-width: 960px;
-  margin: 2.5rem auto 0;
-}
-.faq-item {
-  border-top: 0.5px solid var(--gray-200);
-  padding: 1.75rem 0;
-}
-.faq-q {
-  font-size: 0.88rem; font-weight: 500;
-  color: var(--black); margin-bottom: 0.6rem;
-  line-height: 1.4;
-}
-.faq-a {
-  font-size: 0.78rem; font-weight: 300;
-  color: var(--gray-500); line-height: 1.75;
-}
-
-/* ═══════════════════════════════════════════
-   CTA — Full bleed, NDS style
-   ═══════════════════════════════════════════ */
-.cta-section {
-  background: linear-gradient(135deg, #111110, #1f2937);
-  padding: 100px 24px;
+.cta-sec {
+  background: var(--sage-deep);
+  color: var(--pure-white);
+  padding: 120px 24px;
   text-align: center;
   position: relative; overflow: hidden;
 }
-.cta-section::before {
+.cta-sec::before {
   content: ''; position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
   width: 800px; height: 800px;
-  background: radial-gradient(circle, rgba(79,70,229,0.18), transparent 65%);
-  top: -250px; left: 50%; transform: translateX(-50%);
-  filter: blur(40px); pointer-events: none;
+  background: radial-gradient(circle, rgba(200, 169, 106, 0.15), transparent 70%);
+  pointer-events: none;
 }
-.cta-section::after {
-  content: ''; position: absolute;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(59,130,246,0.08), transparent 70%);
-  bottom: -150px; right: -100px;
-  filter: blur(50px); pointer-events: none;
+.cta-sec h2 {
+  font-family: var(--serif); font-size: 3.5rem; margin-bottom: 1.5rem;
+  position: relative; z-index: 1;
 }
-.cta-section > * { position: relative; z-index: 1; }
-.cta-section .section-h2 {
-  color: var(--white); max-width: 600px;
-  margin: 0 auto 1rem;
+.cta-sec p {
+  font-size: 1.2rem; color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 3rem;
+  position: relative; z-index: 1; font-weight: 300;
 }
-.cta-sub {
-  font-size: 0.92rem; font-weight: 300;
-  color: var(--gray-500);
-  margin: 0 auto 2.5rem;
-  max-width: 480px; line-height: 1.75;
+.cta-btn-main {
+  display: inline-block;
+  background: var(--gold);
+  color: #3E3218;
+  padding: 18px 48px;
+  font-weight: 600; font-size: 1rem;
+  text-decoration: none; border-radius: 2px;
+  transition: all 0.3s;
+  position: relative; z-index: 1;
 }
-.cta-btns {
-  display: flex; gap: 12px;
-  justify-content: center; flex-wrap: wrap;
+.cta-btn-main:hover {
+  background: var(--pure-white); color: var(--sage-deep);
+  transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
-.btn-cta-primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-blue));
-  color: var(--pure-white);
-  padding: 14px 32px; border-radius: 980px;
-  font-size: 0.82rem; font-weight: 500;
-  text-decoration: none; display: inline-flex;
-  align-items: center; gap: 6px;
-  transition: opacity 0.2s;
-}
-.btn-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(79,70,229,0.3); filter: brightness(1.08); }
-.btn-cta-ghost {
-  border: 1px solid rgba(255,255,255,0.15);
-  color: var(--gray-300);
-  padding: 14px 28px; border-radius: 980px;
-  font-size: 0.78rem; font-weight: 400;
-  text-decoration: none; display: inline-flex;
-  align-items: center;
-  transition: all 0.25s;
-}
-.btn-cta-ghost:hover { border-color: rgba(255,255,255,0.4); color: var(--white); }
 
 /* ═══════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════ */
 footer {
-  background: var(--black);
-  border-top: 0.5px solid rgba(255,255,255,0.06);
-  padding: 2rem 24px;
-  display: flex; align-items: center;
-  justify-content: space-between;
+  background: #111815; /* Very dark sage/black */
+  color: rgba(255,255,255,0.4);
+  padding: 40px 24px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.8rem;
 }
-.footer-logo {
-  font-family: var(--serif);
-  font-size: 1rem; font-weight: 500;
-  color: var(--gray-300);
+.footer-inner {
+  max-width: 1140px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
 }
-.footer-links {
-  display: flex; gap: 1.5rem; list-style: none;
-}
-.footer-links a {
-  font-size: 0.68rem; font-weight: 300;
-  color: var(--gray-600);
-  text-decoration: none; transition: color 0.2s;
-}
-.footer-links a:hover { color: var(--gray-300); }
-.footer-copy {
-  font-size: 0.6rem; color: var(--gray-700);
-  font-weight: 300;
-}
+.f-links a { color: inherit; text-decoration: none; margin-left: 2rem; transition: color 0.2s; }
+.f-links a:hover { color: var(--gold); }
 
 /* ═══════════════════════════════════════════
-   ANIMATIONS
-   ═══════════════════════════════════════════ */
-@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-@keyframes fadeDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
-@keyframes fadeLeft { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
-@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
-
-.reveal {
-  opacity: 0; transform: translateY(16px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal.visible { opacity: 1; transform: none; }
-
-/* ═══════════════════════════════════════════
-   RESPONSIVE — Mobile First Priority
+   RESPONSIVE
    ═══════════════════════════════════════════ */
 @media (max-width: 768px) {
-  nav { height: 48px; }
+  .hero-h1 { font-size: 2.8rem; }
+  .cred-grid { grid-template-columns: 1fr 1fr; }
+  .pain-grid, .services-grid, .testi-grid, .pricing-grid { grid-template-columns: 1fr; }
+  .svc-card.featured { grid-template-columns: 1fr; gap: 2rem; }
+  .about { grid-template-columns: 1fr; gap: 3rem; }
   .nav-links { display: none; }
   .nav-toggle { display: flex; }
-
-  section { padding: 64px 20px; }
-  .hero { padding: 100px 20px 48px; min-height: 92vh; }
-  .hero-h1 { font-size: 2.5rem; }
-  .hero-sub { font-size: 0.86rem; }
-  .hero-bullets { flex-direction: column; gap: 8px; align-items: center; }
-  .floating-icons { display: none; }
-  .hero-particles { opacity: 0.25; }
-  .hero-ctas { flex-direction: column; width: 100%; max-width: 320px; }
-  .hero-ctas .btn { justify-content: center; width: 100%; }
-
-  .cred-bar { gap: 16px; font-size: 0.6rem; padding: 16px 20px; }
-  .cred-grid { grid-template-columns: 1fr 1fr; }
-  .pain-grid { grid-template-columns: 1fr; }
-  .services-grid { grid-template-columns: 1fr; }
-  .svc-card.featured { grid-column: span 1; grid-template-columns: 1fr; gap: 1.5rem; }
-  .svc-title { font-size: 1.4rem; }
-  .testi-grid { grid-template-columns: 1fr; }
-  .about { grid-template-columns: 1fr; gap: 2.5rem; padding-left: 20px; padding-right: 20px; }
-  .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .process-steps::before { display: none; }
-  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; gap: 16px; }
-  .price-card { border-radius: 16px; }
-  .price-card.best { transform: none; border-radius: 16px; }
-  .price-card.best:hover { transform: translateY(-4px); }
-  .faq-grid { grid-template-columns: 1fr; }
-  .cta-section { padding: 72px 20px; }
-  .cta-btns { flex-direction: column; align-items: center; }
-  .cta-btns a { width: 100%; max-width: 300px; text-align: center; justify-content: center; }
-  footer { flex-direction: column; gap: 1.25rem; text-align: center; }
-  .floating-cta { bottom: 16px; right: 16px; padding: 12px 20px; font-size: 0.75rem; }
-}
-
-@media (max-width: 480px) {
-  .hero-h1 { font-size: 2.1rem; }
-  .cred-grid { grid-template-columns: 1fr; }
-  .cred-bar { flex-direction: column; gap: 8px; }
-  .process-steps { grid-template-columns: 1fr; gap: 1.75rem; }
-  .section-h2 { font-size: 1.8rem; }
+  .p-card.featured { transform: none; }
+  .p-card.featured:hover { transform: translateY(-5px); }
+  .cta-sec h2 { font-size: 2.5rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════ NAVIGATION ═══════════════ -->
 <nav id="mainNav">
   <div class="nav-logo">Andrew Sayegh</div>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
-    <li><a href="#results">Results</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#contact" class="nav-cta-btn">Book a Free Call</a></li>
+    <li><a href="#results">Expertise</a></li>
+    <li><a href="#about">Profile</a></li>
+    <li><a href="#pricing">Fees</a></li>
+    <li><a href="mailto:contact@andrewsayegh.com" class="nav-cta-btn">Book Consultation</a></li>
   </ul>
   <button class="nav-toggle" id="navToggle" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#services" class="mm-link">Services</a>
-  <a href="#results" class="mm-link">Results</a>
-  <a href="#about" class="mm-link">About</a>
-  <a href="#pricing" class="mm-link">Pricing</a>
-  <a href="#contact" class="mobile-cta mm-link">Book a Free Call →</a>
-</div>
-
-<!-- Floating CTA -->
-<a href="mailto:andrewsayegh@gmail.com" class="floating-cta" id="floatingCta">
-  <span class="float-pulse"></span>
-  Book Free Call
-</a>
-
-<!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero">
-  <!-- Background layers -->
-  <div class="hero-particles"></div>
   <div class="floating-icons">
-    <!-- Graduation cap -->
-    <div class="float-icon fi-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M22 10l-10-5L2 10l10 5 10-5z"/><path d="M6 12v5c0 0 3 3 6 3s6-3 6-3v-5"/><line x1="22" y1="10" x2="22" y2="16"/></svg></div>
-    <!-- Document -->
-    <div class="float-icon fi-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-    <!-- Globe -->
-    <div class="float-icon fi-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-    <!-- Briefcase -->
-    <div class="float-icon fi-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-    <!-- Checklist -->
-    <div class="float-icon fi-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-    <!-- Award/Medal -->
-    <div class="float-icon fi-6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
+    <div class="float-icon fi-1"><svg viewBox="0 0 24 24"><path d="M22 10l-10-5L2 10l10 5 10-5z"/><path d="M6 12v5c0 0 3 3 6 3s6-3 6-3v-5"/><line x1="22" y1="10" x2="22" y2="16"/></svg></div>
+    <div class="float-icon fi-2"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+    <div class="float-icon fi-3"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div>
+    <div class="float-icon fi-4"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+    <div class="float-icon fi-5"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <div class="float-icon fi-6"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
   </div>
+
   <div class="hero-badge">
-    <span class="dot"></span>
-    Now accepting clients · Spring 2025
+    <span class="dot"></span> NOW ACCEPTING CLIENTS · SPRING 2026
   </div>
 
   <h1 class="hero-h1">
-    Your unfair advantage<br>
-    <em>for getting in.</em>
+    Strategic Advisory for Elite<br>
+    <em>Admissions & Policy Careers.</em>
   </h1>
 
   <p class="hero-sub">
-    I went from community college to UCLA, earned two nationally competitive fellowships, and landed internships at CAIR, Congress, and leading policy organizations — <strong>with no connections and no roadmap.</strong>
+    I navigated the path from community college to UCLA, secured competitive internships, and earned national fellowships—all without insider connections. I now provide the <strong>strategic roadmap</strong> for first-generation students to replicate this success.
   </p>
 
-  <div class="hero-bullets">
-    <span>UCLA transfer pathway expertise</span>
-    <span>Fellowship & policy career strategy</span>
-    <span>First-gen application coaching</span>
-  </div>
-
   <div class="hero-ctas">
-    <a href="mailto:andrewsayegh@gmail.com" class="btn btn-primary">Book Your Free 15-Min Call →</a>
+    <a href="mailto:contact@andrewsayegh.com" class="btn btn-primary">Book Consultation</a>
     <a href="#services" class="btn btn-secondary">Explore Services</a>
   </div>
 
-  <div class="social-proof">
-    <div class="avatars">
-      <div class="avatar">M</div>
-      <div class="avatar">S</div>
-      <div class="avatar">J</div>
-      <div class="avatar">+</div>
-    </div>
-    <div class="proof-text">
-      <strong>Trusted by first-gen students</strong> navigating<br>fellowships, admissions, and policy careers
-    </div>
+  <div class="hero-bullets">
+    <span>UC Transfer Expertise</span>
+    <span>National Fellowship Strategy</span>
+    <span>Graduate Admissions</span>
+    <span>First-Gen Advocacy</span>
   </div>
 </section>
 
-<!-- Credibility Bar -->
-<div class="cred-bar">
-  <span>UCLA Transfer</span>
-  <span>Rangel Finalist</span>
-  <span>FLAS Fellow</span>
-  <span>CAIR · TIMEP · Congress</span>
-  <span>First-Gen</span>
+<div class="credentials" id="results">
+  <div class="container-narrow">
+    <span class="section-tag">Credentials</span>
+    <h2 class="section-h2-light">Institutional Authority.</h2>
+  </div>
+  <div class="cred-grid reveal">
+    <div class="cred-block">
+      <div class="cred-label">COLUMBIA SIPA<br>ADMIT</div>
+    </div>
+    <div class="cred-block">
+      <div class="cred-label">UCLA<br>TRANSFER</div>
+    </div>
+    <div class="cred-block">
+      <div class="cred-label">DOS RANGEL / PICKERING<br>FINALIST</div>
+    </div>
+    <div class="cred-block">
+      <div class="cred-label">FLAS<br>FELLOW</div>
+    </div>
+     <div class="cred-block" style="border-right: none;">
+      <div class="cred-label">CONGRESSIONAL<br>INTERN</div>
+    </div>
+  </div>
+  <div class="cred-grid reveal" style="border-top: none; margin-top: 0;">
+    <div class="cred-block">
+      <div class="cred-num">2+</div>
+      <div class="cred-label">Competitive Fellowships<br>Earned</div>
+    </div>
+    <div class="cred-block">
+      <div class="cred-num">5+</div>
+      <div class="cred-label">Policy & Legal Internships<br>Secured</div>
+    </div>
+    <div class="cred-block">
+      <div class="cred-num">CC → UCLA</div>
+      <div class="cred-label">Transfer<br>Pathway</div>
+    </div>
+    <div class="cred-block" style="border-right: none;">
+      <div class="cred-num">100%</div>
+      <div class="cred-label">First-Generation<br>Background</div>
+    </div>
+  </div>
 </div>
 
-<!-- ═══════════════ CREDENTIALS ═══════════════ -->
-<section class="credentials" id="results">
-  <div class="container-narrow" style="margin-bottom:2rem;">
-    <div class="section-label" style="color:var(--gray-500);">Track Record</div>
-    <h2 class="section-h2" style="color:var(--white);">Real credentials. <em>Real results.</em></h2>
-  </div>
-  <div class="cred-grid">
-    <div class="cred-block reveal">
-      <div class="cred-num">2+</div>
-      <div class="cred-label">Competitive Fellowships Earned</div>
-    </div>
-    <div class="cred-block reveal">
-      <div class="cred-num">5+</div>
-      <div class="cred-label">Policy & Legal Internships Secured</div>
-    </div>
-    <div class="cred-block reveal">
-      <div class="cred-num">CC→</div>
-      <div class="cred-label">UCLA Transfer — Without a Roadmap</div>
-    </div>
-    <div class="cred-block reveal">
-      <div class="cred-num">100%</div>
-      <div class="cred-label">First-Gen · Built From Scratch</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ PROBLEM ═══════════════ -->
 <section class="problem">
-  <div class="section-label" style="text-align:center;">The Challenge</div>
-  <h2 class="section-h2">The people who <em>get in</em> know<br>things you don't — yet.</h2>
-  <p class="section-desc" style="text-align:center;max-width:540px;margin:0 auto 3.5rem;">Competitive applications aren't just about credentials. They're about knowing how to frame your story, what committees actually look for, and how to stand out before they've finished the first page.</p>
+  <div class="section-center reveal">
+    <span class="section-tag">The Landscape</span>
+    <h2 class="section-h2">The Hidden Curriculum of<br>Elite Admissions.</h2>
+    <p class="section-desc">Qualified candidates are often overlooked due to a lack of institutional knowledge. Success requires more than credentials; it demands a strategic narrative.</p>
+  </div>
 
   <div class="pain-grid">
     <div class="pain-card reveal">
-      <div class="pain-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gray-500)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      </div>
-      <div class="pain-title">Your essay sounds like everyone else's</div>
-      <p class="pain-desc">Generic openings, safe narratives, no hook. If your essay could have been written by anyone, it probably won't be remembered by anyone.</p>
+      <div class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      <div class="pain-title">Narrative Strategy</div>
+      <p class="pain-desc">Admissions committees review thousands of applications. Differentiation requires a compelling, authentic narrative hook that demands attention.</p>
     </div>
     <div class="pain-card reveal">
-      <div class="pain-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gray-500)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      </div>
-      <div class="pain-title">You're navigating without a map</div>
-      <p class="pain-desc">No one in your family has done this before. You don't know what you don't know — and that knowledge gap is costing you real opportunities.</p>
+      <div class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+      <div class="pain-title">Institutional Navigation</div>
+      <p class="pain-desc">First-generation applicants often lack the roadmap legacy students inherit. Bridge the knowledge gap with expert guidance on unwritten rules.</p>
     </div>
     <div class="pain-card reveal">
-      <div class="pain-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gray-500)" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-      </div>
-      <div class="pain-title">You're underselling your actual story</div>
-      <p class="pain-desc">Your background is compelling. Your experiences are real. But translating lived experience into competitive application language is a skill — and it's learnable.</p>
+      <div class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <div class="pain-title">Value Positioning</div>
+      <p class="pain-desc">Translate lived experience into competitive application language. Frame your background as a distinct strategic asset rather than a deficit.</p>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- ═══════════════ SERVICES ═══════════════ -->
 <section class="services" id="services">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">What I Offer</div>
-      <h2 class="section-h2">Four ways I help you<br><em>get where you're going.</em></h2>
-      <p class="section-desc">Whether you're applying to college, a fellowship, law school, or your first policy role — I help you build the strongest possible case for yourself.</p>
-    </div>
+  <div class="bg-graphic-1"></div>
+  <div class="bg-graphic-2"></div>
+  
+  <div class="container reveal">
+    <span class="section-tag">Services</span>
+    <h2 class="section-h2">Strategic Advisory & Planning</h2>
   </div>
 
   <div class="services-grid">
     <div class="svc-card reveal">
       <div class="svc-num">01</div>
-      <div class="svc-title">College Planning & Application Coaching</div>
-      <p class="svc-desc">Built for transfer students and first-gen applicants targeting selective schools. From school list strategy to essays that sound like the best version of you.</p>
-      <ul class="svc-includes">
-        <li>School list strategy & fit analysis</li>
-        <li>Personal statement development</li>
-        <li>Transfer essay coaching</li>
-        <li>Application timeline & checklist</li>
+      <div class="svc-title">College Transfer Advisory</div>
+      <p class="svc-desc">Strategic planning for community college students targeting top-tier universities. Build a comprehensive transfer application that demonstrates academic rigor.</p>
+      <ul class="svc-list">
+        <li>School fit analysis</li>
+        <li>Personal statement architecture</li>
+        <li>Transfer essay refinement</li>
       </ul>
-      <div class="svc-price">From $500</div>
-      <div class="svc-price-note">Per application cycle · Sliding scale available</div>
+      <div class="price-tag">From $500 / Cycle</div>
     </div>
 
     <div class="svc-card featured reveal">
-      <div class="featured-tag">Most popular</div>
       <div>
         <div class="svc-num">02</div>
-        <div class="svc-title">Fellowship Application Coaching</div>
-        <p class="svc-desc">Fulbright, Rangel, Boren, Gilman, and beyond. I know these applications from the inside — what makes reviewers lean forward and what makes them turn the page.</p>
-        <div class="svc-price">From $200</div>
-        <div class="svc-price-note">Full packages available</div>
+        <div class="svc-title">Fellowship Application Strategy</div>
+        <p class="svc-desc">Comprehensive guidance for Fulbright, Rangel, Boren, and Gilman applications. Leverage insider knowledge of selection criteria to maximize competitiveness.</p>
+        <div class="price-tag">Full Packages Available</div>
       </div>
       <div>
-        <ul class="svc-includes">
-          <li>Application & essay strategy</li>
-          <li>Personal statement drafts & revision</li>
-          <li>Faculty advisor outreach guidance</li>
+        <ul class="svc-list">
+          <li>Narrative strategy development</li>
+          <li>Faculty advisor outreach</li>
           <li>Mock interview preparation</li>
-          <li>Final review & polish</li>
+          <li>Final dossier review</li>
         </ul>
       </div>
     </div>
 
     <div class="svc-card reveal">
       <div class="svc-num">03</div>
-      <div class="svc-title">Law School & Graduate Applications</div>
-      <p class="svc-desc">Personal statements that do more than list accomplishments — they make a case for why you belong and what you'll contribute when you get there.</p>
-      <ul class="svc-includes">
+      <div class="svc-title">Graduate & Law Admissions</div>
+      <p class="svc-desc">Go beyond the resume. Personal statement development and application strategy for competitive graduate programs and law schools.</p>
+      <ul class="svc-list">
         <li>Personal statement coaching</li>
-        <li>Diversity statement development</li>
-        <li>School selection strategy</li>
-        <li>Resume review & positioning</li>
+        <li>Diversity statement strategy</li>
+        <li>Resume positioning</li>
       </ul>
-      <div class="svc-price">From $150</div>
-      <div class="svc-price-note">Per document or full package</div>
+      <div class="price-tag">From $150 / Document</div>
     </div>
 
     <div class="svc-card reveal">
       <div class="svc-num">04</div>
-      <div class="svc-title">Career Coaching & Job Applications</div>
-      <p class="svc-desc">Policy jobs, nonprofit roles, federal positions, and legal-adjacent careers. I help you build a compelling professional narrative and navigate competitive hiring processes.</p>
-      <ul class="svc-includes">
+      <div class="svc-title">Career & Policy Roadmap</div>
+      <p class="svc-desc">Resume architecture and interview preparation for federal, nonprofit, and policy roles. Learn to navigate federal hiring systems.</p>
+      <ul class="svc-list">
         <li>Resume audit & rewrite</li>
-        <li>Cover letter coaching</li>
-        <li>Federal & nonprofit application strategy</li>
-        <li>Interview preparation (STAR method)</li>
-        <li>Career roadmap & positioning</li>
+        <li>Cover letter strategy</li>
+        <li>STAR method interview prep</li>
       </ul>
-      <div class="svc-price">From $75</div>
-      <div class="svc-price-note">Per document · Packages available</div>
+      <div class="price-tag">From $75 / Session</div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ TESTIMONIALS ═══════════════ -->
 <section class="testimonials">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">What Clients Say</div>
-      <h2 class="section-h2">In their words.</h2>
-    </div>
+  <div class="container reveal">
+    <span class="section-tag">Competencies</span>
+    <h2 class="section-h2">Core Areas of Expertise</h2>
   </div>
   <div class="testi-grid">
-    <div class="testi reveal">
-      <p class="testi-text">"Working with someone who actually went through the process — and had to figure it out without a safety net — made all the difference. I finally understood what my essay was actually supposed to do."</p>
-      <div class="testi-author">M.A.</div>
-      <div class="testi-detail">First-gen student, transfer applicant</div>
+    <div class="testi-card reveal">
+      <div class="testi-author">Academic Distinction</div>
+      <p class="testi-text">Admitted to Columbia SIPA and UCLA with Departmental Honors. Demonstrated ability to perform in rigorous academic environments and craft successful graduate applications.</p>
     </div>
-    <div class="testi reveal">
-      <p class="testi-text">"I had the experience. I just didn't know how to frame it. Andrew helped me see my own story in a completely different way — and write it like it deserved to be written."</p>
-      <div class="testi-author">S.K.</div>
-      <div class="testi-detail">Fellowship applicant, policy track</div>
+    <div class="testi-card reveal">
+      <div class="testi-author">Policy Impact</div>
+      <p class="testi-text">Direct experience serving within the U.S. House of Representatives and leading advocacy organizations. Deep understanding of the policy career landscape.</p>
     </div>
-    <div class="testi reveal">
-      <p class="testi-text">"My career pivot felt impossible until I had a clear narrative. The resume and cover letter we built together got me an interview at the first place I sent it."</p>
-      <div class="testi-author">J.R.</div>
-      <div class="testi-detail">Career coaching client, nonprofit sector</div>
+    <div class="testi-card reveal">
+      <div class="testi-author">Fellowship Success</div>
+      <p class="testi-text">Finalist selection for the prestigious Rangel and Pickering programs; recipient of the FLAS Fellowship. Proven track record in navigating national competitions.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ ABOUT ═══════════════ -->
-<section id="about" style="padding: 100px 24px;">
-  <div class="about">
-    <div class="about-quote-block reveal">
-      <div class="about-quote">
-        "The system wasn't built with us in mind. But we can learn to navigate it — and change it from the inside."
-      </div>
-      <div class="about-attr">— Andrew Sayegh, UCLA '24</div>
-      <div class="about-tags">
-        <span class="atag">UCLA Transfer</span>
-        <span class="atag">Rangel Finalist</span>
-        <span class="atag">FLAS Fellow</span>
-        <span class="atag">First-Gen</span>
-        <span class="atag">Murrieta, CA</span>
-      </div>
-    </div>
-
-    <div class="about-text reveal">
-      <div class="section-label">My Story</div>
-      <h2 class="section-h2">I didn't have a guide.<br><em>You do now.</em></h2>
-      <p class="about-body">
-        I grew up in Murrieta, California and started at community college — without a counselor who knew what a fellowship was, or what "competitive applications" actually meant. I figured it out through research, rejection, iteration, and eventually, results.
-      </p>
-      <p class="about-body">
-        That process took me to <strong>UCLA</strong>, through <strong>two nationally competitive fellowships</strong>, a <strong>Rangel Finalist distinction</strong>, and internships at CAIR National, TIMEP, and in the U.S. House of Representatives. Today I work as a Case Manager at City Net, navigating complex systems on behalf of people who've been failed by them.
-      </p>
-      <p class="about-body">
-        Coaching is how I take everything I learned and compress it for you. No generic templates, no recycled advice — just strategy, honesty, and someone in your corner who's been exactly where you're standing.
-      </p>
-      <a href="mailto:andrewsayegh@gmail.com" class="btn btn-primary" style="margin-top:1.5rem;">Let's Talk →</a>
-    </div>
+<section class="about" id="about">
+  <div class="about-quote-box reveal">
+    <div class="quote-lg">"Systemic barriers exist, but strategic preparation overcomes them."</div>
+    <div class="quote-cite">Andrew Sayegh</div>
+  </div>
+  <div class="about-content reveal">
+    <span class="section-tag">Profile</span>
+    <h2>Expert Guidance for<br>The Ambitious.</h2>
+    <p>I navigated the educational system without a safety net. From community college to UCLA, and now as an incoming candidate at Columbia SIPA, I learned that access is often a function of strategy, not just ability.</p>
+    <p>My career includes finalist distinctions for the Rangel and Pickering fellowships and professional service in the U.S. House of Representatives. I leverage this institutional experience to help students demystify the admissions process and secure the opportunities they deserve.</p>
+    <a href="mailto:contact@andrewsayegh.com" class="btn btn-secondary" style="margin-top:1rem;">Contact Me</a>
   </div>
 </section>
 
-<!-- ═══════════════ PROCESS ═══════════════ -->
-<section class="process">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">How It Works</div>
-      <h2 class="section-h2">Four steps to your<br><em>strongest application.</em></h2>
-    </div>
-  </div>
-  <div class="process-steps">
-    <div class="proc-step reveal">
-      <div class="proc-num">1</div>
-      <div class="proc-title">Free Intro Call</div>
-      <p class="proc-desc">15 minutes. Tell me where you are, where you want to go, and what's standing in the way. No pressure, no commitment.</p>
-    </div>
-    <div class="proc-step reveal">
-      <div class="proc-num">2</div>
-      <div class="proc-title">Strategy Session</div>
-      <p class="proc-desc">We map your narrative, identify your most compelling angles, and build a custom plan for your specific application.</p>
-    </div>
-    <div class="proc-step reveal">
-      <div class="proc-num">3</div>
-      <div class="proc-title">Draft & Refine</div>
-      <p class="proc-desc">Iterative rounds of feedback until your essays and materials genuinely reflect who you are — at your absolute best.</p>
-    </div>
-    <div class="proc-step reveal">
-      <div class="proc-num">4</div>
-      <div class="proc-title">Submit with Confidence</div>
-      <p class="proc-desc">You'll send materials you're proud of — clear, authentic, and built to stand out with the people making the decisions.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ PRICING ═══════════════ -->
 <section class="pricing" id="pricing">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Pricing</div>
-      <h2 class="section-h2">Transparent rates.<br><em>No surprises.</em></h2>
-      <p class="section-desc">Start with a free call. Every engagement is tailored — these are starting points, not ceilings. Sliding scale available for students who need it.</p>
-    </div>
+  <div class="container reveal" style="text-align: center;">
+    <span class="section-tag">Investment</span>
+    <h2 class="section-h2">Advisory Fees</h2>
+    <p class="section-desc" style="margin: 0 auto;">Sliding scale options available for students with financial need.</p>
   </div>
 
   <div class="pricing-grid">
-    <div class="price-card reveal">
-      <div class="price-tier">Starter</div>
-      <div class="price-title">Single Session</div>
-      <div class="price-amount">$75</div>
-      <div class="price-note">One focused 60-minute session</div>
-      <div class="price-divider"></div>
-      <ul class="price-features">
-        <li>Resume or essay audit</li>
-        <li>Strategy & feedback session</li>
-        <li>Action plan & next steps</li>
-        <li>Email follow-up summary</li>
-      </ul>
-      <a href="mailto:andrewsayegh@gmail.com" class="price-btn">Get Started</a>
+    <div class="p-card reveal">
+      <div class="p-tier">Starter</div>
+      <div class="p-price">$75</div>
+      <div class="p-sub">Strategic Audit</div>
+      <a href="mailto:contact@andrewsayegh.com" class="p-btn">Inquire</a>
     </div>
-
-    <div class="price-card best reveal">
-      <div class="price-best-badge">Most Popular</div>
-      <div class="price-tier">Full Package</div>
-      <div class="price-title">Application Package</div>
-      <div class="price-amount">$200+</div>
-      <div class="price-note">Varies by application type</div>
-      <div class="price-divider"></div>
-      <ul class="price-features">
-        <li>Everything in Starter</li>
-        <li>Full essay drafting support</li>
-        <li>Multiple revision rounds</li>
-        <li>School / opportunity selection</li>
-        <li>Mock interview preparation</li>
-        <li>Final submission review</li>
-      </ul>
-      <a href="mailto:andrewsayegh@gmail.com" class="price-btn">Book Free Call First</a>
+    <div class="p-card featured reveal">
+      <div class="p-tier">Standard</div>
+      <div class="p-price">$200+</div>
+      <div class="p-sub">Comprehensive Advisory</div>
+      <a href="mailto:contact@andrewsayegh.com" class="p-btn">Book Consultation</a>
     </div>
-
-    <div class="price-card reveal">
-      <div class="price-tier">Comprehensive</div>
-      <div class="price-title">Full Cycle Coaching</div>
-      <div class="price-amount">$500+</div>
-      <div class="price-note">College applications per cycle</div>
-      <div class="price-divider"></div>
-      <ul class="price-features">
-        <li>Everything in Full Package</li>
-        <li>School list strategy</li>
-        <li>All application essays</li>
-        <li>Ongoing support through cycle</li>
-        <li>Priority response time</li>
-      </ul>
-      <a href="mailto:andrewsayegh@gmail.com" class="price-btn">Let's Talk</a>
-    </div>
-  </div>
-
-  <p class="pricing-note reveal"><strong>Free 15-minute intro call always included.</strong> Sliding scale and payment plans available for students facing financial barriers — just ask.</p>
-</section>
-
-<!-- ═══════════════ FAQ ═══════════════ -->
-<section class="faq">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">FAQ</div>
-      <h2 class="section-h2">Questions I hear<br><em>most often.</em></h2>
-    </div>
-  </div>
-
-  <div class="faq-grid">
-    <div class="faq-item reveal">
-      <div class="faq-q">Who is this coaching for?</div>
-      <div class="faq-a">First-gen students, transfer applicants, undergrads pursuing fellowships, recent graduates pivoting to policy or law, and anyone navigating a competitive process without a built-in support system. If that's you, this is for you.</div>
-    </div>
-    <div class="faq-item reveal">
-      <div class="faq-q">I'm on a tight budget. Can I still work with you?</div>
-      <div class="faq-a">Yes. A sliding scale is available for students who need it — just mention it when you reach out. The people who most need this coaching shouldn't be priced out of it.</div>
-    </div>
-    <div class="faq-item reveal">
-      <div class="faq-q">How is this different from generic college counseling?</div>
-      <div class="faq-a">Most college counselors haven't applied to fellowships, navigated a policy career, or transferred from community college. I have. My coaching is based on what I actually did — not a textbook formula.</div>
-    </div>
-    <div class="faq-item reveal">
-      <div class="faq-q">What fellowships can you help me with?</div>
-      <div class="faq-a">Fulbright, Rangel, Boren, Gilman, FLAS, Critical Language Scholarship, and most other nationally competitive fellowships. If you're targeting a specific one, ask — I'll tell you honestly what I can offer.</div>
-    </div>
-    <div class="faq-item reveal">
-      <div class="faq-q">How quickly can you turn around feedback?</div>
-      <div class="faq-a">Typically within 48–72 hours. If you're on a deadline, let me know upfront and I'll do my best to prioritize you. Rush turnarounds are available in most cases.</div>
-    </div>
-    <div class="faq-item reveal">
-      <div class="faq-q">Do you only work with Arab American or MENA students?</div>
-      <div class="faq-a">Not at all. I work with first-gen students and career-changers from all backgrounds. My lived experience informs my coaching approach — it doesn't limit who I help.</div>
+    <div class="p-card reveal">
+      <div class="p-tier">Comprehensive</div>
+      <div class="p-price">$500+</div>
+      <div class="p-sub">Full Cycle Coaching</div>
+      <a href="mailto:contact@andrewsayegh.com" class="p-btn">Contact</a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ CTA ═══════════════ -->
-<section class="cta-section" id="contact">
-  <div class="section-label" style="color:var(--gray-500);text-align:center;">Get Started</div>
-  <h2 class="section-h2" style="color:var(--white);">Your strongest application<br><em>starts with one conversation.</em></h2>
-  <p class="cta-sub">Free 15-minute call. No pitch, no pressure — just clarity on whether we're a good fit and what working together could look like.</p>
-  <div class="cta-btns">
-    <a href="mailto:andrewsayegh@gmail.com" class="btn-cta-primary">Book Your Free Call →</a>
-    <a href="https://linkedin.com/in/andrewsayegh" target="_blank" class="btn-cta-ghost">Connect on LinkedIn</a>
-  </div>
+<section class="cta-sec" id="contact">
+  <h2>Secure Your Strategic Advantage.</h2>
+  <p>Schedule a consultation to assess your profile and define your application strategy. No obligations.</p>
+  <a href="mailto:contact@andrewsayegh.com" class="cta-btn-main">Book Consultation</a>
 </section>
 
-<!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
-  <div class="footer-logo">Andrew Sayegh</div>
-  <ul class="footer-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="mailto:andrewsayegh@gmail.com">andrewsayegh@gmail.com</a></li>
-  </ul>
-  <div class="footer-copy">© 2025 Andrew Sayegh</div>
+  <div class="footer-inner">
+    <div>&copy; 2026 Andrew Sayegh Consulting</div>
+    <div class="f-links">
+      <a href="#services">Services</a>
+      <a href="https://linkedin.com/in/andrewsayegh">LinkedIn</a>
+      <a href="mailto:contact@andrewsayegh.com">Contact</a>
+    </div>
+  </div>
 </footer>
 
 <script>
-// Scroll Reveal
+// Scroll Animations
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+}, { threshold: 0.1 });
 reveals.forEach(el => observer.observe(el));
 
-// Nav scroll state
+// Nav Scroll
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 60) nav.classList.add('scrolled');
+  if (window.scrollY > 50) nav.classList.add('scrolled');
   else nav.classList.remove('scrolled');
-}, { passive: true });
-
-// Floating CTA — show after scrolling past hero
-const floatingCta = document.getElementById('floatingCta');
-const heroEl = document.querySelector('.hero');
-const floatObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) floatingCta.classList.add('visible');
-    else floatingCta.classList.remove('visible');
-  });
-}, { threshold: 0.15 });
-floatObserver.observe(heroEl);
+});
 
 // Mobile Menu
 const toggle = document.getElementById('navToggle');
-const mobileMenu = document.getElementById('mobileMenu');
-const mmLinks = document.querySelectorAll('.mm-link');
-
+const links = document.querySelector('.nav-links');
 toggle.addEventListener('click', () => {
-  toggle.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-});
-mmLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    toggle.classList.remove('open');
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
-  });
-});
-
-// Smooth scroll offset for fixed nav
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', (e) => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      const y = target.getBoundingClientRect().top + window.pageYOffset - 60;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  });
+  const isFlex = links.style.display === 'flex';
+  links.style.display = isFlex ? 'none' : 'flex';
+  links.style.flexDirection = 'column';
+  links.style.position = 'absolute';
+  links.style.top = '72px';
+  links.style.left = '0';
+  links.style.right = '0';
+  links.style.background = '#fff';
+  links.style.padding = '2rem';
+  links.style.borderBottom = '1px solid #eee';
 });
 </script>
 
