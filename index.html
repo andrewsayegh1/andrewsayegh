@@ -624,58 +624,6 @@ section { padding: 88px 24px; max-width: 100%; }
 }
 
 /* ═══════════════════════════════════════════
-   TESTIMONIALS
-   ═══════════════════════════════════════════ */
-.testimonials { padding: 100px 24px; background: var(--section-alt); position: relative; overflow: hidden; }
-.testimonials::before {
-  content: ''; position: absolute;
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(59,130,246,0.07), transparent 70%);
-  top: -200px; left: -250px;
-  filter: blur(60px); pointer-events: none;
-}
-.testimonials::after {
-  content: ''; position: absolute;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(79,70,229,0.05), transparent 70%);
-  bottom: -150px; right: -150px;
-  filter: blur(50px); pointer-events: none;
-}
-.testi-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem; max-width: 1080px;
-  margin: 2.5rem auto 0;
-}
-.testi {
-  background: var(--white);
-  border: 0.5px solid var(--gray-100);
-  border-radius: 16px;
-  padding: 2rem 1.75rem;
-  display: flex; flex-direction: column;
-  transition: transform 0.35s cubic-bezier(0.25,0.1,0,1), box-shadow 0.35s cubic-bezier(0.25,0.1,0,1);
-}
-.testi:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.06);
-}
-.testi-text {
-  font-family: var(--serif);
-  font-size: 1rem; font-style: italic;
-  color: var(--gray-700);
-  line-height: 1.65; margin-bottom: 1.5rem;
-  flex: 1;
-}
-.testi-author {
-  font-size: 0.72rem; font-weight: 600;
-  color: var(--black);
-  letter-spacing: 0.04em;
-}
-.testi-detail {
-  font-size: 0.65rem; font-weight: 300;
-  color: var(--gray-400); margin-top: 2px;
-}
-
-/* ═══════════════════════════════════════════
    ABOUT
    ═══════════════════════════════════════════ */
 .about {
@@ -1062,7 +1010,7 @@ footer {
     <li><a href="#results">Results</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#contact" class="nav-cta-btn">Book a Free Call</a></li>
+    <li><a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="nav-cta-btn">Book a Free Call</a></li>
   </ul>
   <button class="nav-toggle" id="navToggle" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -1074,10 +1022,10 @@ footer {
   <a href="#results" class="mm-link">Results</a>
   <a href="#about" class="mm-link">About</a>
   <a href="#pricing" class="mm-link">Pricing</a>
-  <a href="#contact" class="mobile-cta mm-link">Book a Free Call →</a>
+  <a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="mobile-cta mm-link">Book a Free Call →</a>
 </div>
 
-<a href="mailto:andrewsayegh@gmail.com" class="floating-cta" id="floatingCta">
+<a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="floating-cta" id="floatingCta">
   <span class="float-pulse"></span>
   Book Free Call
 </a>
@@ -1103,7 +1051,7 @@ footer {
   </h1>
 
   <p class="hero-sub">
-    I navigated the path from community college to UCLA, secured competitive internships, and earned national fellowships—all without connections or guidance. I now provide the strategic roadmap for ambitious students to replicate this success.
+    I navigated the path from community college to UCLA, secured competitive internships, and earned national fellowships—all without insider connections. I now provide the strategic roadmap for ambitious students to replicate this success.
   </p>
 
   <div class="hero-bullets">
@@ -1114,7 +1062,7 @@ footer {
   </div>
 
   <div class="hero-ctas">
-    <a href="mailto:andrewsayegh@gmail.com" class="btn btn-primary">Book Your Free 15-Min Call →</a>
+    <a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="btn btn-primary">Book Your Free 15-Min Call →</a>
     <a href="#services" class="btn btn-secondary">Explore Services</a>
   </div>
 
@@ -1270,32 +1218,6 @@ footer {
   </div>
 </section>
 
-<section class="testimonials">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">What Clients Say</div>
-      <h2 class="section-h2">In their words.</h2>
-    </div>
-  </div>
-  <div class="testi-grid">
-    <div class="testi reveal">
-      <p class="testi-text">"Working with someone who actually went through the process — and had to figure it out without a safety net — made all the difference. I finally understood what my essay was actually supposed to do."</p>
-      <div class="testi-author">M.A.</div>
-      <div class="testi-detail">First-gen student, transfer applicant</div>
-    </div>
-    <div class="testi reveal">
-      <p class="testi-text">"I had the experience. I just didn't know how to frame it. Andrew helped me see my own story in a completely different way — and write it like it deserved to be written."</p>
-      <div class="testi-author">S.K.</div>
-      <div class="testi-detail">Fellowship applicant, policy track</div>
-    </div>
-    <div class="testi reveal">
-      <p class="testi-text">"My career pivot felt impossible until I had a clear narrative. The resume and cover letter we built together got me an interview at the first place I sent it."</p>
-      <div class="testi-author">J.R.</div>
-      <div class="testi-detail">Career coaching client, nonprofit sector</div>
-    </div>
-  </div>
-</section>
-
 <section id="about" style="padding: 100px 24px;">
   <div class="about">
     <div class="about-quote-block reveal">
@@ -1324,7 +1246,7 @@ footer {
       <p class="about-body">
         Coaching is how I take everything I learned and compress it for you. No generic templates, no recycled advice — just strategy, honesty, and someone in your corner who's been exactly where you're standing.
       </p>
-      <a href="mailto:andrewsayegh@gmail.com" class="btn btn-primary" style="margin-top:1.5rem;">Let's Talk →</a>
+      <a href="mailto:contact@andrewsayegh.com" class="btn btn-primary" style="margin-top:1.5rem;">Let's Talk →</a>
     </div>
   </div>
 </section>
@@ -1382,7 +1304,7 @@ footer {
         <li>Action plan & next steps</li>
         <li>Email follow-up summary</li>
       </ul>
-      <a href="mailto:andrewsayegh@gmail.com" class="price-btn">Get Started</a>
+      <a href="mailto:contact@andrewsayegh.com" class="price-btn">Get Started</a>
     </div>
 
     <div class="price-card best reveal">
@@ -1400,7 +1322,7 @@ footer {
         <li>Mock interview preparation</li>
         <li>Final submission review</li>
       </ul>
-      <a href="mailto:andrewsayegh@gmail.com" class="price-btn">Book Free Call First</a>
+      <a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="price-btn">Book Free Call First</a>
     </div>
 
     <div class="price-card reveal">
@@ -1416,7 +1338,7 @@ footer {
         <li>Ongoing support through cycle</li>
         <li>Priority response time</li>
       </ul>
-      <a href="mailto:andrewsayegh@gmail.com" class="price-btn">Let's Talk</a>
+      <a href="mailto:contact@andrewsayegh.com" class="price-btn">Let's Talk</a>
     </div>
   </div>
 
@@ -1464,7 +1386,7 @@ footer {
   <h2 class="section-h2" style="color:var(--white);">Your strongest application<br><em>starts with one conversation.</em></h2>
   <p class="cta-sub">Free 15-minute call. No pitch, no pressure — just clarity on whether we're a good fit and what working together could look like.</p>
   <div class="cta-btns">
-    <a href="mailto:andrewsayegh@gmail.com" class="btn-cta-primary">Book Your Free Call →</a>
+    <a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="btn-cta-primary">Book Your Free Call →</a>
     <a href="https://linkedin.com/in/andrewsayegh" target="_blank" class="btn-cta-ghost">Connect on LinkedIn</a>
   </div>
 </section>
@@ -1475,7 +1397,7 @@ footer {
     <li><a href="#services">Services</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="mailto:andrewsayegh@gmail.com">andrewsayegh@gmail.com</a></li>
+    <li><a href="mailto:contact@andrewsayegh.com">contact@andrewsayegh.com</a></li>
   </ul>
   <div class="footer-copy">© 2025 Andrew Sayegh</div>
 </footer>
