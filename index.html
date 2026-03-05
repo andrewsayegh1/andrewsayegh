@@ -25,8 +25,12 @@
   --text-secondary: #a1a1aa;
   --text-tertiary: #52525b;
   
-  --accent-primary: #4f46e5; /* Indigo */
-  --accent-glow: rgba(79, 70, 229, 0.4);
+  --accent-primary: #B0B0B8; /* Metallic Silver */
+  --accent-glow: rgba(176, 176, 184, 0.4);
+
+  --accent-admissions: #6B8CAE;
+  --accent-fellowships: #C9A962;
+  --accent-career: #6BAA8E;
   
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'DM Sans', sans-serif;
@@ -181,6 +185,34 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 .btn-secondary:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.05); }
 
 /* --------------------------------------------------
+   FLOATING BACKGROUND ICONS
+   --------------------------------------------------
+*/
+.floating-icons {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero > *:not(.floating-icons) { position: relative; z-index: 2; }
+.floating-icon {
+  position: absolute;
+  bottom: -10%;
+  opacity: 0;
+  filter: grayscale(100%) brightness(0.4);
+  pointer-events: none;
+  user-select: none;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.07; }
+  90% { opacity: 0.07; }
+  100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
+}
+
+/* --------------------------------------------------
    TICKER 
    --------------------------------------------------
 */
@@ -284,6 +316,11 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
   background: var(--bg-surface);
   padding: 3rem 2rem;
   transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
 }
 .service-card:hover { background: var(--bg-card); }
 .svc-icon { font-family:var(--font-mono); font-size:0.9rem; color:var(--text-tertiary); margin-bottom: 1.5rem; border: 1px solid var(--border-subtle); width:fit-content; padding:4px 8px; border-radius:4px;}
@@ -291,6 +328,23 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 .svc-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
 .svc-list li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); }
 .svc-list li::before { content: ''; width: 4px; height: 4px; background: var(--accent-primary); }
+
+/* Service Card Distinct Colors */
+.service-card[data-type="admissions"]::before { background: linear-gradient(90deg, var(--accent-admissions), transparent); }
+.service-card[data-type="admissions"] .svc-icon { border-color: var(--accent-admissions); color: var(--accent-admissions); }
+.service-card[data-type="admissions"] .svc-list li::before { background: var(--accent-admissions); }
+.service-card[data-type="admissions"]:hover { background: linear-gradient(180deg, rgba(107,140,174,0.08) 0%, var(--bg-card) 30%); }
+
+.service-card[data-type="fellowships"] { background: var(--bg-card); }
+.service-card[data-type="fellowships"]::before { background: linear-gradient(90deg, var(--accent-fellowships), transparent); }
+.service-card[data-type="fellowships"] .svc-icon { border-color: var(--accent-fellowships); color: var(--accent-fellowships); }
+.service-card[data-type="fellowships"] .svc-list li::before { background: var(--accent-fellowships); }
+.service-card[data-type="fellowships"]:hover { background: linear-gradient(180deg, rgba(201,169,98,0.08) 0%, var(--bg-card) 30%); }
+
+.service-card[data-type="career"]::before { background: linear-gradient(90deg, var(--accent-career), transparent); }
+.service-card[data-type="career"] .svc-icon { border-color: var(--accent-career); color: var(--accent-career); }
+.service-card[data-type="career"] .svc-list li::before { background: var(--accent-career); }
+.service-card[data-type="career"]:hover { background: linear-gradient(180deg, rgba(107,170,142,0.08) 0%, var(--bg-card) 30%); }
 
 /* --------------------------------------------------
    PRICING
@@ -379,6 +433,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
 </nav>
 
 <section class="hero">
+  <div class="floating-icons"></div>
   <div class="hero-pill">
     <span class="dot"></span>
     <span>ACCEPTING CLIENTS FOR SPRING 2026</span>
@@ -390,7 +445,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
   </h1>
   
   <p class="hero-desc">
-    I transferred from community college to UCLA, secured competitive internships, national fellowships, and graduate school admissions without insider connections. Now, I built a roadmap for you.
+    I transferred to UCLA from community college, secured competitive internships, won national fellowships and gained admission to graduate school — all without connections. Now I've built a roadmap for you.
   </p>
   
   <div class="hero-btns">
@@ -401,10 +456,10 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
 
 <div class="ticker-wrap">
   <div class="ticker">
-    <div class="ticker-item"><strong>UCLA</strong> Transfer Alum</div>
+    <div class="ticker-item"><strong>UCLA</strong> Alum</div>
     <div class="ticker-item"><strong>Columbia SIPA</strong> Admit</div>
-    <div class="ticker-item"><strong>Rangel & Pickering</strong> Finalist</div>
-    <div class="ticker-item"><strong>State Dept</strong> Intern</div>
+    <div class="ticker-item"><strong>Congress</strong> Intern</div>
+    <div class="ticker-item"><strong>State Dept.</strong> Fellow</div>
   </div>
 </div>
 
@@ -420,7 +475,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
         <div class="stat-num">100%</div>
         <span class="stat-label">First-Gen Success</span>
       </div>
-      <p class="stat-desc">Built from scratch. I specialize in helping students and early career professionals who don't know where to start.</p>
+      <p class="stat-desc">Built from scratch. I specialize in helping students and early-career professionals who don't know where to start.</p>
     </div>
     
     <div class="bento-card">
@@ -428,7 +483,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
         <div class="stat-num">2+</div>
         <span class="stat-label">National Fellowships</span>
       </div>
-      <p class="stat-desc">Finalist of competitive federal programs including Rangel and Pickering.</p>
+      <p class="stat-desc">Finalist for competitive federal programs, including Rangel and Pickering.</p>
     </div>
     
     <div class="bento-card">
@@ -436,7 +491,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
         <div class="stat-num">5+</div>
         <span class="stat-label">Policy Internships</span>
       </div>
-      <p class="stat-desc">From Capitol Hill to International NGOs.</p>
+      <p class="stat-desc">From Capitol Hill to international NGOs.</p>
     </div>
   </div>
 </section>
@@ -452,7 +507,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       </blockquote>
       
       <p class="about-text">
-        I grew up in California, and started at community college without a counselor who understood what "competitive applications" meant. I figured it out through relentless research and iteration.
+        I grew up in California and started at community college without a counselor who understood what "competitive applications" meant. I figured it out through relentless research and iteration.
       </p>
       
       <p class="about-text">
@@ -503,10 +558,10 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
   </div>
   
   <div class="services-grid">
-    <div class="service-card">
+    <div class="service-card" data-type="admissions">
       <div class="svc-icon">ADMISSIONS</div>
       <h3 class="svc-title">College & Grad School</h3>
-      <p>Built for transfer students and first-gen applicants targeting selective schools. School lists, fit analysis, and essays that sound like you.</p>
+      <p>Built for transfer students and first-generation applicants targeting selective schools. School lists, fit analysis and essays that sound like you.</p>
       <ul class="svc-list">
         <li>Personal Statement Strategy</li>
         <li>Transfer Essay Coaching</li>
@@ -514,8 +569,8 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       </ul>
     </div>
     
-    <div class="service-card" style="background:var(--bg-card);">
-      <div class="svc-icon" style="border-color:var(--accent-primary); color:var(--accent-primary);">FELLOWSHIPS</div>
+    <div class="service-card" data-type="fellowships">
+      <div class="svc-icon">FELLOWSHIPS</div>
       <h3 class="svc-title">Fellowship Advising</h3>
       <p>Fulbright, Rangel, Boren, Gilman. I know these applications from the inside. We focus on the narrative arc that reviewers look for.</p>
       <ul class="svc-list">
@@ -525,10 +580,10 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       </ul>
     </div>
     
-    <div class="service-card">
+    <div class="service-card" data-type="career">
       <div class="svc-icon">CAREER</div>
       <h3 class="svc-title">Policy Careers</h3>
-      <p>For those pivoting to policy, non-profits, or federal roles. We translate your background into a compelling professional case.</p>
+      <p>For those pivoting to policy, nonprofits or federal roles. We translate your background into a compelling professional case.</p>
       <ul class="svc-list">
         <li>Federal Resume Audit</li>
         <li>Cover Letter Coaching</li>
@@ -577,11 +632,12 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
 
 <footer>
   <a href="#" class="footer-logo">Andrew Sayegh</a>
+  <p style="font-family:var(--font-sans); font-size:0.9rem; color:var(--text-secondary); margin-bottom:1.5rem;">Admissions &amp; Career Consulting</p>
   <div class="socials">
     <a href="https://linkedin.com/in/andrewsayegh" target="_blank">LinkedIn</a>
     <a href="mailto:contact@andrewsayegh.com">Email</a>
   </div>
-  <p class="mono">© 2026 Andrew Sayegh. Murrieta, CA.</p>
+  <p class="mono">&copy; 2026 Andrew Sayegh. Los Angeles, CA.</p>
 </footer>
 
 <script>
@@ -602,6 +658,23 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       }
     });
   });
+
+  // Floating background icons
+  (function() {
+    var icons = ['\u{1F393}', '\u{1F4DC}', '\u{1F4BC}', '\u{1F3DB}', '\u2708\uFE0F', '\u{1F4CB}'];
+    var container = document.querySelector('.floating-icons');
+    if (!container) return;
+    for (var i = 0; i < 20; i++) {
+      var el = document.createElement('span');
+      el.className = 'floating-icon';
+      el.textContent = icons[i % icons.length];
+      el.style.left = (Math.random() * 95) + '%';
+      el.style.fontSize = (1.5 + Math.random() * 3) + 'rem';
+      el.style.animationDuration = (20 + Math.random() * 30) + 's';
+      el.style.animationDelay = '-' + (Math.random() * 40) + 's';
+      container.appendChild(el);
+    }
+  })();
 </script>
 
 </body>
