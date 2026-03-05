@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andrew Sayegh | Admissions & Career Consulting</title>
+<title>Andrew Sayegh | Elite Admissions & Career Strategy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* --------------------------------------------------
-   CORE VARIABLES 
+   CORE VARIABLES & RESET 
    --------------------------------------------------
 */
 :root {
@@ -25,10 +25,8 @@
   --text-secondary: #a1a1aa;
   --text-tertiary: #52525b;
   
-  /* PILLAR COLORS */
-  --accent-gold: #D4AF37;       /* Career / Prestige */
-  --accent-indigo: #6366f1;     /* Fellowships / Diplomacy */
-  --accent-emerald: #14b8a6;    /* Admissions / Growth */
+  --accent-primary: #4f46e5; /* Indigo */
+  --accent-glow: rgba(79, 70, 229, 0.4);
   
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'DM Sans', sans-serif;
@@ -48,11 +46,8 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  /* Fixed background that doesn't fade */
-  background-image: 
-    radial-gradient(circle at 15% 10%, rgba(212, 175, 55, 0.03) 0%, transparent 40%),
-    radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.04) 0%, transparent 40%);
-  background-attachment: fixed;
+  background-image: radial-gradient(circle at 50% 0%, #1a1a2e 0%, transparent 60%);
+  background-repeat: no-repeat;
 }
 
 h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.03em; color: var(--text-primary); }
@@ -79,8 +74,12 @@ nav.scrolled {
 }
 
 .nav-brand { font-family: var(--font-serif); font-size: 1.25rem; letter-spacing: -0.02em; font-weight: 500; }
+
 .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-.nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.3s; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500;
+  transition: color 0.3s;
+}
 .nav-links a:hover { color: var(--text-primary); }
 
 .btn-nav {
@@ -94,46 +93,32 @@ nav.scrolled {
   transition: transform 0.2s;
 }
 .btn-nav:hover { transform: translateY(-1px); }
+
+/* Mobile Menu Toggle */
 .menu-toggle { display: none; background: none; border: none; cursor: pointer; color: white; }
 .menu-toggle svg { width: 24px; height: 24px; }
 
 /* --------------------------------------------------
-   HERO SECTION & FLOATING ASSETS
+   HERO SECTION 
    --------------------------------------------------
 */
 .hero {
-  min-height: 95vh;
+  min-height: 90vh;
   display: flex; flex-direction: column; justify-content: center; align-items: center;
   text-align: center;
   padding: 8rem 2rem 4rem;
   position: relative;
   overflow: hidden;
-  z-index: 1;
 }
 
-/* Floating 3D Elements Container */
-.floating-assets {
-  position: absolute; inset: 0; pointer-events: none; z-index: -1;
-  overflow: hidden;
-}
-
-.float-item {
-  position: absolute;
-  opacity: 0.15; /* Subtle blend */
-  filter: blur(1px);
-  animation: floatDrift 20s infinite ease-in-out alternate;
-}
-
-/* Individual Item Positioning */
-.fi-grad-cap { top: 15%; left: 10%; width: 180px; animation-duration: 25s; }
-.fi-diploma { bottom: 20%; right: 8%; width: 200px; animation-duration: 22s; animation-delay: 2s; }
-.fi-passport { top: 25%; right: 15%; width: 140px; animation-duration: 28s; animation-delay: 5s; opacity: 0.12; }
-.fi-briefcase { bottom: 15%; left: 15%; width: 160px; animation-duration: 24s; animation-delay: 1s; opacity: 0.1; }
-
-@keyframes floatDrift {
-  0% { transform: translateY(0) rotate(0deg) scale(1); }
-  50% { transform: translateY(-20px) rotate(3deg) scale(1.02); }
-  100% { transform: translateY(10px) rotate(-2deg) scale(1); }
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(var(--border-subtle) 1px, transparent 1px),
+  linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.07;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  pointer-events: none;
 }
 
 .hero-pill {
@@ -217,7 +202,7 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
    BENTO GRID (Results)
    --------------------------------------------------
 */
-.section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+.section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; }
 .section-header { margin-bottom: 4rem; max-width: 600px; }
 .section-header h2 { font-size: 3rem; margin-bottom: 1rem; }
 
@@ -237,58 +222,20 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 }
 .bento-card:hover { border-color: var(--border-focus); transform: translateY(-4px); }
 .bento-card.wide { grid-column: span 2; }
+.bento-card.tall { grid-row: span 2; }
 
 .stat-num { font-family: var(--font-serif); font-size: 3.5rem; line-height: 1; color: var(--text-primary); margin-bottom: 0.5rem; }
 .stat-label { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; display: block; }
 .stat-desc { font-size: 0.9rem; color: var(--text-tertiary); line-height: 1.5; }
 
 /* --------------------------------------------------
-   SERVICES - DISTINCT CONTRAST
-   --------------------------------------------------
-*/
-.services-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;
-}
-
-.service-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  padding: 3rem 2rem;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-.service-card:hover { transform: translateY(-5px); }
-
-/* ADMISSIONS - Emerald */
-.service-card.s-admissions:hover { border-color: var(--accent-emerald); box-shadow: 0 10px 40px -10px rgba(20, 184, 166, 0.15); }
-.service-card.s-admissions .svc-icon { color: var(--accent-emerald); border-color: rgba(20, 184, 166, 0.3); }
-.service-card.s-admissions .svc-list li::before { background: var(--accent-emerald); }
-
-/* FELLOWSHIPS - Indigo */
-.service-card.s-fellowships:hover { border-color: var(--accent-indigo); box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.15); }
-.service-card.s-fellowships .svc-icon { color: var(--accent-indigo); border-color: rgba(99, 102, 241, 0.3); }
-.service-card.s-fellowships .svc-list li::before { background: var(--accent-indigo); }
-
-/* CAREER - Gold */
-.service-card.s-career:hover { border-color: var(--accent-gold); box-shadow: 0 10px 40px -10px rgba(212, 175, 55, 0.15); }
-.service-card.s-career .svc-icon { color: var(--accent-gold); border-color: rgba(212, 175, 55, 0.3); }
-.service-card.s-career .svc-list li::before { background: var(--accent-gold); }
-
-.svc-icon { font-family:var(--font-mono); font-size:0.75rem; font-weight: 500; margin-bottom: 1.5rem; border: 1px solid var(--border-subtle); width:fit-content; padding:6px 10px; border-radius:4px; letter-spacing: 0.05em; }
-.svc-title { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 500; color: var(--text-primary); margin-bottom: 1rem; }
-.svc-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
-.svc-list li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); }
-.svc-list li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; }
-
-/* --------------------------------------------------
    ABOUT / METHODOLOGY
    --------------------------------------------------
 */
 .about-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5rem; align-items: start; }
+
 .about-content blockquote {
-  border-left: 2px solid var(--accent-gold);
+  border-left: 2px solid var(--accent-primary);
   padding-left: 2rem; margin-bottom: 2rem;
   font-family: var(--font-serif); font-size: 1.4rem; font-style: italic; color: var(--text-primary);
   line-height: 1.4;
@@ -313,13 +260,37 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 }
 .time-step:last-child { border-right: none; }
 .time-step:hover { background: var(--bg-highlight); }
+
 .step-num {
   font-family: var(--font-mono); font-size: 3rem; color: var(--border-focus);
   opacity: 0.3; margin-bottom: 1.5rem; display: block;
 }
-.time-step:hover .step-num { color: var(--accent-gold); opacity: 1; }
+.time-step:hover .step-num { color: var(--accent-primary); opacity: 1; }
+
 .step-title { font-size: 1.1rem; font-weight: 500; color: var(--text-primary); margin-bottom: 0.5rem; }
 .step-desc { font-size: 0.85rem; color: var(--text-tertiary); line-height: 1.6; }
+
+/* --------------------------------------------------
+   SERVICES
+   --------------------------------------------------
+*/
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px; overflow: hidden;
+}
+.service-card {
+  background: var(--bg-surface);
+  padding: 3rem 2rem;
+  transition: background 0.3s;
+}
+.service-card:hover { background: var(--bg-card); }
+.svc-icon { font-family:var(--font-mono); font-size:0.9rem; color:var(--text-tertiary); margin-bottom: 1.5rem; border: 1px solid var(--border-subtle); width:fit-content; padding:4px 8px; border-radius:4px;}
+.svc-title { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 500; color: var(--text-primary); margin-bottom: 1rem; }
+.svc-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.svc-list li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); }
+.svc-list li::before { content: ''; width: 4px; height: 4px; background: var(--accent-primary); }
 
 /* --------------------------------------------------
    PRICING
@@ -337,14 +308,14 @@ h1.hero-title span.italic { font-style: italic; font-weight: 400; color: var(--t
 }
 .price-card.featured {
   background: var(--bg-highlight);
-  border: 1px solid var(--accent-gold);
+  border: 1px solid var(--accent-primary);
   padding: 3.5rem 2.5rem;
   position: relative;
   transform: scale(1.05);
   z-index: 2;
   box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
-.price-tag { font-family: var(--font-mono); color: var(--accent-gold); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
+.price-tag { font-family: var(--font-mono); color: var(--accent-primary); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
 .price-amount { font-family: var(--font-serif); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 0.5rem; }
 .price-btn {
   width: 100%; padding: 1rem; margin-top: 2rem;
@@ -371,6 +342,10 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* --------------------------------------------------
+   RESPONSIVE 
+   --------------------------------------------------
+*/
 @media (max-width: 900px) {
   .hero-title { font-size: 3.5rem; }
   .bento-grid { grid-template-columns: 1fr; }
@@ -382,7 +357,6 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
   .price-card.featured { transform: scale(1); }
   .nav-links { display: none; }
   .menu-toggle { display: block; }
-  .floating-assets { display: none; } /* Hide heavy visuals on mobile */
 }
 </style>
 </head>
@@ -405,33 +379,6 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
 </nav>
 
 <section class="hero">
-  
-  <div class="floating-assets">
-    <svg class="float-item fi-grad-cap" viewBox="0 0 24 24" fill="none" stroke="rgba(20, 184, 166, 0.4)" stroke-width="0.5">
-      <path d="M22 10l-10-5L2 10l10 5 10-5z"></path>
-      <path d="M6 12v5c0 0 3 3 6 3s6-3 6-3v-5"></path>
-      <line x1="22" y1="10" x2="22" y2="16"></line>
-    </svg>
-    
-    <svg class="float-item fi-briefcase" viewBox="0 0 24 24" fill="none" stroke="rgba(212, 175, 55, 0.4)" stroke-width="0.5">
-      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-    </svg>
-    
-    <svg class="float-item fi-diploma" viewBox="0 0 24 24" fill="none" stroke="rgba(255, 255, 255, 0.3)" stroke-width="0.5">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-      <polyline points="14 2 14 8 20 8"></polyline>
-      <line x1="16" y1="13" x2="8" y2="13"></line>
-      <line x1="16" y1="17" x2="8" y2="17"></line>
-    </svg>
-
-    <svg class="float-item fi-passport" viewBox="0 0 24 24" fill="none" stroke="rgba(99, 102, 241, 0.4)" stroke-width="0.5">
-      <circle cx="12" cy="12" r="10"></circle>
-      <line x1="2" y1="12" x2="22" y2="12"></line>
-      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-    </svg>
-  </div>
-
   <div class="hero-pill">
     <span class="dot"></span>
     <span>ACCEPTING CLIENTS FOR SPRING 2026</span>
@@ -443,21 +390,21 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
   </h1>
   
   <p class="hero-desc">
-    I transferred to UCLA from community college, secured competitive internships, won national fellowships, and gained admission to graduate school without connections. Now, I built a roadmap for you.
+    I transferred from community college to UCLA, secured competitive internships, national fellowships, and graduate school admissions without insider connections. Now, I built a roadmap for you.
   </p>
   
   <div class="hero-btns">
-    <a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="btn-primary">Book 15-Min. Intro</a>
+    <a href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank" class="btn-primary">Book 15-Min Intro</a>
     <a href="#services" class="btn-secondary">View Services</a>
   </div>
 </section>
 
 <div class="ticker-wrap">
   <div class="ticker">
-    <div class="ticker-item"><strong>UCLA ALUM</strong></div>
-    <div class="ticker-item"><strong>COLUMBIA SIPA ADMIT</strong></div>
-    <div class="ticker-item"><strong>CONGRESS INTERN</strong></div>
-    <div class="ticker-item"><strong>STATE DEPT FELLOW</strong></div>
+    <div class="ticker-item"><strong>UCLA</strong> Transfer Alum</div>
+    <div class="ticker-item"><strong>Columbia SIPA</strong> Admit</div>
+    <div class="ticker-item"><strong>Rangel & Pickering</strong> Finalist</div>
+    <div class="ticker-item"><strong>State Dept</strong> Intern</div>
   </div>
 </div>
 
@@ -489,7 +436,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
         <div class="stat-num">5+</div>
         <span class="stat-label">Policy Internships</span>
       </div>
-      <p class="stat-desc">From Capitol Hill to international NGOs.</p>
+      <p class="stat-desc">From Capitol Hill to International NGOs.</p>
     </div>
   </div>
 </section>
@@ -505,11 +452,11 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
       </blockquote>
       
       <p class="about-text">
-        I grew up in California and started at community college without a counselor who understood what "competitive applications" meant. I figured it out through relentless research and iteration.
+        I grew up in California, and started at community college without a counselor who understood what "competitive applications" meant. I figured it out through relentless research and iteration.
       </p>
       
       <p class="about-text">
-        That process took me to UCLA, internships on Capitol Hill, two national fellowships, and admission to Columbia University's School of International and Public Affairs. Today, I turn that lived experience into strategy for ambitious students and young professionals.
+        That process took me to UCLA, internships on Capitol Hill, two national fellowships, and graduate admissions to Columbia School of International and Public Affairs. Today, I turn that lived experience into strategy for ambitious students and young professionals.
       </p>
     </div>
     
@@ -556,36 +503,36 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
   </div>
   
   <div class="services-grid">
-    <div class="service-card s-admissions">
+    <div class="service-card">
       <div class="svc-icon">ADMISSIONS</div>
       <h3 class="svc-title">College & Grad School</h3>
       <p>Built for transfer students and first-gen applicants targeting selective schools. School lists, fit analysis, and essays that sound like you.</p>
       <ul class="svc-list">
-        <li>Personal statement strategy</li>
-        <li>Transfer essay coaching</li>
-        <li>UC Insight questions</li>
+        <li>Personal Statement Strategy</li>
+        <li>Transfer Essay Coaching</li>
+        <li>UC Insight Questions</li>
       </ul>
     </div>
     
-    <div class="service-card s-fellowships">
-      <div class="svc-icon">FELLOWSHIPS</div>
+    <div class="service-card" style="background:var(--bg-card);">
+      <div class="svc-icon" style="border-color:var(--accent-primary); color:var(--accent-primary);">FELLOWSHIPS</div>
       <h3 class="svc-title">Fellowship Advising</h3>
       <p>Fulbright, Rangel, Boren, Gilman. I know these applications from the inside. We focus on the narrative arc that reviewers look for.</p>
       <ul class="svc-list">
-        <li>Narrative development</li>
-        <li>Faculty advisor outreach</li>
-        <li>Mock interviews</li>
+        <li>Narrative Development</li>
+        <li>Faculty Advisor Outreach</li>
+        <li>Mock Interviews</li>
       </ul>
     </div>
     
-    <div class="service-card s-career">
+    <div class="service-card">
       <div class="svc-icon">CAREER</div>
       <h3 class="svc-title">Policy Careers</h3>
-      <p>For those pivoting to policy, nonprofits, or federal roles. We translate your background into a compelling professional case.</p>
+      <p>For those pivoting to policy, non-profits, or federal roles. We translate your background into a compelling professional case.</p>
       <ul class="svc-list">
-        <li>Federal resume audit</li>
-        <li>Cover letter coaching</li>
-        <li>Interview prep (STAR)</li>
+        <li>Federal Resume Audit</li>
+        <li>Cover Letter Coaching</li>
+        <li>Interview Prep (STAR)</li>
       </ul>
     </div>
   </div>
@@ -634,7 +581,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-al
     <a href="https://linkedin.com/in/andrewsayegh" target="_blank">LinkedIn</a>
     <a href="mailto:contact@andrewsayegh.com">Email</a>
   </div>
-  <p class="mono">© 2026 Andrew Sayegh. Los Angeles, CA.</p>
+  <p class="mono">© 2026 Andrew Sayegh. Murrieta, CA.</p>
 </footer>
 
 <script>
