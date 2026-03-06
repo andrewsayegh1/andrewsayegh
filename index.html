@@ -516,7 +516,7 @@ function fireConfetti(type) {
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
     const particles = [];
-    const icons = type === 'career' ? ['💸','💼','📈','🚀'] : ['🎓','📜','🏛️','✏️'];
+    const icons = type === 'career' ? ['💸','💼'] : ['🎓','📜'];
     for(let i=0; i<60; i++) particles.push({x: window.innerWidth/2, y: window.innerHeight/2, vx:(Math.random()-0.5)*20, vy:(Math.random()-0.5)*20, icon: icons[Math.floor(Math.random()*icons.length)], life:100});
     function animate() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
