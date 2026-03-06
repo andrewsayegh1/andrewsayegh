@@ -6,105 +6,155 @@
 <title>Andrew Sayegh | Flagship Strategy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ──────────────────────────────────────────
-   PALETTE: "CHAMPAGNE & STEEL"
+   PALETTE: "CHAMPAGNE STEEL"
    ────────────────────────────────────────── */
 :root {
-    --bg-void: #050507;
-    --bg-glass: rgba(20, 20, 24, 0.65);
-    --bg-surface: #0e0e12;
+    /* Backgrounds */
+    --bg-void: #030304;
+    --bg-glass: rgba(15, 15, 20, 0.6);
+    --bg-glass-heavy: rgba(10, 10, 12, 0.85);
     
     /* Text */
     --text-primary: #f2f2f5;
     --text-secondary: #a1a1aa;
     --text-tertiary: #52525b;
     
-    /* Accents */
-    --gold-primary: #d4af37;
-    --gold-light: #f3e5ab;
-    --gold-dim: #8a7038;
-    --bronze: #a67c52;
-    --steel: #64748b;
+    /* Accents - The "Premium" Feel */
+    --accent-gold: #d4af37;
+    --accent-champagne: #f3e5ab;
+    --accent-bronze: #a67c52;
+    --metal-silver: #e2e8f0;
     
-    /* Status */
-    --status-green: #10b981;
-    --status-glow: rgba(16, 185, 129, 0.4);
-
     /* Borders & Glows */
-    --border-glass: rgba(255, 255, 255, 0.08);
-    --border-highlight: rgba(212, 175, 55, 0.35);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-highlight: rgba(212, 175, 55, 0.3); /* Subtle Gold Border */
+    --glow-gold: rgba(212, 175, 55, 0.15);
     
     /* Physics */
-    --ease-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
-    --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* LUDICROUS MODE OVERRIDES */
+html.ludicrous {
+    --accent-gold: #ff0055;
+    --accent-champagne: #ff99ac;
+    --border-highlight: rgba(255, 0, 85, 0.5);
+    --glow-gold: rgba(255, 0, 85, 0.3);
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html { scroll-behavior: smooth; font-size: 16px; height: 100%; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
 body {
     background-color: var(--bg-void);
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
-    background-image: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
-}
-
-/* Texture Overlay */
-body::after {
-    content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-    opacity: 0.6; mix-blend-mode: overlay;
+    position: relative;
 }
 
 /* ──────────────────────────────────────────
-   TYPOGRAPHY & COMPONENTS
+   AMBIENT BACKGROUND LAYERS
    ────────────────────────────────────────── */
-h1, h2, h3 { color: var(--text-primary); letter-spacing: -0.02em; }
-h1 { font-family: 'Playfair Display', serif; line-height: 1.1; font-weight: 500; }
-h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; }
-.mono { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-primary); display: block; margin-bottom: 0.5rem; }
+.ambient-light {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    z-index: -1; overflow: hidden; pointer-events: none;
+}
+.light-orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); opacity: 0.4;
+    animation: floatOrb 20s infinite alternate ease-in-out;
+}
+.orb-1 {
+    top: -10%; left: -10%; width: 50vw; height: 50vw;
+    background: radial-gradient(circle, var(--glow-gold), transparent 70%);
+}
+.orb-2 {
+    bottom: -20%; right: -10%; width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+    animation-delay: -5s;
+}
+@keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10%, 10%) scale(1.1); }
+}
 
-/* The Apple-style Glass Card */
-.glass-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--border-glass);
-    border-top: 1px solid rgba(255,255,255,0.1);
-    border-radius: 24px;
-    padding: 2.5rem;
-    transition: transform 0.4s var(--ease-smooth), border-color 0.4s;
+/* Noise overlay for texture */
+body::after {
+    content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.5;
+}
+
+/* ──────────────────────────────────────────
+   TYPOGRAPHY
+   ────────────────────────────────────────── */
+h1, h2, h3 { color: var(--text-primary); font-weight: 400; letter-spacing: -0.02em; }
+h1 { font-family: 'Playfair Display', serif; line-height: 1.1; }
+h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 0.5rem; }
+.mono { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 0.5rem; }
+
+/* Metallic Text Effect */
+.metallic-text {
+    background: linear-gradient(135deg, var(--metal-silver) 0%, #fff 50%, var(--text-secondary) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255,255,255,0.1);
+}
+
+/* ──────────────────────────────────────────
+   GLASS CARDS (LAYERED)
+   ────────────────────────────────────────── */
+.glass-panel {
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-subtle);
+    border-top: 1px solid rgba(255,255,255,0.15); /* Top highlight */
+    border-radius: 20px;
+    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
+    transition: transform 0.4s var(--ease-out), border-color 0.4s, box-shadow 0.4s;
     position: relative; overflow: hidden;
 }
-.glass-card:hover {
-    transform: translateY(-5px);
+.glass-panel:hover {
+    transform: translateY(-4px);
     border-color: var(--border-highlight);
-    box-shadow: 0 20px 60px -15px rgba(0,0,0,0.6);
+    box-shadow: 0 30px 60px -20px var(--glow-gold);
 }
+/* Internal sheen on hover */
+.glass-panel::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.04), transparent 40%);
+    opacity: 0; transition: opacity 0.5s; pointer-events: none;
+}
+.glass-panel:hover::after { opacity: 1; }
 
-/* Buttons */
+/* ──────────────────────────────────────────
+   BUTTONS
+   ────────────────────────────────────────── */
 .btn {
     display: inline-flex; align-items: center; justify-content: center;
     padding: 0.8rem 2rem; border-radius: 999px; font-weight: 500; font-size: 0.9rem;
-    cursor: pointer; transition: all 0.3s var(--ease-smooth); border: none; text-decoration: none;
+    cursor: pointer; transition: all 0.3s var(--ease-out); border: none; text-decoration: none;
     font-family: 'Inter', sans-serif; position: relative; overflow: hidden;
 }
-.btn-gold {
-    background: linear-gradient(135deg, var(--gold-primary) 0%, var(--bronze) 100%);
+.btn-primary {
+    background: linear-gradient(135deg, #eee 0%, #bbb 100%);
     color: #000; font-weight: 600;
 }
-.btn-gold:hover {
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
-    transform: scale(1.02); filter: brightness(1.1);
+.btn-primary:hover {
+    box-shadow: 0 0 25px rgba(255,255,255,0.4);
+    transform: scale(1.02);
 }
 .btn-outline {
-    background: transparent; border: 1px solid var(--border-glass);
+    background: transparent; border: 1px solid var(--border-subtle);
     color: var(--text-primary);
 }
 .btn-outline:hover {
-    border-color: var(--gold-primary); color: var(--gold-primary);
+    border-color: var(--accent-gold); color: var(--accent-gold);
     background: rgba(212, 175, 55, 0.05);
 }
 
@@ -113,164 +163,151 @@ h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; }
    ────────────────────────────────────────── */
 nav {
     position: fixed; top: 0; width: 100%; z-index: 1000;
-    padding: 1.2rem 2rem; transition: all 0.4s var(--ease-smooth);
+    padding: 1.5rem 2rem; transition: all 0.4s var(--ease-out);
 }
 nav.scrolled {
-    background: rgba(5, 5, 7, 0.85);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border-glass);
     padding: 0.8rem 2rem;
+    background: rgba(3, 3, 5, 0.8);
+    backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle);
 }
-.nav-inner {
-    max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;
+.nav-content {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1200px; margin: 0 auto;
 }
 .brand {
     font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; font-style: italic;
     color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 10px;
 }
-.brand-icon {
-    width: 32px; height: 32px; border: 1px solid var(--gold-primary); border-radius: 8px;
-    display: grid; place-items: center; font-size: 0.8rem; color: var(--gold-primary);
-    background: linear-gradient(135deg, rgba(212,175,55,0.1), transparent);
+.brand-mark {
+    width: 30px; height: 30px; border: 1px solid var(--accent-gold); border-radius: 6px;
+    display: grid; place-items: center; font-size: 0.75rem; color: var(--accent-gold);
 }
 
 .nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; transition: color 0.3s; }
-.nav-links a:hover { color: var(--gold-light); }
-.mobile-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+.nav-links a {
+    text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--accent-champagne); }
+
+.mobile-toggle { display: none; background: none; border: none; color: #fff; cursor: pointer; z-index: 1002; }
 
 /* ──────────────────────────────────────────
-   HERO SECTION
+   HERO
    ────────────────────────────────────────── */
 .hero {
     min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
     text-align: center; padding: 6rem 1.5rem; position: relative;
 }
-
-/* Green Pulse Status */
-.status-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 16px; background: rgba(16, 185, 129, 0.08);
-    border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 50px;
-    color: var(--status-green); font-family: 'DM Mono', monospace; font-size: 0.75rem;
-    margin-bottom: 2rem; letter-spacing: 0.05em;
+.hero-pill {
+    padding: 6px 16px; border-radius: 50px; background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.2); color: var(--accent-champagne);
+    font-size: 0.75rem; font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
+    margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 8px;
     animation: fadeIn 1s ease-out;
 }
-.status-dot {
-    width: 8px; height: 8px; background: var(--status-green); border-radius: 50%;
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-    animation: pulse-green 2s infinite;
-}
-@keyframes pulse-green {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-}
+.status-dot { width: 6px; height: 6px; background: var(--accent-gold); border-radius: 50%; box-shadow: 0 0 8px var(--accent-gold); }
 
-/* Hero Title & Rotator */
 .hero-title {
     font-size: clamp(3rem, 8vw, 5.5rem); margin-bottom: 1.5rem;
-    animation: slideUp 0.8s 0.2s var(--ease-smooth) both;
+    animation: slideUp 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
-.rotator-wrap { display: block; height: 1.2em; overflow: hidden; color: var(--gold-light); position: relative; }
-.rotator-track { animation: rotateText 10s infinite cubic-bezier(0.68, -0.55, 0.265, 1.55); }
-.rotator-item { display: block; height: 1.2em; line-height: 1.2em; font-style: italic; }
-
-@keyframes rotateText {
-    0%, 20% { transform: translateY(0); }
-    25%, 45% { transform: translateY(-1.2em); }
-    50%, 70% { transform: translateY(-2.4em); }
-    75%, 95% { transform: translateY(-3.6em); }
-    100% { transform: translateY(-4.8em); }
-}
-
+.hero-title span { display: block; }
 .hero-sub {
-    max-width: 600px; font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 3rem;
-    line-height: 1.7; animation: slideUp 0.8s 0.4s var(--ease-smooth) both;
+    max-width: 600px; font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 3rem;
+    line-height: 1.7; animation: slideUp 1s 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 /* ──────────────────────────────────────────
-   SECTIONS
+   SECTIONS & GRID
    ────────────────────────────────────────── */
 .section { padding: 6rem 1.5rem; max-width: 1200px; margin: 0 auto; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
 .grid-wide { grid-column: span 2; }
 
-/* Pricing Tier */
-.price-card.featured {
-    border-color: var(--gold-primary);
-    background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, rgba(20,20,24,0.8) 100%);
-    transform: scale(1.05); z-index: 2;
+/* Feature Icon */
+.icon-box {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+    border: 1px solid var(--border-subtle); display: grid; place-items: center;
+    margin-bottom: 1.5rem; color: var(--accent-gold);
 }
-.price-amt { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--text-primary); margin: 1rem 0; }
+
+/* Pricing Highlight */
+.glass-panel.featured {
+    border-color: var(--accent-gold);
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
+    box-shadow: 0 0 40px -10px rgba(212, 175, 55, 0.1);
+}
 
 /* ──────────────────────────────────────────
-   BOOKING MODAL & CONFETTI
+   BOOKING MODAL
    ────────────────────────────────────────── */
 .modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px);
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(12px);
     z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
     display: grid; place-items: center; padding: 1rem;
 }
 .modal-overlay.open { opacity: 1; pointer-events: all; }
 .modal-window {
-    width: 100%; max-width: 520px; background: #0c0c0f;
-    border: 1px solid var(--border-glass); border-radius: 24px;
+    width: 100%; max-width: 520px; background: #0a0a0c;
+    border: 1px solid var(--border-subtle); border-radius: 24px;
     padding: 2.5rem; position: relative; transform: scale(0.95) translateY(20px);
-    transition: transform 0.4s var(--ease-elastic);
-    box-shadow: 0 50px 100px -20px rgba(0,0,0,0.9);
+    transition: transform 0.4s var(--ease-spring);
+    box-shadow: 0 40px 80px -10px rgba(0,0,0,0.8);
 }
 .modal-overlay.open .modal-window { transform: scale(1) translateY(0); }
 
-/* Inputs */
 .form-group { margin-bottom: 1.2rem; }
-.form-label { display: block; font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'DM Mono', monospace; }
-.form-input {
+.form-label { display: block; font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; font-family: 'DM Mono', monospace; }
+.form-input, .form-select {
     width: 100%; padding: 1rem; background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border-glass); border-radius: 12px;
+    border: 1px solid var(--border-subtle); border-radius: 10px;
     color: var(--text-primary); font-family: 'Inter', sans-serif; outline: none;
-    transition: all 0.3s;
+    transition: border-color 0.3s;
 }
-.form-input:focus { border-color: var(--gold-primary); background: rgba(212,175,55,0.05); box-shadow: 0 0 15px rgba(212,175,55,0.1); }
-select.form-input { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; }
-
-/* Confetti Container */
-#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 3000; }
+.form-select {
+    appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 1rem center;
+}
+.form-input:focus, .form-select:focus { border-color: var(--accent-gold); background: rgba(212,175,55,0.02); }
 
 /* ──────────────────────────────────────────
-   RESPONSIVE
+   ANIMATIONS & MOBILE
    ────────────────────────────────────────── */
 @keyframes slideUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
-@media (max-width: 900px) {
-    .nav-links, .nav-inner .btn { display: none; }
+@media (max-width: 768px) {
+    .nav-links, .nav-content .btn { display: none; }
     .mobile-toggle { display: block; }
-    .grid-wide { grid-column: span 1; }
-    .price-card.featured { transform: scale(1); }
     .hero-title { font-size: 3rem; }
-    .rotator-item { font-size: 0.9em; }
+    .grid-wide { grid-column: span 1; }
+    
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+        position: fixed; inset: 0; background: var(--bg-glass-heavy); backdrop-filter: blur(30px);
+        z-index: 1001; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+        opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a { font-size: 2rem; font-family: 'Playfair Display', serif; color: var(--text-primary); text-decoration: none; opacity: 0; transform: translateY(20px); transition: 0.4s; }
+    .mobile-menu.open a { opacity: 1; transform: translateY(0); }
 }
-/* Mobile Menu */
-.mobile-menu {
-    position: fixed; inset: 0; background: rgba(5,5,7,0.98); backdrop-filter: blur(20px);
-    z-index: 1001; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s;
-}
-.mobile-menu.open { opacity: 1; pointer-events: all; }
-.mobile-menu a { font-size: 2rem; font-family: 'Playfair Display', serif; color: var(--text-primary); text-decoration: none; transform: translateY(20px); opacity: 0; transition: 0.4s; }
-.mobile-menu.open a { transform: translateY(0); opacity: 1; }
 </style>
 </head>
 <body>
 
-<canvas id="confetti-canvas"></canvas>
+<div class="ambient-light">
+    <div class="light-orb orb-1"></div>
+    <div class="light-orb orb-2"></div>
+</div>
 
 <nav id="navbar">
-    <div class="nav-inner">
+    <div class="nav-content">
         <a href="#" class="brand" id="brandLogo">
-            <div class="brand-icon">AS</div>
-            <span>Andrew Sayegh</span>
+            <div class="brand-mark">AS</div>
+            <span style="font-size:1.1rem; letter-spacing: -0.01em;">Andrew Sayegh</span>
         </a>
         <ul class="nav-links">
             <li><a href="#results">Track Record</a></li>
@@ -278,272 +315,247 @@ select.form-input { cursor: pointer; appearance: none; background-image: url("da
             <li><a href="#pricing">Pricing</a></li>
         </ul>
         <div style="display:flex; gap:1rem;">
-            <button class="btn btn-outline" onclick="openBooking()">Strategy Call</button>
-            <button class="mobile-toggle" onclick="toggleMobile()">☰</button>
+            <button class="btn btn-outline" style="padding:0.6rem 1.2rem; font-size:0.8rem;" onclick="openBooking()">Consultation</button>
+            <button class="mobile-toggle" onclick="toggleMobile()">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
         </div>
     </div>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-    <a href="#results" onclick="toggleMobile()" style="transition-delay:0.1s">Results</a>
-    <a href="#services" onclick="toggleMobile()" style="transition-delay:0.2s">Services</a>
-    <a href="#pricing" onclick="toggleMobile()" style="transition-delay:0.3s">Pricing</a>
-    <a href="javascript:void(0)" onclick="toggleMobile(); openBooking()" style="color:var(--gold-primary); transition-delay:0.4s">Book Now</a>
+    <a href="#results" onclick="toggleMobile()" style="transition-delay: 0.1s">Track Record</a>
+    <a href="#services" onclick="toggleMobile()" style="transition-delay: 0.2s">Services</a>
+    <a href="#pricing" onclick="toggleMobile()" style="transition-delay: 0.3s">Pricing</a>
+    <a href="javascript:void(0)" onclick="toggleMobile(); openBooking()" style="color:var(--accent-gold); transition-delay: 0.4s">Book Now</a>
 </div>
 
 <section class="hero">
-    <div class="status-pill">
-        <span class="status-dot"></span>
-        <span>ACCEPTING CLIENTS FOR 2026</span>
-    </div>
-
+    <div class="hero-pill"><span class="status-dot"></span><span>ACCEPTING CLIENTS FOR 2026</span></div>
     <h1 class="hero-title">
-        The Unfair Advantage<br>
-        <span class="rotator-wrap">
-            <span class="rotator-track">
-                <span class="rotator-item">for UCLA Transfers.</span>
-                <span class="rotator-item">for Columbia Admits.</span>
-                <span class="rotator-item">for Rangel Fellows.</span>
-                <span class="rotator-item">for Policy Leaders.</span>
-                <span class="rotator-item">for UCLA Transfers.</span>
-            </span>
-        </span>
+        <span class="metallic-text">The Unfair Advantage</span>
+        <span style="font-style:italic; font-weight:400; color:var(--text-secondary);">for getting in.</span>
     </h1>
-    
     <p class="hero-sub">
-        I decoded the hidden curriculum of elite admissions so you don't have to. 
-        From Community College to the Ivy League and Capitol Hill.
+        Flagship admissions strategy for high-stakes transfer students and fellowship applicants. 
+        Engineered by a UCLA Alum & Columbia SIPA Admit.
     </p>
-
-    <div style="display:flex; gap:1rem; animation: slideUp 0.8s 0.6s var(--ease-smooth) both;">
-        <button class="btn btn-gold" onclick="openBooking()">Book Consultation</button>
+    <div style="display:flex; gap:1rem; animation: slideUp 1s 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;">
+        <button class="btn btn-primary" onclick="openBooking()">Book Strategy Call</button>
         <button class="btn btn-outline" onclick="document.getElementById('services').scrollIntoView()">Explore Services</button>
     </div>
 </section>
 
 <section id="results" class="section">
-    <span class="mono">The Standard</span>
-    <h2>Proven Track Record.</h2>
+    <span class="mono">Proven Results</span>
+    <h2>Credentials that speak.</h2>
     <div class="grid">
-        <div class="glass-card grid-wide">
-            <span class="mono" style="color:var(--text-secondary);">SPECIALTY</span>
-            <h3 style="font-size:2rem; margin-bottom:1rem;">First-Generation Architect</h3>
-            <p style="color:var(--text-secondary);">I specialize in non-traditional applicants. I help you leverage your unique background as a competitive asset, not a liability.</p>
+        <div class="glass-panel grid-wide" style="padding:2.5rem;">
+            <div class="icon-box">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h3 style="font-size:1.5rem; margin-bottom:0.5rem;">100% First-Gen Success</h3>
+            <p style="color:var(--text-secondary);">I specialize in helping students who don't have a "legacy" advantage. I built this roadmap from scratch so you don't have to.</p>
         </div>
-        <div class="glass-card">
-            <div style="font-size:3.5rem; font-family:'Playfair Display'; color:var(--gold-primary); line-height:1;">2+</div>
-            <p style="margin-top:0.5rem; color:var(--text-secondary);">National Fellowship Finalist Selections (Rangel, Pickering).</p>
+        <div class="glass-panel" style="padding:2.5rem;">
+            <div class="mono" style="color:var(--text-tertiary);">FELLOWSHIPS</div>
+            <div style="font-family:'Playfair Display'; font-size:3.5rem; color:var(--accent-gold); line-height:1;">2+</div>
+            <p style="margin-top:1rem; color:var(--text-secondary);">National Finalist selections (Rangel, Pickering).</p>
         </div>
-        <div class="glass-card">
-            <div style="font-size:3.5rem; font-family:'Playfair Display'; color:var(--text-primary); line-height:1;">Ivy</div>
-            <p style="margin-top:0.5rem; color:var(--text-secondary);">Admitted to Columbia SIPA without insider connections.</p>
+        <div class="glass-panel" style="padding:2.5rem;">
+            <div class="mono" style="color:var(--text-tertiary);">ADMISSIONS</div>
+            <div style="font-family:'Playfair Display'; font-size:3.5rem; color:var(--text-primary); line-height:1;">Ivy</div>
+            <p style="margin-top:1rem; color:var(--text-secondary);">Accepted to Columbia SIPA & UCLA.</p>
         </div>
     </div>
 </section>
 
 <section id="services" class="section">
-    <div style="text-align:center;">
+    <div style="text-align:center; max-width:600px; margin:0 auto;">
         <span class="mono">Consulting</span>
-        <h2>Services & Expertise</h2>
+        <h2>Precision Services</h2>
     </div>
     <div class="grid">
-        <div class="glass-card">
-            <div style="font-size:1.5rem; margin-bottom:1rem; color:var(--gold-primary);">🎓</div>
+        <div class="glass-panel" style="padding:2rem;">
+            <div class="icon-box">❖</div>
             <h3>College Admissions</h3>
-            <p style="color:var(--text-secondary); margin-top:0.5rem; font-size:0.9rem;">Strategic school lists and personal statement engineering for transfers.</p>
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-top:0.5rem;">School list curation and personal statement engineering for T20 & UC transfers.</p>
         </div>
-        <div class="glass-card">
-            <div style="font-size:1.5rem; margin-bottom:1rem; color:var(--gold-primary);">🏛️</div>
+        <div class="glass-panel" style="padding:2rem;">
+            <div class="icon-box">✦</div>
             <h3>Fellowship Advising</h3>
-            <p style="color:var(--text-secondary); margin-top:0.5rem; font-size:0.9rem;">Narrative development for Fulbright and Rangel service applications.</p>
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-top:0.5rem;">Narrative development for Fulbright, Rangel, and Boren applications.</p>
         </div>
-        <div class="glass-card">
-            <div style="font-size:1.5rem; margin-bottom:1rem; color:var(--gold-primary);">💼</div>
+        <div class="glass-panel" style="padding:2rem;">
+            <div class="icon-box">⟁</div>
             <h3>Career Strategy</h3>
-            <p style="color:var(--text-secondary); margin-top:0.5rem; font-size:0.9rem;">Federal resume audits (USAJobs) and STAR-method interview prep.</p>
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-top:0.5rem;">Federal resume audits and STAR-method interview prep for policy roles.</p>
         </div>
     </div>
 </section>
 
 <section id="pricing" class="section">
-    <div style="text-align:center; margin-bottom:3rem;">
+    <div style="text-align:center;">
         <span class="mono">Investment</span>
-        <h2>Transparent Tiers</h2>
+        <h2>Select your tier</h2>
     </div>
     <div class="grid">
-        <div class="glass-card price-card" style="text-align:center;">
-            <span class="mono">Starter</span>
-            <div class="price-amt">$99</div>
-            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:2rem;">One-time resume audit or essay review (30 mins).</p>
-            <button class="btn btn-outline" style="width:100%" onclick="openBooking('Starter')">Select</button>
+        <div class="glass-panel" style="padding:2.5rem; text-align:center;">
+            <span class="mono" style="color:var(--text-secondary);">STARTER</span>
+            <div style="font-size:2.5rem; font-family:'Playfair Display'; margin:1rem 0;">$99</div>
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:2rem;">Single session audit or resume review. Perfect for a quick check.</p>
+            <button class="btn btn-outline" style="width:100%" onclick="openBooking('Starter')">Get Started</button>
         </div>
-        <div class="glass-card price-card featured" style="text-align:center;">
-            <div style="position:absolute; top:0; left:0; right:0; height:3px; background:var(--gold-primary);"></div>
-            <span class="mono" style="color:var(--gold-primary);">Premium</span>
-            <div class="price-amt">$199</div>
-            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:2rem;">Full application package with unlimited revisions (1 school).</p>
-            <button class="btn btn-gold" style="width:100%" onclick="openBooking('Premium')">Select Premium</button>
+        <div class="glass-panel featured" style="padding:2.5rem; text-align:center; transform:scale(1.05);">
+            <div style="position:absolute; top:0; left:0; width:100%; height:4px; background:var(--accent-gold);"></div>
+            <span class="mono" style="color:var(--accent-gold);">PREMIUM</span>
+            <div style="font-size:2.5rem; font-family:'Playfair Display'; margin:1rem 0;">$199</div>
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:2rem;">Full application package with unlimited revisions for one school.</p>
+            <button class="btn btn-primary" style="width:100%" onclick="openBooking('Premium')">Select Premium</button>
         </div>
-        <div class="glass-card price-card" style="text-align:center;">
-            <span class="mono">Unlimited</span>
-            <div class="price-amt">$599</div>
-            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:2rem;">End-to-end consulting for multiple schools & negotiation.</p>
-            <button class="btn btn-outline" style="width:100%" onclick="openBooking('Unlimited')">Contact</button>
+        <div class="glass-panel" style="padding:2.5rem; text-align:center;">
+            <span class="mono" style="color:var(--text-secondary);">UNLIMITED</span>
+            <div style="font-size:2.5rem; font-family:'Playfair Display'; margin:1rem 0;">$599</div>
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:2rem;">End-to-end consulting for multiple schools + scholarship negotiation.</p>
+            <button class="btn btn-outline" style="width:100%" onclick="openBooking('Unlimited')">Contact Me</button>
         </div>
     </div>
 </section>
 
-<footer style="margin-top:6rem; border-top:1px solid var(--border-glass); padding:4rem 1.5rem; text-align:center;">
-    <p class="mono" style="color:var(--text-tertiary);">© 2026 Andrew Sayegh. Los Angeles.</p>
+<footer style="margin-top:6rem; border-top:1px solid var(--border-subtle); padding:4rem 1.5rem; text-align:center; color:var(--text-tertiary);">
+    <p class="mono">© 2026 Andrew Sayegh. Los Angeles, CA.</p>
 </footer>
 
-<div class="modal-overlay" id="bookingModal" onclick="if(event.target === this) closeBooking()">
+<div class="modal-overlay" id="bookingModal" onclick="closeBookingOutside(event)">
     <div class="modal-window">
         <button onclick="closeBooking()" style="position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; color:var(--text-secondary); cursor:pointer; font-size:1.2rem;">✕</button>
-        <h3 style="font-size:1.8rem; margin-bottom:0.5rem; font-family:'Playfair Display';">Strategy Session</h3>
-        <p style="color:var(--text-secondary); margin-bottom:2rem; font-size:0.9rem;">Select your area of interest to get started.</p>
+        <h3 style="font-size:1.8rem; font-family:'Playfair Display'; margin-bottom:0.5rem;">Request Consultation</h3>
+        <p style="color:var(--text-secondary); margin-bottom:2rem; font-size:0.9rem;">Fill out the details below. I usually respond within 24 hours.</p>
         
         <div class="form-group">
-            <label class="form-label">Name</label>
-            <input type="text" id="bk-name" class="form-input" placeholder="Jane Doe">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" id="bk-name" placeholder="Jane Doe">
         </div>
+        
         <div class="form-group">
-            <label class="form-label">Email</label>
-            <input type="email" id="bk-email" class="form-input" placeholder="jane@example.com">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" id="bk-email" placeholder="jane@example.com">
         </div>
+
         <div class="form-group">
-            <label class="form-label">Consulting Focus</label>
-            <select id="bk-focus" class="form-input">
-                <option value="academic">College Admissions / Fellowships</option>
-                <option value="career">Career Strategy / Policy Jobs</option>
-                <option value="general">General Inquiry</option>
+            <label class="form-label">Consulting Option</label>
+            <select class="form-select" id="bk-service">
+                <option value="" disabled selected>Select service type...</option>
+                <option value="College Admissions">College Admissions</option>
+                <option value="Fellowship Advising">Fellowship Advising</option>
+                <option value="Career Strategy">Career/Policy Strategy</option>
+                <option value="General Inquiry">Other / General Inquiry</option>
             </select>
         </div>
+
         <div class="form-group">
             <label class="form-label">Package Tier</label>
-            <select id="bk-tier" class="form-input">
-                <option value="Starter">Starter ($99)</option>
-                <option value="Premium">Premium ($199)</option>
-                <option value="Unlimited">Unlimited ($599)</option>
-                <option value="Unsure">Not sure yet</option>
+            <select class="form-select" id="bk-tier">
+                <option value="" disabled selected>Select package...</option>
+                <option value="Starter ($99)">Starter ($99)</option>
+                <option value="Premium ($199)">Premium ($199)</option>
+                <option value="Unlimited ($599)">Unlimited ($599)</option>
+                <option value="Not Sure">Not sure yet</option>
             </select>
         </div>
-        <button class="btn btn-gold" style="width:100%; margin-top:1rem;" onclick="submitBooking()">Submit Request</button>
+        
+        <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-input" id="bk-msg" rows="3" placeholder="Briefly describe your goals..."></textarea>
+        </div>
+
+        <button class="btn btn-primary" style="width:100%" onclick="submitBooking()">Submit Request</button>
     </div>
 </div>
 
 <script>
-    // Header Scroll Physics
+    // Header Scroll Effect
     window.addEventListener('scroll', () => {
         document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Mobile Menu Toggle
+    // Mobile Menu
     function toggleMobile() {
-        const menu = document.getElementById('mobileMenu');
-        menu.classList.toggle('open');
-        document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        document.getElementById('mobileMenu').classList.toggle('open');
+        document.body.style.overflow = document.body.style.overflow === 'hidden' ? '' : 'hidden';
     }
 
-    // Modal Functions
+    // Modal Logic
     const modal = document.getElementById('bookingModal');
-    function openBooking(tier) {
+    
+    function openBooking(tierPreselect) {
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
-        if(tier) {
+        if(tierPreselect) {
             const select = document.getElementById('bk-tier');
-            for(let i=0; i<select.options.length; i++) {
-                if(select.options[i].value === tier) select.selectedIndex = i;
+            for(let i=0; i<select.options.length; i++){
+                if(select.options[i].value.includes(tierPreselect)) select.selectedIndex = i;
             }
         }
     }
+    
     function closeBooking() {
         modal.classList.remove('open');
         document.body.style.overflow = '';
     }
-
-    // ──────────────────────────────────────────
-    // CONFETTI ENGINE (Emoji Based)
-    // ──────────────────────────────────────────
-    function fireConfetti(type) {
-        const canvas = document.getElementById('confetti-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const particles = [];
-        const academicIcons = ['🎓', '📜', '📚', '🏛️', '✏️'];
-        const careerIcons = ['💸', '💵', '💼', '📈', '🚀'];
-        const icons = type === 'academic' ? academicIcons : careerIcons;
-
-        // Create particles
-        for(let i = 0; i < 60; i++) {
-            particles.push({
-                x: window.innerWidth / 2,
-                y: window.innerHeight / 2,
-                vx: (Math.random() - 0.5) * 20,
-                vy: (Math.random() - 0.5) * 20 - 10, // explode up
-                icon: icons[Math.floor(Math.random() * icons.length)],
-                size: Math.random() * 20 + 20,
-                rotation: Math.random() * 360,
-                dr: (Math.random() - 0.5) * 10,
-                life: 100
-            });
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            let active = false;
-
-            particles.forEach(p => {
-                if(p.life > 0) {
-                    active = true;
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    p.vy += 0.5; // gravity
-                    p.rotation += p.dr;
-                    p.life--;
-
-                    ctx.font = `${p.size}px Arial`;
-                    ctx.save();
-                    ctx.translate(p.x, p.y);
-                    ctx.rotate(p.rotation * Math.PI / 180);
-                    ctx.fillText(p.icon, -p.size/2, p.size/2);
-                    ctx.restore();
-                }
-            });
-
-            if(active) requestAnimationFrame(animate);
-            else ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-        animate();
+    
+    function closeBookingOutside(e) {
+        if(e.target === modal) closeBooking();
     }
 
-    // Submit Logic & Trigger Confetti
+    // Form Submission (Mailto)
     function submitBooking() {
         const name = document.getElementById('bk-name').value;
         const email = document.getElementById('bk-email').value;
-        const focus = document.getElementById('bk-focus').value;
+        const service = document.getElementById('bk-service').value;
         const tier = document.getElementById('bk-tier').value;
+        const msg = document.getElementById('bk-msg').value;
 
         if(!name || !email) {
-            alert('Please enter your name and email.');
+            alert('Please provide your name and email.');
             return;
         }
 
-        // 1. Fire Confetti based on selection
-        fireConfetti(focus === 'career' ? 'career' : 'academic');
-
-        // 2. Prepare Mailto
         const subject = `Consultation Request: ${name}`;
-        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AFocus: ${focus}%0D%0ATier: ${tier}`;
+        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AService: ${service}%0D%0APackage: ${tier}%0D%0A%0D%0AMessage:%0D%0A${msg}`;
         
-        // 3. Delay redirect slightly to see confetti
+        window.location.href = `mailto:contact@andrewsayegh.com?subject=${subject}&body=${body}`;
+        
         setTimeout(() => {
-            window.location.href = `mailto:contact@andrewsayegh.com?subject=${subject}&body=${body}`;
-            setTimeout(closeBooking, 1000);
-        }, 800);
+            closeBooking();
+            // Optional: Reset form
+        }, 1000);
     }
+
+    // Mouse Tracking for Card Glow Effect
+    document.querySelectorAll('.glass-panel').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    // EASTER EGG (Click Logo 5 times)
+    let clicks = 0;
+    document.getElementById('brandLogo').addEventListener('click', (e) => {
+        e.preventDefault();
+        clicks++;
+        if(clicks === 5) {
+            document.documentElement.classList.toggle('ludicrous');
+            alert("/// SYSTEM OVERRIDE: NEON MODE ACTIVATED ///");
+            clicks = 0;
+        }
+        setTimeout(() => clicks = 0, 500);
+    });
 </script>
+
 </body>
 </html>
