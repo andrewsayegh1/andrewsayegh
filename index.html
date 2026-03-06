@@ -2,559 +2,667 @@
 <html lang="en" class="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Andrew Sayegh | Flagship Strategy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrew Sayegh | Elite Admissions Strategy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ──────────────────────────────────────────
-   PALETTE: "CHAMPAGNE STEEL"
-   ────────────────────────────────────────── */
+/* --------------------------------------------------
+   CORE VARIABLES & RESET 
+   -------------------------------------------------- */
 :root {
-    /* Backgrounds */
-    --bg-void: #030304;
-    --bg-glass: rgba(15, 15, 20, 0.6);
-    --bg-glass-heavy: rgba(10, 10, 12, 0.85);
-    
-    /* Text */
-    --text-primary: #f2f2f5;
-    --text-secondary: #a1a1aa;
-    --text-tertiary: #52525b;
-    
-    /* Accents - The "Premium" Feel */
-    --accent-gold: #d4af37;
-    --accent-champagne: #f3e5ab;
-    --accent-bronze: #a67c52;
-    --metal-silver: #e2e8f0;
-    
-    /* Borders & Glows */
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-highlight: rgba(212, 175, 55, 0.3); /* Subtle Gold Border */
-    --glow-gold: rgba(212, 175, 55, 0.15);
-    
-    /* Physics */
-    --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
-    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --bg-depth: #050505;
+  --bg-surface: #0f0f10;
+  --bg-card: rgba(20, 20, 21, 0.6);
+  --bg-glass: rgba(255, 255, 255, 0.03);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(255, 255, 255, 0.2);
+  --text-primary: #f2f2f2;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  
+  --accent-primary: #6366f1; /* Indigo */
+  --accent-glow: rgba(99, 102, 241, 0.15);
+  --accent-gold: #d4af37; 
+  
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* LUDICROUS MODE OVERRIDES */
-html.ludicrous {
-    --accent-gold: #ff0055;
-    --accent-champagne: #ff99ac;
-    --border-highlight: rgba(255, 0, 85, 0.5);
-    --glow-gold: rgba(255, 0, 85, 0.3);
-}
-
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-    background-color: var(--bg-void);
-    color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-    position: relative;
+  background-color: var(--bg-depth);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* ──────────────────────────────────────────
-   AMBIENT BACKGROUND LAYERS
-   ────────────────────────────────────────── */
-.ambient-light {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-    z-index: -1; overflow: hidden; pointer-events: none;
-}
-.light-orb {
-    position: absolute; border-radius: 50%;
-    filter: blur(80px); opacity: 0.4;
-    animation: floatOrb 20s infinite alternate ease-in-out;
-}
-.orb-1 {
-    top: -10%; left: -10%; width: 50vw; height: 50vw;
-    background: radial-gradient(circle, var(--glow-gold), transparent 70%);
-}
-.orb-2 {
-    bottom: -20%; right: -10%; width: 60vw; height: 60vw;
-    background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
-    animation-delay: -5s;
-}
-@keyframes floatOrb {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(10%, 10%) scale(1.1); }
-}
-
-/* Noise overlay for texture */
+/* Noise Texture Overlay */
 body::after {
-    content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    opacity: 0.5;
+  content: "";
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
 }
 
-/* ──────────────────────────────────────────
-   TYPOGRAPHY
-   ────────────────────────────────────────── */
-h1, h2, h3 { color: var(--text-primary); font-weight: 400; letter-spacing: -0.02em; }
-h1 { font-family: 'Playfair Display', serif; line-height: 1.1; }
-h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 0.5rem; }
-.mono { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 0.5rem; }
-
-/* Metallic Text Effect */
-.metallic-text {
-    background: linear-gradient(135deg, var(--metal-silver) 0%, #fff 50%, var(--text-secondary) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 30px rgba(255,255,255,0.1);
+/* Background Gradients */
+.ambient-glow {
+  position: fixed;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, transparent 70%);
+  top: -200px; left: 50%; transform: translateX(-50%);
+  z-index: -1;
+  pointer-events: none;
 }
 
-/* ──────────────────────────────────────────
-   GLASS CARDS (LAYERED)
-   ────────────────────────────────────────── */
-.glass-panel {
-    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-    border: 1px solid var(--border-subtle);
-    border-top: 1px solid rgba(255,255,255,0.15); /* Top highlight */
-    border-radius: 20px;
-    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
-    transition: transform 0.4s var(--ease-out), border-color 0.4s, box-shadow 0.4s;
-    position: relative; overflow: hidden;
-}
-.glass-panel:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-highlight);
-    box-shadow: 0 30px 60px -20px var(--glow-gold);
-}
-/* Internal sheen on hover */
-.glass-panel::after {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.04), transparent 40%);
-    opacity: 0; transition: opacity 0.5s; pointer-events: none;
-}
-.glass-panel:hover::after { opacity: 1; }
+/* Typography Utilities */
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.02em; color: var(--text-primary); }
+p { color: var(--text-secondary); }
+em { font-family: var(--font-serif); font-style: italic; color: var(--text-primary); }
+.mono { font-family: var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.75rem; color: var(--text-tertiary); display: block; margin-bottom: 1rem;}
 
-/* ──────────────────────────────────────────
-   BUTTONS
-   ────────────────────────────────────────── */
-.btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    padding: 0.8rem 2rem; border-radius: 999px; font-weight: 500; font-size: 0.9rem;
-    cursor: pointer; transition: all 0.3s var(--ease-out); border: none; text-decoration: none;
-    font-family: 'Inter', sans-serif; position: relative; overflow: hidden;
-}
-.btn-primary {
-    background: linear-gradient(135deg, #eee 0%, #bbb 100%);
-    color: #000; font-weight: 600;
-}
-.btn-primary:hover {
-    box-shadow: 0 0 25px rgba(255,255,255,0.4);
-    transform: scale(1.02);
-}
-.btn-outline {
-    background: transparent; border: 1px solid var(--border-subtle);
-    color: var(--text-primary);
-}
-.btn-outline:hover {
-    border-color: var(--accent-gold); color: var(--accent-gold);
-    background: rgba(212, 175, 55, 0.05);
-}
-
-/* ──────────────────────────────────────────
+/* –––––––––––––––––––––––––
    NAVIGATION
-   ────────────────────────────────────────── */
+   ––––––––––––––––––––––––– */
 nav {
-    position: fixed; top: 0; width: 100%; z-index: 1000;
-    padding: 1.5rem 2rem; transition: all 0.4s var(--ease-out);
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  padding: 1.5rem 2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid transparent;
+  transition: all 0.4s var(--ease-out);
 }
+
 nav.scrolled {
-    padding: 0.8rem 2rem;
-    background: rgba(3, 3, 5, 0.8);
-    backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle);
-}
-.nav-content {
-    display: flex; justify-content: space-between; align-items: center;
-    max-width: 1200px; margin: 0 auto;
-}
-.brand {
-    font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; font-style: italic;
-    color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 10px;
-}
-.brand-mark {
-    width: 30px; height: 30px; border: 1px solid var(--accent-gold); border-radius: 6px;
-    display: grid; place-items: center; font-size: 0.75rem; color: var(--accent-gold);
+  background: rgba(5, 5, 5, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1rem 2rem;
 }
 
-.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-brand { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
 .nav-links a {
-    text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; transition: color 0.3s;
+  color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500;
+  transition: color 0.3s;
 }
-.nav-links a:hover { color: var(--accent-champagne); }
+.nav-links a:hover { color: var(--text-primary); }
 
-.mobile-toggle { display: none; background: none; border: none; color: #fff; cursor: pointer; z-index: 1002; }
+.btn-nav {
+  padding: 0.6rem 1.4rem;
+  background: var(--text-primary);
+  color: var(--bg-depth);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+.btn-nav:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,255,255,0.15); }
 
-/* ──────────────────────────────────────────
-   HERO
-   ────────────────────────────────────────── */
+.menu-toggle { display: none; background: none; border: none; cursor: pointer; color: white; }
+
+/* –––––––––––––––––––––––––
+   HERO SECTION
+   ––––––––––––––––––––––––– */
 .hero {
-    min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; padding: 6rem 1.5rem; position: relative;
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  padding: 8rem 2rem 4rem;
+  position: relative;
 }
+
 .hero-pill {
-    padding: 6px 16px; border-radius: 50px; background: rgba(212, 175, 55, 0.08);
-    border: 1px solid rgba(212, 175, 55, 0.2); color: var(--accent-champagne);
-    font-size: 0.75rem; font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
-    margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 8px;
-    animation: fadeIn 1s ease-out;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 2rem;
+  animation: fadeUp 0.8s ease-out forwards;
 }
-.status-dot { width: 6px; height: 6px; background: var(--accent-gold); border-radius: 50%; box-shadow: 0 0 8px var(--accent-gold); }
+.hero-pill .dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px #22c55e; }
+.hero-pill span { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); letter-spacing: 0.05em; }
 
-.hero-title {
-    font-size: clamp(3rem, 8vw, 5.5rem); margin-bottom: 1.5rem;
-    animation: slideUp 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+h1.hero-title {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to bottom right, #fff 30%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0; animation: fadeUp 1s 0.2s var(--ease-out) forwards;
 }
-.hero-title span { display: block; }
-.hero-sub {
-    max-width: 600px; font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 3rem;
-    line-height: 1.7; animation: slideUp 1s 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
+h1.hero-title span.italic { font-style: italic; font-family: var(--font-serif); color: var(--text-primary); -webkit-text-fill-color: initial; }
 
-/* ──────────────────────────────────────────
-   SECTIONS & GRID
-   ────────────────────────────────────────── */
-.section { padding: 6rem 1.5rem; max-width: 1200px; margin: 0 auto; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-.grid-wide { grid-column: span 2; }
-
-/* Feature Icon */
-.icon-box {
-    width: 48px; height: 48px; border-radius: 12px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
-    border: 1px solid var(--border-subtle); display: grid; place-items: center;
-    margin-bottom: 1.5rem; color: var(--accent-gold);
+.hero-desc {
+  max-width: 580px;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp 1s 0.4s var(--ease-out) forwards;
 }
 
-/* Pricing Highlight */
-.glass-panel.featured {
-    border-color: var(--accent-gold);
-    background: linear-gradient(180deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
-    box-shadow: 0 0 40px -10px rgba(212, 175, 55, 0.1);
+.hero-btns {
+  display: flex; gap: 1rem;
+  opacity: 0; animation: fadeUp 1s 0.6s var(--ease-out) forwards;
 }
 
-/* ──────────────────────────────────────────
-   BOOKING MODAL
-   ────────────────────────────────────────── */
-.modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(12px);
-    z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    display: grid; place-items: center; padding: 1rem;
+.btn-primary {
+  padding: 1rem 2rem;
+  background: var(--text-primary);
+  color: var(--bg-depth);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s var(--ease-out);
+  cursor: pointer;
+  border: none;
 }
-.modal-overlay.open { opacity: 1; pointer-events: all; }
-.modal-window {
-    width: 100%; max-width: 520px; background: #0a0a0c;
-    border: 1px solid var(--border-subtle); border-radius: 24px;
-    padding: 2.5rem; position: relative; transform: scale(0.95) translateY(20px);
-    transition: transform 0.4s var(--ease-spring);
-    box-shadow: 0 40px 80px -10px rgba(0,0,0,0.8);
-}
-.modal-overlay.open .modal-window { transform: scale(1) translateY(0); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(255,255,255,0.3); }
 
-.form-group { margin-bottom: 1.2rem; }
-.form-label { display: block; font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; font-family: 'DM Mono', monospace; }
+.btn-secondary {
+  padding: 1rem 2rem;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-focus);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+.btn-secondary:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.05); }
+
+/* –––––––––––––––––––––––––
+   TICKER
+   ––––––––––––––––––––––––– */
+.ticker-wrap {
+  width: 100%; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface); padding: 1.5rem 0; overflow: hidden;
+}
+.ticker {
+  display: flex; gap: 4rem; justify-content: center; align-items: center;
+  flex-wrap: wrap; text-align: center;
+}
+.ticker-item {
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-tertiary); letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.ticker-item strong { color: var(--text-secondary); font-weight: 600; margin-right: 6px; }
+
+/* –––––––––––––––––––––––––
+   COMMON SECTION STYLES
+   ––––––––––––––––––––––––– */
+.section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 4rem; max-width: 600px; }
+.section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+
+/* –––––––––––––––––––––––––
+   RESULTS (Bento)
+   ––––––––––––––––––––––––– */
+.bento-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+}
+.bento-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: 2.5rem;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+  backdrop-filter: blur(10px);
+}
+.bento-card:hover { border-color: var(--border-focus); transform: translateY(-4px); }
+.bento-card.wide { grid-column: span 2; }
+
+.stat-num { font-family: var(--font-serif); font-size: 3.5rem; line-height: 1; color: var(--text-primary); margin-bottom: 0.5rem; }
+.stat-label { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-desc { margin-top: 1rem; font-size: 0.9rem; color: var(--text-tertiary); }
+
+/* –––––––––––––––––––––––––
+   ABOUT (With Flagship Graphic)
+   ––––––––––––––––––––––––– */
+.about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+
+.about-content blockquote {
+  border-left: 2px solid var(--accent-primary);
+  padding-left: 1.5rem; margin-bottom: 2rem;
+  font-family: var(--font-serif); font-size: 1.4rem; font-style: italic; color: var(--text-primary);
+  line-height: 1.4;
+}
+
+/* The Flagship Custom Graphic */
+.graphic-container {
+  width: 100%; aspect-ratio: 1/1;
+  background: radial-gradient(circle at center, rgba(30,30,35,0.5) 0%, transparent 70%);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  position: relative;
+  display: flex; justify-content: center; align-items: center;
+}
+
+.chart-svg { width: 80%; height: 80%; overflow: visible; }
+.chart-line { 
+  fill: none; stroke: var(--accent-primary); stroke-width: 2; 
+  stroke-dasharray: 1000; stroke-dashoffset: 1000;
+  animation: drawLine 3s ease-out forwards;
+}
+.chart-point { fill: var(--bg-depth); stroke: var(--text-primary); stroke-width: 2; }
+.chart-label { font-family: var(--font-mono); font-size: 10px; fill: var(--text-tertiary); text-transform: uppercase;}
+
+@keyframes drawLine { to { stroke-dashoffset: 0; } }
+
+/* –––––––––––––––––––––––––
+   SERVICES
+   ––––––––––––––––––––––––– */
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+}
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  transition: all 0.3s;
+}
+.service-card:hover { border-color: var(--accent-primary); box-shadow: 0 0 30px rgba(99, 102, 241, 0.05); }
+
+.svc-icon { 
+  font-family: var(--font-mono); font-size: 1.5rem; color: var(--accent-primary); 
+  margin-bottom: 1.5rem; display: block;
+}
+.svc-title { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 500; color: var(--text-primary); margin-bottom: 1rem; }
+.svc-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.svc-list li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); }
+.svc-list li svg { width: 16px; height: 16px; color: var(--accent-primary); }
+
+/* –––––––––––––––––––––––––
+   PRICING
+   ––––––––––––––––––––––––– */
+.pricing-wrapper {
+  display: grid; grid-template-columns: 1fr 1.1fr 1fr;
+  align-items: center; gap: 2rem; margin-top: 4rem;
+}
+.price-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  padding: 2.5rem; border-radius: 12px;
+  display: flex; flex-direction: column;
+  transition: transform 0.3s;
+}
+.price-card:hover { transform: translateY(-5px); }
+
+.price-card.featured {
+  background: linear-gradient(180deg, rgba(20,20,22,1) 0%, rgba(15,15,16,1) 100%);
+  border: 1px solid var(--accent-primary);
+  padding: 3.5rem 2.5rem;
+  box-shadow: 0 0 50px rgba(79, 70, 229, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.price-tag { font-family: var(--font-mono); color: var(--accent-primary); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
+.price-amount { font-family: var(--font-serif); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+
+.price-btn {
+  width: 100%; padding: 1rem; margin-top: 2rem;
+  text-align: center; border-radius: 4px; text-decoration: none; font-weight: 600; cursor: pointer;
+  transition: all 0.2s;
+}
+.price-btn.outline { border: 1px solid var(--border-focus); color: var(--text-primary); background: transparent; }
+.price-btn.outline:hover { border-color: var(--text-primary); }
+.price-btn.solid { background: var(--text-primary); color: var(--bg-depth); border: none;}
+.price-btn.solid:hover { background: #fff; transform: scale(1.02); }
+
+/* –––––––––––––––––––––––––
+   NATIVE BOOKING MODAL
+   ––––––––––––––––––––––––– */
+.modal-backdrop {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+  z-index: 2000;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+  display: flex; justify-content: center; align-items: center;
+}
+.modal-backdrop.active { opacity: 1; pointer-events: all; }
+
+.booking-modal {
+  background: #121212;
+  border: 1px solid var(--border-focus);
+  width: 90%; max-width: 500px;
+  border-radius: 16px;
+  padding: 2.5rem;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+.modal-backdrop.active .booking-modal { transform: translateY(0); }
+
+.close-modal {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: none; border: none; color: var(--text-tertiary); cursor: pointer;
+}
+.close-modal:hover { color: var(--text-primary); }
+
+.form-group { margin-bottom: 1.5rem; }
+.form-label { display: block; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
 .form-input, .form-select {
-    width: 100%; padding: 1rem; background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border-subtle); border-radius: 10px;
-    color: var(--text-primary); font-family: 'Inter', sans-serif; outline: none;
-    transition: border-color 0.3s;
+  width: 100%; padding: 0.8rem;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle);
+  color: var(--text-primary); border-radius: 4px; font-family: var(--font-sans);
 }
-.form-select {
-    appearance: none; cursor: pointer;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 1rem center;
+.form-input:focus, .form-select:focus { outline: none; border-color: var(--accent-primary); }
+
+/* –––––––––––––––––––––––––
+   FOOTER
+   ––––––––––––––––––––––––– */
+footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-align: center; margin-top: 4rem; }
+.footer-logo { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem; display: block; color: var(--text-primary); text-decoration: none; }
+.socials { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
+.socials a { color: var(--text-tertiary); text-decoration: none; transition: color 0.3s; }
+.socials a:hover { color: var(--text-primary); }
+
+/* ANIMATION UTILS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-.form-input:focus, .form-select:focus { border-color: var(--accent-gold); background: rgba(212,175,55,0.02); }
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s var(--ease-out); }
+.reveal.active { opacity: 1; transform: translateY(0); }
 
-/* ──────────────────────────────────────────
-   ANIMATIONS & MOBILE
-   ────────────────────────────────────────── */
-@keyframes slideUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-
-@media (max-width: 768px) {
-    .nav-links, .nav-content .btn { display: none; }
-    .mobile-toggle { display: block; }
-    .hero-title { font-size: 3rem; }
-    .grid-wide { grid-column: span 1; }
-    
-    /* Mobile Menu Overlay */
-    .mobile-menu {
-        position: fixed; inset: 0; background: var(--bg-glass-heavy); backdrop-filter: blur(30px);
-        z-index: 1001; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
-        opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    }
-    .mobile-menu.open { opacity: 1; pointer-events: all; }
-    .mobile-menu a { font-size: 2rem; font-family: 'Playfair Display', serif; color: var(--text-primary); text-decoration: none; opacity: 0; transform: translateY(20px); transition: 0.4s; }
-    .mobile-menu.open a { opacity: 1; transform: translateY(0); }
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  h1.hero-title { font-size: 3.5rem; }
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-card.wide { grid-column: span 1; }
+  .about-layout { grid-template-columns: 1fr; }
+  .pricing-wrapper { grid-template-columns: 1fr; gap: 1rem; }
+  .nav-links { display: none; } 
+  .menu-toggle { display: block; }
+  .nav-links.mobile-active {
+    display: flex; flex-direction: column; position: absolute;
+    top: 100%; left: 0; width: 100%; background: #050505;
+    padding: 2rem; border-bottom: 1px solid var(--border-subtle);
+  }
 }
 </style>
 </head>
 <body>
 
-<div class="ambient-light">
-    <div class="light-orb orb-1"></div>
-    <div class="light-orb orb-2"></div>
-</div>
+<div class="ambient-glow"></div>
 
 <nav id="navbar">
-    <div class="nav-content">
-        <a href="#" class="brand" id="brandLogo">
-            <div class="brand-mark">AS</div>
-            <span style="font-size:1.1rem; letter-spacing: -0.01em;">Andrew Sayegh</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="#results">Track Record</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-        </ul>
-        <div style="display:flex; gap:1rem;">
-            <button class="btn btn-outline" style="padding:0.6rem 1.2rem; font-size:0.8rem;" onclick="openBooking()">Consultation</button>
-            <button class="mobile-toggle" onclick="toggleMobile()">
-                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-        </div>
-    </div>
+  <div class="nav-brand">Andrew Sayegh</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#results">Track Record</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <div style="display:flex; align-items:center; gap:1rem;">
+    <button onclick="openBooking()" class="btn-nav">Book Strategy Call</button>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+  </div>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-    <a href="#results" onclick="toggleMobile()" style="transition-delay: 0.1s">Track Record</a>
-    <a href="#services" onclick="toggleMobile()" style="transition-delay: 0.2s">Services</a>
-    <a href="#pricing" onclick="toggleMobile()" style="transition-delay: 0.3s">Pricing</a>
-    <a href="javascript:void(0)" onclick="toggleMobile(); openBooking()" style="color:var(--accent-gold); transition-delay: 0.4s">Book Now</a>
-</div>
-
 <section class="hero">
-    <div class="hero-pill"><span class="status-dot"></span><span>ACCEPTING CLIENTS FOR 2026</span></div>
-    <h1 class="hero-title">
-        <span class="metallic-text">The Unfair Advantage</span>
-        <span style="font-style:italic; font-weight:400; color:var(--text-secondary);">for getting in.</span>
-    </h1>
-    <p class="hero-sub">
-        Flagship admissions strategy for high-stakes transfer students and fellowship applicants. 
-        Engineered by a UCLA Alum & Columbia SIPA Admit.
-    </p>
-    <div style="display:flex; gap:1rem; animation: slideUp 1s 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;">
-        <button class="btn btn-primary" onclick="openBooking()">Book Strategy Call</button>
-        <button class="btn btn-outline" onclick="document.getElementById('services').scrollIntoView()">Explore Services</button>
-    </div>
+  <div class="hero-pill">
+    <span class="dot"></span>
+    <span>ACCEPTING CLIENTS FOR SPRING 2026</span>
+  </div>
+  <h1 class="hero-title">
+    Your unfair advantage<br>
+    <span class="italic">for getting in.</span>
+  </h1>
+  <p class="hero-desc">
+    I transferred to UCLA from community college, secured competitive internships, and earned admission to Columbia without connections. I built the roadmap so you don't have to guess.
+  </p>
+  <div class="hero-btns">
+    <button onclick="openBooking()" class="btn-primary">Book 15-Min Intro</button>
+    <a href="#services" class="btn-secondary">View Services</a>
+  </div>
 </section>
 
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item"><strong>UCLA</strong> Alum</div>
+    <div class="ticker-item"><strong>Columbia SIPA</strong> Admit</div>
+    <div class="ticker-item"><strong>Congress</strong> Intern</div>
+    <div class="ticker-item"><strong>State Dept</strong> Fellow</div>
+  </div>
+</div>
+
 <section id="results" class="section">
+  <div class="section-header reveal">
     <span class="mono">Proven Results</span>
-    <h2>Credentials that speak.</h2>
-    <div class="grid">
-        <div class="glass-panel grid-wide" style="padding:2.5rem;">
-            <div class="icon-box">
-                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            </div>
-            <h3 style="font-size:1.5rem; margin-bottom:0.5rem;">100% First-Gen Success</h3>
-            <p style="color:var(--text-secondary);">I specialize in helping students who don't have a "legacy" advantage. I built this roadmap from scratch so you don't have to.</p>
-        </div>
-        <div class="glass-panel" style="padding:2.5rem;">
-            <div class="mono" style="color:var(--text-tertiary);">FELLOWSHIPS</div>
-            <div style="font-family:'Playfair Display'; font-size:3.5rem; color:var(--accent-gold); line-height:1;">2+</div>
-            <p style="margin-top:1rem; color:var(--text-secondary);">National Finalist selections (Rangel, Pickering).</p>
-        </div>
-        <div class="glass-panel" style="padding:2.5rem;">
-            <div class="mono" style="color:var(--text-tertiary);">ADMISSIONS</div>
-            <div style="font-family:'Playfair Display'; font-size:3.5rem; color:var(--text-primary); line-height:1;">Ivy</div>
-            <p style="margin-top:1rem; color:var(--text-secondary);">Accepted to Columbia SIPA & UCLA.</p>
-        </div>
+    <h2>Credentials that <span style="color:var(--text-tertiary)">speak loudly.</span></h2>
+  </div>
+  <div class="bento-grid">
+    <div class="bento-card wide reveal">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">First-Gen Focus</div>
+      <p class="stat-desc">Specialized strategy for students and early professionals navigating elite systems for the first time.</p>
     </div>
+    <div class="bento-card reveal">
+      <div class="stat-num">2+</div>
+      <div class="stat-label">National Fellowships</div>
+      <p class="stat-desc">Finalist for Rangel & Pickering.</p>
+    </div>
+    <div class="bento-card reveal">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Policy Roles</div>
+      <p class="stat-desc">Capitol Hill & International NGOs.</p>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <div class="about-layout">
+    <div class="about-content reveal">
+      <span class="mono">My Methodology</span>
+      <h2>I didn't have a guide.<br><span style="font-style:italic; color:var(--text-tertiary);">You do now.</span></h2>
+      <br>
+      <blockquote>
+        "The system wasn't built with us in mind. But we can learn to navigate it—and change it from the inside."
+      </blockquote>
+      <p>
+        I started at community college without a counselor who understood what "competitive applications" meant. I figured it out through relentless research and iteration. Today, I turn that lived experience into strategy for ambitious students.
+      </p>
+    </div>
+    
+    <div class="graphic-container reveal">
+      <svg class="chart-svg" viewBox="0 0 200 200">
+        <line x1="20" y1="180" x2="180" y2="180" stroke="#333" stroke-width="1" />
+        <line x1="20" y1="20" x2="20" y2="180" stroke="#333" stroke-width="1" />
+        
+        <path class="chart-line" d="M 20 160 C 60 160, 80 120, 100 100 S 140 40, 180 30" />
+        
+        <circle cx="20" cy="160" r="4" class="chart-point" />
+        <text x="25" y="155" class="chart-label">Start</text>
+        
+        <circle cx="100" cy="100" r="4" class="chart-point" />
+        <text x="105" y="95" class="chart-label">UCLA</text>
+        
+        <circle cx="180" cy="30" r="4" class="chart-point" />
+        <text x="140" y="25" class="chart-label">Columbia</text>
+      </svg>
+    </div>
+  </div>
 </section>
 
 <section id="services" class="section">
-    <div style="text-align:center; max-width:600px; margin:0 auto;">
-        <span class="mono">Consulting</span>
-        <h2>Precision Services</h2>
+  <div class="section-header reveal">
+    <span class="mono">Services</span>
+    <h2>Strategic Consulting</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="svc-icon">01.</span>
+      <h3 class="svc-title">College Admissions</h3>
+      <p>Built for transfer students and first-gen applicants targeting selective schools. School lists, fit analysis, and essays.</p>
+      <ul class="svc-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Personal Statement Strategy</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> UC Insight Questions</li>
+      </ul>
     </div>
-    <div class="grid">
-        <div class="glass-panel" style="padding:2rem;">
-            <div class="icon-box">❖</div>
-            <h3>College Admissions</h3>
-            <p style="font-size:0.9rem; color:var(--text-secondary); margin-top:0.5rem;">School list curation and personal statement engineering for T20 & UC transfers.</p>
-        </div>
-        <div class="glass-panel" style="padding:2rem;">
-            <div class="icon-box">✦</div>
-            <h3>Fellowship Advising</h3>
-            <p style="font-size:0.9rem; color:var(--text-secondary); margin-top:0.5rem;">Narrative development for Fulbright, Rangel, and Boren applications.</p>
-        </div>
-        <div class="glass-panel" style="padding:2rem;">
-            <div class="icon-box">⟁</div>
-            <h3>Career Strategy</h3>
-            <p style="font-size:0.9rem; color:var(--text-secondary); margin-top:0.5rem;">Federal resume audits and STAR-method interview prep for policy roles.</p>
-        </div>
+    <div class="service-card reveal" style="border-color:var(--border-focus);">
+      <span class="svc-icon">02.</span>
+      <h3 class="svc-title">Fellowship Advising</h3>
+      <p>Fulbright, Rangel, Boren, Gilman. I know these applications from the inside. We focus on the narrative arc.</p>
+      <ul class="svc-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Narrative Development</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Mock Interviews</li>
+      </ul>
     </div>
+    <div class="service-card reveal">
+      <span class="svc-icon">03.</span>
+      <h3 class="svc-title">Career & Policy</h3>
+      <p>For those pivoting to policy, non-profits, or federal roles. We translate your background into a compelling case.</p>
+      <ul class="svc-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Federal Resume Audit</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> STAR Interview Prep</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <section id="pricing" class="section">
-    <div style="text-align:center;">
-        <span class="mono">Investment</span>
-        <h2>Select your tier</h2>
+  <div class="section-header reveal" style="text-align:center; max-width:100%;">
+    <span class="mono">Investment</span>
+    <h2>Transparent Pricing</h2>
+  </div>
+  <div class="pricing-wrapper">
+    <div class="price-card reveal">
+      <span class="price-tag">Starter</span>
+      <div class="price-amount">$99+</div>
+      <p>Single Session</p>
+      <hr style="border:0; border-top:1px solid var(--border-subtle); margin:1.5rem 0;">
+      <button onclick="openBooking()" class="price-btn outline">Get Started</button>
     </div>
-    <div class="grid">
-        <div class="glass-panel" style="padding:2.5rem; text-align:center;">
-            <span class="mono" style="color:var(--text-secondary);">STARTER</span>
-            <div style="font-size:2.5rem; font-family:'Playfair Display'; margin:1rem 0;">$99</div>
-            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:2rem;">Single session audit or resume review. Perfect for a quick check.</p>
-            <button class="btn btn-outline" style="width:100%" onclick="openBooking('Starter')">Get Started</button>
-        </div>
-        <div class="glass-panel featured" style="padding:2.5rem; text-align:center; transform:scale(1.05);">
-            <div style="position:absolute; top:0; left:0; width:100%; height:4px; background:var(--accent-gold);"></div>
-            <span class="mono" style="color:var(--accent-gold);">PREMIUM</span>
-            <div style="font-size:2.5rem; font-family:'Playfair Display'; margin:1rem 0;">$199</div>
-            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:2rem;">Full application package with unlimited revisions for one school.</p>
-            <button class="btn btn-primary" style="width:100%" onclick="openBooking('Premium')">Select Premium</button>
-        </div>
-        <div class="glass-panel" style="padding:2.5rem; text-align:center;">
-            <span class="mono" style="color:var(--text-secondary);">UNLIMITED</span>
-            <div style="font-size:2.5rem; font-family:'Playfair Display'; margin:1rem 0;">$599</div>
-            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:2rem;">End-to-end consulting for multiple schools + scholarship negotiation.</p>
-            <button class="btn btn-outline" style="width:100%" onclick="openBooking('Unlimited')">Contact Me</button>
-        </div>
+    <div class="price-card featured reveal">
+      <div class="hero-pill">
+        <span class="dot"></span>
+        <span>Most Popular</span>
+      </div>
+      <span class="price-tag">Premium</span>
+      <div class="price-amount">$199+</div>
+      <p>Application Package</p>
+      <hr style="border:0; border-top:1px solid var(--border-subtle); margin:1.5rem 0;">
+      <ul class="price-feat" style="list-style:none; padding: 0;">
+        <li style="color:var(--text-secondary); margin-bottom:0.5rem">Full Essay Drafting</li>
+        <li style="color:var(--text-secondary); margin-bottom:0.5rem">Multiple Revision Rounds</li>
+        <li style="color:var(--text-secondary); margin-bottom:0.5rem">Final Review Polish</li>
+      </ul>
+      <button onclick="openBooking()" class="price-btn solid">Book Free Consult</button>
     </div>
+    <div class="price-card reveal">
+      <span class="price-tag">Unlimited</span>
+      <div class="price-amount">$599+</div>
+      <p>Full Cycle Consulting</p>
+      <hr style="border:0; border-top:1px solid var(--border-subtle); margin:1.5rem 0;">
+      <button onclick="openBooking()" class="price-btn outline">Contact Me</button>
+    </div>
+  </div>
 </section>
 
-<footer style="margin-top:6rem; border-top:1px solid var(--border-subtle); padding:4rem 1.5rem; text-align:center; color:var(--text-tertiary);">
-    <p class="mono">© 2026 Andrew Sayegh. Los Angeles, CA.</p>
+<footer>
+  <a href="#" class="footer-logo">Andrew Sayegh</a>
+  <div class="socials">
+    <a href="#">LinkedIn</a>
+    <a href="#">Email</a>
+  </div>
+  <p class="mono">© 2026 Andrew Sayegh. Los Angeles, CA.</p>
 </footer>
 
-<div class="modal-overlay" id="bookingModal" onclick="closeBookingOutside(event)">
-    <div class="modal-window">
-        <button onclick="closeBooking()" style="position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; color:var(--text-secondary); cursor:pointer; font-size:1.2rem;">✕</button>
-        <h3 style="font-size:1.8rem; font-family:'Playfair Display'; margin-bottom:0.5rem;">Request Consultation</h3>
-        <p style="color:var(--text-secondary); margin-bottom:2rem; font-size:0.9rem;">Fill out the details below. I usually respond within 24 hours.</p>
-        
-        <div class="form-group">
-            <label class="form-label">Full Name</label>
-            <input type="text" class="form-input" id="bk-name" placeholder="Jane Doe">
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <input type="email" class="form-input" id="bk-email" placeholder="jane@example.com">
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">Consulting Option</label>
-            <select class="form-select" id="bk-service">
-                <option value="" disabled selected>Select service type...</option>
-                <option value="College Admissions">College Admissions</option>
-                <option value="Fellowship Advising">Fellowship Advising</option>
-                <option value="Career Strategy">Career/Policy Strategy</option>
-                <option value="General Inquiry">Other / General Inquiry</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">Package Tier</label>
-            <select class="form-select" id="bk-tier">
-                <option value="" disabled selected>Select package...</option>
-                <option value="Starter ($99)">Starter ($99)</option>
-                <option value="Premium ($199)">Premium ($199)</option>
-                <option value="Unlimited ($599)">Unlimited ($599)</option>
-                <option value="Not Sure">Not sure yet</option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label">Message</label>
-            <textarea class="form-input" id="bk-msg" rows="3" placeholder="Briefly describe your goals..."></textarea>
-        </div>
-
-        <button class="btn btn-primary" style="width:100%" onclick="submitBooking()">Submit Request</button>
-    </div>
+<div class="modal-backdrop" id="bookingModal">
+  <div class="booking-modal">
+    <button class="close-modal" onclick="closeBooking()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <h3 style="margin-bottom:0.5rem;">Request Consultation</h3>
+    <p style="font-size:0.9rem; margin-bottom:1.5rem;">Fill out the details below and I'll get back to you within 24 hours.</p>
+    
+    <form onsubmit="event.preventDefault(); alert('Request sent! Demo only.'); closeBooking();">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-input" placeholder="Jane Doe" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" placeholder="jane@example.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Service Interest</label>
+        <select class="form-select">
+          <option>College Admissions</option>
+          <option>Fellowship Advising</option>
+          <option>Career Strategy</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%">Submit Request</button>
+    </form>
+  </div>
 </div>
 
 <script>
-    // Header Scroll Effect
-    window.addEventListener('scroll', () => {
-        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  // Navbar blur effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Mobile Menu Logic
+  function toggleMenu() {
+    const links = document.getElementById('navLinks');
+    links.classList.toggle('mobile-active');
+  }
+
+  // Booking Modal Logic
+  function openBooking() {
+    document.getElementById('bookingModal').classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+  }
+  
+  function closeBooking() {
+    document.getElementById('bookingModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+  
+  // Close modal if clicking outside
+  document.getElementById('bookingModal').addEventListener('click', function(e) {
+    if (e.target === this) closeBooking();
+  });
+
+  // Intersection Observer for Scroll Animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
     });
+  }, { threshold: 0.1 });
 
-    // Mobile Menu
-    function toggleMobile() {
-        document.getElementById('mobileMenu').classList.toggle('open');
-        document.body.style.overflow = document.body.style.overflow === 'hidden' ? '' : 'hidden';
-    }
-
-    // Modal Logic
-    const modal = document.getElementById('bookingModal');
-    
-    function openBooking(tierPreselect) {
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        if(tierPreselect) {
-            const select = document.getElementById('bk-tier');
-            for(let i=0; i<select.options.length; i++){
-                if(select.options[i].value.includes(tierPreselect)) select.selectedIndex = i;
-            }
-        }
-    }
-    
-    function closeBooking() {
-        modal.classList.remove('open');
-        document.body.style.overflow = '';
-    }
-    
-    function closeBookingOutside(e) {
-        if(e.target === modal) closeBooking();
-    }
-
-    // Form Submission (Mailto)
-    function submitBooking() {
-        const name = document.getElementById('bk-name').value;
-        const email = document.getElementById('bk-email').value;
-        const service = document.getElementById('bk-service').value;
-        const tier = document.getElementById('bk-tier').value;
-        const msg = document.getElementById('bk-msg').value;
-
-        if(!name || !email) {
-            alert('Please provide your name and email.');
-            return;
-        }
-
-        const subject = `Consultation Request: ${name}`;
-        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AService: ${service}%0D%0APackage: ${tier}%0D%0A%0D%0AMessage:%0D%0A${msg}`;
-        
-        window.location.href = `mailto:contact@andrewsayegh.com?subject=${subject}&body=${body}`;
-        
-        setTimeout(() => {
-            closeBooking();
-            // Optional: Reset form
-        }, 1000);
-    }
-
-    // Mouse Tracking for Card Glow Effect
-    document.querySelectorAll('.glass-panel').forEach(card => {
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        });
-    });
-
-    // EASTER EGG (Click Logo 5 times)
-    let clicks = 0;
-    document.getElementById('brandLogo').addEventListener('click', (e) => {
-        e.preventDefault();
-        clicks++;
-        if(clicks === 5) {
-            document.documentElement.classList.toggle('ludicrous');
-            alert("/// SYSTEM OVERRIDE: NEON MODE ACTIVATED ///");
-            clicks = 0;
-        }
-        setTimeout(() => clicks = 0, 500);
-    });
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 </script>
 
 </body>
