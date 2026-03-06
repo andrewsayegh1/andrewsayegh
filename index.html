@@ -1,570 +1,606 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="description" content="Strategic admissions and career consulting for high-stakes transfer students and future policy leaders.">
-<title>Andrew Sayegh | Strategic Admissions & Policy Consulting</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Andrew Sayegh | Admissions & Career Consulting</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-/* ─────────────────────────────────────────────────────────────
-   DESIGN SYSTEM: "ONYX & ETHER"
-   ───────────────────────────────────────────────────────────── */
-:root {
-  /* Surfaces */
-  --bg-void: #030303;     /* The deepest background */
-  --bg-surface: #0a0a0a;  /* Card surface */
-  --bg-highlight: #111111; /* Hover state */
-  
-  /* The "Ether" Light System */
-  --ether-glow: rgba(255, 255, 255, 0.08);
-  --ether-border: rgba(255, 255, 255, 0.08);
-  --ether-border-bright: rgba(255, 255, 255, 0.2);
-  
-  /* Text */
-  --text-primary: #ededed;
-  --text-secondary: #888888;
-  --text-tertiary: #444444;
-  
-  /* Physics */
-  --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1); /* "Apple" smooth */
-  --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
-  
-  /* Dimensions */
-  --nav-width: 420px;
+
+/* ------------------------------------------------ */
+/* DESIGN SYSTEM */
+/* ------------------------------------------------ */
+
+:root{
+--bg:#050505;
+--surface:#0f0f10;
+--card:#141415;
+
+--border:rgba(255,255,255,.08);
+--border-focus:rgba(255,255,255,.2);
+
+--text:#f2f2f2;
+--text-secondary:#a1a1aa;
+
+--accent:#4f46e5;
+
+--font-serif:'Playfair Display',serif;
+--font-sans:'DM Sans',sans-serif;
+--font-mono:'DM Mono',monospace;
 }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+*{box-sizing:border-box;margin:0;padding:0}
 
-html { 
-  scroll-behavior: smooth; 
-  font-size: 16px; 
-  background: var(--bg-void); 
-  height: 100%;
-}
+html{scroll-behavior:smooth}
 
-body {
-  color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
-  position: relative;
+body{
+font-family:var(--font-sans);
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
+line-height:1.6;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   ATMOSPHERE & DEPTH LAYERS
-   ───────────────────────────────────────────────────────────── */
+/* ------------------------------------------------ */
+/* ATMOSPHERIC DEPTH */
+/* ------------------------------------------------ */
 
-/* Layer 1: Cinematic Grain (Texture) */
-.noise-overlay {
-  position: fixed; inset: 0; pointer-events: none; z-index: 9000; opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
+.noise{
+position:fixed;
+inset:0;
+pointer-events:none;
+opacity:.035;
+z-index:9999;
 
-/* Layer 2: Ambient Breathing Light (Depth) */
-.ambient-light {
-  position: fixed; inset: 0; pointer-events: none; z-index: -1;
-  background: 
-    radial-gradient(circle at 15% 0%, rgba(255,255,255,0.03) 0%, transparent 40%),
-    radial-gradient(circle at 85% 90%, rgba(255,255,255,0.02) 0%, transparent 40%);
-  animation: breathe 10s ease-in-out infinite alternate;
-}
-@keyframes breathe { 0% { opacity: 0.5; transform: scale(1); } 100% { opacity: 0.8; transform: scale(1.05); } }
-
-/* Layer 3: Vector Graphics (Intellectual Motif) */
-.vector-bg {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100vh; pointer-events: none; z-index: -1;
-  overflow: hidden; opacity: 0.3;
-}
-.vector-bg circle { stroke: var(--ether-border); fill: none; stroke-width: 1px; }
-
-/* ─────────────────────────────────────────────────────────────
-   TYPOGRAPHY
-   ───────────────────────────────────────────────────────────── */
-h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; color: var(--text-primary); }
-
-.mono-tag { 
-  font-family: 'JetBrains Mono', monospace; 
-  font-size: 0.75rem; 
-  text-transform: uppercase; 
-  letter-spacing: 0.08em; 
-  color: var(--text-secondary); 
-  border: 1px solid var(--ether-border); 
-  padding: 6px 12px; 
-  border-radius: 100px; 
-  display: inline-flex; 
-  align-items: center; 
-  gap: 8px; 
-  background: rgba(255,255,255,0.01);
-  backdrop-filter: blur(4px);
-}
-.mono-tag .dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
-
-.gradient-text {
-  background: linear-gradient(135deg, #fff 30%, #666 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-/* ─────────────────────────────────────────────────────────────
-   COMMAND DECK (NAVIGATION)
-   ───────────────────────────────────────────────────────────── */
-.nav-wrapper {
-  position: fixed; top: 24px; left: 0; right: 0; 
-  display: flex; justify-content: center; z-index: 1000;
-  pointer-events: none;
+.ambient{
+position:fixed;
+top:-20%;
+left:50%;
+transform:translateX(-50%);
+width:120vw;
+height:120vh;
+
+background:
+radial-gradient(circle at 20% 40%, rgba(79,70,229,.2), transparent 40%),
+radial-gradient(circle at 80% 20%, rgba(255,255,255,.08), transparent 40%);
+
+filter:blur(80px);
+pointer-events:none;
+z-index:-2;
 }
 
-.command-deck {
-  pointer-events: auto;
-  background: rgba(10, 10, 10, 0.7);
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--ether-border);
-  padding: 6px 6px 6px 20px;
-  border-radius: 100px;
-  display: flex; align-items: center; gap: 8px;
-  box-shadow: 0 8px 32px -8px rgba(0,0,0,0.8);
-  transition: all 0.4s var(--ease-fluid);
+/* Floating flagship */
+
+.flagship{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:1000px;
+height:1000px;
+
+stroke:rgba(255,255,255,.12);
+stroke-width:1;
+fill:none;
+
+opacity:.06;
+
+animation:spin 160s linear infinite;
+z-index:-1;
+pointer-events:none;
 }
 
-.nav-brand { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 600; font-size: 1.1rem; margin-right: 12px; }
-.nav-link { 
-  font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; 
-  padding: 8px 16px; transition: color 0.3s; font-weight: 500;
+@keyframes spin{
+from{transform:translate(-50%,-50%) rotate(0)}
+to{transform:translate(-50%,-50%) rotate(360deg)}
 }
-.nav-link:hover { color: var(--text-primary); }
-.nav-cta { 
-  background: var(--text-primary); color: var(--bg-void); border: none;
-  padding: 8px 20px; border-radius: 100px; font-size: 0.85rem; font-weight: 600; 
-  cursor: pointer; transition: transform 0.2s;
-}
-.nav-cta:hover { transform: scale(1.05); }
 
-/* ─────────────────────────────────────────────────────────────
-   COMPONENTS: CARDS & BUTTONS
-   ───────────────────────────────────────────────────────────── */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 1rem 2rem; border-radius: 6px; cursor: pointer;
-  font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 500;
-  transition: all 0.4s var(--ease-fluid); border: 1px solid transparent; text-decoration: none;
-}
-.btn-primary {
-  background: var(--text-primary); color: var(--bg-void);
-}
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(255,255,255,0.2); }
-.btn-ghost {
-  border-color: var(--ether-border); color: var(--text-primary); background: transparent;
-}
-.btn-ghost:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.03); }
+/* ------------------------------------------------ */
+/* NAVBAR */
+/* ------------------------------------------------ */
 
-/* Spotlight Glass Card */
-.glass-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--ether-border);
-  border-radius: 12px; padding: 2.5rem;
-  position: relative; overflow: hidden;
-  transition: transform 0.4s var(--ease-fluid), border-color 0.4s;
-  height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+nav{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+z-index:100;
 }
-/* The JavaScript drives this variable for the spotlight effect */
-.glass-card::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.05), transparent 40%);
-  opacity: 0; transition: opacity 0.3s;
-}
-.glass-card:hover::after { opacity: 1; }
-.glass-card:hover { transform: translateY(-4px); border-color: var(--ether-border-bright); }
 
-/* ─────────────────────────────────────────────────────────────
-   LAYOUT UTILITIES
-   ───────────────────────────────────────────────────────────── */
-.container { max-width: 1200px; margin: 0 auto; padding: 8rem 2rem; }
-.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
-.section-header { margin-bottom: 4rem; max-width: 650px; }
-.section-header h2 { font-size: 3rem; margin-top: 1rem; line-height: 1.1; }
+.nav-brand{
+font-family:var(--font-serif);
+font-size:1.2rem;
+}
 
-.reveal { opacity: 0; transform: translateY(30px); transition: all 1s var(--ease-fluid); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.nav-links{
+display:flex;
+gap:30px;
+list-style:none;
+}
 
-/* ─────────────────────────────────────────────────────────────
-   SECTIONS
-   ───────────────────────────────────────────────────────────── */
-/* Hero */
-.hero {
-  min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 0 2rem; position: relative; overflow: hidden;
+.nav-links a{
+color:var(--text-secondary);
+text-decoration:none;
+font-size:.9rem;
 }
-.hero h1 {
-  font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.05; letter-spacing: -0.03em;
-  margin: 2rem 0; opacity: 0; animation: fadeUp 1s 0.2s var(--ease-fluid) forwards;
-}
-.hero p {
-  font-size: 1.125rem; color: var(--text-secondary); max-width: 580px; margin-bottom: 3rem;
-  opacity: 0; animation: fadeUp 1s 0.4s var(--ease-fluid) forwards;
-}
-.hero-actions { opacity: 0; animation: fadeUp 1s 0.6s var(--ease-fluid) forwards; }
 
-/* Ticker */
-.ticker-container {
-  border-top: 1px solid var(--ether-border); border-bottom: 1px solid var(--ether-border);
-  background: var(--bg-surface); padding: 1.5rem 0; overflow: hidden;
+.nav-links a:hover{
+color:white;
 }
-.ticker-track { display: flex; animation: scroll 40s linear infinite; gap: 4rem; width: max-content;}
-.ticker-item {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-tertiary); 
-  letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem;
-}
-.ticker-item strong { color: var(--text-secondary); font-weight: 500; }
-@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* Services (Row Layout) */
-.service-row {
-  display: flex; justify-content: space-between; align-items: baseline;
-  padding: 3rem 0; border-bottom: 1px solid var(--ether-border);
-  transition: all 0.3s;
+.btn-nav{
+background:white;
+color:black;
+padding:10px 18px;
+border-radius:6px;
+font-size:.85rem;
+text-decoration:none;
 }
-.service-row:first-child { border-top: 1px solid var(--ether-border); }
-.service-row:hover { padding-left: 1rem; border-color: var(--text-primary); }
-.service-row h3 { font-family: 'Inter', sans-serif; font-size: 1.5rem; width: 40%; font-weight: 500; }
-.service-row p { width: 50%; color: var(--text-secondary); font-size: 1rem; }
 
-/* Pricing */
-.price-amount { font-family: 'Playfair Display', serif; font-size: 3rem; margin: 1rem 0; color: var(--text-primary); }
-.price-list { list-style: none; margin: 1.5rem 0 2.5rem; }
-.price-list li { 
-  margin-bottom: 0.8rem; color: var(--text-secondary); font-size: 0.9rem; 
-  display: flex; align-items: center; gap: 10px; 
+/* ------------------------------------------------ */
+/* HERO */
+/* ------------------------------------------------ */
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:100px 20px;
 }
-.price-list li::before { content:''; width: 4px; height: 4px; background: var(--text-primary); border-radius: 50%; }
 
-/* ─────────────────────────────────────────────────────────────
-   FOOTER
-   ───────────────────────────────────────────────────────────── */
-footer { 
-  border-top: 1px solid var(--ether-border); padding: 5rem 2rem; margin-top: 5rem; text-align: center;
-  background: linear-gradient(to top, #000 0%, var(--bg-void) 100%);
+.hero-pill{
+border:1px solid var(--border);
+padding:6px 16px;
+border-radius:100px;
+margin-bottom:20px;
+font-family:var(--font-mono);
+font-size:.7rem;
 }
-.footer-links { display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; }
-.footer-links a { color: var(--text-secondary); text-decoration: none; transition: 0.3s; font-size: 0.9rem; }
-.footer-links a:hover { color: var(--text-primary); }
 
-/* ─────────────────────────────────────────────────────────────
-   CONCIERGE MODAL
-   ───────────────────────────────────────────────────────────── */
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
-  z-index: 2000; opacity: 0; pointer-events: none; display: flex; align-items: center; justify-content: center;
-  transition: opacity 0.3s;
+.hero-title{
+font-size:clamp(3rem,8vw,6rem);
+line-height:1;
+
+background:linear-gradient(
+135deg,
+#fff 0%,
+#d4d4d8 40%,
+#a1a1aa 100%
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+margin-bottom:20px;
 }
-.modal-overlay.active { opacity: 1; pointer-events: all; }
 
-.modal-content {
-  background: #0c0c0c; width: 90%; max-width: 480px; padding: 3rem;
-  border: 1px solid var(--ether-border-bright); border-radius: 20px;
-  transform: scale(0.95) translateY(20px); transition: transform 0.4s var(--ease-snap);
+.hero-desc{
+max-width:600px;
+color:var(--text-secondary);
+margin-bottom:40px;
 }
-.modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
 
-.form-group { margin-bottom: 1.5rem; position: relative; }
-.form-input {
-  width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--ether-border);
-  padding: 1rem 0; color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 1rem;
-  transition: border-color 0.3s; border-radius: 0;
+.hero-btns{
+display:flex;
+gap:16px;
 }
-.form-input:focus { outline: none; border-color: var(--text-primary); }
-.form-input::placeholder { color: var(--text-tertiary); }
 
-/* Animations Keyframes */
-@keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+/* Buttons */
 
-/* Mobile Tweaks */
-@media (max-width: 768px) {
-  .command-deck { padding: 8px 8px 8px 16px; width: 90%; justify-content: space-between; }
-  .nav-link { display: none; } /* Collapse menu on mobile */
-  .grid-3 { grid-template-columns: 1fr; }
-  .service-row { flex-direction: column; gap: 1rem; }
-  .service-row h3, .service-row p { width: 100%; }
+.btn-primary{
+background:white;
+color:black;
+padding:14px 28px;
+border-radius:6px;
+font-weight:600;
+text-decoration:none;
+transition:.25s;
 }
+
+.btn-primary:hover{
+transform:translateY(-3px) scale(1.02);
+}
+
+.btn-secondary{
+border:1px solid var(--border);
+padding:14px 28px;
+border-radius:6px;
+text-decoration:none;
+color:white;
+}
+
+/* ------------------------------------------------ */
+/* SECTION */
+/* ------------------------------------------------ */
+
+.section{
+max-width:1100px;
+margin:auto;
+padding:120px 20px;
+}
+
+.section h2{
+font-family:var(--font-serif);
+font-size:2.5rem;
+margin-bottom:20px;
+}
+
+.mono{
+font-family:var(--font-mono);
+font-size:.75rem;
+letter-spacing:.08em;
+color:var(--text-secondary);
+}
+
+/* ------------------------------------------------ */
+/* BENTO GRID */
+/* ------------------------------------------------ */
+
+.bento{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:16px;
+margin-top:40px;
+}
+
+.card{
+background:var(--card);
+padding:30px;
+border-radius:12px;
+border:1px solid var(--border);
+position:relative;
+overflow:hidden;
+transition:.3s;
+}
+
+.card:hover{
+border-color:var(--border-focus);
+transform:translateY(-4px);
+}
+
+.card::before{
+content:'';
+position:absolute;
+inset:0;
+
+background:radial-gradient(
+600px circle at var(--mouse-x) var(--mouse-y),
+rgba(255,255,255,.08),
+transparent 40%
+);
+
+opacity:0;
+transition:.3s;
+}
+
+.card:hover::before{
+opacity:1;
+}
+
+.stat{
+font-size:3rem;
+font-family:var(--font-serif);
+}
+
+/* ------------------------------------------------ */
+/* SERVICES */
+/* ------------------------------------------------ */
+
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:1px;
+background:var(--border);
+border-radius:12px;
+overflow:hidden;
+}
+
+.service{
+background:var(--surface);
+padding:30px;
+}
+
+.service h3{
+margin-bottom:10px;
+}
+
+/* ------------------------------------------------ */
+/* PRICING */
+/* ------------------------------------------------ */
+
+.pricing{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+margin-top:40px;
+}
+
+.price-card{
+background:var(--surface);
+border:1px solid var(--border);
+padding:40px;
+border-radius:12px;
+text-align:center;
+}
+
+.price{
+font-family:var(--font-serif);
+font-size:2rem;
+margin:10px 0;
+}
+
+/* ------------------------------------------------ */
+/* FOOTER */
+/* ------------------------------------------------ */
+
+footer{
+text-align:center;
+padding:60px 20px;
+border-top:1px solid var(--border);
+}
+
+/* ------------------------------------------------ */
+/* REVEAL */
+/* ------------------------------------------------ */
+
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:.8s;
+}
+
+.reveal.visible{
+opacity:1;
+transform:translateY(0);
+}
+
+/* ------------------------------------------------ */
+/* MOBILE */
+/* ------------------------------------------------ */
+
+@media(max-width:900px){
+
+.bento{grid-template-columns:1fr}
+
+.pricing{grid-template-columns:1fr}
+
+.nav-links{display:none}
+
+}
+
 </style>
 </head>
+
 <body>
 
-<div class="noise-overlay"></div>
-<div class="ambient-light"></div>
-<svg class="vector-bg" viewBox="0 0 100 100" preserveAspectRatio="none">
-  <circle cx="0" cy="0" r="40" opacity="0.1"/>
-  <circle cx="100" cy="100" r="50" opacity="0.1"/>
+<div class="noise"></div>
+<div class="ambient"></div>
+
+<svg class="flagship" viewBox="0 0 1000 1000">
+<circle cx="500" cy="500" r="420"/>
+<circle cx="500" cy="500" r="300"/>
+<circle cx="500" cy="500" r="180"/>
 </svg>
 
-<div class="nav-wrapper">
-  <nav class="command-deck">
-    <span class="nav-brand">AS.</span>
-    <a href="#results" class="nav-link">Track Record</a>
-    <a href="#services" class="nav-link">Methodology</a>
-    <a href="#pricing" class="nav-link">Investment</a>
-    <button onclick="openModal()" class="nav-cta">Inquire</button>
-  </nav>
-</div>
+<nav>
+
+<div class="nav-brand">Andrew Sayegh</div>
+
+<ul class="nav-links">
+<li><a href="#results">Track Record</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#pricing">Pricing</a></li>
+</ul>
+
+<a class="btn-nav" href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank">
+Book Strategy Call
+</a>
+
+</nav>
 
 <section class="hero">
-  <div class="mono-tag" style="opacity:0; animation: fadeUp 1s 0.1s var(--ease-fluid) forwards;">
-    <span class="dot"></span> Accepting Clients Spring 2026
-  </div>
-  
-  <h1>The unfair advantage<br><span style="font-style:italic; color:var(--text-secondary);">for getting in.</span></h1>
-  
-  <p>Strategic admissions and career consulting for high-stakes transfer students and future policy leaders. I built the roadmap so you don't have to.</p>
-  
-  <div class="hero-actions">
-    <button onclick="openModal()" class="btn btn-primary">Book Strategy Call</button>
-    <a href="#services" class="btn btn-ghost" style="margin-left:1rem;">Explore Methodology</a>
-  </div>
-</section>
 
-<div class="ticker-container">
-  <div class="ticker-track">
-    <div class="ticker-item"><strong>UCLA</strong> ALUMNI</div>
-    <div class="ticker-item"><strong>COLUMBIA SIPA</strong> ADMIT</div>
-    <div class="ticker-item"><strong>U.S. CONGRESS</strong> INTERN</div>
-    <div class="ticker-item"><strong>STATE DEPT</strong> FELLOW</div>
-    <div class="ticker-item"><strong>RANGEL</strong> FINALIST</div>
-    <div class="ticker-item"><strong>FULBRIGHT</strong> APPLICANT</div>
-    <div class="ticker-item"><strong>UCLA</strong> ALUMNI</div>
-    <div class="ticker-item"><strong>COLUMBIA SIPA</strong> ADMIT</div>
-    <div class="ticker-item"><strong>U.S. CONGRESS</strong> INTERN</div>
-    <div class="ticker-item"><strong>STATE DEPT</strong> FELLOW</div>
-    <div class="ticker-item"><strong>RANGEL</strong> FINALIST</div>
-  </div>
+<div class="hero-pill">ACCEPTING CLIENTS FOR SPRING 2026</div>
+
+<h1 class="hero-title">
+Your unfair advantage<br>
+for getting in.
+</h1>
+
+<p class="hero-desc">
+From community college to UCLA, Capitol Hill, and national fellowships — I built the roadmap so you don't have to.
+</p>
+
+<div class="hero-btns">
+
+<a class="btn-primary" href="https://forms.gle/bTyhCoAabwYHnzwp9" target="_blank">
+Book 15-Min Intro
+</a>
+
+<a class="btn-secondary" href="#services">
+View Services
+</a>
+
 </div>
 
-<section id="results" class="container">
-  <div class="section-header reveal">
-    <span class="mono-tag" style="background:transparent; border:none; padding-left:0;">Track Record</span>
-    <h2>Built on lived experience.<br><span style="color:var(--text-tertiary)">Verified by results.</span></h2>
-  </div>
-  
-  <div class="grid-3">
-    <div class="glass-card reveal" onmousemove="handleSpotlight(event)">
-      <div>
-        <h3 style="font-size:3.5rem; margin-bottom:0.5rem;" class="gradient-text">100%</h3>
-        <span class="mono-tag">First-Generation</span>
-      </div>
-      <p style="margin-top:1.5rem; color:var(--text-secondary);">Built from scratch. I specialize in helping students and early career professionals who don't know where to start.</p>
-    </div>
-    
-    <div class="glass-card reveal" onmousemove="handleSpotlight(event)">
-      <div>
-        <h3 style="font-size:3.5rem; margin-bottom:0.5rem;" class="gradient-text">$250k+</h3>
-        <span class="mono-tag">Funding Secured</span>
-      </div>
-      <p style="margin-top:1.5rem; color:var(--text-secondary);">Expertise in competitive narrative arcs for Rangel, Pickering, Payne, and Fulbright fellowships.</p>
-    </div>
-    
-    <div class="glass-card reveal" onmousemove="handleSpotlight(event)">
-      <div>
-        <h3 style="font-size:3.5rem; margin-bottom:0.5rem;" class="gradient-text">5+</h3>
-        <span class="mono-tag">Years Policy Exp</span>
-      </div>
-      <p style="margin-top:1.5rem; color:var(--text-secondary);">Real-world insight from the State Department, Capitol Hill, and international non-profit sectors.</p>
-    </div>
-  </div>
 </section>
 
-<section id="about" class="container">
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:4rem; align-items:center;">
-    <div class="reveal">
-       <span class="mono-tag" style="margin-bottom:1rem;">Methodology</span>
-       <h2 style="font-size:2.5rem; line-height:1.2; margin-bottom:2rem;">I didn't have a guide.<br><span style="font-style:italic; color:var(--text-tertiary);">You do now.</span></h2>
-       <p style="color:var(--text-secondary); margin-bottom:1.5rem;">"The system wasn't built with us in mind. But we can learn to navigate it—and change it from the inside."</p>
-       <p style="color:var(--text-secondary);">I started at community college, without a counselor who understood what "competitive applications" meant. I figured it out through relentless research and iteration.</p>
-    </div>
-    <div class="glass-card reveal" style="height:400px; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle at center, #111, #000);">
-       <div style="font-family:'Playfair Display'; font-size:10rem; opacity:0.05; font-style:italic;">AS</div>
-    </div>
-  </div>
+<section id="results" class="section reveal">
+
+<span class="mono">PROVEN RESULTS</span>
+
+<h2>Credentials that speak loudly.</h2>
+
+<div class="bento">
+
+<div class="card">
+
+<div class="stat">100%</div>
+First-Gen Focus
+
+</div>
+
+<div class="card">
+
+<div class="stat">2+</div>
+National Fellowships
+
+</div>
+
+<div class="card">
+
+<div class="stat">5+</div>
+Policy Internships
+
+</div>
+
+</div>
+
 </section>
 
-<section id="services" class="container">
-  <div class="section-header reveal">
-    <span class="mono-tag" style="background:transparent; border:none; padding-left:0;">Services</span>
-    <h2>Strategic Consulting</h2>
-  </div>
-  
-  <div class="reveal">
-    <div class="service-row">
-      <h3>Academic Strategy</h3>
-      <p>For transfer students targeting T20 universities. We handle transcript audits, narrative construction, and "Why Us" essay architecture.</p>
-    </div>
-    <div class="service-row">
-      <h3>Federal Fellowships</h3>
-      <p>Specialized coaching for State Department and USAID fellowships. We focus on the specific "dimensions" adjudicators are graded on.</p>
-    </div>
-    <div class="service-row">
-      <h3>Policy Careers</h3>
-      <p>Resume translation for the federal sector (USAJobs) and private sector pivot strategies for liberal arts majors.</p>
-    </div>
-  </div>
+<section id="services" class="section reveal">
+
+<span class="mono">SERVICES</span>
+
+<h2>Strategic Consulting</h2>
+
+<div class="services">
+
+<div class="service">
+
+<h3>College Admissions</h3>
+
+<p>
+Transfer strategy, personal statements, and UC insight questions.
+</p>
+
+</div>
+
+<div class="service">
+
+<h3>Fellowship Advising</h3>
+
+<p>
+Rangel, Fulbright, Boren and competitive international fellowships.
+</p>
+
+</div>
+
+<div class="service">
+
+<h3>Career Strategy</h3>
+
+<p>
+Federal resumes, policy career pivots, and interview prep.
+</p>
+
+</div>
+
+</div>
+
 </section>
 
-<section id="pricing" class="container">
-  <div class="section-header reveal" style="text-align:center; max-width:100%;">
-    <span class="mono-tag" style="background:transparent; border:none;">Investment</span>
-    <h2>Transparent Models</h2>
-  </div>
-  
-  <div class="grid-3">
-    <div class="glass-card reveal" onmousemove="handleSpotlight(event)">
-      <span class="mono-tag">Discovery</span>
-      <div class="price-amount">$149</div>
-      <p style="color:var(--text-secondary);">Single high-impact strategy session to audit your profile.</p>
-      <ul class="price-list">
-        <li>60-Min Strategy Call</li>
-        <li>Resume/Essay Audit</li>
-        <li>Actionable Roadmap</li>
-      </ul>
-      <button onclick="openModal('Discovery')" class="btn btn-ghost" style="width:100%">Select</button>
-    </div>
-    
-    <div class="glass-card reveal" style="border-color:var(--ether-border-bright); background: linear-gradient(160deg, var(--bg-surface) 0%, rgba(255,255,255,0.03) 100%);" onmousemove="handleSpotlight(event)">
-      <span class="mono-tag" style="background:var(--text-primary); color:black; border:none;">Recommended</span>
-      <div class="price-amount">$399</div>
-      <p style="color:var(--text-secondary);">The "Sprint": A focused package for application deadlines.</p>
-      <ul class="price-list">
-        <li>3 Consulting Sessions</li>
-        <li>Full Essay Drafting</li>
-        <li>Mock Interview Prep</li>
-      </ul>
-      <button onclick="openModal('Sprint')" class="btn btn-primary" style="width:100%">Book Consult</button>
-    </div>
-    
-    <div class="glass-card reveal" onmousemove="handleSpotlight(event)">
-      <span class="mono-tag">Retainer</span>
-      <div class="price-amount">Custom</div>
-      <p style="color:var(--text-secondary);">Full cycle management for the entire admissions season.</p>
-      <ul class="price-list">
-        <li>Unlimited Revisions</li>
-        <li>School List Strategy</li>
-        <li>Priority Support</li>
-      </ul>
-      <button onclick="openModal('Retainer')" class="btn btn-ghost" style="width:100%">Inquire</button>
-    </div>
-  </div>
+<section id="pricing" class="section reveal">
+
+<span class="mono">INVESTMENT</span>
+
+<h2>Transparent Pricing</h2>
+
+<div class="pricing">
+
+<div class="price-card">
+
+Starter
+
+<div class="price">$99+</div>
+
+<p>Single strategy session</p>
+
+</div>
+
+<div class="price-card">
+
+Premium
+
+<div class="price">$199+</div>
+
+<p>Application package</p>
+
+</div>
+
+<div class="price-card">
+
+Unlimited
+
+<div class="price">$599+</div>
+
+<p>Full cycle consulting</p>
+
+</div>
+
+</div>
+
 </section>
 
 <footer>
-  <div style="font-family:'Playfair Display'; font-size:2rem; font-style:italic; margin-bottom:1rem;">Andrew Sayegh</div>
-  <div class="footer-links">
-    <a href="https://linkedin.com/in/sayeghandrew" target="_blank">LinkedIn</a>
-    <a href="mailto:contact@andrewsayegh.com">Email</a>
-  </div>
-  <p class="mono-tag" style="background:transparent; border:none; font-size:0.7rem;">© 2026 Andrew Sayegh. Los Angeles, CA.</p>
+
+<h3>Andrew Sayegh</h3>
+
+<p>Los Angeles, CA</p>
+
 </footer>
 
-<div class="modal-overlay" id="concierge">
-  <div class="modal-content">
-    <div style="display:flex; justify-content:space-between; margin-bottom:2rem;">
-      <h3>Request Strategy</h3>
-      <button onclick="closeModal()" style="background:none; border:none; color:var(--text-secondary); cursor:pointer; font-size:1.5rem;">&times;</button>
-    </div>
-    
-    <form onsubmit="handleForm(event)">
-      <div class="form-group">
-        <input type="text" class="form-input" placeholder="Full Name" required id="formName">
-      </div>
-      <div class="form-group">
-        <input type="email" class="form-input" placeholder="Email Address" required id="formEmail">
-      </div>
-      <div class="form-group">
-        <select class="form-input" id="formTier" style="color:var(--text-secondary);">
-          <option value="" disabled selected>Select Interest...</option>
-          <option value="Transfer">College Transfer</option>
-          <option value="Fellowship">Federal Fellowship</option>
-          <option value="Career">Career Pivot</option>
-        </select>
-      </div>
-      
-      <button type="submit" class="btn btn-primary" style="width:100%; margin-top:1rem;">Secure Slot</button>
-    </form>
-  </div>
-</div>
-
 <script>
-  // 1. Reveal Animation Observer
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-  
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // 2. Mouse Spotlight Physics
-  function handleSpotlight(e) {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    card.style.setProperty('--mouse-x', `${x}px`);
-    card.style.setProperty('--mouse-y', `${y}px`);
-  }
+/* Card spotlight */
 
-  // 3. Modal Logic
-  const modal = document.getElementById('concierge');
-  
-  function openModal(tier) {
-    modal.classList.add('active');
-    if(tier) {
-      console.log('Selected Tier:', tier); // In prod, pre-fill a hidden input
-    }
-  }
-  
-  function closeModal() {
-    modal.classList.remove('active');
-  }
-  
-  // Close on outside click
-  modal.addEventListener('click', (e) => {
-    if(e.target === modal) closeModal();
-  });
+document.querySelectorAll('.card').forEach(card=>{
+card.addEventListener('mousemove',e=>{
+const rect = card.getBoundingClientRect()
 
-  // 4. Form Submission Simulation
-  function handleForm(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button');
-    const originalText = btn.innerText;
-    
-    btn.innerText = "Processing...";
-    btn.style.opacity = "0.7";
-    
-    setTimeout(() => {
-      btn.innerText = "Request Sent";
-      btn.style.background = "#fff";
-      btn.style.color = "#000";
-      
-      const name = document.getElementById('formName').value;
-      const email = document.getElementById('formEmail').value;
-      const tier = document.getElementById('formTier').value;
+card.style.setProperty('--mouse-x',e.clientX-rect.left+'px')
+card.style.setProperty('--mouse-y',e.clientY-rect.top+'px')
 
-      // Real implementation would use fetch() here
-      // window.location.href = `mailto:contact@andrewsayegh.com?subject=Inquiry from ${name}&body=Interest: ${tier}`;
+})
+})
 
-      setTimeout(() => {
-        closeModal();
-        e.target.reset();
-        btn.innerText = originalText;
-        btn.style.background = "";
-        btn.style.color = "";
-        btn.style.opacity = "1";
-      }, 1000);
-    }, 1200);
-  }
+/* Reveal */
+
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('visible')
+}
+})
+})
+
+document.querySelectorAll('.reveal')
+.forEach(el=>observer.observe(el))
+
+/* Parallax */
+
+window.addEventListener('scroll',()=>{
+const y = window.scrollY
+
+document.querySelector('.flagship').style.transform =
+`translate(-50%, calc(-50% + ${y*0.08}px)) rotate(${y*0.02}deg)`
+})
+
 </script>
 
 </body>
