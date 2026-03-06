@@ -6,544 +6,541 @@
 <title>Andrew Sayegh | Admissions & Career Consulting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ──────────────────────────────────────────
-   PALETTE: AEROSPACE TITANIUM (NO GOLD)
+   TITANIUM PALETTE (No Gold/Bronze)
    ────────────────────────────────────────── */
 :root {
-    /* Backgrounds */
-    --bg-depth: #000000;
-    --bg-surface: #0a0a0c;
-    --bg-card: #121214;
-    
-    /* Metals */
-    --titanium-light: #e2e8f0;
-    --titanium-mid: #94a3b8;
-    --titanium-dark: #475569;
-    --steel-highlight: #f8fafc;
-    
-    /* Text */
-    --text-primary: #f2f2f2;
-    --text-secondary: #a1a1aa;
-    --text-tertiary: #52525b;
-    
-    /* Status */
-    --status-green: #34d399;
-    
-    /* Physics */
-    --ease-island: cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy Apple feel */
-    --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --bg-depth: #050505;
+  --bg-surface: #0e0e10;
+  --bg-card: #151518;
+  --bg-highlight: #1c1c22;
+  
+  /* Metals */
+  --metal-light: #e2e8f0;
+  --metal-mid: #94a3b8;
+  --metal-dark: #475569;
+  --metal-sheen: rgba(255, 255, 255, 0.15);
+  
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(255, 255, 255, 0.25);
+  
+  /* Text */
+  --text-primary: #f2f2f2;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #52525b;
+  
+  /* Accents */
+  --accent-steel: #cbd5e1;
+  --accent-glow: rgba(255, 255, 255, 0.1);
+  --status-green: #34d399; /* Spring Green */
+  
+  /* Fonts */
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  
+  /* Physics */
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html { scroll-behavior: smooth; font-size: 16px; height: 100%; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-    background-color: var(--bg-depth);
-    color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-    /* Cold Steel Gradient */
-    background-image: radial-gradient(circle at 50% 0%, rgba(148, 163, 184, 0.1) 0%, transparent 70%);
+  background-color: var(--bg-depth);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* Cool steel gradient instead of gold */
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 60%);
+  background-repeat: no-repeat;
 }
 
-/* Brushed Metal Noise Texture */
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.03em; color: var(--text-primary); }
+p { color: var(--text-secondary); }
+em { font-family: var(--font-serif); font-style: italic; color: var(--text-primary); }
+.mono { font-family: var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.75rem; color: var(--metal-mid); }
+
+/* Brushed metal noise texture */
 body::after {
-    content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    opacity: 0.5; mix-blend-mode: overlay;
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
 }
-
-/* Typography */
-h1, h2, h3 { color: var(--text-primary); letter-spacing: -0.02em; }
-h1 { font-family: 'Playfair Display', serif; line-height: 1.1; font-weight: 500; }
-h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; }
-.mono { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--titanium-mid); display: block; margin-bottom: 0.5rem; }
 
 /* ──────────────────────────────────────────
-   DYNAMIC ISLAND HEADER
+   DYNAMIC ISLAND (Replaces Menu Bar)
    ────────────────────────────────────────── */
-.island-container {
-    position: fixed; top: 20px; left: 0; right: 0;
-    display: flex; justify-content: center; z-index: 1000;
-    pointer-events: none; /* Let clicks pass through around the island */
+.island-wrapper {
+  position: fixed; top: 20px; left: 0; right: 0;
+  display: flex; justify-content: center; z-index: 2000;
+  pointer-events: none;
 }
-
 .dynamic-island {
-    pointer-events: auto;
-    background: rgba(20, 20, 20, 0.85);
-    backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 100px;
-    padding: 0.75rem 1.5rem;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 2rem;
-    width: auto; min-width: 320px;
-    transition: all 0.4s var(--ease-island);
-    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.8);
+  pointer-events: auto;
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  padding: 0.6rem 1.4rem;
+  display: flex; align-items: center; gap: 1rem;
+  box-shadow: 0 10px 30px -5px rgba(0,0,0,0.8);
+  transition: transform 0.2s var(--ease-out), background 0.2s;
+  cursor: pointer;
+  width: auto;
 }
-
-/* Island expands on hover/interaction */
-.dynamic-island:hover {
-    transform: scale(1.02);
-    border-color: rgba(255, 255, 255, 0.25);
-    background: rgba(30, 30, 30, 0.95);
-}
-
+.dynamic-island:active { transform: scale(0.96); background: rgba(30,30,30,0.95); }
 .island-brand {
-    font-family: 'Playfair Display', serif; font-weight: 600; font-style: italic;
-    font-size: 1.1rem; color: #fff; text-decoration: none;
-    display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-serif); font-weight: 600; font-style: italic;
+  font-size: 1rem; color: var(--text-primary);
 }
-.brand-mark {
-    width: 24px; height: 24px; background: #fff; color: #000;
-    border-radius: 50%; display: grid; place-items: center; font-size: 0.7rem; font-weight: 700;
-    font-family: 'Inter', sans-serif; font-style: normal;
+.island-separator { width: 1px; height: 16px; background: var(--border-subtle); }
+.island-action {
+  font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500;
+  color: var(--metal-light); display: flex; align-items: center; gap: 6px;
 }
 
-.island-nav { display: flex; gap: 1.5rem; list-style: none; }
-.island-nav a {
-    text-decoration: none; color: var(--text-secondary); font-size: 0.85rem; font-weight: 500;
-    transition: color 0.2s;
+/* Full Screen Menu Overlay */
+.menu-overlay {
+  position: fixed; inset: 0; z-index: 1500;
+  background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(30px);
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
 }
-.island-nav a:hover { color: #fff; }
-
-.island-btn {
-    background: #fff; color: #000; border: none;
-    padding: 0.5rem 1.2rem; border-radius: 50px;
-    font-size: 0.8rem; font-weight: 600; cursor: pointer;
-    transition: transform 0.2s;
+.menu-overlay.active { opacity: 1; pointer-events: all; }
+.menu-link {
+  font-family: var(--font-serif); font-size: 2.5rem; color: var(--text-secondary);
+  text-decoration: none; transition: color 0.3s, transform 0.3s;
+  transform: translateY(20px); opacity: 0;
 }
-.island-btn:hover { transform: scale(1.05); }
-
-.mobile-toggle { display: none; background: none; border: none; color: #fff; cursor: pointer; }
+.menu-overlay.active .menu-link { transform: translateY(0); opacity: 1; }
+.menu-link:hover { color: var(--text-primary); }
+/* Stagger delays */
+.menu-overlay.active .menu-link:nth-child(1) { transition-delay: 0.05s; }
+.menu-overlay.active .menu-link:nth-child(2) { transition-delay: 0.1s; }
+.menu-overlay.active .menu-link:nth-child(3) { transition-delay: 0.15s; }
+.menu-overlay.active .menu-link:nth-child(4) { transition-delay: 0.2s; }
 
 /* ──────────────────────────────────────────
    HERO
    ────────────────────────────────────────── */
 .hero {
-    min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; padding: 8rem 1.5rem 4rem; position: relative;
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  padding: 8rem 2rem 4rem; position: relative; overflow: hidden;
 }
 
-/* Rotating Text Logic */
-.hero-title {
-    font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 1.5rem;
-    background: linear-gradient(180deg, #fff 20%, #71717a 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.rotator-wrap {
-    display: block; height: 1.2em; overflow: hidden; position: relative;
-    color: var(--text-secondary); -webkit-text-fill-color: var(--text-secondary);
-    font-weight: 400; font-style: italic;
-}
-.rotator-track { animation: rotateText 12s infinite cubic-bezier(0.2, 0.8, 0.2, 1); }
-.rotator-item { display: block; height: 1.2em; line-height: 1.2em; }
-@keyframes rotateText {
-    0%, 15% { transform: translateY(0); }
-    20%, 35% { transform: translateY(-1.2em); }
-    40%, 55% { transform: translateY(-2.4em); }
-    60%, 75% { transform: translateY(-3.6em); }
-    80%, 95% { transform: translateY(-4.8em); }
-    100% { transform: translateY(0); } /* Loop back */
+/* Graphics: Silver tones */
+.hero-graphic {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 900px; height: 900px; opacity: 0.05; pointer-events: none;
+  animation: heroGraphicSpin 120s linear infinite;
 }
 
-/* Status Pill */
-.status-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 14px; background: rgba(52, 211, 153, 0.05);
-    border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 50px;
-    color: var(--status-green); font-family: 'DM Mono', monospace; font-size: 0.7rem;
-    margin-bottom: 2rem; letter-spacing: 0.05em;
+/* Status Pill: Green Dot, White Text */
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 6px 16px; border-radius: 100px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 2rem; position: relative; z-index: 2;
+  animation: fadeUp 0.8s ease-out forwards;
 }
-.status-dot {
-    width: 6px; height: 6px; background: var(--status-green); border-radius: 50%;
-    box-shadow: 0 0 10px var(--status-green);
-    animation: pulse 2s infinite;
+.hero-pill .dot {
+  width: 6px; height: 6px; background: var(--status-green);
+  border-radius: 50%; box-shadow: 0 0 10px var(--status-green);
+  animation: pulse-dot 2s ease-in-out infinite;
 }
-@keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+.hero-pill span {
+  font-family: var(--font-mono); font-size: 0.75rem; 
+  color: var(--text-primary); /* Not all green */
+  letter-spacing: 0.05em;
+}
+@keyframes pulse-dot { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; transform: scale(1.2); } }
 
-.hero-sub {
-    max-width: 600px; font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 3rem;
-    line-height: 1.7;
+h1.hero-title {
+  font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1;
+  margin-bottom: 1.5rem; position: relative; z-index: 2;
+  opacity: 0; animation: fadeUp 1s 0.2s var(--ease-out) forwards;
+}
+h1.hero-title .line1 { display: block; color: var(--text-primary); }
+h1.hero-title .line2 {
+  display: block; font-style: italic; font-weight: 400;
+  background: linear-gradient(135deg, var(--metal-mid) 0%, #fff 50%, var(--metal-mid) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: metallicSheen 6s ease-in-out infinite;
+}
+@keyframes metallicSheen { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+
+.hero-desc {
+  max-width: 620px; font-size: 1.15rem; color: var(--text-secondary);
+  margin-bottom: 3rem; position: relative; z-index: 2;
+  opacity: 0; animation: fadeUp 1s 0.4s var(--ease-out) forwards; line-height: 1.6;
 }
 
-/* Buttons */
+.hero-btns {
+  display: flex; gap: 1rem; position: relative; z-index: 2;
+  opacity: 0; animation: fadeUp 1s 0.6s var(--ease-out) forwards;
+}
 .btn-primary {
-    padding: 1rem 2.5rem; border-radius: 100px;
-    background: linear-gradient(180deg, #e2e8f0 0%, #94a3b8 100%);
-    color: #000; font-weight: 600; text-decoration: none; border: none;
-    box-shadow: 0 4px 20px rgba(255,255,255,0.15); cursor: pointer;
-    transition: all 0.3s; display: inline-block;
+  padding: 1rem 2.2rem;
+  background: linear-gradient(135deg, var(--metal-light) 0%, var(--metal-mid) 100%);
+  color: #000; font-weight: 600; text-decoration: none; border-radius: 6px;
+  transition: all 0.3s var(--ease-out); border: none; font-family: var(--font-sans);
+  font-size: 0.95rem; cursor: pointer;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.25); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(255,255,255,0.3); }
 
-.btn-ghost {
-    padding: 1rem 2.5rem; border-radius: 100px;
-    background: transparent; border: 1px solid var(--titanium-dark);
-    color: var(--text-primary); font-weight: 500; text-decoration: none;
-    cursor: pointer; transition: all 0.3s;
+.btn-secondary {
+  padding: 1rem 2rem; background: transparent;
+  color: var(--text-primary); border: 1px solid var(--border-subtle);
+  font-weight: 500; text-decoration: none; border-radius: 6px;
+  transition: all 0.3s; font-size: 0.95rem; font-family: var(--font-sans);
 }
-.btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
+.btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
 
-/* ──────────────────────────────────────────
-   TICKER
-   ────────────────────────────────────────── */
+/* ── Ticker ── */
 .ticker-wrap {
-    border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08);
-    background: var(--bg-surface); padding: 1rem 0; overflow: hidden;
+  width: 100%; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface); padding: 0; overflow: hidden;
 }
-.ticker-track { display: flex; gap: 4rem; animation: scroll 35s linear infinite; width: max-content; }
+.ticker { display: flex; animation: tickerScroll 30s linear infinite; }
 .ticker-item {
-    font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--text-secondary);
-    display: flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-tertiary);
+  letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;
+  padding: 1.3rem 3rem; border-right: 1px solid var(--border-subtle);
+  display: flex; align-items: center; gap: 10px;
 }
-.ticker-item strong { color: #fff; }
-@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.ticker-item strong { color: var(--text-primary); font-weight: 600; }
+.ticker-item .tick-diamond { width: 5px; height: 5px; background: var(--metal-mid); transform: rotate(45deg); opacity: 0.5; }
+@keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* ──────────────────────────────────────────
-   SECTIONS & CARDS
-   ────────────────────────────────────────── */
-.section { padding: 8rem 1.5rem; max-width: 1200px; margin: 0 auto; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 4rem; }
-.grid-wide { grid-column: span 2; }
+/* ── Sections & Bento ── */
+.section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 4rem; max-width: 600px; }
+.section-header h2 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.1; }
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* Metallic Glass Card */
-.metal-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-    backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 24px; padding: 2.5rem; position: relative; overflow: hidden;
-    transition: transform 0.3s, border-color 0.3s;
+.bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 4rem; }
+.bento-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  padding: 2.5rem; border-radius: 12px; position: relative; overflow: hidden;
+  transition: border-color 0.4s, transform 0.4s var(--ease-out);
+  background-image: linear-gradient(160deg, var(--bg-card) 0%, rgba(255,255,255,0.02) 100%);
 }
-.metal-card:hover {
-    transform: translateY(-5px); border-color: rgba(255,255,255,0.2);
-    box-shadow: 0 20px 50px -20px rgba(0,0,0,0.7);
+.bento-card:hover { border-color: var(--border-focus); transform: translateY(-4px); }
+.bento-card.wide { grid-column: span 2; }
+
+.stat-num {
+  font-family: var(--font-serif); font-size: 4rem; line-height: 1; margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #fff 0%, var(--metal-mid) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-.metal-card::before {
-    content: ''; position: absolute; top:0; left:0; width:100%; height:1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+.stat-label { font-family: var(--font-mono); font-size: 0.8rem; color: var(--metal-mid); text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-desc { margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* ── About ── */
+.about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-content blockquote {
+  border-left: 2px solid var(--metal-light); padding-left: 2rem; margin-bottom: 2rem;
+  font-family: var(--font-serif); font-size: 1.4rem; font-style: italic;
+  color: var(--text-primary); line-height: 1.5;
 }
 
-/* Pricing Special */
+/* ── Services ── */
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1px; background: var(--border-subtle);
+  border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden;
+}
+.service-card { background: var(--bg-surface); padding: 3rem 2rem; transition: background 0.4s; }
+.service-card:hover { background: var(--bg-card); }
+.svc-icon {
+  width: 48px; height: 48px; border: 1px solid var(--border-subtle);
+  border-radius: 10px; display: grid; place-items: center; margin-bottom: 2rem;
+  color: var(--metal-light); font-family: var(--font-mono); font-size: 0.8rem;
+  background: linear-gradient(135deg, transparent, rgba(255,255,255,0.03));
+}
+.svc-title { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 500; color: var(--text-primary); margin-bottom: 1rem; }
+.svc-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.svc-list li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); }
+.svc-list li::before { content: ''; width: 4px; height: 4px; background: var(--metal-light); border-radius: 50%; }
+
+/* ── Pricing ── */
+.pricing-wrapper { display: grid; grid-template-columns: 1.2fr 1.5fr 1.2fr; align-items: center; gap: 2rem; margin-top: 4rem; }
+.price-card {
+  background: var(--bg-surface); border: 1px solid var(--border-subtle);
+  padding: 2.5rem; border-radius: 16px; display: flex; flex-direction: column;
+  transition: transform 0.3s;
+}
+.price-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px -16px rgba(0,0,0,0.5); }
 .price-card.featured {
-    background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(10,10,12,1) 100%);
-    border: 1px solid rgba(255,255,255,0.2);
-    transform: scale(1.05); z-index: 2;
+  background: linear-gradient(160deg, var(--bg-highlight) 0%, rgba(255,255,255,0.05) 100%);
+  border: 1px solid rgba(255,255,255,0.2); padding: 3.5rem 2.5rem; z-index: 10;
 }
+.price-tag { font-family: var(--font-mono); color: var(--metal-light); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
+.price-amount {
+  font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--metal-light) 50%, var(--text-primary) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.price-btn {
+  width: 100%; padding: 1rem; margin-top: 2rem; text-align: center;
+  border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer;
+  font-family: var(--font-sans); font-size: 0.9rem; display: block;
+}
+.price-btn.outline { border: 1px solid var(--border-subtle); color: var(--text-secondary); background: transparent; }
+.price-btn.outline:hover { border-color: #fff; color: #fff; }
+.price-btn.solid { background: #fff; color: #000; border: none; }
+.price-btn.solid:hover { background: #e2e2e2; }
 
-/* ──────────────────────────────────────────
-   MODAL & CONFETTI
-   ────────────────────────────────────────── */
-.modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
-    z-index: 2000; display: grid; place-items: center; padding: 1rem;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s;
-}
-.modal-overlay.open { opacity: 1; pointer-events: all; }
-.modal {
-    width: 100%; max-width: 500px; background: #0c0c0e;
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 24px;
-    padding: 2.5rem; transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.modal-overlay.open .modal { transform: scale(1); }
+/* ── Footer ── */
+footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-align: center; margin-top: 4rem; }
+.footer-logo { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem; display: block; color: var(--text-primary); text-decoration: none; }
+.socials { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
+.socials a { color: var(--text-tertiary); text-decoration: none; font-size: 0.9rem; }
 
-.input-field {
-    width: 100%; padding: 1rem; margin-bottom: 1rem;
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px; color: #fff; font-family: 'Inter', sans-serif;
-    outline: none; transition: border-color 0.3s;
+/* ── Booking Modal & Confetti ── */
+.booking-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
+  z-index: 3000; display: grid; place-items: center; padding: 1rem;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
 }
-.input-field:focus { border-color: #fff; background: rgba(255,255,255,0.07); }
-select.input-field { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; }
-
-#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 3000; }
+.booking-overlay.open { opacity: 1; pointer-events: all; }
+.booking-modal {
+  width: 100%; max-width: 580px; background: var(--bg-surface);
+  border: 1px solid var(--border-subtle); border-radius: 20px;
+  max-height: 90vh; overflow-y: auto; position: relative;
+  transform: translateY(30px) scale(0.97); transition: transform 0.4s var(--ease-elastic);
+}
+.booking-overlay.open .booking-modal { transform: translateY(0) scale(1); }
+.form-group { margin-bottom: 1.2rem; }
+.form-group label { display: block; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 0.5rem; letter-spacing:0.05em; text-transform:uppercase;}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 0.8rem 1rem; background: var(--bg-card);
+  border: 1px solid var(--border-subtle); border-radius: 8px;
+  color: var(--text-primary); font-family: var(--font-sans); outline: none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--metal-light); }
+#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 4000; }
 
 /* Responsive */
-@media (max-width: 768px) {
-    .island-nav { display: none; }
-    .dynamic-island { min-width: auto; padding: 0.6rem 1rem; gap: 1rem; }
-    .mobile-toggle { display: block; }
-    .grid-wide { grid-column: span 1; }
-    .price-card.featured { transform: scale(1); }
-    .hero-title { font-size: 3rem; }
+@media (max-width: 900px) {
+  .hero-title { font-size: 3.5rem; }
+  .grid, .bento-grid, .pricing-wrapper { grid-template-columns: 1fr; }
+  .bento-card.wide { grid-column: span 1; }
+  .about-layout { grid-template-columns: 1fr; }
 }
-/* Mobile Menu Overlay */
-.mobile-menu {
-    position: fixed; inset: 0; background: #000; z-index: 999;
-    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
-    transform: translateY(-100%); transition: transform 0.4s var(--ease-island);
-}
-.mobile-menu.active { transform: translateY(0); }
-.mobile-menu a { font-size: 2rem; color: #fff; text-decoration: none; font-family: 'Playfair Display', serif; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
 
 <canvas id="confetti-canvas"></canvas>
 
-<div class="island-container">
-    <div class="dynamic-island">
-        <a href="#" class="island-brand">
-            <div class="brand-mark">AS</div>
-            <span style="display:inline-block; font-size:0.9rem;">Andrew Sayegh</span>
-        </a>
-        <ul class="island-nav">
-            <li><a href="#results">Track Record</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-        </ul>
-        <button class="island-btn" onclick="openBooking()">Book Now</button>
-        <button class="mobile-toggle" onclick="toggleMobile()">☰</button>
-    </div>
+<div class="island-wrapper">
+  <div class="dynamic-island" onclick="toggleMenu()">
+    <span class="island-brand">As</span>
+    <div class="island-separator"></div>
+    <span class="island-action">Menu</span>
+  </div>
 </div>
 
-<div class="mobile-menu" id="mobileMenu">
-    <a href="#results" onclick="toggleMobile()">Track Record</a>
-    <a href="#services" onclick="toggleMobile()">Services</a>
-    <a href="#pricing" onclick="toggleMobile()">Pricing</a>
-    <a href="javascript:void(0)" onclick="toggleMobile(); openBooking()">Book Consultation</a>
-    <button onclick="toggleMobile()" style="background:none; border:1px solid #333; color:#888; padding:10px 20px; border-radius:20px; margin-top:20px;">Close</button>
+<div class="menu-overlay" id="mainMenu">
+  <a href="#results" class="menu-link" onclick="toggleMenu()">Track Record</a>
+  <a href="#services" class="menu-link" onclick="toggleMenu()">Services</a>
+  <a href="#about" class="menu-link" onclick="toggleMenu()">About</a>
+  <a href="#pricing" class="menu-link" onclick="toggleMenu()">Pricing</a>
+  <button onclick="toggleMenu()" style="margin-top:2rem; background:none; border:1px solid #333; color:#888; padding:10px 24px; border-radius:50px; cursor:pointer;">Close</button>
 </div>
 
 <section class="hero">
-    <div class="status-pill">
-        <span class="status-dot"></span>
-        <span>ACCEPTING CLIENTS FOR SPRING 2026</span>
-    </div>
-
-    <h1 class="hero-title">
-        Your unfair advantage<br>
-        <span class="rotator-wrap">
-            <span class="rotator-track">
-                <span class="rotator-item">for getting in.</span>
-                <span class="rotator-item">for UCLA Transfers.</span>
-                <span class="rotator-item">for Columbia Admits.</span>
-                <span class="rotator-item">for Rangel Fellows.</span>
-                <span class="rotator-item">for Capitol Hill.</span>
-                <span class="rotator-item">for getting in.</span>
-            </span>
-        </span>
-    </h1>
-
-    <p class="hero-sub">
-        I transferred to UCLA from community college, secured competitive internships and national fellowships, and earned admission to graduate school without connections. Now, I built a roadmap for you.
-    </p>
-
-    <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
-        <button class="btn-primary" onclick="openBooking()">Book 15-Min Intro</button>
-        <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView()">View Services</button>
-    </div>
+  <svg class="hero-graphic" viewBox="0 0 900 900">
+     <circle cx="450" cy="450" r="400" fill="none" stroke="#333" stroke-width="0.5" opacity="0.3"/>
+     <circle cx="450" cy="450" r="250" fill="none" stroke="#555" stroke-width="0.5" opacity="0.2"/>
+  </svg>
+  
+  <div class="hero-pill">
+    <span class="dot"></span>
+    <span>ACCEPTING CLIENTS FOR SPRING 2026</span>
+  </div>
+  
+  <h1 class="hero-title">
+    <span class="line1">Your unfair advantage</span>
+    <span class="line2">for getting in.</span>
+  </h1>
+  
+  <p class="hero-desc">From community college to the Ivy League and Capitol Hill—I built the roadmap so you don't have to.</p>
+  
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="openBooking()"><span>Book 15-Min Intro</span></button>
+    <a href="#services" class="btn-secondary">View Services</a>
+  </div>
 </section>
 
 <div class="ticker-wrap">
-    <div class="ticker-track">
-        <div class="ticker-item"><strong>UCLA</strong> Alum</div>
-        <div class="ticker-item"><strong>Columbia SIPA</strong> Admit</div>
-        <div class="ticker-item"><strong>Congress</strong> Intern</div>
-        <div class="ticker-item"><strong>State Dept</strong> Fellow</div>
-        <div class="ticker-item"><strong>First-Gen</strong> Transfer</div>
-        <div class="ticker-item"><strong>Rangel</strong> Finalist</div>
-        <div class="ticker-item"><strong>UCLA</strong> Alum</div>
-        <div class="ticker-item"><strong>Columbia SIPA</strong> Admit</div>
-        <div class="ticker-item"><strong>Congress</strong> Intern</div>
-        <div class="ticker-item"><strong>State Dept</strong> Fellow</div>
-        <div class="ticker-item"><strong>First-Gen</strong> Transfer</div>
-        <div class="ticker-item"><strong>Rangel</strong> Finalist</div>
-    </div>
+  <div class="ticker"><div class="ticker-item"><strong>UCLA</strong> Alum</div><div class="ticker-item"><strong>Columbia SIPA</strong> Admit</div><div class="ticker-item"><strong>Congress</strong> Intern</div><div class="ticker-item"><strong>State Dept</strong> Fellow</div><div class="ticker-item"><strong>First-Gen</strong> Transfer</div><div class="ticker-item"><strong>Rangel</strong> Finalist</div></div>
 </div>
 
 <section id="results" class="section">
-    <span class="mono">Proven Results</span>
-    <h2>Credentials that speak.</h2>
-    <div class="grid">
-        <div class="metal-card grid-wide">
-            <span class="mono">Origin Story</span>
-            <h3 style="font-size:1.8rem; margin:0.5rem 0;">100% First-Gen</h3>
-            <p style="color:var(--text-secondary);">Built from scratch. I specialize in helping students and early career professionals who don't know where to start.</p>
-        </div>
-        <div class="metal-card">
-            <div style="font-size:3rem; font-family:'Playfair Display'; color:#fff; line-height:1;">2+</div>
-            <p style="color:var(--text-secondary); margin-top:0.5rem;">National Fellowships (Rangel, Pickering Finalist).</p>
-        </div>
-        <div class="metal-card">
-            <div style="font-size:3rem; font-family:'Playfair Display'; color:#fff; line-height:1;">5+</div>
-            <p style="color:var(--text-secondary); margin-top:0.5rem;">Policy Internships (Capitol Hill & Non-Profits).</p>
-        </div>
+  <div class="section-header reveal"><span class="mono">Proven Results</span><h2>Credentials that <span style="color:var(--text-tertiary)">speak loudly.</span></h2></div>
+  <div class="bento-grid">
+    <div class="bento-card wide reveal">
+      <div class="stat-num">100%</div><div class="stat-label">First-Gen</div>
+      <p class="stat-desc">Built from scratch. I specialize in helping students and early career professionals who don't know where to start.</p>
     </div>
+    <div class="bento-card reveal"><div class="stat-num">2+</div><div class="stat-label">National Fellowships</div><p class="stat-desc">Finalist of competitive national fellowships, including Rangel and Pickering.</p></div>
+    <div class="bento-card reveal"><div class="stat-num">5+</div><div class="stat-label">Policy Internships</div><p class="stat-desc">Capitol Hill and international non-profit experience.</p></div>
+  </div>
+</section>
+
+<div class="trust-strip reveal">
+  <p class="trust-quote">"The system wasn't built with us in mind. But we can learn to navigate it — and change it from the inside."</p>
+  <span class="trust-attr">— ANDREW SAYEGH</span>
+</div>
+
+<section id="about" class="section">
+  <div class="about-layout">
+    <div class="about-content reveal">
+      <span class="mono">My Methodology</span>
+      <h2 style="margin-bottom:2rem;">I didn't have a guide.<br><span style="font-style:italic; color:var(--text-tertiary);">You do now.</span></h2>
+      <blockquote>Strategy isn't guesswork — it's pattern recognition from lived experience.</blockquote>
+      <p>I started at community college, without a counselor who understood what "competitive applications" meant. I figured it out through relentless research and iteration.</p>
+    </div>
+    <div class="reveal" style="background:var(--bg-card); height:400px; border-radius:16px; border:1px solid var(--border-subtle); display:grid; place-items:center;">
+       <div style="font-family:var(--font-serif); font-size:120px; color:rgba(255,255,255,0.05);">AS</div>
+    </div>
+  </div>
 </section>
 
 <section id="services" class="section">
-    <div style="text-align:center;">
-        <span class="mono">Services</span>
-        <h2>Strategic Consulting</h2>
+  <div class="section-header reveal"><span class="mono">Services</span><h2>Strategic Consulting</h2></div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="svc-icon">🎓</div>
+      <h3 class="svc-title">College Admissions</h3>
+      <p>Built for transfer students and first-gen applicants targeting selective schools. School lists, fit analysis, and essays that sound like you.</p>
     </div>
-    <div class="grid">
-        <div class="metal-card">
-            <h3>College Admissions</h3>
-            <p style="color:var(--text-secondary); margin-top:0.5rem;">Transfer students & first-gen applicants. Personal Statement Strategy and UC Insight Questions.</p>
-        </div>
-        <div class="metal-card">
-            <h3>Fellowship Advising</h3>
-            <p style="color:var(--text-secondary); margin-top:0.5rem;">Fulbright, Rangel, Boren. Narrative development and mock interviews.</p>
-        </div>
-        <div class="metal-card">
-            <h3>Career & Policy</h3>
-            <p style="color:var(--text-secondary); margin-top:0.5rem;">Federal resume audits and interview prep for those pivoting to policy roles.</p>
-        </div>
+    <div class="service-card">
+      <div class="svc-icon">🏛️</div>
+      <h3 class="svc-title">Fellowship Advising</h3>
+      <p>Fulbright, Rangel, Boren, Gilman. I know these applications from the inside. We focus on the narrative arc that reviewers look for.</p>
     </div>
+    <div class="service-card">
+      <div class="svc-icon">💼</div>
+      <h3 class="svc-title">Career & Policy</h3>
+      <p>For those pivoting to policy, non-profits, or federal roles. We translate your background into a compelling professional case.</p>
+    </div>
+  </div>
 </section>
 
 <section id="pricing" class="section">
-    <div style="text-align:center;">
-        <span class="mono">Investment</span>
-        <h2>Transparent Pricing</h2>
+  <div class="section-header reveal" style="text-align:center; max-width:100%;"><span class="mono">Investment</span><h2>Transparent Pricing</h2></div>
+  <div class="pricing-wrapper reveal">
+    <div class="price-card">
+      <span class="price-tag">Starter</span><div class="price-amount">$99+</div><p>Single Session</p>
+      <ul class="price-feat"><li>Resume or Essay Audit</li><li>60-Min Strategy Call</li><li>Action Plan</li></ul>
+      <button onclick="openBooking('Starter')" class="price-btn outline">Get Started</button>
     </div>
-    <div class="grid">
-        <div class="metal-card" style="text-align:center;">
-            <span class="mono">Starter</span>
-            <div style="font-size:2.5rem; font-family:'Playfair Display'; margin:1rem 0;">$99</div>
-            <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:2rem;">Resume or Essay Audit + 60 Min Strategy Call.</p>
-            <button class="btn-ghost" style="width:100%" onclick="openBooking('Starter')">Book</button>
-        </div>
-        <div class="metal-card featured" style="text-align:center;">
-            <div style="position:absolute; top:0; left:0; right:0; height:2px; background:#fff;"></div>
-            <span class="mono" style="color:#fff;">Premium</span>
-            <div style="font-size:2.5rem; font-family:'Playfair Display'; margin:1rem 0;">$199</div>
-            <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:2rem;">Full Essay Drafting, Multiple Revisions, Final Polish.</p>
-            <button class="btn-primary" style="width:100%" onclick="openBooking('Premium')">Select Premium</button>
-        </div>
-        <div class="metal-card" style="text-align:center;">
-            <span class="mono">Unlimited</span>
-            <div style="font-size:2.5rem; font-family:'Playfair Display'; margin:1rem 0;">$599</div>
-            <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:2rem;">Full Cycle Consulting, School List, Priority Support.</p>
-            <button class="btn-ghost" style="width:100%" onclick="openBooking('Unlimited')">Book</button>
-        </div>
+    <div class="price-card featured">
+      <span class="price-tag" style="color:#fff;">Premium</span><div class="price-amount">$199+</div><p>Application Package</p>
+      <ul class="price-feat"><li>Full Essay Drafting</li><li>Multiple Revision Rounds</li><li>Mock Interview Prep</li></ul>
+      <button onclick="openBooking('Premium')" class="price-btn solid">Book Free Consult</button>
     </div>
+    <div class="price-card">
+      <span class="price-tag">Unlimited</span><div class="price-amount">$599+</div><p>Full Cycle Consulting</p>
+      <ul class="price-feat"><li>School List Strategy</li><li>All Application Essays</li><li>Unlimited Support</li></ul>
+      <button onclick="openBooking('Unlimited')" class="price-btn outline">Contact Me</button>
+    </div>
+  </div>
 </section>
 
-<footer style="margin-top:6rem; border-top:1px solid rgba(255,255,255,0.08); padding:4rem 1.5rem; text-align:center;">
-    <p class="mono">© 2026 Andrew Sayegh. Los Angeles, CA.</p>
+<footer>
+  <a href="#" class="footer-logo">Andrew Sayegh</a>
+  <div class="socials"><a href="#">LinkedIn</a><a href="#">Email</a></div>
+  <p class="mono">© 2026 Andrew Sayegh. Los Angeles, CA.</p>
 </footer>
 
-<div class="modal-overlay" id="bookingModal" onclick="if(event.target === this) closeBooking()">
-    <div class="modal">
-        <button onclick="closeBooking()" style="float:right; background:none; border:none; color:#666; font-size:1.2rem; cursor:pointer;">✕</button>
-        <h3 style="font-size:1.8rem; margin-bottom:0.5rem; font-family:'Playfair Display';">Book Strategy Call</h3>
-        <p style="color:var(--text-secondary); margin-bottom:2rem; font-size:0.9rem;">Tell me about your goals. I'll follow up within 48 hours.</p>
-        
-        <input type="text" id="bk-name" class="input-field" placeholder="Full Name">
-        <input type="email" id="bk-email" class="input-field" placeholder="Email Address">
-        
-        <select id="bk-service" class="input-field">
-            <option value="academic">College Admissions / Fellowships</option>
-            <option value="career">Career Strategy / Policy Jobs</option>
-            <option value="general">Other / Not Sure</option>
+<div class="booking-overlay" id="bookingOverlay" onclick="if(event.target === this) closeBooking()">
+  <div class="booking-modal">
+    <div style="padding:2.5rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <h2 style="font-size:1.8rem; font-family:var(--font-serif);">Book Strategy</h2>
+        <button onclick="closeBooking()" style="background:none; border:none; color:#666; font-size:1.5rem; cursor:pointer;">✕</button>
+      </div>
+      <div class="form-group"><label>Name</label><input type="text" id="bk-name"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="bk-email"></div>
+      <div class="form-group"><label>Focus</label>
+        <select id="bk-focus">
+          <option value="academic">College / Fellowships</option>
+          <option value="career">Career / Policy</option>
         </select>
-
-        <select id="bk-tier" class="input-field">
-            <option value="Starter">Starter ($99)</option>
-            <option value="Premium">Premium ($199)</option>
-            <option value="Unlimited">Unlimited ($599)</option>
-            <option value="Unsure">Not sure yet</option>
+      </div>
+      <div class="form-group"><label>Package</label>
+        <select id="bk-tier">
+          <option value="Starter">Starter</option><option value="Premium">Premium</option><option value="Unlimited">Unlimited</option>
         </select>
-        
-        <button class="btn-primary" style="width:100%" onclick="submitBooking()">Submit Request</button>
+      </div>
+      <button class="price-btn solid" style="margin-top:1rem;" onclick="submitBooking()">Submit Request</button>
     </div>
+  </div>
 </div>
 
 <script>
-    // Mobile Menu
-    function toggleMobile() {
-        document.getElementById('mobileMenu').classList.toggle('active');
+function toggleMenu() {
+  document.getElementById('mainMenu').classList.toggle('active');
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Modal Logic
+const modal = document.getElementById('bookingOverlay');
+function openBooking(tier) {
+  modal.classList.add('open');
+  if(tier) document.getElementById('bk-tier').value = tier;
+}
+function closeBooking() { modal.classList.remove('open'); }
+
+// Confetti Engine
+function fireConfetti(type) {
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    const particles = [];
+    const icons = type === 'career' ? ['💸','💼','📈','🚀'] : ['🎓','📜','🏛️','✏️'];
+    for(let i=0; i<60; i++) particles.push({x: window.innerWidth/2, y: window.innerHeight/2, vx:(Math.random()-0.5)*20, vy:(Math.random()-0.5)*20, icon: icons[Math.floor(Math.random()*icons.length)], life:100});
+    function animate() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p => { if(p.life>0){ p.x+=p.vx; p.y+=p.vy; p.vy+=0.5; p.life--; ctx.font='24px sans-serif'; ctx.fillText(p.icon,p.x,p.y); }});
+        if(particles.some(p=>p.life>0)) requestAnimationFrame(animate);
     }
+    animate();
+}
 
-    // Modal
-    const modal = document.getElementById('bookingModal');
-    function openBooking(tier) {
-        modal.classList.add('open');
-        if(tier) {
-            const select = document.getElementById('bk-tier');
-            for(let i=0; i<select.options.length; i++) {
-                if(select.options[i].value === tier) select.selectedIndex = i;
-            }
-        }
-    }
-    function closeBooking() { modal.classList.remove('open'); }
-
-    // ──────────────────────────────────────────
-    // CONFETTI ENGINE (Contextual)
-    // ──────────────────────────────────────────
-    function fireConfetti(type) {
-        const canvas = document.getElementById('confetti-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const particles = [];
-        // Contextual Emojis
-        const academicIcons = ['🎓', '📚'];
-        const careerIcons = ['💵', '💼'];
-        const icons = type === 'career' ? careerIcons : academicIcons;
-
-        // Create explosion
-        for(let i = 0; i < 80; i++) {
-            particles.push({
-                x: window.innerWidth / 2,
-                y: window.innerHeight / 2,
-                vx: (Math.random() - 0.5) * 25,
-                vy: (Math.random() - 0.5) * 25 - 5,
-                icon: icons[Math.floor(Math.random() * icons.length)],
-                size: Math.random() * 20 + 20,
-                rotation: Math.random() * 360,
-                life: 120
-            });
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            let active = false;
-            particles.forEach(p => {
-                if(p.life > 0) {
-                    active = true;
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    p.vy += 0.4; // Gravity
-                    p.life--;
-                    ctx.font = `${p.size}px Arial`;
-                    ctx.fillText(p.icon, p.x, p.y);
-                }
-            });
-            if(active) requestAnimationFrame(animate);
-            else ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-        animate();
-    }
-
-    function submitBooking() {
-        const name = document.getElementById('bk-name').value;
-        const email = document.getElementById('bk-email').value;
-        const service = document.getElementById('bk-service').value; // 'academic' or 'career'
-        const tier = document.getElementById('bk-tier').value;
-
-        if(!name || !email) {
-            alert('Please provide name and email.');
-            return;
-        }
-
-        // 1. Trigger Contextual Confetti
-        fireConfetti(service);
-
-        // 2. Redirect
-        const subject = `Consultation: ${name}`;
-        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AService: ${service}%0D%0APackage: ${tier}`;
-        
-        setTimeout(() => {
-            window.location.href = `mailto:contact@andrewsayegh.com?subject=${subject}&body=${body}`;
-            setTimeout(closeBooking, 1000);
-        }, 1200);
-    }
+function submitBooking() {
+    const name = document.getElementById('bk-name').value;
+    const email = document.getElementById('bk-email').value;
+    const focus = document.getElementById('bk-focus').value;
+    const tier = document.getElementById('bk-tier').value;
+    
+    if(!name || !email) { alert('Please fill in required fields'); return; }
+    
+    fireConfetti(focus);
+    
+    setTimeout(() => {
+        window.location.href = `mailto:contact@andrewsayegh.com?subject=Consultation: ${name}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0AFocus: ${focus}%0D%0APackage: ${tier}`;
+        closeBooking();
+    }, 1000);
+}
 </script>
 </body>
 </html>
