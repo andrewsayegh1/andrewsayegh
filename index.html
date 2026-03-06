@@ -3,412 +3,401 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Andrew Sayegh | Elite Admissions & Policy Strategy</title>
+<title>Andrew Sayegh | Admissions & Career Consulting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 /* ─────────────────────────────────────────────────────────────
-   THE "ONYX & PLATINUM" DESIGN SYSTEM
+   DESIGN SYSTEM: "STATECRAFT" (Onyx / Platinum / Cobalt)
    ───────────────────────────────────────────────────────────── */
 :root {
-  /* Surfaces */
-  --bg-void: #020202;
-  --bg-deep: #080808;
-  --bg-card: rgba(20, 20, 20, 0.4);
-  --bg-glass: rgba(255, 255, 255, 0.03);
+  /* The Void */
+  --bg-void: #030304;
+  --bg-deep: #0a0a0c;
+  --bg-surface: #121214;
   
-  /* Text & Accents */
-  --text-primary: #f2f2f2;
-  --text-secondary: #8a8a8a;
-  --text-muted: #525252;
-  --accent-gold: #D4AF37; /* Subtle luxe touch */
-  --accent-platinum: #e5e7eb;
+  /* The Metals */
+  --metal-silver: #e2e8f0;
+  --metal-steel: #94a3b8;
+  --metal-dim: #475569;
   
-  /* Borders & Depth */
-  --border-light: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(255, 255, 255, 0.25);
-  --shadow-depth: 0 20px 40px -10px rgba(0,0,0,0.8);
+  /* The Accent: COBALT SIGNAL */
+  --accent-cobalt: #2563eb;       /* Primary Action */
+  --accent-cobalt-dim: #1e40af;   /* Depth */
+  --accent-cobalt-glow: rgba(37, 99, 235, 0.4);
+  
+  /* Borders & Glass */
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.15);
+  --glass-surface: rgba(20, 20, 25, 0.6);
+  
+  /* Typography */
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
   
   /* Physics */
-  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.1); /* Bouncy */
-  --ease-lux: cubic-bezier(0.2, 0, 0, 1); /* Smooth & Heavy */
+  --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  --ease-smooth: cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* Base Reset & Typography */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; font-size: 16px; background: var(--bg-void); height: 100%; }
 body {
-  color: var(--text-primary); font-family: 'Inter', sans-serif;
+  color: var(--metal-silver); font-family: var(--font-sans);
   line-height: 1.6; overflow-x: hidden; min-height: 100%;
-  padding-bottom: 120px; /* Space for bottom nav */
+  padding-bottom: 140px; /* Dock Space */
+  background-image: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.08) 0%, transparent 60%);
 }
 
 /* ─────────────────────────────────────────────────────────────
-   ATMOSPHERE & DEPTH (The "Expensive" Feel)
+   VISUAL FX LAYER
    ───────────────────────────────────────────────────────────── */
-/* 1. Static Grain (Texture) */
-.noise-layer {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.04;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+/* Film Grain */
+.fx-grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.04;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* 2. Living Light (Gradients) */
-.ambient-mesh {
-  position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: 
-    radial-gradient(circle at 15% 50%, rgba(50, 50, 60, 0.15), transparent 40%),
-    radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.03), transparent 40%); /* Gold hint */
-  animation: breathe 10s ease-in-out infinite alternate;
+/* Depth Mesh */
+.fx-mesh {
+  position: fixed; top: 20%; left: -20%; width: 60vw; height: 60vh;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.04), transparent 70%);
+  filter: blur(80px); z-index: -1; animation: float 20s infinite alternate;
 }
-@keyframes breathe { 0% { opacity: 0.6; transform: scale(1); } 100% { opacity: 1; transform: scale(1.1); } }
+@keyframes float { 0% { transform: translate(0,0); } 100% { transform: translate(10%, 10%); } }
 
-/* 3. Typography Styles */
-h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 400; color: var(--text-primary); letter-spacing: -0.02em; }
-.mono-label { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); }
-.gradient-text {
-  background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
+/* Typography */
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.02em; color: #fff; }
+.mono { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--metal-dim); }
 
 /* ─────────────────────────────────────────────────────────────
-   COMPONENTS: CARDS & BUTTONS
+   COMPONENTS
    ───────────────────────────────────────────────────────────── */
-/* The Glass Card */
-.glass-card {
-  background: linear-gradient(180deg, rgba(30,30,30,0.6) 0%, rgba(10,10,10,0.4) 100%);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-light);
-  border-radius: 16px; padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+/* The Card (Glass + Cobalt border on hover) */
+.card {
+  background: var(--glass-surface);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px; padding: 2.5rem;
   position: relative; overflow: hidden;
-  transition: transform 0.4s var(--ease-lux), border-color 0.4s;
+  transition: transform 0.4s var(--ease-smooth), border-color 0.4s;
 }
-/* Spotlight Glow Effect (JS Driven) */
-.glass-card::after {
+.card::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.06), transparent 40%);
+  background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.05), transparent 40%);
   opacity: 0; transition: opacity 0.3s;
 }
-.glass-card:hover::after { opacity: 1; }
-.glass-card:hover { transform: translateY(-4px); border-color: var(--border-glow); }
+.card:hover::after { opacity: 1; }
+.card:hover { transform: translateY(-4px); border-color: rgba(37, 99, 235, 0.5); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5); }
 
 /* Buttons */
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
-  padding: 1rem 2rem; border-radius: 8px; font-weight: 500; text-decoration: none;
-  transition: all 0.3s var(--ease-spring); cursor: pointer; border: none; font-family: 'Inter', sans-serif;
+  padding: 1rem 2rem; border-radius: 6px; font-weight: 500; text-decoration: none;
+  transition: all 0.3s var(--ease-elastic); cursor: pointer; border: none; font-family: var(--font-sans); font-size: 0.9rem;
 }
-.btn:active { transform: scale(0.96); }
 .btn-primary {
-  background: var(--text-primary); color: #000;
-  box-shadow: 0 0 20px rgba(255,255,255,0.1);
+  background: var(--accent-cobalt); color: #fff;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 10px 20px -5px rgba(37, 99, 235, 0.4);
 }
-.btn-primary:hover { box-shadow: 0 0 30px rgba(255,255,255,0.3); }
-.btn-outline {
-  background: transparent; border: 1px solid var(--border-light); color: var(--text-primary);
+.btn-primary:hover { background: #3b82f6; box-shadow: 0 0 0 1px rgba(255,255,255,0.2), 0 15px 30px -5px rgba(37, 99, 235, 0.5); transform: translateY(-2px); }
+
+.btn-ghost {
+  background: transparent; border: 1px solid var(--glass-border); color: var(--metal-silver);
 }
-.btn-outline:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.05); }
+.btn-ghost:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.03); }
 
 /* ─────────────────────────────────────────────────────────────
-   NAVIGATION: THE COMMAND DECK (Mobile Optimized)
+   MOBILE COMMAND DECK (Bottom Nav)
    ───────────────────────────────────────────────────────────── */
-.command-deck-wrapper {
-  position: fixed; bottom: 24px; left: 0; right: 0; z-index: 1000;
+.deck-wrapper {
+  position: fixed; bottom: 30px; left: 0; right: 0; z-index: 1000;
   display: flex; justify-content: center; pointer-events: none;
 }
-.command-deck {
+.deck {
   pointer-events: auto;
-  background: rgba(15, 15, 15, 0.85); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--border-light);
+  background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
   border-radius: 100px; padding: 6px;
   display: flex; align-items: center; gap: 4px;
-  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8);
-  transition: all 0.4s var(--ease-lux);
+  box-shadow: 0 20px 50px -10px rgba(0,0,0,0.9);
+  transform: translateY(0); transition: transform 0.4s var(--ease-elastic);
 }
-.deck-item {
-  color: var(--text-secondary); text-decoration: none;
-  padding: 10px 16px; border-radius: 100px; font-size: 0.9rem; font-weight: 500;
+.deck-link {
+  color: var(--metal-steel); text-decoration: none;
+  padding: 12px 20px; border-radius: 100px; font-size: 0.9rem; font-weight: 500;
   transition: all 0.3s;
 }
-.deck-item:hover, .deck-item.active { color: var(--text-primary); background: rgba(255,255,255,0.08); }
-.deck-cta {
-  background: var(--text-primary); color: #000; padding: 10px 20px;
-  border-radius: 100px; font-weight: 600; text-decoration: none; margin-left: 4px;
+.deck-link:hover, .deck-link.active { color: #fff; background: rgba(255,255,255,0.08); }
+.deck-action {
+  background: var(--accent-cobalt); color: #fff; padding: 12px 24px;
+  border-radius: 100px; font-weight: 600; text-decoration: none; margin-left: 6px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
-.deck-cta:hover { transform: scale(1.05); }
 
 /* ─────────────────────────────────────────────────────────────
-   HERO SECTION
+   HERO
    ───────────────────────────────────────────────────────────── */
 .hero {
   min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
   text-align: center; padding: 2rem; position: relative;
 }
-.hero-tag {
-  display: inline-block; padding: 6px 16px; border-radius: 100px;
-  border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);
+.status-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 100px;
+  border: 1px solid var(--glass-border); background: rgba(255,255,255,0.03);
   margin-bottom: 2rem; opacity: 0; animation: fadeUp 1s 0.2s forwards;
 }
+.status-dot { width: 6px; height: 6px; background: var(--accent-cobalt); border-radius: 50%; box-shadow: 0 0 10px var(--accent-cobalt); }
+
 .hero h1 {
-  font-size: clamp(3rem, 10vw, 7rem); line-height: 0.95; margin-bottom: 1.5rem;
+  font-size: clamp(3.2rem, 9vw, 6.5rem); line-height: 1; margin-bottom: 1.5rem;
   opacity: 0; animation: fadeUp 1s 0.4s forwards;
 }
+.hero h1 span { font-style: italic; color: var(--metal-steel); font-family: var(--font-serif); }
+
 .hero p {
-  font-size: 1.2rem; color: var(--text-secondary); max-width: 500px; margin: 0 auto 3rem;
+  font-size: 1.15rem; color: var(--metal-steel); max-width: 580px; margin: 0 auto 3rem;
   opacity: 0; animation: fadeUp 1s 0.6s forwards;
 }
-.hero-stats {
-  display: flex; gap: 2rem; opacity: 0; animation: fadeUp 1s 0.8s forwards;
+
+/* Ticker */
+.ticker-wrap {
+  width: 100%; border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);
+  background: var(--bg-deep); padding: 1rem 0; overflow: hidden; margin-top: 4rem;
 }
-.stat-box { text-align: center; }
-.stat-box strong { display: block; font-size: 1.5rem; color: var(--text-primary); font-family: 'Playfair Display'; }
-.stat-box span { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.ticker { display: flex; animation: scroll 30s linear infinite; gap: 4rem; }
+.ticker-item {
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--metal-dim);
+  text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap;
+  display: flex; align-items: center; gap: 10px;
+}
+.ticker-item strong { color: var(--metal-silver); }
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ─────────────────────────────────────────────────────────────
-   SECTIONS & LAYOUT
+   SECTIONS
    ───────────────────────────────────────────────────────────── */
-.section { padding: 6rem 1.5rem; max-width: 1100px; margin: 0 auto; }
-.section-head { margin-bottom: 3rem; }
+.section { padding: 8rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+.section-head { margin-bottom: 4rem; }
+.section-head h2 { font-size: 2.5rem; margin-top: 0.5rem; }
 
-/* Scrolling Service Cards (Horizontal Snap on Mobile) */
-.snap-scroll {
-  display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 2rem;
-  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
-  margin: 0 -1.5rem; padding: 0 1.5rem 2rem; /* Bleed to edge */
-}
-.snap-card {
-  min-width: 280px; scroll-snap-align: center;
-  display: flex; flex-direction: column; justify-content: space-between;
-  height: 320px;
+/* Grid Systems */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+
+/* Service Icon */
+.svc-icon {
+  width: 40px; height: 40px; background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border); border-radius: 8px;
+  display: grid; place-items: center; margin-bottom: 1.5rem;
+  color: var(--accent-cobalt);
 }
 
-/* Pricing Grid */
-.pricing-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
+/* Pricing Specifics */
+.price-tag { font-family: var(--font-mono); color: var(--accent-cobalt); font-size: 0.8rem; margin-bottom: 0.5rem; display: block; }
+.price-amt { font-family: var(--font-serif); font-size: 3rem; color: #fff; line-height: 1; margin-bottom: 0.5rem; }
+.feat-list { list-style: none; margin: 2rem 0; padding: 0; }
+.feat-list li { display: flex; align-items: center; gap: 10px; color: var(--metal-steel); font-size: 0.9rem; margin-bottom: 0.8rem; }
+.feat-list li::before { content: '•'; color: var(--accent-cobalt); font-size: 1.2rem; }
 
 /* ─────────────────────────────────────────────────────────────
-   THE BOOKING CONCIERGE (Improved)
+   BOOKING CONCIERGE (Modal)
    ───────────────────────────────────────────────────────────── */
 .concierge-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px);
-  z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.4s;
-  display: flex; align-items: flex-end; /* Bottom sheet on mobile */
+  position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(12px);
+  z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  display: flex; align-items: center; justify-content: center;
 }
-@media(min-width: 768px) { .concierge-overlay { align-items: center; justify-content: center; } }
-
 .concierge-overlay.active { opacity: 1; pointer-events: all; }
 
 .concierge-modal {
-  width: 100%; background: #0c0c0c; border-top: 1px solid var(--border-light);
-  border-radius: 24px 24px 0 0; padding: 2rem;
-  transform: translateY(100%); transition: transform 0.4s var(--ease-spring);
-  max-width: 600px; max-height: 90vh; overflow-y: auto;
+  width: 100%; max-width: 500px; background: #0c0c0e;
+  border: 1px solid var(--glass-border); border-radius: 16px; padding: 2.5rem;
+  transform: scale(0.95) translateY(20px); transition: transform 0.4s var(--ease-elastic);
+  position: relative; box-shadow: 0 40px 80px -20px rgba(0,0,0,0.8);
 }
-@media(min-width: 768px) { 
-  .concierge-modal { border-radius: 24px; border: 1px solid var(--border-light); transform: translateY(20px) scale(0.95); } 
+.concierge-overlay.active .concierge-modal { transform: scale(1) translateY(0); }
+
+/* Form Elements */
+.form-group { margin-bottom: 1.5rem; }
+.form-label { display: block; font-family: var(--font-mono); font-size: 0.7rem; color: var(--metal-steel); margin-bottom: 0.6rem; letter-spacing:0.05em; text-transform:uppercase; }
+.form-control {
+  width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+  padding: 1rem; color: #fff; border-radius: 6px; font-family: var(--font-sans); outline: none;
+  transition: 0.3s; font-size: 1rem;
 }
-.concierge-overlay.active .concierge-modal { transform: translateY(0) scale(1); }
+.form-control:focus { border-color: var(--accent-cobalt); background: rgba(37, 99, 235, 0.05); }
+select.form-control { appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%232563eb%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 0.8rem; }
 
-/* Progress Bar */
-.progress-track { width: 100%; height: 2px; background: var(--bg-card); margin-bottom: 2rem; position: relative; }
-.progress-fill { height: 100%; background: var(--text-primary); width: 33%; transition: width 0.3s; }
-
-/* Form Steps */
-.step-container { display: none; animation: slideIn 0.4s var(--ease-lux); }
-.step-container.active { display: block; }
-@keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-
-.form-label { display: block; font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
-.form-input, .form-select {
-  width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border-light);
-  padding: 1rem; color: var(--text-primary); border-radius: 8px; font-size: 1rem;
-  margin-bottom: 1.5rem; outline: none; transition: border-color 0.3s;
-  font-family: 'Inter', sans-serif;
-}
-.form-input:focus, .form-select:focus { border-color: var(--text-primary); background: rgba(255,255,255,0.08); }
-
-/* Custom Checkbox Cards */
-.selection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
-.selection-card {
-  border: 1px solid var(--border-light); padding: 1rem; border-radius: 8px; cursor: pointer;
-  text-align: center; transition: 0.2s;
-}
-.selection-card.selected { background: var(--text-primary); color: #000; border-color: var(--text-primary); }
-
-/* Animations */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Footer */
-footer { text-align: center; padding: 4rem 2rem; border-top: 1px solid var(--border-light); margin-top: 4rem; }
 </style>
 </head>
 <body>
 
-<div class="noise-layer"></div>
-<div class="ambient-mesh"></div>
+<div class="fx-grain"></div>
+<div class="fx-mesh"></div>
 
-<div class="command-deck-wrapper">
-  <nav class="command-deck">
-    <a href="#home" class="deck-item active">Home</a>
-    <a href="#services" class="deck-item">Services</a>
-    <a href="#results" class="deck-item">Results</a>
-    <a href="#" onclick="openConcierge()" class="deck-cta">Inquire</a>
+<div class="deck-wrapper">
+  <nav class="deck">
+    <a href="#home" class="deck-link active">Home</a>
+    <a href="#services" class="deck-link">Services</a>
+    <a href="#pricing" class="deck-link">Plans</a>
+    <a href="#" onclick="openConcierge()" class="deck-action">Book</a>
   </nav>
 </div>
 
 <section id="home" class="hero">
-  <div class="hero-tag">
-    <span style="color:var(--accent-gold);">●</span> Accepting Spring 2026
+  <div class="status-pill">
+    <span class="status-dot"></span>
+    <span class="mono" style="color:#fff;">Accepting Spring 2026</span>
   </div>
-  <h1>Strategist.<br><span style="font-style:italic; color:var(--text-secondary);">Insider.</span></h1>
-  <p>Andrew Sayegh helps transfers and professionals engineer their way into the Ivy League and Capitol Hill.</p>
   
-  <div class="hero-stats">
-    <div class="stat-box"><strong>100%</strong><span>First Gen</span></div>
-    <div class="stat-box"><strong>5+</strong><span>Yrs Policy</span></div>
-    <div class="stat-box"><strong>Ivy</strong><span>Admissions</span></div>
+  <h1>Your unfair advantage<br><span>for getting in.</span></h1>
+  
+  <p>From community college to the Ivy League and Capitol Hill—I built the roadmap so you don't have to.</p>
+  
+  <div style="display:flex; gap:1rem; opacity:0; animation:fadeUp 1s 0.8s forwards;">
+    <button onclick="openConcierge()" class="btn btn-primary">Start Strategy</button>
+    <a href="#results" class="btn btn-ghost">View Track Record</a>
   </div>
 </section>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item"><strong>UCLA</strong> ALUM</div>
+    <div class="ticker-item"><strong>COLUMBIA</strong> ADMIT</div>
+    <div class="ticker-item"><strong>CONGRESS</strong> INTERN</div>
+    <div class="ticker-item"><strong>STATE DEPT</strong> FELLOW</div>
+    <div class="ticker-item"><strong>RANGEL</strong> FINALIST</div>
+    <div class="ticker-item"><strong>FIRST-GEN</strong> TRANSFER</div>
+    <div class="ticker-item"><strong>UCLA</strong> ALUM</div>
+    <div class="ticker-item"><strong>COLUMBIA</strong> ADMIT</div>
+  </div>
+</div>
 
 <section id="services" class="section">
   <div class="section-head">
-    <span class="mono-label">Capabilities</span>
-    <h2>Strategic Intervention</h2>
+    <span class="mono">Expertise</span>
+    <h2>Strategic Consulting</h2>
   </div>
   
-  <div class="snap-scroll" id="card-container">
-    <div class="glass-card snap-card" onmousemove="glow(event)">
-      <div>
-        <div class="mono-label" style="margin-bottom:1rem;">01 / Academic</div>
-        <h3>Transfer Architecture</h3>
-        <p style="margin-top:1rem; color:var(--text-secondary);">
-          We rebuild your application narrative from the ground up. Targeting Columbia GS, UCLA, and Top 20 transfers.
-        </p>
-      </div>
-      <div style="margin-top:1rem; border-top:1px solid var(--border-light); padding-top:1rem; font-size:0.85rem;">
-        Includes: Transcript Audit, Essay Drafting
-      </div>
+  <div class="grid-3">
+    <div class="card" onmousemove="glow(event)">
+      <div class="svc-icon">🎓</div>
+      <h3>College Admissions</h3>
+      <p style="margin-top:1rem; color:var(--metal-steel);">Built for transfer students and first-gen applicants targeting selective schools. School lists, fit analysis, and essays that sound like you.</p>
     </div>
     
-    <div class="glass-card snap-card" onmousemove="glow(event)">
-      <div>
-        <div class="mono-label" style="margin-bottom:1rem;">02 / Federal</div>
-        <h3>Fellowship Advising</h3>
-        <p style="margin-top:1rem; color:var(--text-secondary);">
-          Winning strategies for Rangel, Pickering, and Fulbright. I know the rubrics because I've lived them.
-        </p>
-      </div>
-      <div style="margin-top:1rem; border-top:1px solid var(--border-light); padding-top:1rem; font-size:0.85rem;">
-        Includes: Narrative Arc, Mock Interviews
-      </div>
+    <div class="card" onmousemove="glow(event)">
+      <div class="svc-icon">🏛️</div>
+      <h3>Fellowship Advising</h3>
+      <p style="margin-top:1rem; color:var(--metal-steel);">Fulbright, Rangel, Boren, Gilman. I know these applications from the inside. We focus on the narrative arc reviewers look for.</p>
     </div>
     
-    <div class="glass-card snap-card" onmousemove="glow(event)">
-      <div>
-        <div class="mono-label" style="margin-bottom:1rem;">03 / Career</div>
-        <h3>Policy Pivot</h3>
-        <p style="margin-top:1rem; color:var(--text-secondary);">
-          Translate your background for federal hiring managers. USAJobs optimization and network mapping.
-        </p>
-      </div>
-      <div style="margin-top:1rem; border-top:1px solid var(--border-light); padding-top:1rem; font-size:0.85rem;">
-        Includes: Resume Translation, Cover Letters
-      </div>
+    <div class="card" onmousemove="glow(event)">
+      <div class="svc-icon">💼</div>
+      <h3>Career & Policy</h3>
+      <p style="margin-top:1rem; color:var(--metal-steel);">For those pivoting to policy, non-profits, or federal roles. We translate your background into a compelling professional case.</p>
     </div>
   </div>
 </section>
 
-<section id="results" class="section">
+<section id="pricing" class="section">
   <div class="section-head">
-    <span class="mono-label">Investment</span>
-    <h2>Transparent Pricing</h2>
+    <span class="mono">Investment</span>
+    <h2>Transparent Tiers</h2>
   </div>
   
-  <div class="pricing-grid">
-    <div class="glass-card" onmousemove="glow(event)">
-      <h3 style="font-size:1.5rem;">Discovery</h3>
-      <div style="font-size:2.5rem; margin:0.5rem 0;">$149</div>
-      <p style="color:var(--text-secondary); margin-bottom:1.5rem;">One-time strategy session to audit your profile and build a roadmap.</p>
-      <button class="btn btn-outline" style="width:100%" onclick="openConcierge('Discovery')">Select</button>
+  <div class="grid-3">
+    <div class="card" onmousemove="glow(event)">
+      <span class="price-tag">STARTER</span>
+      <div class="price-amt">$99+</div>
+      <p style="color:var(--metal-steel); font-size:0.9rem;">Perfect for a quick audit.</p>
+      <ul class="feat-list">
+        <li>Resume or Essay Audit</li>
+        <li>60-Min Strategy Call</li>
+        <li>Action Plan</li>
+      </ul>
+      <button onclick="openConcierge('Starter')" class="btn btn-ghost" style="width:100%">Select</button>
     </div>
     
-    <div class="glass-card" style="border-color:var(--accent-gold);" onmousemove="glow(event)">
-      <div class="mono-label" style="color:var(--accent-gold);">Most Popular</div>
-      <h3 style="font-size:1.5rem; margin-top:0.5rem;">Sprint</h3>
-      <div style="font-size:2.5rem; margin:0.5rem 0;">$399</div>
-      <p style="color:var(--text-secondary); margin-bottom:1.5rem;">3-Session package including essay editing and interview prep.</p>
-      <button class="btn btn-primary" style="width:100%" onclick="openConcierge('Sprint')">Select</button>
+    <div class="card" style="border-color: rgba(37,99,235,0.3);" onmousemove="glow(event)">
+      <span class="price-tag">PREMIUM</span>
+      <div class="price-amt">$199+</div>
+      <p style="color:var(--metal-steel); font-size:0.9rem;">Comprehensive application help.</p>
+      <ul class="feat-list">
+        <li>Full Essay Drafting</li>
+        <li>Multiple Revision Rounds</li>
+        <li>Mock Interview Prep</li>
+      </ul>
+      <button onclick="openConcierge('Premium')" class="btn btn-primary" style="width:100%">Select</button>
+    </div>
+    
+    <div class="card" onmousemove="glow(event)">
+      <span class="price-tag">UNLIMITED</span>
+      <div class="price-amt">$599+</div>
+      <p style="color:var(--metal-steel); font-size:0.9rem;">Full cycle partnership.</p>
+      <ul class="feat-list">
+        <li>School List Strategy</li>
+        <li>All Application Essays</li>
+        <li>Unlimited Support</li>
+      </ul>
+      <button onclick="openConcierge('Unlimited')" class="btn btn-ghost" style="width:100%">Inquire</button>
     </div>
   </div>
 </section>
 
-<footer>
-  <h2 style="font-size:1.5rem;">Andrew Sayegh</h2>
-  <div style="margin-top:1rem; display:flex; gap:1.5rem; justify-content:center;">
-    <a href="#" style="color:var(--text-secondary);">LinkedIn</a>
-    <a href="#" style="color:var(--text-secondary);">Email</a>
-  </div>
-  <p style="margin-top:2rem; font-size:0.75rem; color:var(--text-muted);">© 2026. Los Angeles / Washington D.C.</p>
+<footer style="text-align:center; padding:4rem; border-top:1px solid var(--glass-border); color:var(--metal-dim);">
+  <p class="mono">© 2026 ANDREW SAYEGH. LOS ANGELES / D.C.</p>
 </footer>
 
-<div class="concierge-overlay" id="concierge">
+<div class="concierge-overlay" id="modal">
   <div class="concierge-modal">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-      <h3>Inquiry Concierge</h3>
-      <button onclick="closeConcierge()" style="background:none; border:none; color:var(--text-secondary); font-size:1.5rem; cursor:pointer;">&times;</button>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+      <h3>Secure Slot</h3>
+      <button onclick="closeConcierge()" style="background:none; border:none; color:var(--metal-dim); font-size:1.5rem; cursor:pointer;">&times;</button>
     </div>
     
-    <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
-    
-    <form id="bookingForm" onsubmit="submitForm(event)">
-      <div class="step-container active" id="step1">
-        <label class="form-label">What is your primary goal?</label>
-        <div class="selection-grid">
-          <div class="selection-card" onclick="selectOption(this, 'College Transfer')">College Transfer</div>
-          <div class="selection-card" onclick="selectOption(this, 'Grad School')">Grad School</div>
-          <div class="selection-card" onclick="selectOption(this, 'Fellowship')">Fellowship</div>
-          <div class="selection-card" onclick="selectOption(this, 'Career Pivot')">Career Pivot</div>
-        </div>
-        <input type="hidden" id="goal" name="goal">
-        <button type="button" class="btn btn-primary" style="width:100%" onclick="nextStep(2)">Next: Details</button>
-      </div>
-      
-      <div class="step-container" id="step2">
-        <label class="form-label">Preferred Engagement</label>
-        <select class="form-select" id="package" onchange="autoFillCheck()">
-          <option value="" disabled selected>Select a Tier...</option>
-          <option value="Discovery">Discovery Call ($149)</option>
-          <option value="Sprint">Sprint Package ($399)</option>
-          <option value="Custom">Custom / Retainer</option>
-        </select>
-        <div style="display:flex; gap:1rem; margin-top:1rem;">
-          <button type="button" class="btn btn-outline" style="width:50%" onclick="nextStep(1)">Back</button>
-          <button type="button" class="btn btn-primary" style="width:50%" onclick="nextStep(3)">Next: Contact</button>
-        </div>
-      </div>
-      
-      <div class="step-container" id="step3">
+    <form onsubmit="submitForm(event)">
+      <div class="form-group">
         <label class="form-label">Name</label>
-        <input type="text" class="form-input" placeholder="Your Name" autocomplete="name" required id="name">
-        
+        <input type="text" class="form-control" required placeholder="Full Name">
+      </div>
+      
+      <div class="form-group">
         <label class="form-label">Email</label>
-        <input type="email" class="form-input" placeholder="email@example.com" autocomplete="email" required id="email">
-        
-        <div style="display:flex; gap:1rem; margin-top:1rem;">
-          <button type="button" class="btn btn-outline" style="width:50%" onclick="nextStep(2)">Back</button>
-          <button type="submit" class="btn btn-primary" style="width:50%">Confirm Request</button>
+        <input type="email" class="form-control" required placeholder="email@example.com">
+      </div>
+      
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label">Focus Area</label>
+          <select class="form-control">
+            <option>College Admissions</option>
+            <option>Fellowships</option>
+            <option>Career Strategy</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tier</label>
+          <select class="form-control" id="tier-select">
+            <option value="Starter">Starter ($99)</option>
+            <option value="Premium">Premium ($199)</option>
+            <option value="Unlimited">Unlimited ($599)</option>
+          </select>
         </div>
       </div>
+      
+      <button type="submit" class="btn btn-primary" style="width:100%; margin-top:1rem;">Confirm Request</button>
     </form>
   </div>
 </div>
 
 <script>
-  // 1. Mouse Tracking Glow Effect
+  // Mouse Glow Logic
   function glow(e) {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -418,44 +407,19 @@ footer { text-align: center; padding: 4rem 2rem; border-top: 1px solid var(--bor
     card.style.setProperty('--y', `${y}px`);
   }
 
-  // 2. Concierge Logic
-  let currentStep = 1;
-  const overlay = document.getElementById('concierge');
+  // Concierge Logic
+  const modal = document.getElementById('modal');
+  const tierSelect = document.getElementById('tier-select');
   
   function openConcierge(tier) {
-    overlay.classList.add('active');
+    modal.classList.add('active');
     if(tier) {
-      document.getElementById('package').value = tier;
+      tierSelect.value = tier;
     }
   }
   
   function closeConcierge() {
-    overlay.classList.remove('active');
-    setTimeout(() => {
-       currentStep = 1;
-       showStep(1);
-    }, 400); // Reset after animation
-  }
-  
-  function nextStep(step) {
-    currentStep = step;
-    showStep(step);
-    // Update Progress
-    const progress = document.getElementById('progress');
-    if(step === 1) progress.style.width = '33%';
-    if(step === 2) progress.style.width = '66%';
-    if(step === 3) progress.style.width = '100%';
-  }
-  
-  function showStep(step) {
-    document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
-    document.getElementById(`step${step}`).classList.add('active');
-  }
-  
-  function selectOption(el, value) {
-    document.querySelectorAll('.selection-card').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-    document.getElementById('goal').value = value;
+    modal.classList.remove('active');
   }
   
   function submitForm(e) {
@@ -463,27 +427,30 @@ footer { text-align: center; padding: 4rem 2rem; border-top: 1px solid var(--bor
     const btn = e.target.querySelector('button[type="submit"]');
     const originalText = btn.innerText;
     
-    btn.innerText = "Securing Slot...";
+    btn.innerText = "Processing...";
+    btn.style.opacity = "0.8";
     
     setTimeout(() => {
-      btn.innerText = "Request Sent";
-      btn.style.background = "#fff";
-      btn.style.color = "#000";
+      btn.innerText = "Request Sent ✓";
+      btn.style.backgroundColor = "#22c55e"; // Success Green
+      btn.style.borderColor = "#22c55e";
+      
       setTimeout(() => {
         closeConcierge();
-        // Reset form
-        e.target.reset();
-        document.querySelectorAll('.selection-card').forEach(c => c.classList.remove('selected'));
-        btn.innerText = originalText;
-        btn.style.background = "";
-        btn.style.color = "";
+        setTimeout(() => {
+           btn.innerText = originalText;
+           btn.style.backgroundColor = "";
+           btn.style.borderColor = "";
+           btn.style.opacity = "1";
+           e.target.reset();
+        }, 500);
       }, 1000);
-    }, 1500);
+    }, 1200);
   }
   
-  // Close modal on outside click
-  overlay.addEventListener('click', (e) => {
-    if(e.target === overlay) closeConcierge();
+  // Close on outside click
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) closeConcierge();
   });
 </script>
 </body>
