@@ -3,598 +3,571 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andrew Sayegh | Strategic Admissions</title>
-<meta name="description" content="Precision consulting for competitive transfer admissions, national fellowships, and policy careers.">
-
+<title>Andrew Sayegh | Flagship Admissions Strategy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Manrope:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ──────────────────────────────────────────
-   ENGINEERING SPECS & VARS
+   TITANIUM PALETTE — NO GOLD, PURE AUTHORITY
    ────────────────────────────────────────── */
 :root {
-  /* Core Physics */
-  --bg-deep: #050507;
-  --bg-panel: #0a0a0e;
-  --bg-glass: rgba(10, 10, 14, 0.7);
+  /* Depths */
+  --bg-depth: #030304;      /* Deep Space Black */
+  --bg-surface: #0a0a0c;    /* Dark Steel */
+  --bg-card: #121216;       /* Gunmetal */
   
-  /* Alloys */
-  --alloy-gold: #D4AF37;
-  --alloy-champagne: #F3E5AB;
-  --alloy-bronze: #8C7853;
-  --alloy-silver: #A8A9AD;
-  --alloy-carbon: #1A1A1D;
-
-  /* UI Tokens */
-  --text-primary: #EAEAEA;
-  --text-muted: #888890;
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-active: rgba(212, 175, 55, 0.3);
+  /* Metals */
+  --metal-silver: #e2e2e6;  /* Polished Apple Silver */
+  --metal-steel: #868696;   /* Industrial Steel */
+  --metal-titanium: #aeb4b9; /* Matte Titanium */
+  --metal-chrome: #ffffff;   /* Highlighting */
+  
+  /* Borders & Accents */
+  --glass-border: rgba(226, 226, 230, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.08);
+  --glass-blur: 20px;
+  
+  /* Text */
+  --text-primary: #f5f5f7;  /* Apple White */
+  --text-secondary: #86868b; /* Apple Gray */
+  --text-tertiary: #525257;
+  
+  /* Brand Accents (Cool Blue/Steel instead of Gold) */
+  --accent-core: #cbd5e1;   /* Cold Steel */
+  --accent-glow: rgba(203, 213, 225, 0.3);
   
   /* Typography */
   --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Manrope', sans-serif;
-  --font-code: 'JetBrains Mono', monospace;
-
-  /* Animation Physics */
-  --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  --ease-smooth: cubic-bezier(0.23, 1, 0.32, 1);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  
+  /* Motion */
+  --ease-apple: cubic-bezier(0.2, 0.8, 0.2, 1); /* Smooth "iOS" feel */
 }
 
-/* Reset & Base */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-html { scroll-behavior: smooth; font-size: 16px; cursor: default; }
+/* Global Reset */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-  background-color: var(--bg-deep);
+  background-color: var(--bg-depth);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  line-height: 1.6;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  position: relative;
+  /* Subtle radial spotlight (Tesla Cybertruck vibe) */
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.07) 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg-depth) 0%, var(--bg-surface) 100%);
 }
 
-/* Global Noise overlay for texture */
-.noise-overlay {
-  position: fixed; inset: 0; pointer-events: none; z-index: 9000;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+h1, h2, h3 { color: var(--text-primary); letter-spacing: -0.02em; }
+h1 { font-family: var(--font-serif); }
+h2, h3 { font-family: var(--font-sans); font-weight: 600; }
+p { color: var(--text-secondary); font-size: 1.05rem; font-weight: 400; }
+.mono { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--metal-titanium); }
+
+/* Brushed Metal Texture Overlay */
+body::after {
+  content: "";
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.6; mix-blend-mode: overlay;
 }
-
-/* Selection Style */
-::selection { background: var(--alloy-gold); color: var(--bg-deep); }
-
-/* Typography Utility */
-h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; color: var(--text-primary); }
-.mono-tag { font-family: var(--font-code); font-size: 0.75rem; letter-spacing: 0.05em; color: var(--alloy-gold); text-transform: uppercase; }
 
 /* ──────────────────────────────────────────
-   NAVBAR (Glassmorphism)
+   GLASSMORPHISM & COMPONENTS
+   ────────────────────────────────────────── */
+
+/* The "Apple" Button */
+.btn-primary {
+  background: linear-gradient(180deg, #ffffff 0%, #e2e2e6 100%);
+  color: #000;
+  padding: 1rem 2.5rem;
+  border-radius: 999px; /* Pill shape */
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid #fff;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-apple);
+  position: relative; overflow: hidden;
+  box-shadow: 0 4px 24px rgba(255,255,255,0.15);
+}
+.btn-primary:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 40px rgba(255,255,255,0.3);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+  padding: 1rem 2.5rem;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-apple);
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--text-primary);
+}
+
+/* Glass Card */
+.glass-card {
+  background: rgba(20, 20, 25, 0.4);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-top: 1px solid var(--glass-highlight); /* Top light catch */
+  border-radius: 24px; /* Meta-style roundedness */
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+  transition: transform 0.4s var(--ease-apple), border-color 0.4s;
+}
+.glass-card:hover {
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-4px);
+}
+
+/* ──────────────────────────────────────────
+   NAVIGATION
    ────────────────────────────────────────── */
 nav {
   position: fixed; top: 0; width: 100%; z-index: 1000;
-  padding: 1.5rem 2.5rem;
+  padding: 1.2rem 2.5rem;
   display: flex; justify-content: space-between; align-items: center;
-  transition: all 0.4s var(--ease-smooth);
+  transition: all 0.4s var(--ease-apple);
 }
-
 nav.scrolled {
-  background: var(--bg-glass);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-subtle);
-  padding: 1rem 2.5rem;
+  background: rgba(3, 3, 4, 0.7);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 0.8rem 2.5rem;
 }
 
-.brand-lockup {
+.nav-brand {
   display: flex; align-items: center; gap: 12px;
-  cursor: pointer; user-select: none;
+  font-weight: 600; font-size: 1.1rem; color: var(--text-primary);
+  text-decoration: none; cursor: pointer; user-select: none;
 }
-/* The Monogram Logo */
-.brand-mark svg { width: 32px; height: 32px; fill: var(--alloy-gold); transition: transform 0.3s var(--ease-elastic); }
-.brand-lockup:hover .brand-mark svg { transform: rotate(90deg); }
-
-.brand-text {
-  font-family: var(--font-serif); font-size: 1.1rem; letter-spacing: -0.01em;
-  background: linear-gradient(90deg, #fff, var(--alloy-silver));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+/* Metallic Logo */
+.logo-mark {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, #e2e2e6 0%, #868696 100%);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); color: #000; font-weight: 700; font-style: italic;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 15px rgba(255,255,255,0.1);
 }
 
 .nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-item {
-  color: var(--text-muted); font-size: 0.9rem; text-decoration: none;
-  position: relative; transition: color 0.3s;
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+  transition: color 0.2s;
 }
-.nav-item::after {
-  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
-  background: var(--alloy-gold); transition: width 0.3s var(--ease-smooth);
-}
-.nav-item:hover { color: var(--alloy-champagne); }
-.nav-item:hover::after { width: 100%; }
+.nav-links a:hover { color: var(--text-primary); }
 
-/* Magnetic Button Class */
-.btn-magnetic {
-  display: inline-block; padding: 0.75rem 1.5rem;
-  border: 1px solid var(--border-subtle); border-radius: 4px;
-  color: var(--alloy-champagne); font-size: 0.85rem; font-weight: 500;
-  text-decoration: none; transition: all 0.3s var(--ease-smooth);
-  position: relative; overflow: hidden; background: rgba(255,255,255,0.02);
-  cursor: pointer;
-}
-.btn-magnetic:hover { border-color: var(--alloy-gold); background: rgba(212, 175, 55, 0.05); }
+.menu-btn { display: none; background: none; border: none; color: #fff; cursor: pointer; }
 
 /* ──────────────────────────────────────────
    HERO SECTION
    ────────────────────────────────────────── */
 .hero {
-  min-height: 100vh; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; text-align: center;
-  position: relative; overflow: hidden; padding-top: 60px;
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; position: relative; padding: 0 2rem;
 }
 
-/* Dynamic Background Grid */
-.grid-floor {
-  position: absolute; width: 200%; height: 200%;
-  background-image: 
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
-  animation: gridMove 20s linear infinite;
-  mask-image: linear-gradient(to bottom, transparent, black 40%, transparent);
-  pointer-events: none;
+/* Metallic Sheen Animation on Text */
+.gradient-text {
+  background: linear-gradient(to right, #868696 20%, #ffffff 50%, #868696 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: shine 5s linear infinite;
 }
-@keyframes gridMove { 0% { transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px); } 100% { transform: perspective(500px) rotateX(60deg) translateY(50px) translateZ(-200px); } }
+@keyframes shine { to { background-position: 200% center; } }
 
-.hero-content { z-index: 2; max-width: 800px; padding: 0 1rem; }
-
-.status-chip {
+.hero-pill {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 6px 14px; border-radius: 100px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  background: rgba(212, 175, 55, 0.05);
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
   margin-bottom: 2rem;
-  font-family: var(--font-code); font-size: 0.7rem; color: var(--alloy-gold);
+  font-family: var(--font-mono); font-size: 0.7rem; color: var(--metal-silver);
 }
-.status-dot { width: 6px; height: 6px; background: var(--alloy-gold); border-radius: 50%; animation: pulse 2s infinite; }
+.status-dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; }
 
 h1.hero-title {
-  font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1; margin-bottom: 1.5rem;
-  background: radial-gradient(circle at center, #fff 0%, #888 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 40px rgba(255,255,255,0.1);
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 1.05; margin-bottom: 1.5rem;
 }
-h1 span.italic { font-style: italic; color: var(--alloy-gold); -webkit-text-fill-color: var(--alloy-gold); }
 
 .hero-sub {
-  font-size: 1.1rem; color: var(--text-muted); max-width: 500px; margin: 0 auto 2.5rem;
+  max-width: 600px; margin-bottom: 3rem; font-size: 1.2rem;
+  color: var(--text-secondary); line-height: 1.6;
 }
 
-.cta-group { display: flex; gap: 1rem; justify-content: center; }
-.btn-primary {
-  padding: 1rem 2rem; background: var(--alloy-gold);
-  color: var(--bg-deep); font-weight: 600; border-radius: 4px;
-  border: none; cursor: pointer; text-decoration: none;
-  transition: transform 0.2s;
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-}
-.btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(212, 175, 55, 0.4); }
+.hero-actions { display: flex; gap: 1rem; align-items: center; }
 
 /* ──────────────────────────────────────────
-   TICKER (Stock Market Style)
+   SECTIONS
    ────────────────────────────────────────── */
-.ticker-container {
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
-  background: var(--bg-panel); overflow: hidden;
-  padding: 0.8rem 0;
+.section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; }
+.header-center { text-align: center; max-width: 700px; margin: 0 auto 5rem; }
+.header-center h2 { font-size: 3rem; margin-top: 1rem; }
+
+/* Ticker */
+.ticker-wrap {
+  border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);
+  background: rgba(255,255,255,0.01); overflow: hidden; padding: 1.2rem 0;
 }
-.ticker-track {
-  display: flex; white-space: nowrap; gap: 3rem;
-  animation: scrollTicker 30s linear infinite;
-}
+.ticker-content { display: flex; gap: 4rem; animation: ticker 40s linear infinite; }
 .ticker-item {
-  font-family: var(--font-code); font-size: 0.75rem; color: var(--text-muted);
-  display: flex; align-items: center; gap: 8px;
+  color: var(--metal-steel); font-family: var(--font-mono); font-size: 0.9rem;
+  white-space: nowrap; text-transform: uppercase; letter-spacing: 0.05em;
+  display: flex; align-items: center; gap: 10px;
 }
-.ticker-val { color: var(--alloy-gold); }
-@keyframes scrollTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ticker-item b { color: var(--text-primary); }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-/* ──────────────────────────────────────────
-   BENTO GRID (3D Physics)
-   ────────────────────────────────────────── */
-.section-padding { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
-
-.section-head { margin-bottom: 4rem; }
-.section-head h2 { font-size: 2.5rem; margin-top: 0.5rem; }
-
-.bento-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 300px);
-  gap: 1.5rem; perspective: 1000px;
-}
-
+/* Bento Grid */
+.bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 .bento-card {
-  background: var(--bg-panel);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px; padding: 2rem;
-  position: relative; overflow: hidden;
-  transition: transform 0.1s; /* JS handles smooth tilt */
-  transform-style: preserve-3d;
+  padding: 2.5rem; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
 }
-.bento-card:hover { border-color: var(--border-active); }
+.bento-wide { grid-column: span 2; }
+.bento-stat { font-size: 4.5rem; font-family: var(--font-serif); line-height: 1; margin-bottom: 0.5rem; color: var(--text-primary); }
+.bento-desc { color: var(--text-secondary); font-size: 0.95rem; }
 
-/* Card Content Layering */
-.card-content { transform: translateZ(30px); }
-.card-bg-icon {
-  position: absolute; bottom: -20px; right: -20px;
-  opacity: 0.03; transform: translateZ(10px) rotate(-15deg);
-  width: 150px; height: 150px; fill: var(--alloy-gold);
+/* Services */
+.services-list { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+.svc-card { padding: 3rem 2rem; text-align: left; }
+.svc-icon {
+  width: 50px; height: 50px; border-radius: 12px;
+  background: linear-gradient(135deg, #333, #111);
+  border: 1px solid var(--glass-border);
+  display: grid; place-items: center; margin-bottom: 1.5rem;
+  color: var(--metal-silver);
 }
+.svc-card:hover .svc-icon { border-color: var(--text-primary); box-shadow: 0 0 20px rgba(255,255,255,0.2); }
 
-.card-span-2 { grid-column: span 2; }
-.card-stat { font-size: 3.5rem; font-family: var(--font-serif); color: var(--alloy-champagne); line-height: 1; }
-.card-label { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
+/* Pricing */
+.price-grid { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 2rem; align-items: center; }
+.price-card { padding: 3rem 2rem; text-align: center; }
+.price-card.featured {
+  background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.2);
+  transform: scale(1.05); z-index: 2;
+  box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8);
+}
+.price-amt { font-size: 3rem; font-weight: 600; color: var(--text-primary); margin: 1rem 0; letter-spacing: -1px; }
+.price-feat li { list-style: none; margin-bottom: 0.8rem; color: var(--text-secondary); font-size: 0.9rem; }
 
 /* ──────────────────────────────────────────
-   SERVICES & PRICING
+   BOOKING MODAL (Auto-load)
    ────────────────────────────────────────── */
-.service-row {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  border-top: 1px solid var(--border-subtle);
-  padding: 2rem 0; transition: background 0.3s;
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);
+  z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  display: grid; place-items: center; padding: 1rem;
 }
-.service-row:hover { background: rgba(255,255,255,0.02); }
-.service-row h3 { font-size: 1.5rem; width: 30%; }
-.service-desc { width: 50%; color: var(--text-muted); font-size: 0.95rem; }
-.service-icon { width: 10%; text-align: right; color: var(--alloy-gold); }
+.modal-overlay.active { opacity: 1; pointer-events: all; }
+.modal-box {
+  width: 100%; max-width: 500px;
+  background: #111; border: 1px solid var(--glass-border);
+  border-radius: 20px; padding: 2.5rem;
+  transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+}
+.modal-overlay.active .modal-box { transform: scale(1); }
 
-/* Pricing Cards */
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
-.price-card {
-  border: 1px solid var(--border-subtle); padding: 2.5rem; border-radius: 8px;
-  background: linear-gradient(180deg, var(--bg-panel) 0%, rgba(212,175,55,0.02) 100%);
-  position: relative;
+.input-group { margin-bottom: 1.2rem; }
+.input-group label { display: block; font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.input-field {
+  width: 100%; background: #080808; border: 1px solid #333;
+  padding: 1rem; border-radius: 8px; color: #fff; font-family: var(--font-sans);
+  outline: none; transition: border-color 0.3s;
 }
-.price-card.featured { border-color: var(--alloy-gold); box-shadow: 0 0 30px rgba(212,175,55,0.05); }
-.price { font-size: 2.5rem; color: var(--text-primary); margin: 1rem 0; font-family: var(--font-serif); }
-.features li { list-style: none; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem; display: flex; gap: 8px; }
-.features li::before { content: "›"; color: var(--alloy-gold); }
+.input-field:focus { border-color: var(--metal-silver); }
 
 /* ──────────────────────────────────────────
-   FOOTER
+   EASTER EGG (Tesla Mode)
    ────────────────────────────────────────── */
-footer {
-  border-top: 1px solid var(--border-subtle);
-  padding: 4rem 2rem; text-align: center; margin-top: 6rem;
+.ludicrous-mode {
+  --bg-depth: #000000;
+  --text-primary: #ff0033; /* Tesla Red / Cyber Punk */
+  --metal-silver: #ff0033;
+  --glass-border: #ff0033;
+  font-family: 'DM Mono', monospace !important;
 }
-.footer-copy { font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted); cursor: help; }
+.ludicrous-mode h1, .ludicrous-mode p { text-shadow: 0 0 10px #ff0033; }
+.ludicrous-mode body::after { opacity: 0.2; }
 
-/* ──────────────────────────────────────────
-   UTILITIES & ANIMATIONS
-   ────────────────────────────────────────── */
-@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
-/* Wireframe Mode (Easter Egg) */
-body.wireframe-mode { background: #000; }
-body.wireframe-mode * {
-  background: transparent !important;
-  color: #0f0 !important;
-  border: 1px solid #0f0 !important;
-  box-shadow: none !important;
-  font-family: var(--font-code) !important;
-}
-
-/* Confetti Canvas */
-#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 9999; }
-
-/* Mobile Menu */
-.mobile-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+/* Responsive */
 @media (max-width: 768px) {
-  .nav-links { display: none; }
-  .mobile-toggle { display: block; }
-  .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-  .card-span-2 { grid-column: span 1; }
-  .service-row { flex-direction: column; gap: 1rem; }
-  .service-row h3, .service-desc, .service-icon { width: 100%; text-align: left; }
   h1.hero-title { font-size: 3.5rem; }
+  .nav-links { display: none; }
+  .menu-btn { display: block; }
+  .bento-grid, .services-list, .price-grid { grid-template-columns: 1fr; }
+  .bento-wide { grid-column: span 1; }
+  .price-card.featured { transform: scale(1); }
+  .hero-actions { flex-direction: column; width: 100%; }
+  .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
 }
 </style>
 </head>
 <body>
 
-<div class="noise-overlay"></div>
-<canvas id="confetti-canvas"></canvas>
-
 <nav id="navbar">
-  <div class="brand-lockup" id="logoTrigger">
-    <div class="brand-mark">
-      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 4 L4 50 H16 L32 20 L48 50 H60 L32 4 Z" opacity="0.8"/>
-        <path d="M12 50 L32 50 L32 60 L6 60 L12 50 Z" fill="#fff" opacity="0.3"/>
-        <rect x="28" y="38" width="8" height="22" fill="#fff"/>
-      </svg>
-    </div>
-    <span class="brand-text">ANDREW SAYEGH</span>
+  <div class="nav-brand" id="brandLogo">
+    <div class="logo-mark">As</div>
+    <span>Andrew Sayegh</span>
   </div>
-
   <ul class="nav-links">
-    <li><a href="#track-record" class="nav-item">Track Record</a></li>
-    <li><a href="#services" class="nav-item">Services</a></li>
-    <li><a href="#methodology" class="nav-item">Methodology</a></li>
+    <li><a href="#track-record">Track Record</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
   </ul>
-
-  <div style="display: flex; gap:1rem; align-items: center;">
-    <button class="btn-magnetic" onclick="window.location.href='#contact'">Book Strategy</button>
-    <button class="mobile-toggle">☰</button>
-  </div>
+  <button class="btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.85rem;" onclick="openBooking()">Book Consultation</button>
+  <button class="menu-btn" onclick="alert('Mobile menu placeholder')">☰</button>
 </nav>
 
 <section class="hero">
-  <div class="grid-floor"></div>
-  <div class="hero-content">
-    <div class="status-chip"><div class="status-dot"></div><span>ACCEPTING SPRING 2026 COHORT</span></div>
-    <h1 class="hero-title">Your unfair advantage <br><span class="italic">for getting in.</span></h1>
-    <p class="hero-sub">I reverse-engineered the admissions process to go from community college to UCLA, Capitol Hill, and Columbia SIPA. Now, I hand you the blueprints.</p>
-    <div class="cta-group">
-      <button class="btn-primary" onclick="alert('Scheduling System: Opening...')">Book Intro Call</button>
-      <button class="btn-magnetic" style="border:none;">Read Case Studies</button>
-    </div>
+  <div class="hero-pill"><span class="status-dot"></span><span>ACCEPTING CLIENTS FOR 2026</span></div>
+  <h1 class="hero-title">
+    Strategy over <br>
+    <span class="gradient-text">speculation.</span>
+  </h1>
+  <p class="hero-sub">
+    Precision admissions consulting for high-stakes transfer students and fellowship applicants. 
+    Flagship guidance from a UCLA Alum & Columbia SIPA Admit.
+  </p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="openBooking()">Initialize Strategy Call</button>
+    <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView()">View Services</button>
   </div>
 </section>
 
-<div class="ticker-container">
-  <div class="ticker-track">
-    <div class="ticker-item"><span>//</span> STATUS: <span class="ticker-val">ACTIVE</span></div>
-    <div class="ticker-item"><span>//</span> UCLA: <span class="ticker-val">ALUMNUS</span></div>
-    <div class="ticker-item"><span>//</span> COLUMBIA SIPA: <span class="ticker-val">ADMIT</span></div>
-    <div class="ticker-item"><span>//</span> STATE DEPT: <span class="ticker-val">RANGEL FINALIST</span></div>
-    <div class="ticker-item"><span>//</span> CONGRESS: <span class="ticker-val">INTERN</span></div>
-    <div class="ticker-item"><span>//</span> ACCEPTANCE RATE: <span class="ticker-val">TOP 1%</span></div>
-    <div class="ticker-item"><span>//</span> STATUS: <span class="ticker-val">ACTIVE</span></div>
-     <div class="ticker-item"><span>//</span> UCLA: <span class="ticker-val">ALUMNUS</span></div>
-     <div class="ticker-item"><span>//</span> COLUMBIA SIPA: <span class="ticker-val">ADMIT</span></div>
-     <div class="ticker-item"><span>//</span> STATE DEPT: <span class="ticker-val">RANGEL FINALIST</span></div>
+<div class="ticker-wrap">
+  <div class="ticker-content">
+    <div class="ticker-item"><b>UCLA</b> Alum</div>
+    <div class="ticker-item"><b>Columbia</b> Admit</div>
+    <div class="ticker-item"><b>Capitol Hill</b> Experience</div>
+    <div class="ticker-item"><b>State Dept</b> Fellow</div>
+    <div class="ticker-item"><b>Rangel</b> Finalist</div>
+    <div class="ticker-item"><b>First-Gen</b> Specialist</div>
+    <div class="ticker-item"><b>UCLA</b> Alum</div>
+    <div class="ticker-item"><b>Columbia</b> Admit</div>
+    <div class="ticker-item"><b>Capitol Hill</b> Experience</div>
+    <div class="ticker-item"><b>State Dept</b> Fellow</div>
   </div>
 </div>
 
-<section id="track-record" class="section-padding">
-  <div class="section-head">
-    <span class="mono-tag">01. METRICS</span>
-    <h2>Proven Outcomes</h2>
+<section id="track-record" class="section">
+  <div class="header-center">
+    <span class="mono">The Standard</span>
+    <h2>Built on <span style="color:var(--text-tertiary)">proven results.</span></h2>
   </div>
-  
   <div class="bento-grid">
-    <div class="bento-card card-span-2">
-      <div class="card-content">
-        <div class="card-stat">100%</div>
-        <div class="card-label">First-Generation Focus</div>
-        <p style="margin-top:1rem; color:var(--text-muted);">Specialized strategy for students without family legacy connections. We build narratives that turn "disadvantage" into "resilience."</p>
-      </div>
-      <svg class="card-bg-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/></svg>
+    <div class="glass-card bento-card bento-wide">
+      <div class="bento-stat">100%</div>
+      <h3>First-Generation Focus</h3>
+      <p class="bento-desc">Navigating the hidden curriculum. I built this roadmap because I had to walk it alone first.</p>
     </div>
-    <div class="bento-card">
-      <div class="card-content">
-        <div class="card-stat">2+</div>
-        <div class="card-label">National Fellowships</div>
-        <p style="margin-top:1rem; color:var(--text-muted);">Rangel & Pickering Finalist expertise.</p>
-      </div>
+    <div class="glass-card bento-card">
+      <div class="bento-stat">2</div>
+      <h3>National Fellowships</h3>
+      <p class="bento-desc">Finalist selection for the nation's most competitive diplomatic programs.</p>
     </div>
-    <div class="bento-card">
-      <div class="card-content">
-        <div class="card-stat">5+</div>
-        <div class="card-label">Policy Internships</div>
-        <p style="margin-top:1rem; color:var(--text-muted);">From District Offices to Capitol Hill.</p>
-      </div>
+    <div class="glass-card bento-card">
+      <div class="bento-stat">IVY</div>
+      <h3>League Admissions</h3>
+      <p class="bento-desc">Accepted to Columbia SIPA without traditional connections.</p>
     </div>
-    <div class="bento-card card-span-2">
-      <div class="card-content">
-        <div class="card-stat">$0</div>
-        <div class="card-label">Debt Strategy</div>
-        <p style="margin-top:1rem; color:var(--text-muted);">I teach you how to get funded. My clients prioritize programs that offer significant financial aid packages.</p>
-      </div>
-       <svg class="card-bg-icon" viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+    <div class="glass-card bento-card bento-wide">
+      <div class="bento-stat">DC</div>
+      <h3>Policy Experience</h3>
+      <p class="bento-desc">Internships in Congress and International Non-Profits.</p>
     </div>
   </div>
 </section>
 
-<section id="services" class="section-padding" style="background: var(--bg-panel); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle);">
-  <div class="section-head">
-    <span class="mono-tag">02. CAPABILITIES</span>
-    <h2>Strategic Consulting</h2>
+<section id="services" class="section">
+  <div class="header-center">
+    <span class="mono">Offerings</span>
+    <h2>Precision Consulting</h2>
   </div>
-
-  <div class="service-row">
-    <h3>College Admissions</h3>
-    <div class="service-desc">
-      Architecting the transfer path. School selection, narrative arc development, and essay polishing for T25 universities.
+  <div class="services-list">
+    <div class="glass-card svc-card">
+      <div class="svc-icon">❖</div>
+      <h3>College Admissions</h3>
+      <p style="margin-top:1rem; font-size:0.9rem;">Targeting T20 schools and UC transfers. We engineer your personal statement to cut through the noise.</p>
     </div>
-    <div class="service-icon">→</div>
-  </div>
-
-  <div class="service-row">
-    <h3>Fellowship Advising</h3>
-    <div class="service-desc">
-      Navigating complex federal and international applications (Fulbright, Rangel, Pickering) with a focus on "Service" narratives.
+    <div class="glass-card svc-card">
+      <div class="svc-icon">✦</div>
+      <h3>Fellowship Advising</h3>
+      <p style="margin-top:1rem; font-size:0.9rem;">Fulbright, Rangel, Pickering. I help you construct the narrative arc that reviewers require.</p>
     </div>
-    <div class="service-icon">→</div>
-  </div>
-
-  <div class="service-row">
-    <h3>Career Trajectory</h3>
-    <div class="service-desc">
-      Resume audits and interview prep for federal government, think tanks, and policy roles. Converting academic wins into job offers.
+    <div class="glass-card svc-card">
+      <div class="svc-icon">⟁</div>
+      <h3>Career Strategy</h3>
+      <p style="margin-top:1rem; font-size:0.9rem;">Resume auditing and interview prep (STAR method) for federal and policy roles.</p>
     </div>
-    <div class="service-icon">→</div>
   </div>
 </section>
 
-<section id="contact" class="section-padding">
-  <div class="section-head" style="text-align: center;">
-    <span class="mono-tag">03. INITIALIZE</span>
-    <h2>Select Your Tier</h2>
+<section id="pricing" class="section">
+  <div class="header-center">
+    <span class="mono">Investment</span>
+    <h2>Transparent Pricing</h2>
   </div>
-  
-  <div class="pricing-grid">
-    <div class="price-card">
-      <span class="mono-tag">STARTER</span>
-      <div class="price">$99</div>
-      <ul class="features">
-        <li>Essay Audit (1 Revision)</li>
-        <li>Resume Review</li>
-        <li>30-min Strategy Call</li>
+  <div class="price-grid">
+    <div class="glass-card price-card">
+      <span class="mono">Starter</span>
+      <div class="price-amt">$99</div>
+      <ul class="price-feat">
+        <li>Single Essay Audit</li>
+        <li>30-Min Strategy Call</li>
+        <li>Action Plan</li>
       </ul>
-      <button class="btn-magnetic" style="width:100%; margin-top:2rem;">Select</button>
+      <button class="btn-secondary" style="width:100%; margin-top:2rem;" onclick="openBooking('Starter')">Select</button>
     </div>
-    
-    <div class="price-card featured">
-      <span class="mono-tag" style="color:var(--alloy-gold);">RECOMMENDED</span>
-      <div class="price">$249</div>
-      <ul class="features">
-        <li>End-to-End Application Support</li>
-        <li>Unlimited Essay Edits</li>
+    <div class="glass-card price-card featured">
+      <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, #fff, transparent);"></div>
+      <span class="mono" style="color:#fff;">Premium</span>
+      <div class="price-amt">$199</div>
+      <ul class="price-feat">
+        <li>Full Application Package</li>
+        <li>Unlimited Revisions (1 App)</li>
         <li>Mock Interview Prep</li>
-        <li>Financial Aid Negotiation</li>
+        <li>Priority Support</li>
       </ul>
-      <button class="btn-primary" style="width:100%; margin-top:2rem;">Select</button>
+      <button class="btn-primary" style="width:100%; margin-top:2rem;" onclick="openBooking('Premium')">Select Premium</button>
     </div>
-
-    <div class="price-card">
-      <span class="mono-tag">FULL CYCLE</span>
-      <div class="price">$600+</div>
-      <ul class="features">
-        <li>Multi-school Strategy</li>
-        <li>Fellowship + Grad School Combo</li>
-        <li>Priority Slack Access</li>
+    <div class="glass-card price-card">
+      <span class="mono">Full Cycle</span>
+      <div class="price-amt">$599</div>
+      <ul class="price-feat">
+        <li>Multi-School Strategy</li>
+        <li>Complete Essay Drafting</li>
+        <li>Scholarship Negotiation</li>
       </ul>
-      <button class="btn-magnetic" style="width:100%; margin-top:2rem;">Inquire</button>
+      <button class="btn-secondary" style="width:100%; margin-top:2rem;" onclick="openBooking('Full Cycle')">Select</button>
     </div>
   </div>
 </section>
 
-<footer>
-  <p class="footer-copy" id="footerTrigger">© 2026 ANDREW SAYEGH. ALL RIGHTS RESERVED.</p>
+<footer style="border-top: 1px solid var(--glass-border); padding: 4rem 2rem; text-align:center; margin-top: 4rem;">
+  <div class="nav-brand" style="justify-content:center; margin-bottom:1.5rem; opacity:0.7;">
+    <div class="logo-mark" style="transform:scale(0.8)">As</div>
+  </div>
+  <p class="mono">© 2026 Andrew Sayegh. Designed in California.</p>
 </footer>
 
+<div class="modal-overlay" id="bookingModal" onclick="if(event.target === this) closeBooking()">
+  <div class="modal-box">
+    <h3 style="font-size:1.5rem; margin-bottom:1.5rem;">Secure Your Spot</h3>
+    <div class="input-group">
+      <label>Name</label>
+      <input type="text" id="bk-name" class="input-field" placeholder="Jane Doe">
+    </div>
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" id="bk-email" class="input-field" placeholder="jane@example.com">
+    </div>
+    <div class="input-group">
+      <label>Interest</label>
+      <input type="text" id="bk-interest" class="input-field" placeholder="Admissions, Fellowships...">
+    </div>
+    <div class="input-group">
+      <label>Message</label>
+      <textarea id="bk-msg" class="input-field" rows="3" placeholder="Briefly describe your goals..."></textarea>
+    </div>
+    <button class="btn-primary" style="width:100%" onclick="submitBooking()">Send Request</button>
+    <button style="width:100%; background:none; border:none; color:var(--text-secondary); margin-top:1rem; cursor:pointer;" onclick="closeBooking()">Cancel</button>
+  </div>
+</div>
+
 <script>
-  /* ──────────────────────────────────────────
-     PRECISION ENGINEERING (JS)
-     ────────────────────────────────────────── */
-
-  // 1. Navbar Scroll Effect
+  // Sticky Nav Logic
   window.addEventListener('scroll', () => {
-    const nav = document.getElementById('navbar');
-    if (window.scrollY > 50) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
   });
 
-  // 2. 3D Tilt Effect on Bento Cards
-  const cards = document.querySelectorAll('.bento-card');
-  
-  cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg rotation
-      const rotateY = ((x - centerX) / centerX) * 5;
+  // Modal Logic
+  function openBooking(interest) {
+    document.getElementById('bookingModal').classList.add('active');
+    if(interest) document.getElementById('bk-interest').value = interest;
+  }
+  function closeBooking() {
+    document.getElementById('bookingModal').classList.remove('active');
+  }
 
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
+  // Mailto Auto-Load Logic
+  function submitBooking() {
+    const name = document.getElementById('bk-name').value;
+    const email = document.getElementById('bk-email').value;
+    const interest = document.getElementById('bk-interest').value;
+    const msg = document.getElementById('bk-msg').value;
+    
+    if(!name || !email) {
+      alert("Please provide name and email.");
+      return;
+    }
 
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
-    });
-  });
+    const subject = `Consultation Request: ${interest} - ${name}`;
+    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AInterest: ${interest}%0D%0A%0D%0AMessage:%0D%0A${msg}`;
+    
+    // Auto-load email client
+    window.location.href = `mailto:contact@andrewsayegh.com?subject=${subject}&body=${body}`;
+    
+    // Close modal after brief delay
+    setTimeout(closeBooking, 1000);
+  }
 
-  /* ──────────────────────────────────────────
-     EASTER EGGS (THE "MUSK" TOUCH)
-     ────────────────────────────────────────── */
-
-  // EASTER EGG 1: "Debug Mode" (Wireframe)
-  // Action: Click the Monogram Logo 5 times rapidly
+  // EASTER EGG: "Ludicrous Mode"
+  // Click the logo 5 times rapidly to trigger
   let clickCount = 0;
-  const logo = document.getElementById('logoTrigger');
+  let clickTimer;
   
-  logo.addEventListener('click', () => {
+  document.getElementById('brandLogo').addEventListener('click', (e) => {
+    e.preventDefault();
     clickCount++;
+    clearTimeout(clickTimer);
+    
+    clickTimer = setTimeout(() => {
+      clickCount = 0; // Reset if too slow
+    }, 500);
+
     if (clickCount === 5) {
-      document.body.classList.toggle('wireframe-mode');
-      console.log("%c[SYSTEM] DIAGNOSTIC MODE ENGAGED", "color: #0f0; font-weight: bold;");
+      activateLudicrousMode();
       clickCount = 0;
     }
-    setTimeout(() => clickCount = 0, 1000); // Reset if not fast enough
   });
 
-  // EASTER EGG 2: "Konami Code" -> Acceptance Mode (Confetti)
-  // Action: Up Up Down Down Left Right Left Right B A
-  const konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-  let konamiIndex = 0;
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === konamiCode[konamiIndex]) {
-      konamiIndex++;
-      if (konamiIndex === konamiCode.length) {
-        triggerConfetti();
-        konamiIndex = 0;
-      }
-    } else {
-      konamiIndex = 0;
-    }
-  });
-
-  // EASTER EGG 3: Console Recruit Payload
-  console.log(
-    "%c Andrew Sayegh | Admissions Architecture \n %c IF YOU ARE READING THIS: You likely have the technical mindset we look for in policy analysis. Email me with subject line 'Console Payload' for a discount.",
-    "font-family: 'Playfair Display'; font-size: 20px; font-weight: bold; color: #D4AF37;",
-    "font-family: sans-serif; font-size: 12px; color: #888;"
-  );
-
-  /* Confetti Logic */
-  function triggerConfetti() {
-    alert("🎉 SYSTEM OVERRIDE: ADMISSION ACCEPTED 🎉");
-    const canvas = document.getElementById('confetti-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  function activateLudicrousMode() {
+    document.documentElement.classList.toggle('ludicrous-mode');
     
-    const particles = [];
-    const colors = ['#D4AF37', '#F3E5AB', '#FFFFFF'];
-
-    for(let i=0; i<150; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: -10,
-        r: Math.random() * 6 + 2,
-        d: Math.random() * 5 + 2,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        tilt: Math.floor(Math.random() * 10) - 10
-      });
+    // Visual feedback
+    const logo = document.querySelector('.logo-mark');
+    logo.style.transition = "transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+    logo.style.transform = "rotate(360deg) scale(1.5)";
+    
+    // Alert user
+    const title = document.querySelector('.hero-title span');
+    if (document.documentElement.classList.contains('ludicrous-mode')) {
+        title.innerText = "LUDICROUS MODE";
+        alert("/// SYSTEM OVERRIDE: LUDICROUS MODE ENGAGED ///");
+    } else {
+        title.innerText = "speculation.";
+        logo.style.transform = "rotate(0deg) scale(1)";
     }
-
-    let angle = 0;
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      angle += 0.01;
-      for(let i=0; i<particles.length; i++) {
-        let p = particles[i];
-        p.y += Math.cos(angle + p.d) + 1 + p.r/2;
-        p.x += Math.sin(angle);
-        ctx.beginPath();
-        ctx.lineWidth = p.r;
-        ctx.strokeStyle = p.color;
-        ctx.moveTo(p.x + p.tilt + p.r/2, p.y);
-        ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r/2);
-        ctx.stroke();
-      }
-      requestAnimationFrame(draw);
-    }
-    draw();
-    setTimeout(() => { location.reload(); }, 5000); // Reset after 5s
   }
 </script>
 
