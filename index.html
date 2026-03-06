@@ -3,647 +3,558 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Andrew Sayegh | Elite Admissions Strategy</title>
+<title>Andrew Sayegh | Flagship Strategy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ──────────────────────────────────────────
-   ENGINEERED PHYSICS & PALETTE
+   PALETTE: "CHAMPAGNE STEEL"
    ────────────────────────────────────────── */
 :root {
-    /* Core Physics */
-    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy */
-    --ease-fluid: cubic-bezier(0.25, 0.1, 0.25, 1);       /* Smooth */
-    --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);         /* Apple-like */
+    /* Backgrounds */
+    --bg-void: #030304;
+    --bg-glass: rgba(15, 15, 20, 0.6);
+    --bg-glass-heavy: rgba(10, 10, 12, 0.85);
     
-    /* Titanium Palette */
-    --bg-deep: #050507;
-    --bg-glass: rgba(18, 18, 22, 0.65);
-    --bg-surface: #0e0e11;
+    /* Text */
+    --text-primary: #f2f2f5;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #52525b;
     
-    /* Metals */
-    --metal-light: #e4e4e7;
-    --metal-dim: #71717a;
-    --metal-dark: #27272a;
+    /* Accents - The "Premium" Feel */
+    --accent-gold: #d4af37;
+    --accent-champagne: #f3e5ab;
+    --accent-bronze: #a67c52;
+    --metal-silver: #e2e8f0;
     
-    /* Accents */
-    --accent-primary: #ffffff;
-    --accent-glow: rgba(255,255,255,0.15);
-    --border-glass: rgba(255, 255, 255, 0.08);
+    /* Borders & Glows */
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-highlight: rgba(212, 175, 55, 0.3); /* Subtle Gold Border */
+    --glow-gold: rgba(212, 175, 55, 0.15);
     
-    /* Typography */
-    --font-head: 'Playfair Display', serif;
-    --font-body: 'Inter', sans-serif;
-    --font-tech: 'DM Mono', monospace;
-    
-    /* Layout */
-    --nav-height: 70px;
-    --container-width: 1200px;
-    --gutter: 24px;
+    /* Physics */
+    --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* LUDICROUS MODE VARIABLES (Overwritten via JS) */
+/* LUDICROUS MODE OVERRIDES */
 html.ludicrous {
-    --accent-primary: #ff0033;
-    --accent-glow: rgba(255, 0, 51, 0.4);
-    --bg-deep: #000;
-    --metal-light: #ff0033;
-    --border-glass: rgba(255, 0, 51, 0.3);
+    --accent-gold: #ff0055;
+    --accent-champagne: #ff99ac;
+    --border-highlight: rgba(255, 0, 85, 0.5);
+    --glow-gold: rgba(255, 0, 85, 0.3);
 }
 
-/* Reset & Base */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html { scroll-behavior: smooth; font-size: 16px; height: 100%; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
 body {
-    background-color: var(--bg-deep);
-    color: var(--metal-light);
-    font-family: var(--font-body);
+    background-color: var(--bg-void);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
-    height: 100%;
-    /* Subtle Grain Texture */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    position: relative;
 }
-
-/* Typography */
-h1, h2, h3 { color: var(--accent-primary); letter-spacing: -0.03em; font-weight: 400; }
-h1 { font-family: var(--font-head); line-height: 1.1; }
-h2 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
-p { color: var(--metal-dim); font-size: 1.05rem; max-width: 65ch; }
-.mono { font-family: var(--font-tech); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--metal-dim); display: block; margin-bottom: 0.75rem; }
 
 /* ──────────────────────────────────────────
-   COMPONENTS
+   AMBIENT BACKGROUND LAYERS
    ────────────────────────────────────────── */
-
-/* Glass Panel Logic */
-.glass {
-    background: var(--bg-glass);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--border-glass);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+.ambient-light {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    z-index: -1; overflow: hidden; pointer-events: none;
+}
+.light-orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); opacity: 0.4;
+    animation: floatOrb 20s infinite alternate ease-in-out;
+}
+.orb-1 {
+    top: -10%; left: -10%; width: 50vw; height: 50vw;
+    background: radial-gradient(circle, var(--glow-gold), transparent 70%);
+}
+.orb-2 {
+    bottom: -20%; right: -10%; width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+    animation-delay: -5s;
+}
+@keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10%, 10%) scale(1.1); }
 }
 
-/* Buttons */
+/* Noise overlay for texture */
+body::after {
+    content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.5;
+}
+
+/* ──────────────────────────────────────────
+   TYPOGRAPHY
+   ────────────────────────────────────────── */
+h1, h2, h3 { color: var(--text-primary); font-weight: 400; letter-spacing: -0.02em; }
+h1 { font-family: 'Playfair Display', serif; line-height: 1.1; }
+h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 0.5rem; }
+.mono { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-gold); display: block; margin-bottom: 0.5rem; }
+
+/* Metallic Text Effect */
+.metallic-text {
+    background: linear-gradient(135deg, var(--metal-silver) 0%, #fff 50%, var(--text-secondary) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255,255,255,0.1);
+}
+
+/* ──────────────────────────────────────────
+   GLASS CARDS (LAYERED)
+   ────────────────────────────────────────── */
+.glass-panel {
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-subtle);
+    border-top: 1px solid rgba(255,255,255,0.15); /* Top highlight */
+    border-radius: 20px;
+    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
+    transition: transform 0.4s var(--ease-out), border-color 0.4s, box-shadow 0.4s;
+    position: relative; overflow: hidden;
+}
+.glass-panel:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-highlight);
+    box-shadow: 0 30px 60px -20px var(--glow-gold);
+}
+/* Internal sheen on hover */
+.glass-panel::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.04), transparent 40%);
+    opacity: 0; transition: opacity 0.5s; pointer-events: none;
+}
+.glass-panel:hover::after { opacity: 1; }
+
+/* ──────────────────────────────────────────
+   BUTTONS
+   ────────────────────────────────────────── */
 .btn {
     display: inline-flex; align-items: center; justify-content: center;
-    padding: 0 2rem; height: 50px;
-    border-radius: 999px; font-weight: 500; font-size: 0.95rem;
-    transition: transform 0.2s var(--ease-snappy), box-shadow 0.3s ease, filter 0.3s ease;
-    cursor: pointer; position: relative; overflow: hidden; white-space: nowrap;
-    text-decoration: none;
+    padding: 0.8rem 2rem; border-radius: 999px; font-weight: 500; font-size: 0.9rem;
+    cursor: pointer; transition: all 0.3s var(--ease-out); border: none; text-decoration: none;
+    font-family: 'Inter', sans-serif; position: relative; overflow: hidden;
 }
-.btn:active { transform: scale(0.96); }
-
 .btn-primary {
-    background: var(--accent-primary);
-    color: var(--bg-deep);
-    border: 1px solid var(--accent-primary);
-    font-weight: 600;
+    background: linear-gradient(135deg, #eee 0%, #bbb 100%);
+    color: #000; font-weight: 600;
 }
 .btn-primary:hover {
-    box-shadow: 0 0 30px var(--accent-glow);
+    box-shadow: 0 0 25px rgba(255,255,255,0.4);
+    transform: scale(1.02);
 }
-/* Shine Effect for Button */
-.btn-primary::after {
-    content: ''; position: absolute; top: 0; left: -100%;
-    width: 50%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    transform: skewX(-20deg);
-    transition: left 0.5s;
+.btn-outline {
+    background: transparent; border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
 }
-.btn-primary:hover::after { left: 150%; transition: left 0.7s ease; }
-
-.btn-ghost {
-    background: rgba(255,255,255,0.05);
-    color: var(--metal-light);
-    border: 1px solid var(--border-glass);
-}
-.btn-ghost:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: var(--metal-light);
+.btn-outline:hover {
+    border-color: var(--accent-gold); color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.05);
 }
 
 /* ──────────────────────────────────────────
    NAVIGATION
    ────────────────────────────────────────── */
-.nav-container {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    padding: 1rem var(--gutter);
-    transition: padding 0.3s var(--ease-fluid);
+nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    padding: 1.5rem 2rem; transition: all 0.4s var(--ease-out);
 }
-.nav-container.scrolled { padding: 0.75rem var(--gutter); }
-
-.navbar {
-    max-width: var(--container-width); margin: 0 auto;
+nav.scrolled {
+    padding: 0.8rem 2rem;
+    background: rgba(3, 3, 5, 0.8);
+    backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle);
+}
+.nav-content {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 0.75rem 1.5rem; border-radius: 100px;
-    transition: all 0.3s var(--ease-fluid);
+    max-width: 1200px; margin: 0 auto;
 }
-.nav-container.scrolled .navbar {
-    background: rgba(5, 5, 7, 0.85);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--border-glass);
-    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.8);
+.brand {
+    font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; font-style: italic;
+    color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 10px;
 }
-
-.logo {
-    font-family: var(--font-head); font-size: 1.25rem; font-weight: 600; font-style: italic;
-    color: var(--accent-primary); text-decoration: none; display: flex; align-items: center; gap: 8px;
-    user-select: none;
-}
-.logo-mark {
-    width: 32px; height: 32px; border: 1px solid var(--border-glass); border-radius: 8px;
-    display: grid; place-items: center; font-size: 0.8em;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+.brand-mark {
+    width: 30px; height: 30px; border: 1px solid var(--accent-gold); border-radius: 6px;
+    display: grid; place-items: center; font-size: 0.75rem; color: var(--accent-gold);
 }
 
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a {
-    color: var(--metal-dim); text-decoration: none; font-size: 0.9rem; font-weight: 500;
-    transition: color 0.2s; position: relative;
+    text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; transition: color 0.3s;
 }
-.nav-links a:hover { color: var(--accent-primary); }
-.nav-links a::after {
-    content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%);
-    width: 0; height: 1px; background: var(--accent-primary); transition: width 0.3s;
-}
-.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover { color: var(--accent-champagne); }
 
-.mobile-toggle {
-    display: none; background: none; border: none; color: var(--accent-primary);
-    width: 44px; height: 44px; z-index: 1002; cursor: pointer;
-    flex-direction: column; justify-content: center; align-items: center; gap: 6px;
-}
-.mobile-toggle span {
-    width: 24px; height: 2px; background: currentColor; border-radius: 2px;
-    transition: all 0.3s var(--ease-snappy);
-}
+.mobile-toggle { display: none; background: none; border: none; color: #fff; cursor: pointer; z-index: 1002; }
 
 /* ──────────────────────────────────────────
-   MOBILE MENU OVERLAY
-   ────────────────────────────────────────── */
-.mobile-menu {
-    position: fixed; inset: 0; z-index: 1001;
-    background: var(--bg-deep);
-    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
-    opacity: 0; pointer-events: none;
-    transform: scale(0.95) translateY(20px);
-    transition: all 0.4s var(--ease-snappy);
-}
-.mobile-menu.active { opacity: 1; pointer-events: all; transform: scale(1) translateY(0); }
-/* Cool blur circle behind menu */
-.mobile-menu::before {
-    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 300px; height: 300px; background: var(--accent-primary);
-    filter: blur(150px); opacity: 0.1; pointer-events: none;
-}
-.mobile-link {
-    font-family: var(--font-head); font-size: 2.5rem; color: var(--metal-light);
-    text-decoration: none; opacity: 0; transform: translateY(20px);
-    transition: opacity 0.3s, transform 0.3s;
-}
-.mobile-menu.active .mobile-link { opacity: 1; transform: translateY(0); }
-.mobile-menu.active .mobile-link:nth-child(1) { transition-delay: 0.1s; }
-.mobile-menu.active .mobile-link:nth-child(2) { transition-delay: 0.2s; }
-.mobile-menu.active .mobile-link:nth-child(3) { transition-delay: 0.3s; }
-.mobile-menu.active .mobile-link:nth-child(4) { transition-delay: 0.4s; }
-
-/* ──────────────────────────────────────────
-   SCROLL REVEAL ANIMATIONS
-   ────────────────────────────────────────── */
-.reveal-text {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-}
-.reveal-text > span {
-    display: block; transform: translateY(120%); opacity: 0;
-    transition: transform 1s var(--ease-fluid), opacity 1s ease;
-}
-.reveal-text.visible > span { transform: translateY(0); opacity: 1; }
-
-.fade-up {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s var(--ease-fluid);
-}
-.fade-up.visible { opacity: 1; transform: translateY(0); }
-
-/* ──────────────────────────────────────────
-   HERO SECTION
+   HERO
    ────────────────────────────────────────── */
 .hero {
-    min-height: 100vh; padding: 0 var(--gutter);
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; position: relative;
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 6rem 1.5rem; position: relative;
 }
 .hero-pill {
-    padding: 6px 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
-    border-radius: 100px; display: inline-flex; align-items: center; gap: 8px;
-    margin-bottom: 2rem;
+    padding: 6px 16px; border-radius: 50px; background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.2); color: var(--accent-champagne);
+    font-size: 0.75rem; font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
+    margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 8px;
+    animation: fadeIn 1s ease-out;
 }
-.hero-pill .dot { width: 6px; height: 6px; background: #4ADE80; border-radius: 50%; box-shadow: 0 0 10px rgba(74, 222, 128, 0.5); }
+.status-dot { width: 6px; height: 6px; background: var(--accent-gold); border-radius: 50%; box-shadow: 0 0 8px var(--accent-gold); }
+
 .hero-title {
-    font-size: clamp(3.5rem, 9vw, 6.5rem); margin-bottom: 1.5rem;
-    background: linear-gradient(180deg, #fff 0%, #a1a1aa 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    font-size: clamp(3rem, 8vw, 5.5rem); margin-bottom: 1.5rem;
+    animation: slideUp 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
-.hero-btn-group { display: flex; gap: 1rem; margin-top: 2rem; }
+.hero-title span { display: block; }
+.hero-sub {
+    max-width: 600px; font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 3rem;
+    line-height: 1.7; animation: slideUp 1s 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
 
 /* ──────────────────────────────────────────
-   TICKER (Infinite Loop)
+   SECTIONS & GRID
    ────────────────────────────────────────── */
-.ticker-wrap {
-    width: 100%; overflow: hidden; border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);
-    background: var(--bg-surface); padding: 1.25rem 0;
-}
-.ticker-track {
-    display: flex; white-space: nowrap; gap: 4rem;
-    animation: scroll 30s linear infinite; will-change: transform;
-}
-.ticker-item {
-    font-family: var(--font-tech); color: var(--metal-dim); font-size: 0.85rem;
-    display: flex; align-items: center; gap: 0.5rem;
-}
-.ticker-item strong { color: var(--accent-primary); }
-@keyframes scroll { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-50%,0,0); } }
-
-/* ──────────────────────────────────────────
-   GRIDS
-   ────────────────────────────────────────── */
-.section { padding: 8rem var(--gutter); max-width: var(--container-width); margin: 0 auto; }
-
-.grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem; margin-top: 4rem;
-}
+.section { padding: 6rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
 .grid-wide { grid-column: span 2; }
 
-.card {
-    background: linear-gradient(160deg, rgba(255,255,255,0.03) 0%, transparent 100%);
-    border: 1px solid var(--border-glass); border-radius: 24px;
-    padding: 2.5rem; position: relative; overflow: hidden;
-    transition: transform 0.4s var(--ease-snappy), border-color 0.4s;
-    display: flex; flex-direction: column; justify-content: space-between; h-100;
+/* Feature Icon */
+.icon-box {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+    border: 1px solid var(--border-subtle); display: grid; place-items: center;
+    margin-bottom: 1.5rem; color: var(--accent-gold);
 }
-.card:hover {
-    transform: translateY(-5px); border-color: rgba(255,255,255,0.2);
-    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+
+/* Pricing Highlight */
+.glass-panel.featured {
+    border-color: var(--accent-gold);
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
+    box-shadow: 0 0 40px -10px rgba(212, 175, 55, 0.1);
 }
-.stat { font-family: var(--font-head); font-size: 4rem; line-height: 1; margin-bottom: 0.5rem; color: var(--accent-primary); }
-.card-icon { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--metal-dim); }
 
 /* ──────────────────────────────────────────
-   MODAL
+   BOOKING MODAL
    ────────────────────────────────────────── */
-.modal-backdrop {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
+.modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(12px);
     z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    display: flex; align-items: center; justify-content: center; padding: 1rem;
+    display: grid; place-items: center; padding: 1rem;
 }
-.modal-backdrop.open { opacity: 1; pointer-events: all; }
-.modal-content {
-    background: #09090b; border: 1px solid var(--border-glass); border-radius: 24px;
-    width: 100%; max-width: 500px; padding: 2.5rem;
-    transform: translateY(40px) scale(0.95); transition: all 0.4s var(--ease-spring);
-    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.8);
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal-window {
+    width: 100%; max-width: 520px; background: #0a0a0c;
+    border: 1px solid var(--border-subtle); border-radius: 24px;
+    padding: 2.5rem; position: relative; transform: scale(0.95) translateY(20px);
+    transition: transform 0.4s var(--ease-spring);
+    box-shadow: 0 40px 80px -10px rgba(0,0,0,0.8);
 }
-.modal-backdrop.open .modal-content { transform: translateY(0) scale(1); }
+.modal-overlay.open .modal-window { transform: scale(1) translateY(0); }
 
-.input-group { margin-bottom: 1.25rem; }
-.input-label { display: block; font-size: 0.75rem; color: var(--metal-dim); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
-.input-field {
-    width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
-    padding: 1rem; border-radius: 12px; color: var(--accent-primary); font-family: var(--font-body);
-    font-size: 1rem; outline: none; transition: border-color 0.2s;
+.form-group { margin-bottom: 1.2rem; }
+.form-label { display: block; font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; font-family: 'DM Mono', monospace; }
+.form-input, .form-select {
+    width: 100%; padding: 1rem; background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-subtle); border-radius: 10px;
+    color: var(--text-primary); font-family: 'Inter', sans-serif; outline: none;
+    transition: border-color 0.3s;
 }
-.input-field:focus { border-color: var(--accent-primary); background: rgba(255,255,255,0.05); }
+.form-select {
+    appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 1rem center;
+}
+.form-input:focus, .form-select:focus { border-color: var(--accent-gold); background: rgba(212,175,55,0.02); }
 
 /* ──────────────────────────────────────────
-   RESPONSIVE
+   ANIMATIONS & MOBILE
    ────────────────────────────────────────── */
-@media (max-width: 900px) {
-    .nav-links, .nav-container .btn-primary { display: none; }
-    .mobile-toggle { display: flex; }
-    .grid-wide { grid-column: span 1; }
-    .hero-title { font-size: 3.5rem; }
-}
+@keyframes slideUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
-/* Ludicrous Mode Animation */
-@keyframes warpSpeed {
-    0% { transform: scale(1); filter: hue-rotate(0deg); }
-    50% { transform: scale(1.1) rotate(2deg); filter: blur(4px) contrast(200%); }
-    100% { transform: scale(1); filter: hue-rotate(0deg); }
+@media (max-width: 768px) {
+    .nav-links, .nav-content .btn { display: none; }
+    .mobile-toggle { display: block; }
+    .hero-title { font-size: 3rem; }
+    .grid-wide { grid-column: span 1; }
+    
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+        position: fixed; inset: 0; background: var(--bg-glass-heavy); backdrop-filter: blur(30px);
+        z-index: 1001; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+        opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a { font-size: 2rem; font-family: 'Playfair Display', serif; color: var(--text-primary); text-decoration: none; opacity: 0; transform: translateY(20px); transition: 0.4s; }
+    .mobile-menu.open a { opacity: 1; transform: translateY(0); }
 }
-.warp-active { animation: warpSpeed 0.6s ease-in-out; }
 </style>
 </head>
 <body>
 
-<header class="nav-container" id="mainNav">
-    <div class="navbar">
-        <a href="#" class="logo" id="logoTrigger">
-            <div class="logo-mark">As</div>
-            <span>Andrew Sayegh</span>
+<div class="ambient-light">
+    <div class="light-orb orb-1"></div>
+    <div class="light-orb orb-2"></div>
+</div>
+
+<nav id="navbar">
+    <div class="nav-content">
+        <a href="#" class="brand" id="brandLogo">
+            <div class="brand-mark">AS</div>
+            <span style="font-size:1.1rem; letter-spacing: -0.01em;">Andrew Sayegh</span>
         </a>
         <ul class="nav-links">
             <li><a href="#results">Track Record</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#pricing">Invest</a></li>
+            <li><a href="#pricing">Pricing</a></li>
         </ul>
-        <div style="display: flex; gap:1rem; align-items:center;">
-            <a href="javascript:void(0)" onclick="openModal()" class="btn btn-primary" style="height: 40px; font-size: 0.85rem;">Book Strategy</a>
-            <button class="mobile-toggle" aria-label="Menu" onclick="toggleMenu()">
-                <span></span><span></span>
+        <div style="display:flex; gap:1rem;">
+            <button class="btn btn-outline" style="padding:0.6rem 1.2rem; font-size:0.8rem;" onclick="openBooking()">Consultation</button>
+            <button class="mobile-toggle" onclick="toggleMobile()">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             </button>
         </div>
     </div>
-</header>
+</nav>
 
 <div class="mobile-menu" id="mobileMenu">
-    <a href="#results" class="mobile-link" onclick="toggleMenu()">Results</a>
-    <a href="#services" class="mobile-link" onclick="toggleMenu()">Services</a>
-    <a href="#pricing" class="mobile-link" onclick="toggleMenu()">Pricing</a>
-    <a href="javascript:void(0)" class="mobile-link" onclick="toggleMenu(); openModal()" style="color: var(--accent-primary); margin-top: 1rem;">Book Now →</a>
+    <a href="#results" onclick="toggleMobile()" style="transition-delay: 0.1s">Track Record</a>
+    <a href="#services" onclick="toggleMobile()" style="transition-delay: 0.2s">Services</a>
+    <a href="#pricing" onclick="toggleMobile()" style="transition-delay: 0.3s">Pricing</a>
+    <a href="javascript:void(0)" onclick="toggleMobile(); openBooking()" style="color:var(--accent-gold); transition-delay: 0.4s">Book Now</a>
 </div>
 
-<main>
-    <section class="hero">
-        <div class="hero-pill fade-up"><span class="dot"></span><span>ACCEPTING FOR 2026</span></div>
-        <h1 class="hero-title reveal-text">
-            <span>Precision Strategy</span>
-            <span>for the Ambitious.</span>
-        </h1>
-        <p class="fade-up" style="margin-bottom: 2.5rem;">
-            I decode the hidden curriculum of elite admissions. From community college to Columbia SIPA and Capitol Hill—I built the roadmap so you don't have to guess.
-        </p>
-        <div class="hero-btn-group fade-up">
-            <button class="btn btn-primary" onclick="openModal()">Secure Consultation</button>
-            <button class="btn btn-ghost" onclick="document.getElementById('services').scrollIntoView()">Explore Services</button>
-        </div>
-    </section>
+<section class="hero">
+    <div class="hero-pill"><span class="status-dot"></span><span>ACCEPTING CLIENTS FOR 2026</span></div>
+    <h1 class="hero-title">
+        <span class="metallic-text">The Unfair Advantage</span>
+        <span style="font-style:italic; font-weight:400; color:var(--text-secondary);">for getting in.</span>
+    </h1>
+    <p class="hero-sub">
+        Flagship admissions strategy for high-stakes transfer students and fellowship applicants. 
+        Engineered by a UCLA Alum & Columbia SIPA Admit.
+    </p>
+    <div style="display:flex; gap:1rem; animation: slideUp 1s 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;">
+        <button class="btn btn-primary" onclick="openBooking()">Book Strategy Call</button>
+        <button class="btn btn-outline" onclick="document.getElementById('services').scrollIntoView()">Explore Services</button>
+    </div>
+</section>
 
-    <div class="ticker-wrap">
-        <div class="ticker-track">
-            <div class="ticker-item"><strong>UCLA</strong> ALUMNI</div>
-            <div class="ticker-item"><strong>COLUMBIA SIPA</strong> ADMIT</div>
-            <div class="ticker-item"><strong>RANGEL</strong> FINALIST</div>
-            <div class="ticker-item"><strong>CONGRESSIONAL</strong> INTERN</div>
-            <div class="ticker-item"><strong>STATE DEPT</strong> FELLOW</div>
-            <div class="ticker-item"><strong>FIRST-GEN</strong> SPECIALIST</div>
-            <div class="ticker-item"><strong>UCLA</strong> ALUMNI</div>
-            <div class="ticker-item"><strong>COLUMBIA SIPA</strong> ADMIT</div>
-            <div class="ticker-item"><strong>RANGEL</strong> FINALIST</div>
-            <div class="ticker-item"><strong>CONGRESSIONAL</strong> INTERN</div>
-            <div class="ticker-item"><strong>STATE DEPT</strong> FELLOW</div>
-            <div class="ticker-item"><strong>FIRST-GEN</strong> SPECIALIST</div>
+<section id="results" class="section">
+    <span class="mono">Proven Results</span>
+    <h2>Credentials that speak.</h2>
+    <div class="grid">
+        <div class="glass-panel grid-wide" style="padding:2.5rem;">
+            <div class="icon-box">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h3 style="font-size:1.5rem; margin-bottom:0.5rem;">100% First-Gen Success</h3>
+            <p style="color:var(--text-secondary);">I specialize in helping students who don't have a "legacy" advantage. I built this roadmap from scratch so you don't have to.</p>
+        </div>
+        <div class="glass-panel" style="padding:2.5rem;">
+            <div class="mono" style="color:var(--text-tertiary);">FELLOWSHIPS</div>
+            <div style="font-family:'Playfair Display'; font-size:3.5rem; color:var(--accent-gold); line-height:1;">2+</div>
+            <p style="margin-top:1rem; color:var(--text-secondary);">National Finalist selections (Rangel, Pickering).</p>
+        </div>
+        <div class="glass-panel" style="padding:2.5rem;">
+            <div class="mono" style="color:var(--text-tertiary);">ADMISSIONS</div>
+            <div style="font-family:'Playfair Display'; font-size:3.5rem; color:var(--text-primary); line-height:1;">Ivy</div>
+            <p style="margin-top:1rem; color:var(--text-secondary);">Accepted to Columbia SIPA & UCLA.</p>
         </div>
     </div>
+</section>
 
-    <section id="results" class="section">
-        <div class="reveal-text">
-            <span class="mono">Proven Outcomes</span>
-            <h2>Credentials that speak.</h2>
+<section id="services" class="section">
+    <div style="text-align:center; max-width:600px; margin:0 auto;">
+        <span class="mono">Consulting</span>
+        <h2>Precision Services</h2>
+    </div>
+    <div class="grid">
+        <div class="glass-panel" style="padding:2rem;">
+            <div class="icon-box">❖</div>
+            <h3>College Admissions</h3>
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-top:0.5rem;">School list curation and personal statement engineering for T20 & UC transfers.</p>
         </div>
-        <div class="grid">
-            <div class="card grid-wide fade-up">
-                <div class="stat">100%</div>
-                <h3>First-Generation Architect</h3>
-                <p>I specialize in high-potential students navigating systems not built for them. I turn "non-traditional" backgrounds into competitive advantages.</p>
-            </div>
-            <div class="card fade-up">
-                <div class="stat">2</div>
-                <h3>National Fellowships</h3>
-                <p>Selected as a finalist for the nation's most competitive diplomatic service programs.</p>
-            </div>
-            <div class="card fade-up">
-                <div class="stat">IVY</div>
-                <h3>League Admissions</h3>
-                <p>Accepted to Columbia's School of International & Public Affairs without insider connections.</p>
-            </div>
+        <div class="glass-panel" style="padding:2rem;">
+            <div class="icon-box">✦</div>
+            <h3>Fellowship Advising</h3>
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-top:0.5rem;">Narrative development for Fulbright, Rangel, and Boren applications.</p>
         </div>
-    </section>
+        <div class="glass-panel" style="padding:2rem;">
+            <div class="icon-box">⟁</div>
+            <h3>Career Strategy</h3>
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-top:0.5rem;">Federal resume audits and STAR-method interview prep for policy roles.</p>
+        </div>
+    </div>
+</section>
 
-    <section id="services" class="section">
-        <div class="reveal-text">
-            <span class="mono">Intelligence</span>
-            <h2>Service Offerings</h2>
+<section id="pricing" class="section">
+    <div style="text-align:center;">
+        <span class="mono">Investment</span>
+        <h2>Select your tier</h2>
+    </div>
+    <div class="grid">
+        <div class="glass-panel" style="padding:2.5rem; text-align:center;">
+            <span class="mono" style="color:var(--text-secondary);">STARTER</span>
+            <div style="font-size:2.5rem; font-family:'Playfair Display'; margin:1rem 0;">$99</div>
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:2rem;">Single session audit or resume review. Perfect for a quick check.</p>
+            <button class="btn btn-outline" style="width:100%" onclick="openBooking('Starter')">Get Started</button>
         </div>
-        <div class="grid">
-            <div class="card fade-up">
-                <div class="card-icon">❖</div>
-                <h3>Admissions Strategy</h3>
-                <p>School selection, personal statement engineering, and narrative construction for Transfer & Grad school applicants.</p>
-            </div>
-            <div class="card fade-up">
-                <div class="card-icon">✦</div>
-                <h3>Fellowship Design</h3>
-                <p>Specific coaching for Fulbright, Rangel, and Pickering. We focus on the "Service Narrative" reviewers demand.</p>
-            </div>
-            <div class="card fade-up">
-                <div class="card-icon">⚡</div>
-                <h3>Career Pivot</h3>
-                <p>Translating corporate or academic backgrounds into policy, non-profit, and federal resume formats.</p>
-            </div>
+        <div class="glass-panel featured" style="padding:2.5rem; text-align:center; transform:scale(1.05);">
+            <div style="position:absolute; top:0; left:0; width:100%; height:4px; background:var(--accent-gold);"></div>
+            <span class="mono" style="color:var(--accent-gold);">PREMIUM</span>
+            <div style="font-size:2.5rem; font-family:'Playfair Display'; margin:1rem 0;">$199</div>
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:2rem;">Full application package with unlimited revisions for one school.</p>
+            <button class="btn btn-primary" style="width:100%" onclick="openBooking('Premium')">Select Premium</button>
         </div>
-    </section>
+        <div class="glass-panel" style="padding:2.5rem; text-align:center;">
+            <span class="mono" style="color:var(--text-secondary);">UNLIMITED</span>
+            <div style="font-size:2.5rem; font-family:'Playfair Display'; margin:1rem 0;">$599</div>
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:2rem;">End-to-end consulting for multiple schools + scholarship negotiation.</p>
+            <button class="btn btn-outline" style="width:100%" onclick="openBooking('Unlimited')">Contact Me</button>
+        </div>
+    </div>
+</section>
 
-    <section id="pricing" class="section">
-        <div class="reveal-text" style="text-align: center;">
-            <span class="mono">Investment</span>
-            <h2>Transparent Tiers</h2>
-        </div>
-        <div class="grid">
-            <div class="card fade-up" style="text-align: center;">
-                <span class="mono">Starter</span>
-                <div class="stat" style="font-size: 2.5rem;">$99</div>
-                <p>Single Session Strategy<br>Resume Audit<br>Action Plan</p>
-                <button class="btn btn-ghost" style="width: 100%; margin-top: 1.5rem;" onclick="openModal('Starter')">Begin</button>
-            </div>
-            <div class="card fade-up" style="text-align: center; border-color: var(--accent-primary); background: rgba(255,255,255,0.06);">
-                <span class="mono" style="color: var(--accent-primary);">Recommended</span>
-                <div class="stat" style="font-size: 2.5rem;">$199</div>
-                <p>Full Application Package<br>Unlimited Revisions (1 App)<br>Interview Prep</p>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" onclick="openModal('Premium')">Select</button>
-            </div>
-            <div class="card fade-up" style="text-align: center;">
-                <span class="mono">Full Cycle</span>
-                <div class="stat" style="font-size: 2.5rem;">$599</div>
-                <p>End-to-End Consulting<br>Multiple Schools<br>Scholarship Negotation</p>
-                <button class="btn btn-ghost" style="width: 100%; margin-top: 1.5rem;" onclick="openModal('Full Cycle')">Contact</button>
-            </div>
-        </div>
-    </section>
-</main>
-
-<footer style="padding: 4rem 2rem; border-top: 1px solid var(--border-glass); text-align: center; margin-top: 4rem;">
-    <p class="mono">© 2026 Andrew Sayegh. Engineered in California.</p>
+<footer style="margin-top:6rem; border-top:1px solid var(--border-subtle); padding:4rem 1.5rem; text-align:center; color:var(--text-tertiary);">
+    <p class="mono">© 2026 Andrew Sayegh. Los Angeles, CA.</p>
 </footer>
 
-<div class="modal-backdrop" id="bookingModal" onclick="if(event.target === this) closeModal()">
-    <div class="modal-content">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
-            <h3>Request Access</h3>
-            <button onclick="closeModal()" style="background:none; border:none; color:var(--metal-dim); font-size:1.5rem; cursor:pointer;">✕</button>
+<div class="modal-overlay" id="bookingModal" onclick="closeBookingOutside(event)">
+    <div class="modal-window">
+        <button onclick="closeBooking()" style="position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; color:var(--text-secondary); cursor:pointer; font-size:1.2rem;">✕</button>
+        <h3 style="font-size:1.8rem; font-family:'Playfair Display'; margin-bottom:0.5rem;">Request Consultation</h3>
+        <p style="color:var(--text-secondary); margin-bottom:2rem; font-size:0.9rem;">Fill out the details below. I usually respond within 24 hours.</p>
+        
+        <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" id="bk-name" placeholder="Jane Doe">
         </div>
-        <form onsubmit="handleForm(event)">
-            <div class="input-group">
-                <label class="input-label">Full Name</label>
-                <input type="text" id="fname" class="input-field" placeholder="Jane Doe" required>
-            </div>
-            <div class="input-group">
-                <label class="input-label">Email Address</label>
-                <input type="email" id="femail" class="input-field" placeholder="jane@example.com" required>
-            </div>
-            <div class="input-group">
-                <label class="input-label">Interest</label>
-                <select id="finterest" class="input-field">
-                    <option value="General">General Inquiry</option>
-                    <option value="Starter">Starter ($99)</option>
-                    <option value="Premium">Premium ($199)</option>
-                    <option value="Full Cycle">Full Cycle ($599)</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Initialize Request</button>
-        </form>
+        
+        <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" id="bk-email" placeholder="jane@example.com">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Consulting Option</label>
+            <select class="form-select" id="bk-service">
+                <option value="" disabled selected>Select service type...</option>
+                <option value="College Admissions">College Admissions</option>
+                <option value="Fellowship Advising">Fellowship Advising</option>
+                <option value="Career Strategy">Career/Policy Strategy</option>
+                <option value="General Inquiry">Other / General Inquiry</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Package Tier</label>
+            <select class="form-select" id="bk-tier">
+                <option value="" disabled selected>Select package...</option>
+                <option value="Starter ($99)">Starter ($99)</option>
+                <option value="Premium ($199)">Premium ($199)</option>
+                <option value="Unlimited ($599)">Unlimited ($599)</option>
+                <option value="Not Sure">Not sure yet</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-input" id="bk-msg" rows="3" placeholder="Briefly describe your goals..."></textarea>
+        </div>
+
+        <button class="btn btn-primary" style="width:100%" onclick="submitBooking()">Submit Request</button>
     </div>
 </div>
 
 <script>
-    // ──────────────────────────────────────────
-    // SMOOTH SCROLL & PARALLAX ENGINE
-    // ──────────────────────────────────────────
-    
-    // Header Blur on Scroll
-    const nav = document.getElementById('mainNav');
+    // Header Scroll Effect
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-    }, { passive: true });
-
-    // Intersection Observer for Reveal Animations
-    const observerOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-up, .reveal-text').forEach(el => {
-        observer.observe(el);
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Mobile Menu Logic
-    const menu = document.getElementById('mobileMenu');
-    const toggleBtn = document.querySelector('.mobile-toggle');
-    
-    function toggleMenu() {
-        const isOpen = menu.classList.contains('active');
-        if (isOpen) {
-            menu.classList.remove('active');
-            document.body.style.overflow = '';
-            toggleBtn.innerHTML = '<span></span><span></span>';
-        } else {
-            menu.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Lock scroll
-            toggleBtn.innerHTML = '<span style="transform: rotate(45deg) translate(5px, 6px)"></span><span style="transform: rotate(-45deg) translate(5px, -6px)"></span>';
-        }
+    // Mobile Menu
+    function toggleMobile() {
+        document.getElementById('mobileMenu').classList.toggle('open');
+        document.body.style.overflow = document.body.style.overflow === 'hidden' ? '' : 'hidden';
     }
 
     // Modal Logic
     const modal = document.getElementById('bookingModal');
-    const select = document.getElementById('finterest');
-
-    function openModal(tier) {
+    
+    function openBooking(tierPreselect) {
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
-        if (tier) {
-            for (let i = 0; i < select.options.length; i++) {
-                if (select.options[i].value === tier) {
-                    select.selectedIndex = i;
-                    break;
-                }
+        if(tierPreselect) {
+            const select = document.getElementById('bk-tier');
+            for(let i=0; i<select.options.length; i++){
+                if(select.options[i].value.includes(tierPreselect)) select.selectedIndex = i;
             }
         }
     }
-
-    function closeModal() {
+    
+    function closeBooking() {
         modal.classList.remove('open');
         document.body.style.overflow = '';
     }
-
-    function handleForm(e) {
-        e.preventDefault();
-        const name = document.getElementById('fname').value;
-        const email = document.getElementById('femail').value;
-        const interest = document.getElementById('finterest').value;
-        
-        // Simulating "Processing" then redirect
-        const btn = e.target.querySelector('button');
-        const originalText = btn.innerText;
-        btn.innerText = "Processing...";
-        btn.style.opacity = "0.7";
-        
-        setTimeout(() => {
-            const subject = `Consultation Request: ${interest} - ${name}`;
-            const body = `Name: ${name}\nEmail: ${email}\nTier: ${interest}\n\nPlease provide details on next steps.`;
-            window.location.href = `mailto:contact@andrewsayegh.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
-            btn.innerText = "Redirecting...";
-            setTimeout(() => {
-                closeModal();
-                btn.innerText = originalText;
-                btn.style.opacity = "1";
-            }, 1000);
-        }, 800);
+    
+    function closeBookingOutside(e) {
+        if(e.target === modal) closeBooking();
     }
 
-    // ──────────────────────────────────────────
-    // EASTER EGG: LUDICROUS MODE
-    // ──────────────────────────────────────────
-    let clickCount = 0;
-    let clickTimer;
-    const logoTrigger = document.getElementById('logoTrigger');
+    // Form Submission (Mailto)
+    function submitBooking() {
+        const name = document.getElementById('bk-name').value;
+        const email = document.getElementById('bk-email').value;
+        const service = document.getElementById('bk-service').value;
+        const tier = document.getElementById('bk-tier').value;
+        const msg = document.getElementById('bk-msg').value;
 
-    logoTrigger.addEventListener('click', (e) => {
-        e.preventDefault();
-        clickCount++;
-        clearTimeout(clickTimer);
-        
-        // Reset count if user stops clicking
-        clickTimer = setTimeout(() => { clickCount = 0; }, 400);
-
-        if (clickCount === 5) {
-            enableLudicrousMode();
-            clickCount = 0;
+        if(!name || !email) {
+            alert('Please provide your name and email.');
+            return;
         }
+
+        const subject = `Consultation Request: ${name}`;
+        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AService: ${service}%0D%0APackage: ${tier}%0D%0A%0D%0AMessage:%0D%0A${msg}`;
+        
+        window.location.href = `mailto:contact@andrewsayegh.com?subject=${subject}&body=${body}`;
+        
+        setTimeout(() => {
+            closeBooking();
+            // Optional: Reset form
+        }, 1000);
+    }
+
+    // Mouse Tracking for Card Glow Effect
+    document.querySelectorAll('.glass-panel').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
     });
 
-    function enableLudicrousMode() {
-        document.body.classList.add('warp-active');
-        
-        setTimeout(() => {
+    // EASTER EGG (Click Logo 5 times)
+    let clicks = 0;
+    document.getElementById('brandLogo').addEventListener('click', (e) => {
+        e.preventDefault();
+        clicks++;
+        if(clicks === 5) {
             document.documentElement.classList.toggle('ludicrous');
-            document.body.classList.remove('warp-active');
-            
-            // Haptic Feedback (Visual)
-            if (document.documentElement.classList.contains('ludicrous')) {
-                alert("/// LUDICROUS MODE ENGAGED ///");
-                document.querySelector('.hero-title span').innerText = "MAXIMUM VELOCITY";
-            } else {
-                document.querySelector('.hero-title span').innerText = "Precision Strategy";
-            }
-        }, 300); // Wait for warp animation peak
-    }
+            alert("/// SYSTEM OVERRIDE: NEON MODE ACTIVATED ///");
+            clicks = 0;
+        }
+        setTimeout(() => clicks = 0, 500);
+    });
 </script>
 
 </body>
