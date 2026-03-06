@@ -2,573 +2,648 @@
 <html lang="en" class="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andrew Sayegh | Flagship Admissions Strategy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Andrew Sayegh | Elite Admissions Strategy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ──────────────────────────────────────────
-   TITANIUM PALETTE — NO GOLD, PURE AUTHORITY
+   ENGINEERED PHYSICS & PALETTE
    ────────────────────────────────────────── */
 :root {
-  /* Depths */
-  --bg-depth: #030304;      /* Deep Space Black */
-  --bg-surface: #0a0a0c;    /* Dark Steel */
-  --bg-card: #121216;       /* Gunmetal */
-  
-  /* Metals */
-  --metal-silver: #e2e2e6;  /* Polished Apple Silver */
-  --metal-steel: #868696;   /* Industrial Steel */
-  --metal-titanium: #aeb4b9; /* Matte Titanium */
-  --metal-chrome: #ffffff;   /* Highlighting */
-  
-  /* Borders & Accents */
-  --glass-border: rgba(226, 226, 230, 0.12);
-  --glass-highlight: rgba(255, 255, 255, 0.08);
-  --glass-blur: 20px;
-  
-  /* Text */
-  --text-primary: #f5f5f7;  /* Apple White */
-  --text-secondary: #86868b; /* Apple Gray */
-  --text-tertiary: #525257;
-  
-  /* Brand Accents (Cool Blue/Steel instead of Gold) */
-  --accent-core: #cbd5e1;   /* Cold Steel */
-  --accent-glow: rgba(203, 213, 225, 0.3);
-  
-  /* Typography */
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'DM Mono', monospace;
-  
-  /* Motion */
-  --ease-apple: cubic-bezier(0.2, 0.8, 0.2, 1); /* Smooth "iOS" feel */
+    /* Core Physics */
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy */
+    --ease-fluid: cubic-bezier(0.25, 0.1, 0.25, 1);       /* Smooth */
+    --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);         /* Apple-like */
+    
+    /* Titanium Palette */
+    --bg-deep: #050507;
+    --bg-glass: rgba(18, 18, 22, 0.65);
+    --bg-surface: #0e0e11;
+    
+    /* Metals */
+    --metal-light: #e4e4e7;
+    --metal-dim: #71717a;
+    --metal-dark: #27272a;
+    
+    /* Accents */
+    --accent-primary: #ffffff;
+    --accent-glow: rgba(255,255,255,0.15);
+    --border-glass: rgba(255, 255, 255, 0.08);
+    
+    /* Typography */
+    --font-head: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-tech: 'DM Mono', monospace;
+    
+    /* Layout */
+    --nav-height: 70px;
+    --container-width: 1200px;
+    --gutter: 24px;
 }
 
-/* Global Reset */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
+/* LUDICROUS MODE VARIABLES (Overwritten via JS) */
+html.ludicrous {
+    --accent-primary: #ff0033;
+    --accent-glow: rgba(255, 0, 51, 0.4);
+    --bg-deep: #000;
+    --metal-light: #ff0033;
+    --border-glass: rgba(255, 0, 51, 0.3);
+}
 
+/* Reset & Base */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; font-size: 16px; height: 100%; }
 body {
-  background-color: var(--bg-depth);
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  /* Subtle radial spotlight (Tesla Cybertruck vibe) */
-  background-image: 
-    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.07) 0%, transparent 60%),
-    linear-gradient(180deg, var(--bg-depth) 0%, var(--bg-surface) 100%);
+    background-color: var(--bg-deep);
+    color: var(--metal-light);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    height: 100%;
+    /* Subtle Grain Texture */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
-h1, h2, h3 { color: var(--text-primary); letter-spacing: -0.02em; }
-h1 { font-family: var(--font-serif); }
-h2, h3 { font-family: var(--font-sans); font-weight: 600; }
-p { color: var(--text-secondary); font-size: 1.05rem; font-weight: 400; }
-.mono { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--metal-titanium); }
-
-/* Brushed Metal Texture Overlay */
-body::after {
-  content: "";
-  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.6; mix-blend-mode: overlay;
-}
+/* Typography */
+h1, h2, h3 { color: var(--accent-primary); letter-spacing: -0.03em; font-weight: 400; }
+h1 { font-family: var(--font-head); line-height: 1.1; }
+h2 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
+p { color: var(--metal-dim); font-size: 1.05rem; max-width: 65ch; }
+.mono { font-family: var(--font-tech); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--metal-dim); display: block; margin-bottom: 0.75rem; }
 
 /* ──────────────────────────────────────────
-   GLASSMORPHISM & COMPONENTS
+   COMPONENTS
    ────────────────────────────────────────── */
 
-/* The "Apple" Button */
+/* Glass Panel Logic */
+.glass {
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--border-glass);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0 2rem; height: 50px;
+    border-radius: 999px; font-weight: 500; font-size: 0.95rem;
+    transition: transform 0.2s var(--ease-snappy), box-shadow 0.3s ease, filter 0.3s ease;
+    cursor: pointer; position: relative; overflow: hidden; white-space: nowrap;
+    text-decoration: none;
+}
+.btn:active { transform: scale(0.96); }
+
 .btn-primary {
-  background: linear-gradient(180deg, #ffffff 0%, #e2e2e6 100%);
-  color: #000;
-  padding: 1rem 2.5rem;
-  border-radius: 999px; /* Pill shape */
-  font-weight: 600;
-  font-size: 0.95rem;
-  border: 1px solid #fff;
-  cursor: pointer;
-  transition: all 0.4s var(--ease-apple);
-  position: relative; overflow: hidden;
-  box-shadow: 0 4px 24px rgba(255,255,255,0.15);
+    background: var(--accent-primary);
+    color: var(--bg-deep);
+    border: 1px solid var(--accent-primary);
+    font-weight: 600;
 }
 .btn-primary:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 40px rgba(255,255,255,0.3);
+    box-shadow: 0 0 30px var(--accent-glow);
 }
+/* Shine Effect for Button */
+.btn-primary::after {
+    content: ''; position: absolute; top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s;
+}
+.btn-primary:hover::after { left: 150%; transition: left 0.7s ease; }
 
-.btn-secondary {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  color: var(--text-primary);
-  border: 1px solid var(--glass-border);
-  padding: 1rem 2.5rem;
-  border-radius: 999px;
-  font-weight: 500;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.3s var(--ease-apple);
+.btn-ghost {
+    background: rgba(255,255,255,0.05);
+    color: var(--metal-light);
+    border: 1px solid var(--border-glass);
 }
-.btn-secondary:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: var(--text-primary);
-}
-
-/* Glass Card */
-.glass-card {
-  background: rgba(20, 20, 25, 0.4);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border);
-  border-top: 1px solid var(--glass-highlight); /* Top light catch */
-  border-radius: 24px; /* Meta-style roundedness */
-  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
-  transition: transform 0.4s var(--ease-apple), border-color 0.4s;
-}
-.glass-card:hover {
-  border-color: rgba(255,255,255,0.2);
-  transform: translateY(-4px);
+.btn-ghost:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--metal-light);
 }
 
 /* ──────────────────────────────────────────
    NAVIGATION
    ────────────────────────────────────────── */
-nav {
-  position: fixed; top: 0; width: 100%; z-index: 1000;
-  padding: 1.2rem 2.5rem;
-  display: flex; justify-content: space-between; align-items: center;
-  transition: all 0.4s var(--ease-apple);
+.nav-container {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 1rem var(--gutter);
+    transition: padding 0.3s var(--ease-fluid);
 }
-nav.scrolled {
-  background: rgba(3, 3, 4, 0.7);
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
-  border-bottom: 1px solid var(--glass-border);
-  padding: 0.8rem 2.5rem;
+.nav-container.scrolled { padding: 0.75rem var(--gutter); }
+
+.navbar {
+    max-width: var(--container-width); margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.75rem 1.5rem; border-radius: 100px;
+    transition: all 0.3s var(--ease-fluid);
+}
+.nav-container.scrolled .navbar {
+    background: rgba(5, 5, 7, 0.85);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-glass);
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.8);
 }
 
-.nav-brand {
-  display: flex; align-items: center; gap: 12px;
-  font-weight: 600; font-size: 1.1rem; color: var(--text-primary);
-  text-decoration: none; cursor: pointer; user-select: none;
+.logo {
+    font-family: var(--font-head); font-size: 1.25rem; font-weight: 600; font-style: italic;
+    color: var(--accent-primary); text-decoration: none; display: flex; align-items: center; gap: 8px;
+    user-select: none;
 }
-/* Metallic Logo */
 .logo-mark {
-  width: 36px; height: 36px;
-  background: linear-gradient(135deg, #e2e2e6 0%, #868696 100%);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-serif); color: #000; font-weight: 700; font-style: italic;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 15px rgba(255,255,255,0.1);
+    width: 32px; height: 32px; border: 1px solid var(--border-glass); border-radius: 8px;
+    display: grid; place-items: center; font-size: 0.8em;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
 }
 
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a {
-  color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500;
-  transition: color 0.2s;
+    color: var(--metal-dim); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    transition: color 0.2s; position: relative;
 }
-.nav-links a:hover { color: var(--text-primary); }
+.nav-links a:hover { color: var(--accent-primary); }
+.nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%);
+    width: 0; height: 1px; background: var(--accent-primary); transition: width 0.3s;
+}
+.nav-links a:hover::after { width: 100%; }
 
-.menu-btn { display: none; background: none; border: none; color: #fff; cursor: pointer; }
+.mobile-toggle {
+    display: none; background: none; border: none; color: var(--accent-primary);
+    width: 44px; height: 44px; z-index: 1002; cursor: pointer;
+    flex-direction: column; justify-content: center; align-items: center; gap: 6px;
+}
+.mobile-toggle span {
+    width: 24px; height: 2px; background: currentColor; border-radius: 2px;
+    transition: all 0.3s var(--ease-snappy);
+}
+
+/* ──────────────────────────────────────────
+   MOBILE MENU OVERLAY
+   ────────────────────────────────────────── */
+.mobile-menu {
+    position: fixed; inset: 0; z-index: 1001;
+    background: var(--bg-deep);
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+    opacity: 0; pointer-events: none;
+    transform: scale(0.95) translateY(20px);
+    transition: all 0.4s var(--ease-snappy);
+}
+.mobile-menu.active { opacity: 1; pointer-events: all; transform: scale(1) translateY(0); }
+/* Cool blur circle behind menu */
+.mobile-menu::before {
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 300px; height: 300px; background: var(--accent-primary);
+    filter: blur(150px); opacity: 0.1; pointer-events: none;
+}
+.mobile-link {
+    font-family: var(--font-head); font-size: 2.5rem; color: var(--metal-light);
+    text-decoration: none; opacity: 0; transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+.mobile-menu.active .mobile-link { opacity: 1; transform: translateY(0); }
+.mobile-menu.active .mobile-link:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.active .mobile-link:nth-child(2) { transition-delay: 0.2s; }
+.mobile-menu.active .mobile-link:nth-child(3) { transition-delay: 0.3s; }
+.mobile-menu.active .mobile-link:nth-child(4) { transition-delay: 0.4s; }
+
+/* ──────────────────────────────────────────
+   SCROLL REVEAL ANIMATIONS
+   ────────────────────────────────────────── */
+.reveal-text {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+.reveal-text > span {
+    display: block; transform: translateY(120%); opacity: 0;
+    transition: transform 1s var(--ease-fluid), opacity 1s ease;
+}
+.reveal-text.visible > span { transform: translateY(0); opacity: 1; }
+
+.fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s var(--ease-fluid);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
 
 /* ──────────────────────────────────────────
    HERO SECTION
    ────────────────────────────────────────── */
 .hero {
-  min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  text-align: center; position: relative; padding: 0 2rem;
+    min-height: 100vh; padding: 0 var(--gutter);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; position: relative;
 }
-
-/* Metallic Sheen Animation on Text */
-.gradient-text {
-  background: linear-gradient(to right, #868696 20%, #ffffff 50%, #868696 80%);
-  background-size: 200% auto;
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  animation: shine 5s linear infinite;
-}
-@keyframes shine { to { background-position: 200% center; } }
-
 .hero-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 14px; border-radius: 100px;
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-  margin-bottom: 2rem;
-  font-family: var(--font-mono); font-size: 0.7rem; color: var(--metal-silver);
+    padding: 6px 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
+    border-radius: 100px; display: inline-flex; align-items: center; gap: 8px;
+    margin-bottom: 2rem;
 }
-.status-dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; }
-
-h1.hero-title {
-  font-size: clamp(3rem, 7vw, 6rem);
-  line-height: 1.05; margin-bottom: 1.5rem;
+.hero-pill .dot { width: 6px; height: 6px; background: #4ADE80; border-radius: 50%; box-shadow: 0 0 10px rgba(74, 222, 128, 0.5); }
+.hero-title {
+    font-size: clamp(3.5rem, 9vw, 6.5rem); margin-bottom: 1.5rem;
+    background: linear-gradient(180deg, #fff 0%, #a1a1aa 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-
-.hero-sub {
-  max-width: 600px; margin-bottom: 3rem; font-size: 1.2rem;
-  color: var(--text-secondary); line-height: 1.6;
-}
-
-.hero-actions { display: flex; gap: 1rem; align-items: center; }
+.hero-btn-group { display: flex; gap: 1rem; margin-top: 2rem; }
 
 /* ──────────────────────────────────────────
-   SECTIONS
+   TICKER (Infinite Loop)
    ────────────────────────────────────────── */
-.section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; }
-.header-center { text-align: center; max-width: 700px; margin: 0 auto 5rem; }
-.header-center h2 { font-size: 3rem; margin-top: 1rem; }
-
-/* Ticker */
 .ticker-wrap {
-  border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);
-  background: rgba(255,255,255,0.01); overflow: hidden; padding: 1.2rem 0;
+    width: 100%; overflow: hidden; border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);
+    background: var(--bg-surface); padding: 1.25rem 0;
 }
-.ticker-content { display: flex; gap: 4rem; animation: ticker 40s linear infinite; }
+.ticker-track {
+    display: flex; white-space: nowrap; gap: 4rem;
+    animation: scroll 30s linear infinite; will-change: transform;
+}
 .ticker-item {
-  color: var(--metal-steel); font-family: var(--font-mono); font-size: 0.9rem;
-  white-space: nowrap; text-transform: uppercase; letter-spacing: 0.05em;
-  display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-tech); color: var(--metal-dim); font-size: 0.85rem;
+    display: flex; align-items: center; gap: 0.5rem;
 }
-.ticker-item b { color: var(--text-primary); }
-@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
-
-/* Bento Grid */
-.bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-.bento-card {
-  padding: 2.5rem; position: relative; overflow: hidden;
-  display: flex; flex-direction: column; justify-content: space-between;
-  background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-}
-.bento-wide { grid-column: span 2; }
-.bento-stat { font-size: 4.5rem; font-family: var(--font-serif); line-height: 1; margin-bottom: 0.5rem; color: var(--text-primary); }
-.bento-desc { color: var(--text-secondary); font-size: 0.95rem; }
-
-/* Services */
-.services-list { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
-.svc-card { padding: 3rem 2rem; text-align: left; }
-.svc-icon {
-  width: 50px; height: 50px; border-radius: 12px;
-  background: linear-gradient(135deg, #333, #111);
-  border: 1px solid var(--glass-border);
-  display: grid; place-items: center; margin-bottom: 1.5rem;
-  color: var(--metal-silver);
-}
-.svc-card:hover .svc-icon { border-color: var(--text-primary); box-shadow: 0 0 20px rgba(255,255,255,0.2); }
-
-/* Pricing */
-.price-grid { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 2rem; align-items: center; }
-.price-card { padding: 3rem 2rem; text-align: center; }
-.price-card.featured {
-  background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
-  border: 1px solid rgba(255,255,255,0.2);
-  transform: scale(1.05); z-index: 2;
-  box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8);
-}
-.price-amt { font-size: 3rem; font-weight: 600; color: var(--text-primary); margin: 1rem 0; letter-spacing: -1px; }
-.price-feat li { list-style: none; margin-bottom: 0.8rem; color: var(--text-secondary); font-size: 0.9rem; }
+.ticker-item strong { color: var(--accent-primary); }
+@keyframes scroll { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-50%,0,0); } }
 
 /* ──────────────────────────────────────────
-   BOOKING MODAL (Auto-load)
+   GRIDS
    ────────────────────────────────────────── */
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);
-  z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
-  display: grid; place-items: center; padding: 1rem;
-}
-.modal-overlay.active { opacity: 1; pointer-events: all; }
-.modal-box {
-  width: 100%; max-width: 500px;
-  background: #111; border: 1px solid var(--glass-border);
-  border-radius: 20px; padding: 2.5rem;
-  transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-}
-.modal-overlay.active .modal-box { transform: scale(1); }
+.section { padding: 8rem var(--gutter); max-width: var(--container-width); margin: 0 auto; }
 
-.input-group { margin-bottom: 1.2rem; }
-.input-group label { display: block; font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; margin-top: 4rem;
+}
+.grid-wide { grid-column: span 2; }
+
+.card {
+    background: linear-gradient(160deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+    border: 1px solid var(--border-glass); border-radius: 24px;
+    padding: 2.5rem; position: relative; overflow: hidden;
+    transition: transform 0.4s var(--ease-snappy), border-color 0.4s;
+    display: flex; flex-direction: column; justify-content: space-between; h-100;
+}
+.card:hover {
+    transform: translateY(-5px); border-color: rgba(255,255,255,0.2);
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+}
+.stat { font-family: var(--font-head); font-size: 4rem; line-height: 1; margin-bottom: 0.5rem; color: var(--accent-primary); }
+.card-icon { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--metal-dim); }
+
+/* ──────────────────────────────────────────
+   MODAL
+   ────────────────────────────────────────── */
+.modal-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
+    z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    display: flex; align-items: center; justify-content: center; padding: 1rem;
+}
+.modal-backdrop.open { opacity: 1; pointer-events: all; }
+.modal-content {
+    background: #09090b; border: 1px solid var(--border-glass); border-radius: 24px;
+    width: 100%; max-width: 500px; padding: 2.5rem;
+    transform: translateY(40px) scale(0.95); transition: all 0.4s var(--ease-spring);
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.8);
+}
+.modal-backdrop.open .modal-content { transform: translateY(0) scale(1); }
+
+.input-group { margin-bottom: 1.25rem; }
+.input-label { display: block; font-size: 0.75rem; color: var(--metal-dim); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
 .input-field {
-  width: 100%; background: #080808; border: 1px solid #333;
-  padding: 1rem; border-radius: 8px; color: #fff; font-family: var(--font-sans);
-  outline: none; transition: border-color 0.3s;
+    width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
+    padding: 1rem; border-radius: 12px; color: var(--accent-primary); font-family: var(--font-body);
+    font-size: 1rem; outline: none; transition: border-color 0.2s;
 }
-.input-field:focus { border-color: var(--metal-silver); }
+.input-field:focus { border-color: var(--accent-primary); background: rgba(255,255,255,0.05); }
 
 /* ──────────────────────────────────────────
-   EASTER EGG (Tesla Mode)
+   RESPONSIVE
    ────────────────────────────────────────── */
-.ludicrous-mode {
-  --bg-depth: #000000;
-  --text-primary: #ff0033; /* Tesla Red / Cyber Punk */
-  --metal-silver: #ff0033;
-  --glass-border: #ff0033;
-  font-family: 'DM Mono', monospace !important;
+@media (max-width: 900px) {
+    .nav-links, .nav-container .btn-primary { display: none; }
+    .mobile-toggle { display: flex; }
+    .grid-wide { grid-column: span 1; }
+    .hero-title { font-size: 3.5rem; }
 }
-.ludicrous-mode h1, .ludicrous-mode p { text-shadow: 0 0 10px #ff0033; }
-.ludicrous-mode body::after { opacity: 0.2; }
 
-/* Responsive */
-@media (max-width: 768px) {
-  h1.hero-title { font-size: 3.5rem; }
-  .nav-links { display: none; }
-  .menu-btn { display: block; }
-  .bento-grid, .services-list, .price-grid { grid-template-columns: 1fr; }
-  .bento-wide { grid-column: span 1; }
-  .price-card.featured { transform: scale(1); }
-  .hero-actions { flex-direction: column; width: 100%; }
-  .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+/* Ludicrous Mode Animation */
+@keyframes warpSpeed {
+    0% { transform: scale(1); filter: hue-rotate(0deg); }
+    50% { transform: scale(1.1) rotate(2deg); filter: blur(4px) contrast(200%); }
+    100% { transform: scale(1); filter: hue-rotate(0deg); }
 }
+.warp-active { animation: warpSpeed 0.6s ease-in-out; }
 </style>
 </head>
 <body>
 
-<nav id="navbar">
-  <div class="nav-brand" id="brandLogo">
-    <div class="logo-mark">As</div>
-    <span>Andrew Sayegh</span>
-  </div>
-  <ul class="nav-links">
-    <li><a href="#track-record">Track Record</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-  </ul>
-  <button class="btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.85rem;" onclick="openBooking()">Book Consultation</button>
-  <button class="menu-btn" onclick="alert('Mobile menu placeholder')">☰</button>
-</nav>
+<header class="nav-container" id="mainNav">
+    <div class="navbar">
+        <a href="#" class="logo" id="logoTrigger">
+            <div class="logo-mark">As</div>
+            <span>Andrew Sayegh</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#results">Track Record</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#pricing">Invest</a></li>
+        </ul>
+        <div style="display: flex; gap:1rem; align-items:center;">
+            <a href="javascript:void(0)" onclick="openModal()" class="btn btn-primary" style="height: 40px; font-size: 0.85rem;">Book Strategy</a>
+            <button class="mobile-toggle" aria-label="Menu" onclick="toggleMenu()">
+                <span></span><span></span>
+            </button>
+        </div>
+    </div>
+</header>
 
-<section class="hero">
-  <div class="hero-pill"><span class="status-dot"></span><span>ACCEPTING CLIENTS FOR 2026</span></div>
-  <h1 class="hero-title">
-    Strategy over <br>
-    <span class="gradient-text">speculation.</span>
-  </h1>
-  <p class="hero-sub">
-    Precision admissions consulting for high-stakes transfer students and fellowship applicants. 
-    Flagship guidance from a UCLA Alum & Columbia SIPA Admit.
-  </p>
-  <div class="hero-actions">
-    <button class="btn-primary" onclick="openBooking()">Initialize Strategy Call</button>
-    <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView()">View Services</button>
-  </div>
-</section>
-
-<div class="ticker-wrap">
-  <div class="ticker-content">
-    <div class="ticker-item"><b>UCLA</b> Alum</div>
-    <div class="ticker-item"><b>Columbia</b> Admit</div>
-    <div class="ticker-item"><b>Capitol Hill</b> Experience</div>
-    <div class="ticker-item"><b>State Dept</b> Fellow</div>
-    <div class="ticker-item"><b>Rangel</b> Finalist</div>
-    <div class="ticker-item"><b>First-Gen</b> Specialist</div>
-    <div class="ticker-item"><b>UCLA</b> Alum</div>
-    <div class="ticker-item"><b>Columbia</b> Admit</div>
-    <div class="ticker-item"><b>Capitol Hill</b> Experience</div>
-    <div class="ticker-item"><b>State Dept</b> Fellow</div>
-  </div>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#results" class="mobile-link" onclick="toggleMenu()">Results</a>
+    <a href="#services" class="mobile-link" onclick="toggleMenu()">Services</a>
+    <a href="#pricing" class="mobile-link" onclick="toggleMenu()">Pricing</a>
+    <a href="javascript:void(0)" class="mobile-link" onclick="toggleMenu(); openModal()" style="color: var(--accent-primary); margin-top: 1rem;">Book Now →</a>
 </div>
 
-<section id="track-record" class="section">
-  <div class="header-center">
-    <span class="mono">The Standard</span>
-    <h2>Built on <span style="color:var(--text-tertiary)">proven results.</span></h2>
-  </div>
-  <div class="bento-grid">
-    <div class="glass-card bento-card bento-wide">
-      <div class="bento-stat">100%</div>
-      <h3>First-Generation Focus</h3>
-      <p class="bento-desc">Navigating the hidden curriculum. I built this roadmap because I had to walk it alone first.</p>
-    </div>
-    <div class="glass-card bento-card">
-      <div class="bento-stat">2</div>
-      <h3>National Fellowships</h3>
-      <p class="bento-desc">Finalist selection for the nation's most competitive diplomatic programs.</p>
-    </div>
-    <div class="glass-card bento-card">
-      <div class="bento-stat">IVY</div>
-      <h3>League Admissions</h3>
-      <p class="bento-desc">Accepted to Columbia SIPA without traditional connections.</p>
-    </div>
-    <div class="glass-card bento-card bento-wide">
-      <div class="bento-stat">DC</div>
-      <h3>Policy Experience</h3>
-      <p class="bento-desc">Internships in Congress and International Non-Profits.</p>
-    </div>
-  </div>
-</section>
+<main>
+    <section class="hero">
+        <div class="hero-pill fade-up"><span class="dot"></span><span>ACCEPTING FOR 2026</span></div>
+        <h1 class="hero-title reveal-text">
+            <span>Precision Strategy</span>
+            <span>for the Ambitious.</span>
+        </h1>
+        <p class="fade-up" style="margin-bottom: 2.5rem;">
+            I decode the hidden curriculum of elite admissions. From community college to Columbia SIPA and Capitol Hill—I built the roadmap so you don't have to guess.
+        </p>
+        <div class="hero-btn-group fade-up">
+            <button class="btn btn-primary" onclick="openModal()">Secure Consultation</button>
+            <button class="btn btn-ghost" onclick="document.getElementById('services').scrollIntoView()">Explore Services</button>
+        </div>
+    </section>
 
-<section id="services" class="section">
-  <div class="header-center">
-    <span class="mono">Offerings</span>
-    <h2>Precision Consulting</h2>
-  </div>
-  <div class="services-list">
-    <div class="glass-card svc-card">
-      <div class="svc-icon">❖</div>
-      <h3>College Admissions</h3>
-      <p style="margin-top:1rem; font-size:0.9rem;">Targeting T20 schools and UC transfers. We engineer your personal statement to cut through the noise.</p>
+    <div class="ticker-wrap">
+        <div class="ticker-track">
+            <div class="ticker-item"><strong>UCLA</strong> ALUMNI</div>
+            <div class="ticker-item"><strong>COLUMBIA SIPA</strong> ADMIT</div>
+            <div class="ticker-item"><strong>RANGEL</strong> FINALIST</div>
+            <div class="ticker-item"><strong>CONGRESSIONAL</strong> INTERN</div>
+            <div class="ticker-item"><strong>STATE DEPT</strong> FELLOW</div>
+            <div class="ticker-item"><strong>FIRST-GEN</strong> SPECIALIST</div>
+            <div class="ticker-item"><strong>UCLA</strong> ALUMNI</div>
+            <div class="ticker-item"><strong>COLUMBIA SIPA</strong> ADMIT</div>
+            <div class="ticker-item"><strong>RANGEL</strong> FINALIST</div>
+            <div class="ticker-item"><strong>CONGRESSIONAL</strong> INTERN</div>
+            <div class="ticker-item"><strong>STATE DEPT</strong> FELLOW</div>
+            <div class="ticker-item"><strong>FIRST-GEN</strong> SPECIALIST</div>
+        </div>
     </div>
-    <div class="glass-card svc-card">
-      <div class="svc-icon">✦</div>
-      <h3>Fellowship Advising</h3>
-      <p style="margin-top:1rem; font-size:0.9rem;">Fulbright, Rangel, Pickering. I help you construct the narrative arc that reviewers require.</p>
-    </div>
-    <div class="glass-card svc-card">
-      <div class="svc-icon">⟁</div>
-      <h3>Career Strategy</h3>
-      <p style="margin-top:1rem; font-size:0.9rem;">Resume auditing and interview prep (STAR method) for federal and policy roles.</p>
-    </div>
-  </div>
-</section>
 
-<section id="pricing" class="section">
-  <div class="header-center">
-    <span class="mono">Investment</span>
-    <h2>Transparent Pricing</h2>
-  </div>
-  <div class="price-grid">
-    <div class="glass-card price-card">
-      <span class="mono">Starter</span>
-      <div class="price-amt">$99</div>
-      <ul class="price-feat">
-        <li>Single Essay Audit</li>
-        <li>30-Min Strategy Call</li>
-        <li>Action Plan</li>
-      </ul>
-      <button class="btn-secondary" style="width:100%; margin-top:2rem;" onclick="openBooking('Starter')">Select</button>
-    </div>
-    <div class="glass-card price-card featured">
-      <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, #fff, transparent);"></div>
-      <span class="mono" style="color:#fff;">Premium</span>
-      <div class="price-amt">$199</div>
-      <ul class="price-feat">
-        <li>Full Application Package</li>
-        <li>Unlimited Revisions (1 App)</li>
-        <li>Mock Interview Prep</li>
-        <li>Priority Support</li>
-      </ul>
-      <button class="btn-primary" style="width:100%; margin-top:2rem;" onclick="openBooking('Premium')">Select Premium</button>
-    </div>
-    <div class="glass-card price-card">
-      <span class="mono">Full Cycle</span>
-      <div class="price-amt">$599</div>
-      <ul class="price-feat">
-        <li>Multi-School Strategy</li>
-        <li>Complete Essay Drafting</li>
-        <li>Scholarship Negotiation</li>
-      </ul>
-      <button class="btn-secondary" style="width:100%; margin-top:2rem;" onclick="openBooking('Full Cycle')">Select</button>
-    </div>
-  </div>
-</section>
+    <section id="results" class="section">
+        <div class="reveal-text">
+            <span class="mono">Proven Outcomes</span>
+            <h2>Credentials that speak.</h2>
+        </div>
+        <div class="grid">
+            <div class="card grid-wide fade-up">
+                <div class="stat">100%</div>
+                <h3>First-Generation Architect</h3>
+                <p>I specialize in high-potential students navigating systems not built for them. I turn "non-traditional" backgrounds into competitive advantages.</p>
+            </div>
+            <div class="card fade-up">
+                <div class="stat">2</div>
+                <h3>National Fellowships</h3>
+                <p>Selected as a finalist for the nation's most competitive diplomatic service programs.</p>
+            </div>
+            <div class="card fade-up">
+                <div class="stat">IVY</div>
+                <h3>League Admissions</h3>
+                <p>Accepted to Columbia's School of International & Public Affairs without insider connections.</p>
+            </div>
+        </div>
+    </section>
 
-<footer style="border-top: 1px solid var(--glass-border); padding: 4rem 2rem; text-align:center; margin-top: 4rem;">
-  <div class="nav-brand" style="justify-content:center; margin-bottom:1.5rem; opacity:0.7;">
-    <div class="logo-mark" style="transform:scale(0.8)">As</div>
-  </div>
-  <p class="mono">© 2026 Andrew Sayegh. Designed in California.</p>
+    <section id="services" class="section">
+        <div class="reveal-text">
+            <span class="mono">Intelligence</span>
+            <h2>Service Offerings</h2>
+        </div>
+        <div class="grid">
+            <div class="card fade-up">
+                <div class="card-icon">❖</div>
+                <h3>Admissions Strategy</h3>
+                <p>School selection, personal statement engineering, and narrative construction for Transfer & Grad school applicants.</p>
+            </div>
+            <div class="card fade-up">
+                <div class="card-icon">✦</div>
+                <h3>Fellowship Design</h3>
+                <p>Specific coaching for Fulbright, Rangel, and Pickering. We focus on the "Service Narrative" reviewers demand.</p>
+            </div>
+            <div class="card fade-up">
+                <div class="card-icon">⚡</div>
+                <h3>Career Pivot</h3>
+                <p>Translating corporate or academic backgrounds into policy, non-profit, and federal resume formats.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section">
+        <div class="reveal-text" style="text-align: center;">
+            <span class="mono">Investment</span>
+            <h2>Transparent Tiers</h2>
+        </div>
+        <div class="grid">
+            <div class="card fade-up" style="text-align: center;">
+                <span class="mono">Starter</span>
+                <div class="stat" style="font-size: 2.5rem;">$99</div>
+                <p>Single Session Strategy<br>Resume Audit<br>Action Plan</p>
+                <button class="btn btn-ghost" style="width: 100%; margin-top: 1.5rem;" onclick="openModal('Starter')">Begin</button>
+            </div>
+            <div class="card fade-up" style="text-align: center; border-color: var(--accent-primary); background: rgba(255,255,255,0.06);">
+                <span class="mono" style="color: var(--accent-primary);">Recommended</span>
+                <div class="stat" style="font-size: 2.5rem;">$199</div>
+                <p>Full Application Package<br>Unlimited Revisions (1 App)<br>Interview Prep</p>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" onclick="openModal('Premium')">Select</button>
+            </div>
+            <div class="card fade-up" style="text-align: center;">
+                <span class="mono">Full Cycle</span>
+                <div class="stat" style="font-size: 2.5rem;">$599</div>
+                <p>End-to-End Consulting<br>Multiple Schools<br>Scholarship Negotation</p>
+                <button class="btn btn-ghost" style="width: 100%; margin-top: 1.5rem;" onclick="openModal('Full Cycle')">Contact</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer style="padding: 4rem 2rem; border-top: 1px solid var(--border-glass); text-align: center; margin-top: 4rem;">
+    <p class="mono">© 2026 Andrew Sayegh. Engineered in California.</p>
 </footer>
 
-<div class="modal-overlay" id="bookingModal" onclick="if(event.target === this) closeBooking()">
-  <div class="modal-box">
-    <h3 style="font-size:1.5rem; margin-bottom:1.5rem;">Secure Your Spot</h3>
-    <div class="input-group">
-      <label>Name</label>
-      <input type="text" id="bk-name" class="input-field" placeholder="Jane Doe">
+<div class="modal-backdrop" id="bookingModal" onclick="if(event.target === this) closeModal()">
+    <div class="modal-content">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
+            <h3>Request Access</h3>
+            <button onclick="closeModal()" style="background:none; border:none; color:var(--metal-dim); font-size:1.5rem; cursor:pointer;">✕</button>
+        </div>
+        <form onsubmit="handleForm(event)">
+            <div class="input-group">
+                <label class="input-label">Full Name</label>
+                <input type="text" id="fname" class="input-field" placeholder="Jane Doe" required>
+            </div>
+            <div class="input-group">
+                <label class="input-label">Email Address</label>
+                <input type="email" id="femail" class="input-field" placeholder="jane@example.com" required>
+            </div>
+            <div class="input-group">
+                <label class="input-label">Interest</label>
+                <select id="finterest" class="input-field">
+                    <option value="General">General Inquiry</option>
+                    <option value="Starter">Starter ($99)</option>
+                    <option value="Premium">Premium ($199)</option>
+                    <option value="Full Cycle">Full Cycle ($599)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Initialize Request</button>
+        </form>
     </div>
-    <div class="input-group">
-      <label>Email</label>
-      <input type="email" id="bk-email" class="input-field" placeholder="jane@example.com">
-    </div>
-    <div class="input-group">
-      <label>Interest</label>
-      <input type="text" id="bk-interest" class="input-field" placeholder="Admissions, Fellowships...">
-    </div>
-    <div class="input-group">
-      <label>Message</label>
-      <textarea id="bk-msg" class="input-field" rows="3" placeholder="Briefly describe your goals..."></textarea>
-    </div>
-    <button class="btn-primary" style="width:100%" onclick="submitBooking()">Send Request</button>
-    <button style="width:100%; background:none; border:none; color:var(--text-secondary); margin-top:1rem; cursor:pointer;" onclick="closeBooking()">Cancel</button>
-  </div>
 </div>
 
 <script>
-  // Sticky Nav Logic
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-  });
-
-  // Modal Logic
-  function openBooking(interest) {
-    document.getElementById('bookingModal').classList.add('active');
-    if(interest) document.getElementById('bk-interest').value = interest;
-  }
-  function closeBooking() {
-    document.getElementById('bookingModal').classList.remove('active');
-  }
-
-  // Mailto Auto-Load Logic
-  function submitBooking() {
-    const name = document.getElementById('bk-name').value;
-    const email = document.getElementById('bk-email').value;
-    const interest = document.getElementById('bk-interest').value;
-    const msg = document.getElementById('bk-msg').value;
+    // ──────────────────────────────────────────
+    // SMOOTH SCROLL & PARALLAX ENGINE
+    // ──────────────────────────────────────────
     
-    if(!name || !email) {
-      alert("Please provide name and email.");
-      return;
+    // Header Blur on Scroll
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    }, { passive: true });
+
+    // Intersection Observer for Reveal Animations
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up, .reveal-text').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Mobile Menu Logic
+    const menu = document.getElementById('mobileMenu');
+    const toggleBtn = document.querySelector('.mobile-toggle');
+    
+    function toggleMenu() {
+        const isOpen = menu.classList.contains('active');
+        if (isOpen) {
+            menu.classList.remove('active');
+            document.body.style.overflow = '';
+            toggleBtn.innerHTML = '<span></span><span></span>';
+        } else {
+            menu.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock scroll
+            toggleBtn.innerHTML = '<span style="transform: rotate(45deg) translate(5px, 6px)"></span><span style="transform: rotate(-45deg) translate(5px, -6px)"></span>';
+        }
     }
 
-    const subject = `Consultation Request: ${interest} - ${name}`;
-    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AInterest: ${interest}%0D%0A%0D%0AMessage:%0D%0A${msg}`;
-    
-    // Auto-load email client
-    window.location.href = `mailto:contact@andrewsayegh.com?subject=${subject}&body=${body}`;
-    
-    // Close modal after brief delay
-    setTimeout(closeBooking, 1000);
-  }
+    // Modal Logic
+    const modal = document.getElementById('bookingModal');
+    const select = document.getElementById('finterest');
 
-  // EASTER EGG: "Ludicrous Mode"
-  // Click the logo 5 times rapidly to trigger
-  let clickCount = 0;
-  let clickTimer;
-  
-  document.getElementById('brandLogo').addEventListener('click', (e) => {
-    e.preventDefault();
-    clickCount++;
-    clearTimeout(clickTimer);
-    
-    clickTimer = setTimeout(() => {
-      clickCount = 0; // Reset if too slow
-    }, 500);
-
-    if (clickCount === 5) {
-      activateLudicrousMode();
-      clickCount = 0;
+    function openModal(tier) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        if (tier) {
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === tier) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+        }
     }
-  });
 
-  function activateLudicrousMode() {
-    document.documentElement.classList.toggle('ludicrous-mode');
-    
-    // Visual feedback
-    const logo = document.querySelector('.logo-mark');
-    logo.style.transition = "transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
-    logo.style.transform = "rotate(360deg) scale(1.5)";
-    
-    // Alert user
-    const title = document.querySelector('.hero-title span');
-    if (document.documentElement.classList.contains('ludicrous-mode')) {
-        title.innerText = "LUDICROUS MODE";
-        alert("/// SYSTEM OVERRIDE: LUDICROUS MODE ENGAGED ///");
-    } else {
-        title.innerText = "speculation.";
-        logo.style.transform = "rotate(0deg) scale(1)";
+    function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
     }
-  }
+
+    function handleForm(e) {
+        e.preventDefault();
+        const name = document.getElementById('fname').value;
+        const email = document.getElementById('femail').value;
+        const interest = document.getElementById('finterest').value;
+        
+        // Simulating "Processing" then redirect
+        const btn = e.target.querySelector('button');
+        const originalText = btn.innerText;
+        btn.innerText = "Processing...";
+        btn.style.opacity = "0.7";
+        
+        setTimeout(() => {
+            const subject = `Consultation Request: ${interest} - ${name}`;
+            const body = `Name: ${name}\nEmail: ${email}\nTier: ${interest}\n\nPlease provide details on next steps.`;
+            window.location.href = `mailto:contact@andrewsayegh.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            btn.innerText = "Redirecting...";
+            setTimeout(() => {
+                closeModal();
+                btn.innerText = originalText;
+                btn.style.opacity = "1";
+            }, 1000);
+        }, 800);
+    }
+
+    // ──────────────────────────────────────────
+    // EASTER EGG: LUDICROUS MODE
+    // ──────────────────────────────────────────
+    let clickCount = 0;
+    let clickTimer;
+    const logoTrigger = document.getElementById('logoTrigger');
+
+    logoTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        clickCount++;
+        clearTimeout(clickTimer);
+        
+        // Reset count if user stops clicking
+        clickTimer = setTimeout(() => { clickCount = 0; }, 400);
+
+        if (clickCount === 5) {
+            enableLudicrousMode();
+            clickCount = 0;
+        }
+    });
+
+    function enableLudicrousMode() {
+        document.body.classList.add('warp-active');
+        
+        setTimeout(() => {
+            document.documentElement.classList.toggle('ludicrous');
+            document.body.classList.remove('warp-active');
+            
+            // Haptic Feedback (Visual)
+            if (document.documentElement.classList.contains('ludicrous')) {
+                alert("/// LUDICROUS MODE ENGAGED ///");
+                document.querySelector('.hero-title span').innerText = "MAXIMUM VELOCITY";
+            } else {
+                document.querySelector('.hero-title span').innerText = "Precision Strategy";
+            }
+        }, 300); // Wait for warp animation peak
+    }
 </script>
 
 </body>
