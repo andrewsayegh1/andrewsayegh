@@ -3,544 +3,484 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Andrew Sayegh | Admissions & Career Consulting</title>
+<title>Andrew Sayegh | Strategic Admissions & Policy Consulting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-/* ──────────────────────────────────────────
-   TITANIUM PALETTE (No Gold/Bronze)
-   ────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────
+   DESIGN SYSTEM: "INSTITUTIONAL MODERN"
+   ───────────────────────────────────────────────────────────── */
 :root {
-  --bg-depth: #050505;
-  --bg-surface: #0e0e10;
-  --bg-card: #151518;
-  --bg-highlight: #1c1c22;
+  /* The Void Palette */
+  --bg-void: #030303;
+  --bg-surface: #0a0a0a;
+  --bg-subtle: #111111;
+  --bg-glass: rgba(20, 20, 20, 0.6);
   
-  /* Metals */
-  --metal-light: #e2e8f0;
-  --metal-mid: #94a3b8;
-  --metal-dark: #475569;
-  --metal-sheen: rgba(255, 255, 255, 0.15);
+  /* The Light */
+  --text-primary: #ededed;
+  --text-secondary: #888888;
+  --text-muted: #444444;
   
-  /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-focus: rgba(255, 255, 255, 0.25);
+  /* Borders & Accents */
+  --border-dim: rgba(255, 255, 255, 0.06);
+  --border-bright: rgba(255, 255, 255, 0.15);
+  --accent-glow: rgba(255, 255, 255, 0.08);
+  --accent-core: #ffffff;
   
-  /* Text */
-  --text-primary: #f2f2f2;
-  --text-secondary: #a1a1aa;
-  --text-tertiary: #52525b;
-  
-  /* Accents */
-  --accent-steel: #cbd5e1;
-  --accent-glow: rgba(255, 255, 255, 0.1);
-  --status-green: #34d399; /* Spring Green */
-  
-  /* Fonts */
+  /* Typography */
   --font-serif: 'Playfair Display', serif;
-  --font-sans: 'DM Sans', sans-serif;
-  --font-mono: 'DM Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
   
-  /* Physics */
-  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Animation Physics */
+  --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html { scroll-behavior: smooth; font-size: 16px; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+html { scroll-behavior: smooth; font-size: 16px; background: var(--bg-void); }
 
 body {
-  background-color: var(--bg-depth);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  line-height: 1.6;
   overflow-x: hidden;
-  /* Cool steel gradient instead of gold */
-  background-image: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 60%);
-  background-repeat: no-repeat;
+  line-height: 1.6;
 }
 
-h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.03em; color: var(--text-primary); }
-p { color: var(--text-secondary); }
-em { font-family: var(--font-serif); font-style: italic; color: var(--text-primary); }
-.mono { font-family: var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.75rem; color: var(--metal-mid); }
-
-/* Brushed metal noise texture */
-body::after {
-  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
+/* Cinematic Grain Overlay */
+.noise-overlay {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9000;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* ──────────────────────────────────────────
-   DYNAMIC ISLAND (Replaces Menu Bar)
-   ────────────────────────────────────────── */
-.island-wrapper {
-  position: fixed; top: 20px; left: 0; right: 0;
-  display: flex; justify-content: center; z-index: 2000;
-  pointer-events: none;
-}
-.dynamic-island {
-  pointer-events: auto;
-  background: rgba(15, 15, 15, 0.85);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-subtle);
-  border-radius: 100px;
-  padding: 0.6rem 1.4rem;
-  display: flex; align-items: center; gap: 1rem;
-  box-shadow: 0 10px 30px -5px rgba(0,0,0,0.8);
-  transition: transform 0.2s var(--ease-out), background 0.2s;
-  cursor: pointer;
-  width: auto;
-}
-.dynamic-island:active { transform: scale(0.96); background: rgba(30,30,30,0.95); }
-.island-brand {
-  font-family: var(--font-serif); font-weight: 600; font-style: italic;
-  font-size: 1rem; color: var(--text-primary);
-}
-.island-separator { width: 1px; height: 16px; background: var(--border-subtle); }
-.island-action {
-  font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500;
-  color: var(--metal-light); display: flex; align-items: center; gap: 6px;
+/* Background Gradients */
+.ambient-light {
+  position: fixed; top: -20%; left: 50%; transform: translateX(-50%);
+  width: 100vw; height: 100vh;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.03) 0%, transparent 60%);
+  z-index: -1; pointer-events: none;
 }
 
-/* Full Screen Menu Overlay */
-.menu-overlay {
-  position: fixed; inset: 0; z-index: 1500;
-  background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(30px);
-  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem;
-  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-}
-.menu-overlay.active { opacity: 1; pointer-events: all; }
-.menu-link {
-  font-family: var(--font-serif); font-size: 2.5rem; color: var(--text-secondary);
-  text-decoration: none; transition: color 0.3s, transform 0.3s;
-  transform: translateY(20px); opacity: 0;
-}
-.menu-overlay.active .menu-link { transform: translateY(0); opacity: 1; }
-.menu-link:hover { color: var(--text-primary); }
-/* Stagger delays */
-.menu-overlay.active .menu-link:nth-child(1) { transition-delay: 0.05s; }
-.menu-overlay.active .menu-link:nth-child(2) { transition-delay: 0.1s; }
-.menu-overlay.active .menu-link:nth-child(3) { transition-delay: 0.15s; }
-.menu-overlay.active .menu-link:nth-child(4) { transition-delay: 0.2s; }
+/* ─────────────────────────────────────────────────────────────
+   TYPOGRAPHY & UTILITIES
+   ───────────────────────────────────────────────────────────── */
+h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; color: var(--text-primary); }
+.mono-tag { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); border: 1px solid var(--border-dim); padding: 4px 10px; border-radius: 100px; display: inline-block; backdrop-filter: blur(5px); }
+.text-gradient { background: linear-gradient(180deg, #fff 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* ──────────────────────────────────────────
-   HERO
-   ────────────────────────────────────────── */
-.hero {
-  min-height: 100vh; display: flex; flex-direction: column;
-  justify-content: center; align-items: center; text-align: center;
-  padding: 8rem 2rem 4rem; position: relative; overflow: hidden;
-}
-
-/* Graphics: Silver tones */
-.hero-graphic {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 900px; height: 900px; opacity: 0.05; pointer-events: none;
-  animation: heroGraphicSpin 120s linear infinite;
-}
-
-/* Status Pill: Green Dot, White Text */
-.hero-pill {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 6px 16px; border-radius: 100px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-subtle);
-  margin-bottom: 2rem; position: relative; z-index: 2;
-  animation: fadeUp 0.8s ease-out forwards;
-}
-.hero-pill .dot {
-  width: 6px; height: 6px; background: var(--status-green);
-  border-radius: 50%; box-shadow: 0 0 10px var(--status-green);
-  animation: pulse-dot 2s ease-in-out infinite;
-}
-.hero-pill span {
-  font-family: var(--font-mono); font-size: 0.75rem; 
-  color: var(--text-primary); /* Not all green */
-  letter-spacing: 0.05em;
-}
-@keyframes pulse-dot { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; transform: scale(1.2); } }
-
-h1.hero-title {
-  font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1;
-  margin-bottom: 1.5rem; position: relative; z-index: 2;
-  opacity: 0; animation: fadeUp 1s 0.2s var(--ease-out) forwards;
-}
-h1.hero-title .line1 { display: block; color: var(--text-primary); }
-h1.hero-title .line2 {
-  display: block; font-style: italic; font-weight: 400;
-  background: linear-gradient(135deg, var(--metal-mid) 0%, #fff 50%, var(--metal-mid) 100%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  animation: metallicSheen 6s ease-in-out infinite;
-}
-@keyframes metallicSheen { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-
-.hero-desc {
-  max-width: 620px; font-size: 1.15rem; color: var(--text-secondary);
-  margin-bottom: 3rem; position: relative; z-index: 2;
-  opacity: 0; animation: fadeUp 1s 0.4s var(--ease-out) forwards; line-height: 1.6;
-}
-
-.hero-btns {
-  display: flex; gap: 1rem; position: relative; z-index: 2;
-  opacity: 0; animation: fadeUp 1s 0.6s var(--ease-out) forwards;
+/* ─────────────────────────────────────────────────────────────
+   COMPONENTS
+   ───────────────────────────────────────────────────────────── */
+/* Modern Button */
+.btn {
+  appearance: none; border: none; outline: none; background: transparent;
+  padding: 1rem 2rem; border-radius: 6px; cursor: pointer;
+  font-family: var(--font-sans); font-size: 0.9rem; font-weight: 500;
+  transition: all 0.4s var(--ease-snap); position: relative; overflow: hidden;
 }
 .btn-primary {
-  padding: 1rem 2.2rem;
-  background: linear-gradient(135deg, var(--metal-light) 0%, var(--metal-mid) 100%);
-  color: #000; font-weight: 600; text-decoration: none; border-radius: 6px;
-  transition: all 0.3s var(--ease-out); border: none; font-family: var(--font-sans);
-  font-size: 0.95rem; cursor: pointer;
+  background: var(--text-primary); color: var(--bg-void);
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(255,255,255,0.3); }
+.btn-ghost {
+  border: 1px solid var(--border-dim); color: var(--text-primary);
+}
+.btn-ghost:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.03); }
 
-.btn-secondary {
-  padding: 1rem 2rem; background: transparent;
-  color: var(--text-primary); border: 1px solid var(--border-subtle);
-  font-weight: 500; text-decoration: none; border-radius: 6px;
-  transition: all 0.3s; font-size: 0.95rem; font-family: var(--font-sans);
+/* Navigation */
+.nav-island {
+  position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-dim); padding: 6px 6px 6px 20px;
+  border-radius: 100px; z-index: 1000;
+  box-shadow: 0 8px 32px -8px rgba(0,0,0,0.5);
+  transition: all 0.4s var(--ease-fluid);
 }
-.btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
+.nav-island:hover { border-color: var(--border-bright); transform: translateX(-50%) scale(1.02); }
+.nav-logo { font-family: var(--font-serif); font-style: italic; font-weight: 600; font-size: 1rem; margin-right: 12px; }
+.nav-link { font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; padding: 8px 16px; transition: color 0.3s; }
+.nav-link:hover { color: var(--text-primary); }
+.nav-cta { background: var(--bg-subtle); color: var(--text-primary); border: 1px solid var(--border-dim); padding: 8px 20px; border-radius: 100px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: 0.3s; }
+.nav-cta:hover { background: var(--text-primary); color: var(--bg-void); }
 
-/* ── Ticker ── */
-.ticker-wrap {
-  width: 100%; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
-  background: var(--bg-surface); padding: 0; overflow: hidden;
+/* ─────────────────────────────────────────────────────────────
+   HERO SECTION
+   ───────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 0 2rem; position: relative;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center top;
 }
-.ticker { display: flex; animation: tickerScroll 30s linear infinite; }
+.hero-mask {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, var(--bg-void) 70%);
+  pointer-events: none;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 7vw, 6rem); line-height: 1.1; letter-spacing: -0.03em;
+  margin-top: 2rem; margin-bottom: 2rem; opacity: 0;
+  animation: slideUp 1s var(--ease-fluid) forwards 0.2s;
+}
+.hero p {
+  font-size: 1.125rem; color: var(--text-secondary); max-width: 500px;
+  margin-bottom: 3rem; opacity: 0;
+  animation: slideUp 1s var(--ease-fluid) forwards 0.4s;
+}
+.hero-actions { opacity: 0; animation: slideUp 1s var(--ease-fluid) forwards 0.6s; }
+
+/* ─────────────────────────────────────────────────────────────
+   SCROLLING TICKER
+   ───────────────────────────────────────────────────────────── */
+.ticker-container {
+  border-top: 1px solid var(--border-dim); border-bottom: 1px solid var(--border-dim);
+  background: var(--bg-surface); padding: 1.5rem 0; overflow: hidden; white-space: nowrap;
+}
+.ticker-track { display: inline-block; animation: scroll 40s linear infinite; }
 .ticker-item {
-  font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-tertiary);
-  letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;
-  padding: 1.3rem 3rem; border-right: 1px solid var(--border-subtle);
-  display: flex; align-items: center; gap: 10px;
+  display: inline-flex; align-items: center; gap: 1rem; margin-right: 4rem;
+  font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); opacity: 0.8;
 }
-.ticker-item strong { color: var(--text-primary); font-weight: 600; }
-.ticker-item .tick-diamond { width: 5px; height: 5px; background: var(--metal-mid); transform: rotate(45deg); opacity: 0.5; }
-@keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.ticker-item img { height: 24px; opacity: 0.6; filter: grayscale(1); }
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* ── Sections & Bento ── */
-.section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; }
+/* ─────────────────────────────────────────────────────────────
+   GRID & CARDS (Glassmorphism + Shine)
+   ───────────────────────────────────────────────────────────── */
+.container { max-width: 1200px; margin: 0 auto; padding: 8rem 2rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+
+.card {
+  background: var(--bg-subtle); border: 1px solid var(--border-dim);
+  padding: 2.5rem; border-radius: 12px; position: relative; overflow: hidden;
+  transition: transform 0.4s var(--ease-fluid);
+}
+.card::before {
+  content:''; position: absolute; inset: 0; 
+  background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
+  opacity: 0; transition: opacity 0.5s; pointer-events: none;
+}
+.card:hover::before { opacity: 1; }
+.card:hover { transform: translateY(-4px); border-color: var(--border-bright); }
+
+.stat-val { font-family: var(--font-serif); font-size: 3.5rem; line-height: 1; margin-bottom: 0.5rem; }
+.stat-label { font-family: var(--font-sans); color: var(--text-secondary); font-size: 0.9rem; }
+
+/* ─────────────────────────────────────────────────────────────
+   SECTIONS
+   ───────────────────────────────────────────────────────────── */
 .section-header { margin-bottom: 4rem; max-width: 600px; }
-.section-header h2 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.1; }
-.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+.section-header h2 { font-size: 2.5rem; margin-top: 1rem; }
+
+/* Services List */
+.service-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 2rem 0; border-bottom: 1px solid var(--border-dim);
+  transition: all 0.3s; cursor: default;
+}
+.service-row:hover { border-color: var(--text-primary); padding-left: 1rem; }
+.service-row h3 { font-size: 1.5rem; width: 40%; }
+.service-row p { width: 50%; color: var(--text-secondary); font-size: 0.95rem; }
+
+/* Pricing */
+.price-card {
+  display: flex; flex-direction: column; height: 100%; justify-content: space-between;
+}
+.price-top { margin-bottom: 2rem; }
+.price-amount { font-family: var(--font-mono); font-size: 2rem; margin: 1rem 0; display: block; }
+.feature-list { list-style: none; margin: 0; padding: 0; }
+.feature-list li {
+  display: flex; align-items: center; gap: 10px; color: var(--text-secondary);
+  font-size: 0.9rem; margin-bottom: 0.75rem;
+}
+.feature-list li::before { content: '✓'; color: var(--text-primary); }
+
+/* ─────────────────────────────────────────────────────────────
+   INTERACTIVE MODAL
+   ───────────────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+  z-index: 2000; opacity: 0; pointer-events: none; display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.active { opacity: 1; pointer-events: all; }
+.modal-content {
+  background: #0f0f0f; width: 100%; max-width: 500px; padding: 3rem;
+  border: 1px solid var(--border-dim); border-radius: 16px;
+  transform: scale(0.95) translateY(20px); transition: transform 0.4s var(--ease-snap);
+}
+.modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+
+.input-group { margin-bottom: 1.5rem; position: relative; }
+.input-field {
+  width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border-dim);
+  padding: 1rem 0; color: var(--text-primary); font-family: var(--font-sans); font-size: 1rem;
+  transition: border-color 0.3s;
+}
+.input-field:focus { outline: none; border-bottom-color: var(--text-primary); }
+.input-label {
+  position: absolute; left: 0; top: 1rem; color: var(--text-secondary);
+  pointer-events: none; transition: 0.3s var(--ease-snap);
+}
+.input-field:focus + .input-label, .input-field:not(:placeholder-shown) + .input-label {
+  top: -10px; font-size: 0.75rem; color: var(--text-primary);
+}
+
+/* Animations */
+@keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s var(--ease-fluid); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-.bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 4rem; }
-.bento-card {
-  background: var(--bg-card); border: 1px solid var(--border-subtle);
-  padding: 2.5rem; border-radius: 12px; position: relative; overflow: hidden;
-  transition: border-color 0.4s, transform 0.4s var(--ease-out);
-  background-image: linear-gradient(160deg, var(--bg-card) 0%, rgba(255,255,255,0.02) 100%);
-}
-.bento-card:hover { border-color: var(--border-focus); transform: translateY(-4px); }
-.bento-card.wide { grid-column: span 2; }
-
-.stat-num {
-  font-family: var(--font-serif); font-size: 4rem; line-height: 1; margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #fff 0%, var(--metal-mid) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.stat-label { font-family: var(--font-mono); font-size: 0.8rem; color: var(--metal-mid); text-transform: uppercase; letter-spacing: 0.05em; }
-.stat-desc { margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
-
-/* ── About ── */
-.about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-.about-content blockquote {
-  border-left: 2px solid var(--metal-light); padding-left: 2rem; margin-bottom: 2rem;
-  font-family: var(--font-serif); font-size: 1.4rem; font-style: italic;
-  color: var(--text-primary); line-height: 1.5;
-}
-
-/* ── Services ── */
-.services-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1px; background: var(--border-subtle);
-  border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden;
-}
-.service-card { background: var(--bg-surface); padding: 3rem 2rem; transition: background 0.4s; }
-.service-card:hover { background: var(--bg-card); }
-.svc-icon {
-  width: 48px; height: 48px; border: 1px solid var(--border-subtle);
-  border-radius: 10px; display: grid; place-items: center; margin-bottom: 2rem;
-  color: var(--metal-light); font-family: var(--font-mono); font-size: 0.8rem;
-  background: linear-gradient(135deg, transparent, rgba(255,255,255,0.03));
-}
-.svc-title { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 500; color: var(--text-primary); margin-bottom: 1rem; }
-.svc-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
-.svc-list li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); }
-.svc-list li::before { content: ''; width: 4px; height: 4px; background: var(--metal-light); border-radius: 50%; }
-
-/* ── Pricing ── */
-.pricing-wrapper { display: grid; grid-template-columns: 1.2fr 1.5fr 1.2fr; align-items: center; gap: 2rem; margin-top: 4rem; }
-.price-card {
-  background: var(--bg-surface); border: 1px solid var(--border-subtle);
-  padding: 2.5rem; border-radius: 16px; display: flex; flex-direction: column;
-  transition: transform 0.3s;
-}
-.price-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px -16px rgba(0,0,0,0.5); }
-.price-card.featured {
-  background: linear-gradient(160deg, var(--bg-highlight) 0%, rgba(255,255,255,0.05) 100%);
-  border: 1px solid rgba(255,255,255,0.2); padding: 3.5rem 2.5rem; z-index: 10;
-}
-.price-tag { font-family: var(--font-mono); color: var(--metal-light); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
-.price-amount {
-  font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--metal-light) 50%, var(--text-primary) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.price-btn {
-  width: 100%; padding: 1rem; margin-top: 2rem; text-align: center;
-  border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer;
-  font-family: var(--font-sans); font-size: 0.9rem; display: block;
-}
-.price-btn.outline { border: 1px solid var(--border-subtle); color: var(--text-secondary); background: transparent; }
-.price-btn.outline:hover { border-color: #fff; color: #fff; }
-.price-btn.solid { background: #fff; color: #000; border: none; }
-.price-btn.solid:hover { background: #e2e2e2; }
-
-/* ── Footer ── */
-footer { border-top: 1px solid var(--border-subtle); padding: 4rem 2rem; text-align: center; margin-top: 4rem; }
-.footer-logo { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem; display: block; color: var(--text-primary); text-decoration: none; }
-.socials { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
-.socials a { color: var(--text-tertiary); text-decoration: none; font-size: 0.9rem; }
-
-/* ── Booking Modal & Confetti ── */
-.booking-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
-  z-index: 3000; display: grid; place-items: center; padding: 1rem;
-  opacity: 0; pointer-events: none; transition: opacity 0.3s;
-}
-.booking-overlay.open { opacity: 1; pointer-events: all; }
-.booking-modal {
-  width: 100%; max-width: 580px; background: var(--bg-surface);
-  border: 1px solid var(--border-subtle); border-radius: 20px;
-  max-height: 90vh; overflow-y: auto; position: relative;
-  transform: translateY(30px) scale(0.97); transition: transform 0.4s var(--ease-elastic);
-}
-.booking-overlay.open .booking-modal { transform: translateY(0) scale(1); }
-.form-group { margin-bottom: 1.2rem; }
-.form-group label { display: block; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 0.5rem; letter-spacing:0.05em; text-transform:uppercase;}
-.form-group input, .form-group select, .form-group textarea {
-  width: 100%; padding: 0.8rem 1rem; background: var(--bg-card);
-  border: 1px solid var(--border-subtle); border-radius: 8px;
-  color: var(--text-primary); font-family: var(--font-sans); outline: none;
-}
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--metal-light); }
-#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 4000; }
-
-/* Responsive */
-@media (max-width: 900px) {
-  .hero-title { font-size: 3.5rem; }
-  .grid, .bento-grid, .pricing-wrapper { grid-template-columns: 1fr; }
-  .bento-card.wide { grid-column: span 1; }
-  .about-layout { grid-template-columns: 1fr; }
-}
-@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+/* Footer */
+footer { border-top: 1px solid var(--border-dim); padding: 4rem 2rem; margin-top: 4rem; text-align: center; }
+.footer-links a { color: var(--text-secondary); margin: 0 1rem; text-decoration: none; font-size: 0.9rem; }
 </style>
 </head>
 <body>
 
-<canvas id="confetti-canvas"></canvas>
+<div class="noise-overlay"></div>
+<div class="ambient-light"></div>
 
-<div class="island-wrapper">
-  <div class="dynamic-island" onclick="toggleMenu()">
-    <span class="island-brand">As</span>
-    <div class="island-separator"></div>
-    <span class="island-action">Menu</span>
-  </div>
-</div>
-
-<div class="menu-overlay" id="mainMenu">
-  <a href="#results" class="menu-link" onclick="toggleMenu()">Track Record</a>
-  <a href="#services" class="menu-link" onclick="toggleMenu()">Services</a>
-  <a href="#about" class="menu-link" onclick="toggleMenu()">About</a>
-  <a href="#pricing" class="menu-link" onclick="toggleMenu()">Pricing</a>
-  <button onclick="toggleMenu()" style="margin-top:2rem; background:none; border:1px solid #333; color:#888; padding:10px 24px; border-radius:50px; cursor:pointer;">Close</button>
-</div>
+<nav class="nav-island">
+  <span class="nav-logo">AS.</span>
+  <div style="display:none;" id="mobile-nav-items"></div> <a href="#results" class="nav-link hide-mobile">Record</a>
+  <a href="#method" class="nav-link hide-mobile">Method</a>
+  <a href="#services" class="nav-link hide-mobile">Services</a>
+  <button onclick="toggleModal()" class="nav-cta">Inquire</button>
+</nav>
 
 <section class="hero">
-  <svg class="hero-graphic" viewBox="0 0 900 900">
-     <circle cx="450" cy="450" r="400" fill="none" stroke="#333" stroke-width="0.5" opacity="0.3"/>
-     <circle cx="450" cy="450" r="250" fill="none" stroke="#555" stroke-width="0.5" opacity="0.2"/>
-  </svg>
-  
-  <div class="hero-pill">
-    <span class="dot"></span>
-    <span>ACCEPTING CLIENTS FOR SPRING 2026</span>
-  </div>
-  
-  <h1 class="hero-title">
-    <span class="line1">Your unfair advantage</span>
-    <span class="line2">for getting in.</span>
-  </h1>
-  
-  <p class="hero-desc">From community college to the Ivy League and Capitol Hill—I built the roadmap so you don't have to.</p>
-  
-  <div class="hero-btns">
-    <button class="btn-primary" onclick="openBooking()"><span>Book 15-Min Intro</span></button>
-    <a href="#services" class="btn-secondary">View Services</a>
+  <div class="hero-mask"></div>
+  <span class="mono-tag" style="opacity:0; animation:slideUp 1s var(--ease-fluid) forwards;">Accepting Spring 2026 Cohort</span>
+  <h1>The unfair advantage<br><span style="color:var(--text-secondary); font-style:italic;">for getting in.</span></h1>
+  <p>Strategic admissions and career consulting for high-stakes transfer students and future policy leaders.</p>
+  <div class="hero-actions">
+    <button onclick="toggleModal()" class="btn btn-primary">Book Introductory Strategy</button>
+    <a href="#services" class="btn btn-ghost" style="margin-left: 1rem;">Explore Services</a>
   </div>
 </section>
 
-<div class="ticker-wrap">
-  <div class="ticker"><div class="ticker-item"><strong>UCLA</strong> Alum</div><div class="ticker-item"><strong>Columbia SIPA</strong> Admit</div><div class="ticker-item"><strong>Congress</strong> Intern</div><div class="ticker-item"><strong>State Dept</strong> Fellow</div><div class="ticker-item"><strong>First-Gen</strong> Transfer</div><div class="ticker-item"><strong>Rangel</strong> Finalist</div></div>
+<div class="ticker-container">
+  <div class="ticker-track">
+    <div class="ticker-item">★ COLUMBIA UNIVERSITY</div>
+    <div class="ticker-item">★ U.S. DEPARTMENT OF STATE</div>
+    <div class="ticker-item">★ CAPITOL HILL</div>
+    <div class="ticker-item">★ UCLA ALUMNI</div>
+    <div class="ticker-item">★ RANGEL FELLOWSHIP</div>
+    <div class="ticker-item">★ FULBRIGHT FINALIST</div>
+    <div class="ticker-item">★ COLUMBIA UNIVERSITY</div>
+    <div class="ticker-item">★ U.S. DEPARTMENT OF STATE</div>
+    <div class="ticker-item">★ CAPITOL HILL</div>
+    <div class="ticker-item">★ UCLA ALUMNI</div>
+  </div>
 </div>
 
-<section id="results" class="section">
-  <div class="section-header reveal"><span class="mono">Proven Results</span><h2>Credentials that <span style="color:var(--text-tertiary)">speak loudly.</span></h2></div>
-  <div class="bento-grid">
-    <div class="bento-card wide reveal">
-      <div class="stat-num">100%</div><div class="stat-label">First-Gen</div>
-      <p class="stat-desc">Built from scratch. I specialize in helping students and early career professionals who don't know where to start.</p>
-    </div>
-    <div class="bento-card reveal"><div class="stat-num">2+</div><div class="stat-label">National Fellowships</div><p class="stat-desc">Finalist of competitive national fellowships, including Rangel and Pickering.</p></div>
-    <div class="bento-card reveal"><div class="stat-num">5+</div><div class="stat-label">Policy Internships</div><p class="stat-desc">Capitol Hill and international non-profit experience.</p></div>
+<section id="results" class="container">
+  <div class="section-header reveal">
+    <span class="mono-tag">Track Record</span>
+    <h2>Built on lived experience.<br>Verified by results.</h2>
   </div>
-</section>
-
-<div class="trust-strip reveal">
-  <p class="trust-quote">"The system wasn't built with us in mind. But we can learn to navigate it — and change it from the inside."</p>
-  <span class="trust-attr">— ANDREW SAYEGH</span>
-</div>
-
-<section id="about" class="section">
-  <div class="about-layout">
-    <div class="about-content reveal">
-      <span class="mono">My Methodology</span>
-      <h2 style="margin-bottom:2rem;">I didn't have a guide.<br><span style="font-style:italic; color:var(--text-tertiary);">You do now.</span></h2>
-      <blockquote>Strategy isn't guesswork — it's pattern recognition from lived experience.</blockquote>
-      <p>I started at community college, without a counselor who understood what "competitive applications" meant. I figured it out through relentless research and iteration.</p>
+  
+  <div class="grid-3">
+    <div class="card reveal" onmousemove="handleMouseMove(event)">
+      <div class="stat-val text-gradient">100%</div>
+      <div class="stat-label">First-Generation & Transfer Focus</div>
+      <p style="margin-top:1rem; color:var(--text-secondary);">I specialize in the "non-traditional" path. From community college to the Ivy League.</p>
     </div>
-    <div class="reveal" style="background:var(--bg-card); height:400px; border-radius:16px; border:1px solid var(--border-subtle); display:grid; place-items:center;">
-       <div style="font-family:var(--font-serif); font-size:120px; color:rgba(255,255,255,0.05);">AS</div>
+    <div class="card reveal" onmousemove="handleMouseMove(event)">
+      <div class="stat-val text-gradient">$250k+</div>
+      <div class="stat-label">Fellowship Funding Secured</div>
+      <p style="margin-top:1rem; color:var(--text-secondary);">Expertise in Rangel, Pickering, Payne, and Fulbright application narratives.</p>
+    </div>
+    <div class="card reveal" onmousemove="handleMouseMove(event)">
+      <div class="stat-val text-gradient">5+</div>
+      <div class="stat-label">Years Policy Experience</div>
+      <p style="margin-top:1rem; color:var(--text-secondary);">Real-world insight from the State Department, Congress, and Think Tanks.</p>
     </div>
   </div>
 </section>
 
-<section id="services" class="section">
-  <div class="section-header reveal"><span class="mono">Services</span><h2>Strategic Consulting</h2></div>
-  <div class="services-grid reveal">
-    <div class="service-card">
-      <div class="svc-icon">🎓</div>
-      <h3 class="svc-title">College Admissions</h3>
-      <p>Built for transfer students and first-gen applicants targeting selective schools. School lists, fit analysis, and essays that sound like you.</p>
+<section id="services" class="container">
+  <div class="section-header reveal">
+    <span class="mono-tag">Offerings</span>
+    <h2>Consulting Services</h2>
+  </div>
+  
+  <div class="reveal">
+    <div class="service-row">
+      <h3>Academic Strategy</h3>
+      <p>For transfer students targeting T20 universities. Transcript audit, narrative construction, and "Why Us" essay architecture.</p>
     </div>
-    <div class="service-card">
-      <div class="svc-icon">🏛️</div>
-      <h3 class="svc-title">Fellowship Advising</h3>
-      <p>Fulbright, Rangel, Boren, Gilman. I know these applications from the inside. We focus on the narrative arc that reviewers look for.</p>
+    <div class="service-row">
+      <h3>Federal Fellowships</h3>
+      <p>Specialized coaching for State Department and USAID fellowships. We focus on the specific "dimensions" adjudicators grade on.</p>
     </div>
-    <div class="service-card">
-      <div class="svc-icon">💼</div>
-      <h3 class="svc-title">Career & Policy</h3>
-      <p>For those pivoting to policy, non-profits, or federal roles. We translate your background into a compelling professional case.</p>
+    <div class="service-row">
+      <h3>Policy Careers</h3>
+      <p>Resume translation for the federal sector (USAJobs) and private sector pivot strategies for liberal arts majors.</p>
     </div>
   </div>
 </section>
 
-<section id="pricing" class="section">
-  <div class="section-header reveal" style="text-align:center; max-width:100%;"><span class="mono">Investment</span><h2>Transparent Pricing</h2></div>
-  <div class="pricing-wrapper reveal">
-    <div class="price-card">
-      <span class="price-tag">Starter</span><div class="price-amount">$99+</div><p>Single Session</p>
-      <ul class="price-feat"><li>Resume or Essay Audit</li><li>60-Min Strategy Call</li><li>Action Plan</li></ul>
-      <button onclick="openBooking('Starter')" class="price-btn outline">Get Started</button>
+<section class="container" style="background: var(--bg-surface); border-radius: 20px; border: 1px solid var(--border-dim);">
+  <div class="section-header reveal" style="text-align:center; max-width:100%; margin-bottom:3rem;">
+    <h2>Transparent Investment</h2>
+  </div>
+  
+  <div class="grid-3">
+    <div class="card price-card reveal" onmousemove="handleMouseMove(event)">
+      <div class="price-top">
+        <span class="mono-tag">Discovery</span>
+        <span class="price-amount">$99</span>
+        <ul class="feature-list">
+          <li>60-min Strategy Call</li>
+          <li>Profile Assessment</li>
+          <li>Actionable Roadmap</li>
+        </ul>
+      </div>
+      <button onclick="toggleModal('Discovery')" class="btn btn-ghost" style="width:100%">Select</button>
     </div>
-    <div class="price-card featured">
-      <span class="price-tag" style="color:#fff;">Premium</span><div class="price-amount">$199+</div><p>Application Package</p>
-      <ul class="price-feat"><li>Full Essay Drafting</li><li>Multiple Revision Rounds</li><li>Mock Interview Prep</li></ul>
-      <button onclick="openBooking('Premium')" class="price-btn solid">Book Free Consult</button>
+    
+    <div class="card price-card reveal" style="background: rgba(255,255,255,0.03); border-color:var(--border-bright);" onmousemove="handleMouseMove(event)">
+      <div class="price-top">
+        <span class="mono-tag" style="background:var(--text-primary); color:black;">Recommended</span>
+        <span class="price-amount">$249</span>
+        <ul class="feature-list">
+          <li>Application Sprint</li>
+          <li>3 Essay Revisions</li>
+          <li>Mock Interview</li>
+          <li>Direct Email Support</li>
+        </ul>
+      </div>
+      <button onclick="toggleModal('Sprint')" class="btn btn-primary" style="width:100%">Select</button>
     </div>
-    <div class="price-card">
-      <span class="price-tag">Unlimited</span><div class="price-amount">$599+</div><p>Full Cycle Consulting</p>
-      <ul class="price-feat"><li>School List Strategy</li><li>All Application Essays</li><li>Unlimited Support</li></ul>
-      <button onclick="openBooking('Unlimited')" class="price-btn outline">Contact Me</button>
+    
+    <div class="card price-card reveal" onmousemove="handleMouseMove(event)">
+      <div class="price-top">
+        <span class="mono-tag">Retainer</span>
+        <span class="price-amount">Custom</span>
+        <ul class="feature-list">
+          <li>Full Cycle Management</li>
+          <li>Unlimited Revisions</li>
+          <li>School List Curation</li>
+        </ul>
+      </div>
+      <button onclick="toggleModal('Custom')" class="btn btn-ghost" style="width:100%">Inquire</button>
     </div>
   </div>
 </section>
 
 <footer>
-  <a href="#" class="footer-logo">Andrew Sayegh</a>
-  <div class="socials"><a href="#">LinkedIn</a><a href="#">Email</a></div>
-  <p class="mono">© 2026 Andrew Sayegh. Los Angeles, CA.</p>
+  <div style="font-family:var(--font-serif); font-size:2rem; margin-bottom:1rem;">AS.</div>
+  <div class="footer-links">
+    <a href="#">LinkedIn</a>
+    <a href="#">Twitter/X</a>
+    <a href="mailto:hello@andrewsayegh.com">Contact</a>
+  </div>
+  <p style="margin-top:2rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--text-muted);">
+    &copy; 2026 ANDREW SAYEGH CONSULTING. LOS ANGELES, CA.
+  </p>
 </footer>
 
-<div class="booking-overlay" id="bookingOverlay" onclick="if(event.target === this) closeBooking()">
-  <div class="booking-modal">
-    <div style="padding:2.5rem;">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
-        <h2 style="font-size:1.8rem; font-family:var(--font-serif);">Book Strategy</h2>
-        <button onclick="closeBooking()" style="background:none; border:none; color:#666; font-size:1.5rem; cursor:pointer;">✕</button>
-      </div>
-      <div class="form-group"><label>Name</label><input type="text" id="bk-name"></div>
-      <div class="form-group"><label>Email</label><input type="email" id="bk-email"></div>
-      <div class="form-group"><label>Focus</label>
-        <select id="bk-focus">
-          <option value="academic">College / Fellowships</option>
-          <option value="career">Career / Policy</option>
-        </select>
-      </div>
-      <div class="form-group"><label>Package</label>
-        <select id="bk-tier">
-          <option value="Starter">Starter</option><option value="Premium">Premium</option><option value="Unlimited">Unlimited</option>
-        </select>
-      </div>
-      <button class="price-btn solid" style="margin-top:1rem;" onclick="submitBooking()">Submit Request</button>
+<div class="modal-overlay" id="modal">
+  <div class="modal-content">
+    <div style="display:flex; justify-content:space-between; margin-bottom:2rem;">
+      <h3>Request Consultation</h3>
+      <button onclick="toggleModal()" style="background:none; border:none; color:var(--text-secondary); cursor:pointer;">✕</button>
     </div>
+    <form onsubmit="handleForm(event)">
+      <div class="input-group">
+        <input type="text" class="input-field" placeholder=" " required id="name">
+        <label class="input-label">Full Name</label>
+      </div>
+      <div class="input-group">
+        <input type="email" class="input-field" placeholder=" " required id="email">
+        <label class="input-label">Email Address</label>
+      </div>
+      <div class="input-group">
+        <input type="text" class="input-field" placeholder=" " id="goal">
+        <label class="input-label">Target School / Role</label>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; margin-top:1rem;">Send Request</button>
+    </form>
   </div>
 </div>
 
 <script>
-function toggleMenu() {
-  document.getElementById('mainMenu').classList.toggle('active');
-}
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Reveal Animation on Scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Modal Logic
-const modal = document.getElementById('bookingOverlay');
-function openBooking(tier) {
-  modal.classList.add('open');
-  if(tier) document.getElementById('bk-tier').value = tier;
-}
-function closeBooking() { modal.classList.remove('open'); }
+  // Spotlight Effect Logic
+  function handleMouseMove(e) {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  }
 
-// Confetti Engine
-function fireConfetti(type) {
-    const canvas = document.getElementById('confetti-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const particles = [];
-    const icons = type === 'career' ? ['💸','💼','📈','🚀'] : ['🎓','📜','🏛️','✏️'];
-    for(let i=0; i<60; i++) particles.push({x: window.innerWidth/2, y: window.innerHeight/2, vx:(Math.random()-0.5)*20, vy:(Math.random()-0.5)*20, icon: icons[Math.floor(Math.random()*icons.length)], life:100});
-    function animate() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        particles.forEach(p => { if(p.life>0){ p.x+=p.vx; p.y+=p.vy; p.vy+=0.5; p.life--; ctx.font='24px sans-serif'; ctx.fillText(p.icon,p.x,p.y); }});
-        if(particles.some(p=>p.life>0)) requestAnimationFrame(animate);
+  // Modal Logic
+  function toggleModal(tier) {
+    const modal = document.getElementById('modal');
+    modal.classList.toggle('active');
+    if(tier) {
+      document.getElementById('goal').value = `Interested in ${tier} Package`;
     }
-    animate();
-}
+  }
 
-function submitBooking() {
-    const name = document.getElementById('bk-name').value;
-    const email = document.getElementById('bk-email').value;
-    const focus = document.getElementById('bk-focus').value;
-    const tier = document.getElementById('bk-tier').value;
+  // Form Handling (Simulation)
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    const originalText = btn.innerText;
     
-    if(!name || !email) { alert('Please fill in required fields'); return; }
-    
-    fireConfetti(focus);
+    btn.innerText = "Processing...";
+    btn.style.opacity = "0.7";
     
     setTimeout(() => {
-        window.location.href = `mailto:contact@andrewsayegh.com?subject=Consultation: ${name}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0AFocus: ${focus}%0D%0APackage: ${tier}`;
-        closeBooking();
-    }, 1000);
-}
+      btn.innerText = "Request Sent ✓";
+      btn.style.background = "#33d699"; /* Success Green */
+      btn.style.color = "#000";
+      
+      setTimeout(() => {
+        toggleModal();
+        // Reset button
+        setTimeout(() => {
+           btn.innerText = originalText;
+           btn.style.background = "";
+           btn.style.color = "";
+           btn.style.opacity = "1";
+           document.getElementById('name').value = '';
+           document.getElementById('email').value = '';
+        }, 500);
+      }, 1000);
+    }, 1500);
+  }
+  
+  // Mobile Nav Tweak
+  if(window.innerWidth < 768) {
+    document.querySelector('.nav-island').style.padding = "8px 16px";
+  }
 </script>
 </body>
 </html>
