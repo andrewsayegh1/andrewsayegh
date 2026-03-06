@@ -1,231 +1,576 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrew Sayegh | Digital Innovator & Strategist</title>
-    <meta name="description" content="Portfolio of Andrew Sayegh - Specializing in robust digital infrastructure and strategic solutions.">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        slate: {
-                            850: '#151e32', /* Custom Deep Blue */
-                            900: '#0F172A',
-                        },
-                        accent: {
-                            gold: '#C5A059',
-                            blue: '#3B82F6'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Andrew Sayegh | Strategic Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <style>
-        /* Custom Utilities */
-        .glass-nav {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .text-gradient {
-            background: linear-gradient(to right, #C5A059, #FDBA74);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+<style>
+/* ─────────────────────────────────────────────────────────────
+   DESIGN SYSTEM: SOVEREIGN GLASS
+   ───────────────────────────────────────────────────────────── */
+:root {
+  /* The Void (Backgrounds) */
+  --bg-deep: #030303;
+  --bg-surface: #0a0a0a;
+  --bg-panel: rgba(255, 255, 255, 0.03);
+  --bg-glass: rgba(15, 15, 15, 0.65);
+  
+  /* The Light (Text) */
+  --text-primary: #ffffff;
+  --text-secondary: #98989f;
+  --text-tertiary: #505055;
+  
+  /* The Currency (Accents) */
+  --accent-gold: #D4AF37;       /* Prestige */
+  --accent-blue: #3b82f6;       /* Trust */
+  --accent-purple: #8b5cf6;     /* Strategy */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-highlight: rgba(255, 255, 255, 0.2);
+  
+  /* Physics */
+  --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+}
 
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+html { scroll-behavior: smooth; font-size: 16px; background: var(--bg-deep); height: 100%; }
 
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-    </style>
+body {
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   ATMOSPHERICS & DEPTH
+   ───────────────────────────────────────────────────────────── */
+/* Layer 1: Film Grain */
+.noise {
+  position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Layer 2: Aurora Gradients */
+.aurora {
+  position: fixed; top: -20vh; left: 0; right: 0; height: 120vh; z-index: -1; pointer-events: none;
+  background: 
+    radial-gradient(circle at 15% 30%, rgba(59, 130, 246, 0.08), transparent 40%),
+    radial-gradient(circle at 85% 60%, rgba(212, 175, 55, 0.05), transparent 40%);
+  animation: pulseAurora 10s ease-in-out infinite alternate;
+}
+@keyframes pulseAurora { 0% { opacity: 0.7; transform: scale(1); } 100% { opacity: 1; transform: scale(1.05); } }
+
+/* Typography Utility */
+h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; letter-spacing: -0.02em; }
+.mono { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); }
+.gradient-text {
+  background: linear-gradient(135deg, #fff 30%, #999 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   NAVIGATION: DYNAMIC ISLAND DOCK
+   ───────────────────────────────────────────────────────────── */
+.dock-wrapper {
+  position: fixed; bottom: 2rem; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: center; pointer-events: none;
+}
+.dock {
+  pointer-events: auto;
+  background: rgba(15, 15, 15, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle); border-radius: 100px;
+  padding: 0.5rem; display: flex; gap: 0.5rem;
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8);
+  transition: transform 0.3s var(--ease-apple);
+}
+.dock:hover { transform: scale(1.02); }
+
+.dock-item {
+  position: relative; padding: 0.75rem 1.5rem; border-radius: 100px;
+  color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+  transition: all 0.3s var(--ease-apple); overflow: hidden;
+}
+.dock-item:hover, .dock-item.active { color: var(--text-primary); background: rgba(255,255,255,0.08); }
+.dock-cta {
+  background: var(--text-primary); color: #000; font-weight: 600;
+}
+.dock-cta:hover { background: #e0e0e0; transform: translateY(-2px); }
+
+/* ─────────────────────────────────────────────────────────────
+   COMPONENTS: CARDS & BUTTONS
+   ───────────────────────────────────────────────────────────── */
+.card {
+  background: linear-gradient(180deg, rgba(30,30,30,0.4) 0%, rgba(10,10,10,0.4) 100%);
+  border: 1px solid var(--border-subtle); border-radius: 20px;
+  position: relative; overflow: hidden; backdrop-filter: blur(10px);
+  transition: all 0.4s var(--ease-apple);
+}
+/* Spotlight Effect */
+.card::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(800px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.06), transparent 40%);
+  opacity: 0; transition: opacity 0.4s;
+}
+.card:hover::before { opacity: 1; }
+.card:hover { border-color: var(--border-highlight); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+
+.btn {
+  display: inline-block; padding: 1rem 2rem; border-radius: 12px;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.95rem;
+  text-decoration: none; cursor: pointer; transition: transform 0.2s; border: none;
+}
+.btn:active { transform: scale(0.96); }
+.btn-primary { background: var(--text-primary); color: #000; }
+.btn-outline { border: 1px solid var(--border-highlight); color: var(--text-primary); background: transparent; }
+.btn-outline:hover { background: rgba(255,255,255,0.05); border-color: var(--text-primary); }
+
+/* ─────────────────────────────────────────────────────────────
+   HERO & TICKER
+   ───────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 95vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 2rem; position: relative;
+}
+.hero-badge {
+  display: flex; align-items: center; gap: 8px; padding: 6px 12px;
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle);
+  border-radius: 100px; margin-bottom: 2rem; backdrop-filter: blur(10px);
+}
+.status-dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px #22c55e; }
+
+.hero h1 {
+  font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1.05;
+  margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeUp 1s 0.2s var(--ease-apple) forwards;
+}
+.hero p {
+  font-size: 1.25rem; color: var(--text-secondary); max-width: 580px; margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp 1s 0.4s var(--ease-apple) forwards;
+}
+
+.ticker-wrap {
+  width: 100%; overflow: hidden; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
+  background: rgba(0,0,0,0.3); padding: 1.25rem 0;
+}
+.ticker { display: flex; width: max-content; animation: scroll 40s linear infinite; }
+.ticker-item { 
+  padding: 0 3rem; font-family: 'Playfair Display', serif; font-style: italic; 
+  color: var(--text-secondary); font-size: 1.1rem; opacity: 0.6;
+}
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ─────────────────────────────────────────────────────────────
+   SWITCHBOARD (Services)
+   ───────────────────────────────────────────────────────────── */
+.section { max-width: 1200px; margin: 0 auto; padding: 8rem 2rem; }
+.switchboard-nav {
+  display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;
+}
+.switch-btn {
+  background: transparent; border: 1px solid var(--border-subtle); color: var(--text-secondary);
+  padding: 0.8rem 1.5rem; border-radius: 100px; cursor: pointer; font-family: 'Inter', sans-serif;
+  transition: all 0.3s;
+}
+.switch-btn:hover { border-color: var(--text-primary); color: var(--text-primary); }
+.switch-btn.active { background: var(--text-primary); color: #000; border-color: var(--text-primary); }
+
+.switch-panel { display: none; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; opacity: 0; transition: opacity 0.4s; }
+.switch-panel.active { display: grid; opacity: 1; }
+@media (max-width: 900px) { .switch-panel { grid-template-columns: 1fr; } }
+
+/* ─────────────────────────────────────────────────────────────
+   PRICING & BENTO
+   ───────────────────────────────────────────────────────────── */
+.bento-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 8rem;
+}
+.bento-card {
+  padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; height: 320px;
+}
+.bento-wide { grid-column: span 2; }
+@media (max-width: 768px) { .bento-grid { grid-template-columns: 1fr; } .bento-wide { grid-column: span 1; } }
+
+.price-card {
+  padding: 3rem 2rem; text-align: left; display: flex; flex-direction: column; height: 100%;
+}
+.price-badge {
+  display: inline-block; padding: 4px 10px; background: rgba(255,255,255,0.1); 
+  border-radius: 4px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;
+}
+.price-val { font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 0.5rem; }
+.feature-list { list-style: none; margin-top: 2rem; margin-bottom: auto; }
+.feature-list li { margin-bottom: 0.8rem; color: var(--text-secondary); font-size: 0.9rem; display: flex; align-items: center; gap: 10px; }
+.feature-list li::before { content: ''; width: 6px; height: 6px; background: var(--text-tertiary); border-radius: 50%; }
+
+/* ─────────────────────────────────────────────────────────────
+   BOOKING CONCIERGE (Modal)
+   ───────────────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
+  z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.4s;
+  display: flex; align-items: center; justify-content: center;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+
+.concierge-window {
+  width: 90%; max-width: 550px; background: #0f0f0f; 
+  border: 1px solid var(--border-subtle); border-radius: 24px;
+  padding: 3rem; position: relative;
+  transform: scale(0.95) translateY(20px); transition: transform 0.4s var(--ease-elastic);
+  overflow: hidden;
+}
+.modal-overlay.open .concierge-window { transform: scale(1) translateY(0); }
+
+/* Form Aesthetics */
+.form-step { display: none; animation: slideIn 0.3s ease-out; }
+.form-step.active { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+
+.c-label { display: block; font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 0.8rem; text-transform: uppercase; }
+.c-input {
+  width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border-subtle);
+  padding: 1rem 0; font-family: 'Playfair Display'; font-size: 1.5rem; color: var(--text-primary);
+  outline: none; transition: border-color 0.3s;
+}
+.c-input:focus { border-bottom-color: var(--text-primary); }
+.c-input::placeholder { color: var(--text-tertiary); opacity: 0.5; }
+
+.option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 2rem; }
+.option-btn {
+  padding: 1.5rem; border: 1px solid var(--border-subtle); border-radius: 12px;
+  text-align: center; cursor: pointer; transition: 0.3s; background: rgba(255,255,255,0.02);
+}
+.option-btn:hover { background: rgba(255,255,255,0.05); }
+.option-btn.selected { border-color: var(--text-primary); background: var(--text-primary); color: #000; }
+
+/* ─────────────────────────────────────────────────────────────
+   ANIMATIONS
+   ───────────────────────────────────────────────────────────── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s var(--ease-apple); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+</style>
 </head>
-<body class="bg-slate-900 text-slate-300 font-sans antialiased selection:bg-accent-gold selection:text-slate-900">
+<body>
 
-    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex-shrink-0">
-                    <a href="#" class="font-serif text-2xl text-white font-bold tracking-tight">
-                        A.S.
-                    </a>
-                </div>
-                
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#home" class="hover:text-accent-gold transition-colors px-3 py-2 text-sm font-medium">Home</a>
-                        <a href="#about" class="hover:text-accent-gold transition-colors px-3 py-2 text-sm font-medium">About</a>
-                        <a href="#expertise" class="hover:text-accent-gold transition-colors px-3 py-2 text-sm font-medium">Expertise</a>
-                        <a href="#projects" class="hover:text-accent-gold transition-colors px-3 py-2 text-sm font-medium">Projects</a>
-                        <a href="#contact" class="px-5 py-2.5 rounded-full border border-accent-gold text-accent-gold hover:bg-accent-gold hover:text-slate-900 transition-all duration-300 text-sm font-semibold">Contact Me</a>
-                    </div>
-                </div>
+<div class="noise"></div>
+<div class="aurora"></div>
 
-                <div class="-mr-2 flex md:hidden">
-                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
-                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
+<div class="dock-wrapper">
+  <nav class="dock">
+    <a href="#hero" class="dock-item active">Home</a>
+    <a href="#track-record" class="dock-item">Results</a>
+    <a href="#services" class="dock-item">Services</a>
+    <a href="#pricing" class="dock-item">Pricing</a>
+    <a href="#" onclick="openConcierge()" class="dock-item dock-cta">Book</a>
+  </nav>
+</div>
 
-        <div class="hidden md:hidden bg-slate-850" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-800">
-                <a href="#home" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a href="#about" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
-                <a href="#expertise" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Expertise</a>
-                <a href="#contact" class="text-accent-gold block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-            </div>
-        </div>
-    </nav>
+<header id="hero" class="hero">
+  <div class="hero-badge">
+    <span class="status-dot"></span>
+    <span class="mono" style="color:#fff;">Waitlist Open: Spring '26</span>
+  </div>
+  
+  <h1>
+    <span class="gradient-text">Architecting</span> the<br>
+    <span style="font-style:italic; font-family:'Playfair Display'; color:var(--text-secondary);">Impossible Acceptance.</span>
+  </h1>
+  
+  <p>Andrew Sayegh provides high-velocity consulting for elite college transfers, national fellowships, and federal policy careers.</p>
+  
+  <div style="display:flex; gap:1rem; opacity:0; animation:fadeUp 1s 0.6s var(--ease-apple) forwards;">
+    <button onclick="openConcierge()" class="btn btn-primary">Initiate Strategy</button>
+    <a href="#services" class="btn btn-outline">Explore Methodology</a>
+  </div>
+</header>
 
-    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-            <div class="absolute top-[-10%] right-[-5%] w-96 h-96 bg-accent-blue/10 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-[-10%] left-[-5%] w-96 h-96 bg-accent-gold/5 rounded-full blur-3xl"></div>
-        </div>
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item">Columbia University</div>
+    <div class="ticker-item">U.S. Dept of State</div>
+    <div class="ticker-item">Rangel Fellowship</div>
+    <div class="ticker-item">Fulbright</div>
+    <div class="ticker-item">UCLA</div>
+    <div class="ticker-item">Capitol Hill</div>
+    <div class="ticker-item">Columbia University</div>
+    <div class="ticker-item">U.S. Dept of State</div>
+    <div class="ticker-item">Rangel Fellowship</div>
+    <div class="ticker-item">Fulbright</div>
+    <div class="ticker-item">UCLA</div>
+    <div class="ticker-item">Capitol Hill</div>
+  </div>
+</div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-accent-gold font-medium tracking-widest uppercase mb-4 fade-in-up">Welcome</p>
-            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight fade-in-up delay-100">
-                Building <span class="text-gradient">Resilient</span> <br> Digital Futures.
-            </h1>
-            <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-400 fade-in-up delay-200">
-                I am Andrew Sayegh. I engineer robust systems and strategic solutions that drive efficiency, security, and growth.
-            </p>
-            <div class="mt-10 flex justify-center gap-4 fade-in-up delay-300">
-                <a href="#projects" class="px-8 py-3.5 rounded-full bg-white text-slate-900 font-semibold hover:bg-gray-100 transition-colors shadow-lg shadow-white/10">
-                    View My Work
-                </a>
-                <a href="#contact" class="px-8 py-3.5 rounded-full border border-gray-600 text-white font-semibold hover:border-accent-gold hover:text-accent-gold transition-colors">
-                    Get in Touch
-                </a>
-            </div>
-        </div>
-    </section>
+<section id="track-record" class="section">
+  <div class="mono" style="margin-bottom:1rem;">Proven Results</div>
+  <div class="bento-grid">
+    <div class="card bento-card bento-wide reveal" onmousemove="spotlight(event)">
+      <h3 style="font-size:2rem;">First-Generation Specialist</h3>
+      <p style="color:var(--text-secondary); margin-top:1rem;">I don't just edit essays; I translate lived experience into institutional value. 100% success rate for transfers targeting T25 schools.</p>
+      <div class="mono" style="margin-top:auto;">Metric: 100% Transfer Admit Rate</div>
+    </div>
+    <div class="card bento-card reveal" onmousemove="spotlight(event)">
+      <h3 style="font-size:3.5rem; color:var(--accent-gold);">$250k</h3>
+      <p style="color:var(--text-secondary);">In fellowship funding secured for clients.</p>
+    </div>
+    <div class="card bento-card reveal" onmousemove="spotlight(event)">
+      <h3 style="font-size:3.5rem;">5+</h3>
+      <p style="color:var(--text-secondary);">Years in Federal Policy & Diplomacy.</p>
+    </div>
+    <div class="card bento-card bento-wide reveal" onmousemove="spotlight(event)" style="background:linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,0,0,0));">
+      <h3 style="font-size:2rem;">The "Insider" Edge</h3>
+      <p style="color:var(--text-secondary); margin-top:1rem;">Having served on selection committees, I know exactly how applications are read, graded, and debated behind closed doors.</p>
+    </div>
+  </div>
+</section>
 
-    <section id="about" class="py-24 bg-slate-850">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
-                <div class="relative">
-                    <div class="absolute inset-0 bg-accent-gold/20 transform translate-x-4 translate-y-4 rounded-lg"></div>
-                    <div class="relative h-96 w-full bg-gray-800 rounded-lg overflow-hidden border border-gray-700 flex items-center justify-center">
-                        <span class="text-gray-500 text-lg">[ Insert Professional Headshot ]</span>
-                    </div>
-                </div>
-                <div class="mt-12 lg:mt-0">
-                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-6">About Andrew</h2>
-                    <p class="text-lg text-slate-400 mb-6 leading-relaxed">
-                        With a deep commitment to excellence and a forward-thinking approach, I specialize in bridging the gap between complex technical requirements and strategic business goals.
-                    </p>
-                    <p class="text-lg text-slate-400 mb-8 leading-relaxed">
-                        Whether architecting cloud infrastructure or streamlining operational workflows, my focus remains constant: delivering high-impact results with precision and clarity.
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="border-l-2 border-accent-gold pl-4">
-                            <span class="block text-3xl font-bold text-white">5+</span>
-                            <span class="text-sm text-slate-500 uppercase tracking-wide">Years Experience</span>
-                        </div>
-                        <div class="border-l-2 border-accent-gold pl-4">
-                            <span class="block text-3xl font-bold text-white">100%</span>
-                            <span class="text-sm text-slate-500 uppercase tracking-wide">Project Success</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="services" class="section">
+  <div style="text-align:center; margin-bottom:2rem;">
+    <h2 class="reveal" style="font-size:3rem; margin-bottom:1rem;">Select Your Path</h2>
+    
+    <div class="switchboard-nav reveal">
+      <button class="switch-btn active" onclick="switchTab('college')">College Admissions</button>
+      <button class="switch-btn" onclick="switchTab('fellowships')">National Fellowships</button>
+      <button class="switch-btn" onclick="switchTab('career')">Policy Career</button>
+    </div>
+  </div>
 
-    <section id="expertise" class="py-24 bg-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-white">Core Competencies</h2>
-                <div class="w-24 h-1 bg-accent-gold mx-auto mt-4"></div>
-            </div>
+  <div id="panel-college" class="switch-panel active">
+    <div class="reveal">
+      <div class="mono" style="color:var(--accent-blue);">Focus: Undergrad & Transfer</div>
+      <h3 style="font-size:2.5rem; margin:1rem 0;">The Transfer Architecture</h3>
+      <p style="font-size:1.1rem; color:var(--text-secondary); margin-bottom:2rem;">
+        Transferring is an engineering problem. We audit your transcript, design your narrative arc, and execute a precision strike on "Why Us" essays.
+      </p>
+      <ul class="feature-list">
+        <li>Strategic School List Creation</li>
+        <li>"Lived Experience" Narrative Building</li>
+        <li>Mock Alumni Interviews</li>
+      </ul>
+    </div>
+    <div class="card reveal" style="height:400px; background: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1000&auto=format&fit=crop') center/cover; opacity:0.6;"></div>
+  </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-8 bg-slate-850 rounded-xl border border-gray-800 hover:border-accent-gold/50 transition-colors group">
-                    <div class="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-accent-gold group-hover:text-slate-900 transition-colors text-accent-gold">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">System Architecture</h3>
-                    <p class="text-slate-400">Designing scalable, secure, and high-performance infrastructure tailored to enterprise needs.</p>
-                </div>
+  <div id="panel-fellowships" class="switch-panel">
+    <div class="reveal">
+      <div class="mono" style="color:var(--accent-gold);">Focus: Rangel, Pickering, Fulbright</div>
+      <h3 style="font-size:2.5rem; margin:1rem 0;">The Fellowship Blueprint</h3>
+      <p style="font-size:1.1rem; color:var(--text-secondary); margin-bottom:2rem;">
+        These applications aren't about grades; they are about service dimensions. I help you map your biography to the specific rubrics used by the State Department.
+      </p>
+      <ul class="feature-list">
+        <li>Personal Statement Strategy</li>
+        <li>Statement of Grant Purpose Audits</li>
+        <li>Finalist Interview Simulations</li>
+      </ul>
+    </div>
+    <div class="card reveal" style="height:400px; background: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1000&auto=format&fit=crop') center/cover; opacity:0.6;"></div>
+  </div>
 
-                <div class="p-8 bg-slate-850 rounded-xl border border-gray-800 hover:border-accent-gold/50 transition-colors group">
-                    <div class="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-accent-gold group-hover:text-slate-900 transition-colors text-accent-gold">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">Strategic Consulting</h3>
-                    <p class="text-slate-400">Analyzing complex challenges to provide actionable, data-driven solutions.</p>
-                </div>
+  <div id="panel-career" class="switch-panel">
+    <div class="reveal">
+      <div class="mono" style="color:var(--accent-purple);">Focus: Federal & Non-Profit</div>
+      <h3 style="font-size:2.5rem; margin:1rem 0;">The Policy Pivot</h3>
+      <p style="font-size:1.1rem; color:var(--text-secondary); margin-bottom:2rem;">
+        Translating private sector or academic experience into government-speak (USAJobs). We reconstruct your resume to pass the automated filters.
+      </p>
+      <ul class="feature-list">
+        <li>Federal Resume Construction</li>
+        <li>Cover Letter "Op-Ed" Style</li>
+        <li>Network Mapping DC/remote</li>
+      </ul>
+    </div>
+    <div class="card reveal" style="height:400px; background: url('https://images.unsplash.com/photo-1555848960-8c3af5e48dc6?q=80&w=1000&auto=format&fit=crop') center/cover; opacity:0.6;"></div>
+  </div>
+</section>
 
-                <div class="p-8 bg-slate-850 rounded-xl border border-gray-800 hover:border-accent-gold/50 transition-colors group">
-                    <div class="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-accent-gold group-hover:text-slate-900 transition-colors text-accent-gold">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">Development</h3>
-                    <p class="text-slate-400">Full-stack capabilities ensuring seamless integration between front-end interfaces and back-end logic.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="pricing" class="section">
+  <div class="bento-grid">
+    <div class="card price-card reveal" onmousemove="spotlight(event)">
+      <span class="price-badge">Basic</span>
+      <h3 style="font-size:1.5rem;">Strategy Call</h3>
+      <div class="price-val">$149</div>
+      <p style="color:var(--text-secondary);">60-minute intensive diagnostic.</p>
+      <ul class="feature-list">
+        <li>Profile Audit</li>
+        <li>Gap Analysis</li>
+        <li>Recorded Session</li>
+      </ul>
+      <button class="btn btn-outline" style="width:100%; margin-top:2rem;" onclick="openConcierge('Basic')">Select</button>
+    </div>
 
-    <footer id="contact" class="bg-slate-950 border-t border-gray-900 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
-                <div class="text-center md:text-left mb-8 md:mb-0">
-                    <h2 class="text-3xl font-serif font-bold text-white mb-2">Let's Connect</h2>
-                    <p class="text-slate-400">Open for opportunities and collaborations.</p>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="mailto:contact@andrewsayegh.com" class="px-6 py-3 bg-accent-gold text-slate-900 font-bold rounded hover:bg-white transition-colors">
-                        Email Me
-                    </a>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
-                <p>&copy; 2026 Andrew Sayegh. All rights reserved.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white transition-colors">GitHub</a>
-                    <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
-                    <a href="#" class="hover:text-white transition-colors">Twitter</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div class="card price-card reveal" style="border-color:var(--text-primary);" onmousemove="spotlight(event)">
+      <span class="price-badge" style="background:var(--text-primary); color:black;">Premium</span>
+      <h3 style="font-size:1.5rem;">Sprint Package</h3>
+      <div class="price-val">$499</div>
+      <p style="color:var(--text-secondary);">End-to-end support for one application.</p>
+      <ul class="feature-list">
+        <li>3 Strategy Sessions</li>
+        <li>Unlimited Essay Edits</li>
+        <li>Mock Interview</li>
+        <li>Direct Text Access</li>
+      </ul>
+      <button class="btn btn-primary" style="width:100%; margin-top:2rem;" onclick="openConcierge('Premium')">Select</button>
+    </div>
 
+    <div class="card price-card reveal" onmousemove="spotlight(event)">
+      <span class="price-badge">Unlimited</span>
+      <h3 style="font-size:1.5rem;">Retainer</h3>
+      <div class="price-val">Custom</div>
+      <p style="color:var(--text-secondary);">Full cycle support for multiple schools.</p>
+      <ul class="feature-list">
+        <li>School List Curation</li>
+        <li>All Supplements</li>
+        <li>Waitlist Strategy</li>
+      </ul>
+      <button class="btn btn-outline" style="width:100%; margin-top:2rem;" onclick="openConcierge('Unlimited')">Inquire</button>
+    </div>
+  </div>
+</section>
+
+<footer style="text-align:center; padding:4rem 0; color:var(--text-tertiary); font-size:0.9rem;">
+  <p>&copy; 2026 Andrew Sayegh Consulting. All Rights Reserved.</p>
+  <div style="margin-top:1rem; display:flex; justify-content:center; gap:1.5rem;">
+    <a href="#" style="color:var(--text-secondary); text-decoration:none;">LinkedIn</a>
+    <a href="#" style="color:var(--text-secondary); text-decoration:none;">Email</a>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="bookingModal">
+  <div class="concierge-window">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+      <h3 style="margin:0;">Concierge</h3>
+      <button onclick="closeConcierge()" style="background:none; border:none; color:var(--text-secondary); font-size:1.5rem; cursor:pointer;">&times;</button>
+    </div>
+
+    <div id="step-1" class="form-step active">
+      <span class="c-label">01 // Select Focus Area</span>
+      <div class="option-grid">
+        <div class="option-btn" onclick="selectOption(this, 'College')">College</div>
+        <div class="option-btn" onclick="selectOption(this, 'Fellowship')">Fellowship</div>
+        <div class="option-btn" onclick="selectOption(this, 'Career')">Career</div>
+        <div class="option-btn" onclick="selectOption(this, 'Other')">Other</div>
+      </div>
+      <button class="btn btn-primary" style="width:100%" onclick="nextStep(2)">Continue</button>
+    </div>
+
+    <div id="step-2" class="form-step">
+      <span class="c-label">02 // Your Identity</span>
+      <div style="margin-bottom:2rem;">
+        <input type="text" class="c-input" placeholder="Full Name" id="userName">
+      </div>
+      <div style="margin-bottom:2rem;">
+        <input type="email" class="c-input" placeholder="Email Address" id="userEmail">
+      </div>
+      <div style="display:flex; gap:1rem;">
+        <button class="btn btn-outline" style="width:50%" onclick="nextStep(1)">Back</button>
+        <button class="btn btn-primary" style="width:50%" onclick="submitForm()">Confirm Request</button>
+      </div>
+    </div>
+    
+    <div id="step-3" class="form-step" style="text-align:center;">
+      <h3 style="font-size:2rem; margin-bottom:1rem;">Request Received.</h3>
+      <p style="color:var(--text-secondary);">Andrew will review your profile and contact you within 24 hours.</p>
+      <button class="btn btn-outline" style="margin-top:2rem;" onclick="closeConcierge()">Close</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // 1. Spotlight Effect (Mouse Tracking)
+  function spotlight(e) {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--x', `${x}px`);
+    card.style.setProperty('--y', `${y}px`);
+  }
+
+  // 2. Intersection Observer (Reveal on Scroll)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // 3. Tab Switching Logic
+  function switchTab(tabId) {
+    // Buttons
+    document.querySelectorAll('.switch-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Panels
+    document.querySelectorAll('.switch-panel').forEach(panel => {
+      panel.style.opacity = '0';
+      setTimeout(() => {
+        panel.classList.remove('active');
+      }, 200);
+    });
+    
+    setTimeout(() => {
+      const activePanel = document.getElementById(`panel-${tabId}`);
+      activePanel.classList.add('active');
+      setTimeout(() => {
+        activePanel.style.opacity = '1';
+      }, 50);
+    }, 200);
+  }
+
+  // 4. Modal Logic
+  let selectedCategory = '';
+  
+  function openConcierge(tier) {
+    document.getElementById('bookingModal').classList.add('open');
+    if(tier) console.log("Pre-selected Tier:", tier); // Logic to store tier if needed
+  }
+  
+  function closeConcierge() {
+    document.getElementById('bookingModal').classList.remove('open');
+    setTimeout(() => {
+      nextStep(1); // Reset
+      document.querySelectorAll('input').forEach(i => i.value = '');
+      document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    }, 400);
+  }
+  
+  function nextStep(step) {
+    document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+    document.getElementById(`step-${step}`).classList.add('active');
+  }
+  
+  function selectOption(el, cat) {
+    document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedCategory = cat;
+  }
+  
+  function submitForm() {
+    const name = document.getElementById('userName').value;
+    if(!name) { alert("Please provide your name."); return; }
+    
+    // Simulate API call
+    const btn = document.querySelector('#step-2 .btn-primary');
+    btn.innerHTML = "Processing...";
+    
+    setTimeout(() => {
+      nextStep(3);
+      btn.innerHTML = "Confirm Request";
+    }, 1500);
+  }
+</script>
 </body>
 </html>
