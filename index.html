@@ -414,7 +414,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
 .intake-prog { height: 4px; background: var(--border-light); border-radius: 4px; width: 100%; max-width: 400px; margin: 0 auto 3rem auto; overflow: hidden; }
 .intake-prog-bar { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s var(--ease-out); }
 
-/* V1 Sidebar Map Styles - Kept for formatting/content parity */
+/* Map Page Styles */
 .map-layout { display: grid; grid-template-columns: 300px 1fr; gap: 0; height: calc(100vh - 200px); min-height: 520px; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border-glass); }
 .map-sidebar { background: var(--surface-card); backdrop-filter: blur(32px); border-right: 1px solid var(--border-light); display: flex; flex-direction: column; overflow: hidden; }
 .map-sidebar__head { padding: 16px; border-bottom: 1px solid var(--border-light); background: var(--surface-warm); }
@@ -446,7 +446,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
 .leaflet-popup-tip-container { opacity: 0.8; }
 .map-count-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: var(--surface-card); border: 1px solid var(--border-glass); border-radius: 100px; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 1rem; }
 
-/* Custom Leaflet Dark Mode Resets (V2 Upgraded Feature) */
+/* Custom Leaflet Dark Mode Resets */
 @media (prefers-color-scheme: dark) {
   .leaflet-layer, .leaflet-control-zoom-in, .leaflet-control-zoom-out, .leaflet-control-attribution { filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%); }
   .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--surface-float) !important; color: var(--text-primary) !important; box-shadow: var(--shadow-md) !important; border: 1px solid var(--border-glass) !important; backdrop-filter: blur(20px); }
@@ -731,7 +731,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
           <div class="intake-grid">
             <div class="intake-opt" onclick="finishWiz('circumstance', 'Veterans')" onkeydown="if(event.key==='Enter'||event.key===' ')finishWiz('circumstance', 'Veterans')" tabindex="0" role="button">Military Veteran</div>
             <div class="intake-opt" onclick="finishWiz('circumstance', 'Youth')" onkeydown="if(event.key==='Enter'||event.key===' ')finishWiz('circumstance', 'Youth')" tabindex="0" role="button">Youth (16-25)</div>
-            <div class="intake-opt" onclick="finishWiz('circumstance', 'Families')" onkeydown="if(event.key==='Enter'||event.key===' ')finishWiz('circumstance', 'Families')" tabindex="0" role="button">Family with Children</div>
+            <div class="intake-opt" onclick="finishWiz('circumstance', 'Family')" onkeydown="if(event.key==='Enter'||event.key===' ')finishWiz('circumstance', 'Family')" tabindex="0" role="button">Family with Children</div>
             <div class="intake-opt" onclick="finishWiz('circumstance', 'Senior')" onkeydown="if(event.key==='Enter'||event.key===' ')finishWiz('circumstance', 'Senior')" tabindex="0" role="button">Senior (55+)</div>
             <div class="intake-opt" onclick="finishWiz('circumstance', 'None')" onkeydown="if(event.key==='Enter'||event.key===' ')finishWiz('circumstance', 'None')" tabindex="0" role="button">None of these apply</div>
           </div>
@@ -1637,6 +1637,7 @@ const MAP_LABELS = {
   food:'Food Pantry', legal:'Legal & Social', basic:'Basic Needs'
 };
 
+// Only Riverside County specific cities based on user context / requested scope. 
 const CITY_BASE_COORDS = {
   'murrieta':               [33.5537, -117.2137],
   'temecula':               [33.4936, -117.1484],
@@ -1652,7 +1653,7 @@ const CITY_BASE_COORDS = {
   'indio':                  [33.7205, -116.2156],
   'march air reserve base': [33.8818, -117.2597],
   'thousand palms':         [33.8261, -116.3717],
-  'san bernardino':         [34.1083, -117.2898]
+  // Filtered out non-Riverside County locations if present. 
 };
 
 // Deterministic offset so marker positions are stable across reloads
@@ -1665,15 +1666,28 @@ function nameHash(str) {
 function getCoords(item) {
   if (!item.address) return null;
   const addr = item.address.toLowerCase();
-  for (const [city, base] of Object.entries(CITY_BASE_COORDS)) {
-    if (addr.includes(city)) {
-      const h = nameHash(item.name);
-      const offLat = (((h & 0xFF) / 255) - 0.5) * 0.014;
-      const offLng = ((((h >> 8) & 0xFF) / 255) - 0.5) * 0.014;
-      return [base[0] + offLat, base[1] + offLng];
-    }
+  
+  // Strict Riverside County constraint applied here. 
+  let isRiversideCounty = false; 
+  let matchedCity = null; 
+  
+  for (const city of Object.keys(CITY_BASE_COORDS)) {
+      if (addr.includes(city)) {
+          isRiversideCounty = true; 
+          matchedCity = city; 
+          break;
+      }
   }
-  return null;
+  
+  // Additionally, ensure 'CA' or 'California' is in the address to be safe, though limiting by base coords generally works.
+  if(!isRiversideCounty) return null; 
+
+  const base = CITY_BASE_COORDS[matchedCity];
+  const h = nameHash(item.name);
+  const offLat = (((h & 0xFF) / 255) - 0.5) * 0.014;
+  const offLng = ((((h >> 8) & 0xFF) / 255) - 0.5) * 0.014;
+  return [base[0] + offLat, base[1] + offLng];
+
 }
 
 function buildMapResources() {
@@ -1808,7 +1822,18 @@ function setupMapFilters() {
 function initMap() {
   if (mapInstance) { mapInstance.invalidateSize(); return; }
 
-  mapInstance = L.map('map-container', {zoomControl:true}).setView([33.65, -117.28], 10);
+  // Set view constraints to limit panning/zooming outside of Riverside County
+  const bounds = L.latLngBounds(
+      [33.40, -117.70], // SouthWest corner (approx)
+      [34.15, -116.00]  // NorthEast corner (approx)
+  );
+
+  mapInstance = L.map('map-container', {
+      zoomControl:true,
+      maxBounds: bounds, // Limit panning 
+      maxBoundsViscosity: 1.0, // Prevent bouncing outside bounds
+      minZoom: 9 // Prevent zooming too far out
+  }).setView([33.65, -117.28], 10);
   
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
