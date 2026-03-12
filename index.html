@@ -182,7 +182,10 @@ body {
 }
 
 img { display: block; max-width: 100%; }
-a, button { touch-action: manipulation; }
+
+/* MOBILE OPTIMIZATIONS: Remove ugly tap highlights */
+a, button, .intake-option { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
 a { color: inherit; text-decoration: none; transition: all var(--dur-fast); }
 button { font-family: var(--f-body); border: none; background: none; cursor: pointer; }
 ::selection { background: var(--accent); color: var(--text-primary); }
@@ -538,7 +541,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
 .searchbox:focus-within { border-color: var(--accent); box-shadow: 0 4px 16px rgba(2,119,182,0.15); }
 .searchbox svg { width: 18px; height: 18px; color: var(--text-tertiary); flex-shrink: 0; transition: color var(--dur-fast); }
 .searchbox:focus-within svg { color: var(--accent); }
-.searchbox input { border: none; background: none; font-family: var(--f-body); font-size: var(--size-sm); color: var(--text-primary); outline: none; width: 100%; }
+.searchbox input { border: none; background: none; font-family: var(--f-body); font-size: 16px !important; color: var(--text-primary); outline: none; width: 100%; } /* font-size 16px rigidly prevents iOS Safari auto-zoom bug */
 .searchbox input::placeholder { color: var(--text-tertiary); }
 .result-count { font-size: 13px; color: var(--text-secondary); font-weight: 500; }
 
@@ -760,10 +763,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
 .footer .logo__sub { font-size: var(--size-xs); }
 
 /* ══════════════════════════════════════════════════════
-   INTAKE WIZARD MODAL (Upgraded UX/UI)
+   INTAKE WIZARD MODAL (Streamlined)
 ══════════════════════════════════════════════════════ */
 .intake-overlay { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 1rem; }
-.intake-overlay.open { display: flex; animation: intakeIn 0.35s var(--ease-out) forwards; }
+.intake-overlay.open { display: flex; animation: intakeIn 0.3s var(--ease-out) forwards; }
 @keyframes intakeIn { from { opacity: 0; } to { opacity: 1; } }
 .intake-modal { background: var(--surface-float); border: 1px solid var(--border-glass); border-radius: var(--radius-xl); width: 100%; max-width: 560px; max-height: 90dvh; overflow-y: auto; box-shadow: var(--shadow-float); position: relative; animation: intakeSlideIn 0.4s var(--ease-spring) forwards; will-change: opacity, transform; }
 @keyframes intakeSlideIn { from { opacity: 0; transform: translateY(20px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
@@ -798,18 +801,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
 .intake-option::after { content: ''; position: absolute; right: 20px; top: 50%; transform: translateY(-50%) scale(0.5); width: 24px; height: 24px; background: var(--accent); border-radius: 50%; opacity: 0; transition: all var(--dur-fast) var(--ease-spring); background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>'); background-size: 14px; background-position: center; background-repeat: no-repeat; }
 .intake-option.selected::after { opacity: 1; transform: translateY(-50%) scale(1); }
 
-.intake-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 1.5rem; }
-.intake-nav .btn { justify-content: center; min-height: 48px; }
-
-/* Personalized Action Plan Results */
-.plan-intro { font-size: var(--size-sm); color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.5; }
-#intakeResultsList { display: flex; flex-direction: column; gap: 12px; margin-bottom: 1.5rem; }
-#intakeResultsList .rc { padding: 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
-/* Make top result pop */
-#intakeResultsList .rc:first-child { border-color: var(--accent); box-shadow: 0 8px 32px rgba(2, 119, 182, 0.15), var(--inner-glow); transform: scale(1.02); margin-bottom: 8px; }
-#intakeResultsList .rc-name { font-size: 1.1rem; }
-#intakeResultsList .rc-details { margin-top: 0.5rem; padding-top: 0.5rem; }
-#intakeResultsList .rc-actions { margin-top: 0.5rem; padding-top: 0.5rem; }
+.intake-nav { display: flex; justify-content: flex-start; margin-top: 1.5rem; }
 
 /* ══════════════════════════════════════════════════════
    DYNAMIC RESOURCE MAP (Fullscreen Glassmorphism UI)
@@ -817,8 +809,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
 .map-container { position: relative; height: calc(100dvh - 76px); width: 100%; overflow: hidden; background: var(--surface-warm); }
 #mapCanvas { position: absolute; inset: 0; z-index: 1; }
 
-/* Seamless Map Integration Filter */
-.leaflet-tile-pane { filter: contrast(1.05) saturate(1.1); }
+/* Seamless Map Integration Filter - Matches brand color palate */
+.leaflet-tile-pane { filter: sepia(0.05) hue-rotate(-5deg) saturate(1.15) contrast(1.02); transition: filter 0.4s; }
+@media (prefers-color-scheme: dark) { .leaflet-tile-pane { filter: grayscale(0.1) contrast(1.1) brightness(0.85); } }
 
 .map-ui-layer { position: absolute; inset: 0; z-index: 10; pointer-events: none; display: flex; flex-direction: column; }
 .map-toolbar { pointer-events: auto; display: flex; align-items: center; gap: 8px; padding: 12px clamp(1rem, 3vw, 2rem); background: var(--surface-float); border-bottom: 1px solid var(--border-light); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; flex-shrink: 0; backdrop-filter: blur(24px); box-shadow: var(--shadow-sm); }
@@ -1350,55 +1343,76 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
     
     <div class="intake-modal__body">
       
-      <div class="intake-step active" id="intakeStep1">
+      <div class="intake-step active" id="intakeStep_step1">
         <div class="intake-step__label">What is your primary goal today?</div>
         <div class="intake-options">
-          <button class="intake-option" onclick="intakeSelect(1, 'goal', 'housing', this)">
+          <button class="intake-option" onclick="intakeSelect('step1', 'goal', 'housing', this)">
             <div class="intake-option__icon" style="color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
             Find Housing or Shelter
           </button>
-          <button class="intake-option" onclick="intakeSelect(1, 'goal', 'employment', this)">
+          <button class="intake-option" onclick="intakeSelect('step1', 'goal', 'employment', this)">
             <div class="intake-option__icon" style="color:var(--signal-green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
             Seek Employment
           </button>
-          <button class="intake-option" onclick="intakeSelect(1, 'goal', 'healthcare', this)">
+          <button class="intake-option" onclick="intakeSelect('step1', 'goal', 'healthcare', this)">
             <div class="intake-option__icon" style="color:var(--signal-purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
             Access Healthcare / Clinics
           </button>
-          <button class="intake-option" onclick="intakeSelect(1, 'goal', 'food', this)">
+          <button class="intake-option" onclick="intakeSelect('step1', 'goal', 'food', this)">
             <div class="intake-option__icon" style="color:var(--signal-amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
             Get Food Assistance
           </button>
-          <button class="intake-option" onclick="intakeSelect(1, 'goal', 'crisis', this)">
+          <button class="intake-option" onclick="intakeSelect('step1', 'goal', 'crisis', this)">
             <div class="intake-option__icon" style="color:var(--signal-red)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
             I need immediate crisis support
           </button>
         </div>
         <div class="intake-nav" style="justify-content: flex-end;">
-          <button class="btn btn--outline" style="border-color:transparent; color:var(--text-tertiary);" onclick="intakeSelect(1, 'goal', 'bypass', this)">Skip to all resources</button>
+          <button class="btn btn--outline" style="border-color:transparent; color:var(--text-tertiary); min-height:44px; padding:0 12px;" onclick="intakeSelect('step1', 'goal', 'bypass', this)">Skip to all resources</button>
         </div>
       </div>
 
-      <div class="intake-step" id="intakeStep2">
+      <div class="intake-step" id="intakeStep_stepHealth">
+        <div class="intake-step__label">What kind of care are you looking for?</div>
+        <div class="intake-options">
+          <button class="intake-option" onclick="intakeSelect('stepHealth', 'care', 'medical', this)">
+            <div class="intake-option__icon" style="color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            Medical & Clinics
+          </button>
+          <button class="intake-option" onclick="intakeSelect('stepHealth', 'care', 'behavioral', this)">
+            <div class="intake-option__icon" style="color:var(--signal-purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></div>
+            Mental Health & Recovery
+          </button>
+          <button class="intake-option" onclick="intakeSelect('stepHealth', 'care', 'specialty', this)">
+            <div class="intake-option__icon" style="color:var(--signal-amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
+            Specialty Care
+          </button>
+        </div>
+        <div class="intake-nav">
+          <button class="btn btn--outline" onclick="intakeBack()">Back</button>
+        </div>
+      </div>
+
+      <div class="intake-step" id="intakeStep_step2">
         <div class="intake-step__label">Tell us a bit about who needs assistance:</div>
         <div class="intake-options">
-          <button class="intake-option" onclick="intakeSelect(2, 'who', 'single', this)">
+          <button class="intake-option" onclick="intakeSelect('step2', 'who', 'single', this)">
             <div class="intake-option__icon" style="color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
             Just me (Single Adult)
           </button>
-          <button class="intake-option" onclick="intakeSelect(2, 'who', 'family', this)">
+          <button class="intake-option" onclick="intakeSelect('step2', 'who', 'family', this)">
             <div class="intake-option__icon" style="color:var(--signal-amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             A family with children
           </button>
-          <button class="intake-option" onclick="intakeSelect(2, 'who', 'youth', this)">
+          <button class="intake-option" onclick="intakeSelect('step2', 'who', 'youth', this)">
             <div class="intake-option__icon" style="color:var(--signal-green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M3 21v-2a7 7 0 0 1 14 0v2"/></svg></div>
             Youth or young adult (16-25)
           </button>
-          <button class="intake-option" onclick="intakeSelect(2, 'who', 'veteran', this)">
+          <button class="intake-option" onclick="intakeSelect('step2', 'who', 'veteran', this)">
             <div class="intake-option__icon" style="color:var(--badge-bg-3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
             Military Veteran
           </button>
-          <button class="intake-option" onclick="intakeSelect(2, 'who', 'senior', this)">
+          <button class="intake-option" onclick="intakeSelect('step2', 'who', 'senior', this)">
             <div class="intake-option__icon" style="color:var(--text-secondary)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
             Senior (55+)
           </button>
@@ -1408,36 +1422,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
         </div>
       </div>
 
-      <div class="intake-step" id="intakeStep3">
+      <div class="intake-step" id="intakeStep_step3">
         <div class="intake-step__label">How soon do you need this support?</div>
         <div class="intake-options">
-          <button class="intake-option" onclick="intakeSelect(3, 'urgency', 'today', this)">
+          <button class="intake-option" onclick="intakeSelect('step3', 'urgency', 'today', this)">
             <div class="intake-option__icon" style="color:var(--signal-red)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div>
             Today / Emergency
           </button>
-          <button class="intake-option" onclick="intakeSelect(3, 'urgency', 'soon', this)">
+          <button class="intake-option" onclick="intakeSelect('step3', 'urgency', 'soon', this)">
             <div class="intake-option__icon" style="color:var(--signal-amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
             Within a week
           </button>
-          <button class="intake-option" onclick="intakeSelect(3, 'urgency', 'planning', this)">
+          <button class="intake-option" onclick="intakeSelect('step3', 'urgency', 'planning', this)">
             <div class="intake-option__icon" style="color:var(--signal-green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
             Just planning ahead / Flexible
           </button>
         </div>
         <div class="intake-nav">
           <button class="btn btn--outline" onclick="intakeBack()">Back</button>
-        </div>
-      </div>
-
-      <div class="intake-step" id="intakeStep4">
-        <div class="intake-step__label" style="font-family: var(--f-display); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);">Your Tailored Action Plan</div>
-        <p class="plan-intro">Based on your selections, here are our top immediate recommendations for you.</p>
-        
-        <div id="intakeResultsList"></div>
-
-        <div class="intake-nav" style="flex-direction: column; gap: 12px; margin-top: 2rem;">
-          <button class="btn btn--solid" onclick="intakeFinish()" style="width: 100%;">View All Matching Resources</button>
-          <button class="btn btn--outline" onclick="intakeBack()" style="width: 100%; border-color: transparent;">Go Back</button>
         </div>
       </div>
       
@@ -1699,7 +1701,6 @@ function renderTeam(q='') {
   const list = caseManagers.filter(c => c.name.toLowerCase().includes(q.toLowerCase()));
   if (cnt) cnt.textContent = list.length;
   
-  // Using document fragment for better performance rendering
   const fragment = document.createDocumentFragment();
   list.forEach(cm => {
     const card = document.createElement('div');
@@ -1812,8 +1813,6 @@ function buildCard(item, colorClass, defaultLabel) {
   const label      = item.special || defaultLabel;
   const phoneClean = item.phone ? item.phone.replace(/[^0-9]/g,'') : '';
   const addrEncoded = item.address ? encodeURIComponent(item.address) : '';
-  
-  // Address URL mapping 
   const mapUrl = `http://googleusercontent.com/maps.google.com/?q=${addrEncoded}`;
   
   return `
@@ -1977,7 +1976,7 @@ document.getElementById('mobileNav').addEventListener('click', e => {
   if (e.target === e.currentTarget) closeMobileNav();
 });
 
-// FIXED: Close mobile navigation safely if viewport resizes to desktop preventing lock
+// Close mobile navigation safely if viewport resizes to desktop preventing lock
 window.addEventListener('resize', () => {
   if(window.innerWidth > 768 && document.getElementById('mobileNav').classList.contains('open')) {
     closeMobileNav();
@@ -2115,17 +2114,18 @@ fetchAndPopulateJobs();
 setInterval(fetchAndPopulateJobs, 300000);
 
 /* ═══════════════════════════════════════════════════════
-   INTAKE WIZARD (Upgraded Logic & History Navigation)
+   INTAKE WIZARD (Streamlined & Rapid Routing)
 ═══════════════════════════════════════════════════════ */
-let intakeState = { step: 1, goal: '', who: '', urgency: '' };
-let intakeHistory = []; // Tracks actual steps taken for robust "Back" navigation
+let intakeState = { currentStepId: 'step1', goal: '', who: '', urgency: '', care: '' };
+let intakeHistory = [];
 
 function openIntake() {
-  intakeState = { step: 1, goal: '', who: '', urgency: '' };
+  intakeState = { currentStepId: 'step1', goal: '', who: '', urgency: '', care: '' };
   intakeHistory = [];
-  updateIntakeUI();
+  showStep('step1');
   document.getElementById('intakeOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.querySelectorAll('.intake-option').forEach(o => o.classList.remove('selected'));
 }
 
 function closeIntake() {
@@ -2133,7 +2133,26 @@ function closeIntake() {
   document.body.style.overflow = '';
 }
 
-function intakeSelect(stepIndex, key, value, el) {
+function showStep(stepId) {
+  document.querySelectorAll('.intake-step').forEach(s => s.classList.remove('active'));
+  const stepEl = document.getElementById('intakeStep_' + stepId);
+  if (stepEl) stepEl.classList.add('active');
+  intakeState.currentStepId = stepId;
+
+  const prog = document.getElementById('intakeProgress');
+  if (prog) {
+    if (stepId === 'step1') prog.style.width = '25%';
+    else if (stepId === 'step2' || stepId === 'stepHealth') prog.style.width = '60%';
+    else if (stepId === 'step3') prog.style.width = '90%';
+  }
+}
+
+function executeRoute(page, tab) {
+  closeIntake();
+  goTo(page, null, tab);
+}
+
+function intakeSelect(stepId, key, value, el) {
   // Visual select
   const parent = el.closest('.intake-options') || el.closest('.intake-nav');
   if(parent) {
@@ -2141,141 +2160,47 @@ function intakeSelect(stepIndex, key, value, el) {
   }
   if(el.classList.contains('intake-option')) el.classList.add('selected');
   
-  // Set data
   intakeState[key] = value;
 
-  // Auto advance after short delay for rapid feel
+  // Ultra-rapid auto-advance to eliminate friction
   setTimeout(() => {
-    if (intakeState.step === stepIndex) { // Ensures user hasn't already double-clicked to another step
-      intakeHistory.push(intakeState.step);
+    if (intakeState.currentStepId === stepId) {
+      intakeHistory.push(intakeState.currentStepId);
       
-      if (stepIndex === 1) {
-        if (value === 'crisis') {
-          // Fast-track crisis straight to results
-          intakeState.urgency = 'today';
-          intakeState.step = 4;
-          generateActionPlan();
-        } else if (value === 'bypass') {
-          // Send to general resources if they just want to skip
-          intakeState.goal = 'resources';
-          intakeState.step = 4;
-          generateActionPlan();
-        } else if (value === 'employment' || value === 'food') {
-          // Skip demographics if looking for general resources
-          intakeState.step = 3;
-        } else {
-          intakeState.step = 2;
-        }
-      } else if (stepIndex === 2) {
-        intakeState.step = 3;
-      } else if (stepIndex === 3) {
-        intakeState.step = 4;
-        generateActionPlan();
+      // Smart Branching Logic - Instant Redirection for direct goals
+      if (stepId === 'step1') {
+        if (value === 'crisis') return executeRoute('resources', 'crisis');
+        if (value === 'employment') return executeRoute('employment');
+        if (value === 'food') return executeRoute('resources', 'food');
+        if (value === 'bypass') return executeRoute('home');
+        
+        if (value === 'housing') return showStep('step2');
+        if (value === 'healthcare') return showStep('stepHealth');
+      } 
+      else if (stepId === 'step2') {
+        return showStep('step3');
+      } 
+      else if (stepId === 'step3') {
+        if (value === 'today') return executeRoute('housing', 'emergency');
+        if (value === 'soon') return executeRoute('housing', 'transitional');
+        if (value === 'planning') return executeRoute('housing', 'affordable');
       }
-      updateIntakeUI();
+      else if (stepId === 'stepHealth') {
+        if (value === 'medical') return executeRoute('healthcare', 'medical');
+        if (value === 'behavioral') return executeRoute('healthcare', 'behavioral');
+        if (value === 'specialty') return executeRoute('healthcare', 'specialty');
+      }
     }
   }, 150);
 }
 
-// FIXED: Uses history stack to properly navigate backwards without breaking skip-logic
 function intakeBack() {
   if(intakeHistory.length > 0) {
-    intakeState.step = intakeHistory.pop();
-    updateIntakeUI();
+    const prev = intakeHistory.pop();
+    showStep(prev);
   } else {
     openIntake(); // Failsafe reset
   }
-}
-
-function updateIntakeUI() {
-  document.querySelectorAll('.intake-step').forEach(s => s.classList.remove('active'));
-  const stepEl = document.getElementById('intakeStep' + intakeState.step);
-  if (stepEl) stepEl.classList.add('active');
-
-  // Update Progress Bar
-  const prog = document.getElementById('intakeProgress');
-  if (prog) {
-    const percentages = { 1: '25%', 2: '50%', 3: '75%', 4: '100%' };
-    prog.style.width = percentages[intakeState.step] || '25%';
-  }
-}
-
-function generateActionPlan() {
-  let candidates = [];
-  
-  // Pool resources
-  Object.keys(housing).forEach(k => housing[k].forEach(item => candidates.push({...item, cat: 'housing', subcat: k})));
-  Object.keys(healthcare).forEach(k => healthcare[k].forEach(item => candidates.push({...item, cat: 'healthcare', subcat: k})));
-  Object.keys(resources).forEach(k => resources[k].forEach(item => candidates.push({...item, cat: 'resources', subcat: k})));
-  Object.keys(jobs).forEach(city => jobs[city].forEach(item => candidates.push({...item, cat: 'employment', subcat: city})));
-
-  // Score algorithm
-  candidates.forEach(c => {
-    c.score = 0;
-    const special = (c.special || '').toLowerCase();
-    
-    // Core match
-    if (c.cat === intakeState.goal) c.score += 15;
-    
-    // Crisis priority
-    if (intakeState.goal === 'crisis' && (c.subcat === 'crisis' || c.subcat === 'emergency' || special.includes('crisis'))) c.score += 30;
-
-    // Demographics match
-    if (intakeState.who === 'youth' && special.includes('youth')) c.score += 20;
-    if (intakeState.who === 'veteran' && special.includes('veteran')) c.score += 20;
-    if (intakeState.who === 'family' && (special.includes('women') || special.includes('famil'))) c.score += 20;
-    if (intakeState.who === 'senior' && special.includes('senior')) c.score += 20;
-
-    // Urgency match
-    if (intakeState.urgency === 'today') {
-      if (c.subcat === 'emergency' || c.subcat === 'crisis' || special.includes('emergency')) c.score += 15;
-    } else if (intakeState.urgency === 'planning') {
-      if (c.subcat === 'affordable' || c.subcat === 'psh') c.score += 10;
-    }
-  });
-
-  // Filter & sort
-  let topMatches = candidates.filter(c => c.score > 0).sort((a,b) => b.score - a.score).slice(0, 3);
-  
-  // Render
-  const container = document.getElementById('intakeResultsList');
-  if(topMatches.length === 0 || intakeState.goal === 'resources') {
-    container.innerHTML = `<div class="rc"><p style="font-size:14px;color:var(--text-secondary);">We recommend calling our outreach line for personalized assistance right now, or clicking below to view all directory items.</p></div>`;
-  } else {
-    container.innerHTML = topMatches.map(m => {
-      if (m.cat === 'employment') {
-        return `<div class="rc rc--medical reveal visible" style="padding: 20px;">
-                  <div class="rc-badge rcb--medical">Job Opening • ${m.location}</div>
-                  <div class="rc-name">${m.title}</div>
-                  <div class="rc-details" style="margin-top:0.5rem; padding-top:0.5rem;">
-                     <div class="rc-row"><span style="font-weight:700;">${m.employer}</span></div>
-                     <div class="rc-row"><span>${m.wage} • ${m.type === 'ft' ? 'Full-Time' : 'Part-Time'}</span></div>
-                  </div>
-                  <div class="rc-actions" style="margin-top:0.5rem; padding-top:0.5rem;">
-                    <a class="rc-action rc-action--web" href="${m.url}" target="_blank" rel="noopener noreferrer">Apply Now ↗</a>
-                  </div>
-                </div>`;
-      }
-      return buildCard(m, 'accent', m.special || (m.cat === 'housing' ? 'Housing Match' : 'Recommended Resource'));
-    }).join('');
-  }
-}
-
-function intakeFinish() {
-  closeIntake();
-  const routeMap = {
-    crisis:     { page: 'resources', tab: 'crisis' },
-    housing:    { page: 'housing',   tab: intakeState.urgency === 'today' ? 'emergency' : 'affordable' },
-    employment: { page: 'employment' },
-    healthcare: { page: 'healthcare', tab: 'medical' },
-    food:       { page: 'resources', tab: 'food' },
-    legal:      { page: 'resources', tab: 'legal' },
-    resources:  { page: 'resources' }
-  };
-  const route = routeMap[intakeState.goal] || { page: 'home' };
-  
-  // Ensure we navigate and automatically activate the matching tab
-  goTo(route.page, null, route.tab || null);
 }
 
 // Close modal on overlay click
@@ -2285,11 +2210,10 @@ document.getElementById('intakeOverlay').addEventListener('click', e => {
 
 
 /* ═══════════════════════════════════════════════════════
-   DYNAMIC RESOURCE MAP (Leaflet.js - Riverside Enforced)
+   DYNAMIC RESOURCE MAP (Unlocked, Stylized Riverside)
 ═══════════════════════════════════════════════════════ */
 let mapInstance = null, mapMarkers = [], mapFilter = 'all';
 
-// Geocode data for resources with addresses
 const mapResources = [];
 function buildMapResources() {
   if (mapResources.length > 0) return;
@@ -2344,17 +2268,11 @@ function initMap() {
     ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
     : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 
-  // Soft Boundaries - Center Riverside, Allow Panning
-  const riversideBounds = L.latLngBounds([
-    [32.85, -118.20], 
-    [34.55, -114.00] 
-  ]);
-
+  // Set view to Riverside County natively, but DO NOT lock map limits
   mapInstance = L.map('mapCanvas', { 
     zoomControl: false, 
-    maxBounds: riversideBounds,
-    maxBoundsViscosity: 0.5, // FIXED: User can pan naturally but gets bounded softly
-    minZoom: 8
+    minZoom: 8,
+    maxBounds: null // Map is 100% unlocked for users to pan freely
   }).setView([33.75, -116.50], 9);
 
   L.control.zoom({ position: 'bottomright' }).addTo(mapInstance);
@@ -2391,7 +2309,7 @@ function renderMapMarkers() {
 
   filtered.forEach((r, i) => {
     const color = catColors[r.category] || '#0277b6';
-    // Gorgeous animated markers
+    // Gorgeous animated pulse markers matching brand UI
     const icon = L.divIcon({
       className: '',
       html: `<div style="width:16px;height:16px;border-radius:50%;background:${color};border:2px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,0.4);--pulse-color:${color}88;animation:pulse-marker 3s infinite;"></div>`,
