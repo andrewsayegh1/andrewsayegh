@@ -405,12 +405,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
 .res-link:hover .res-link__arrow { color: var(--accent); }
 
 /* Intake Questionnaire Styles */
-.intake-step { display: none; animation: pageFadeIn 0.4s ease-out forwards; }
-.intake-step.active { display: block; }
-.intake-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 2rem 0; }
-.intake-opt { background: var(--surface-card); border: 2px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-sm), var(--inner-glow); backdrop-filter: blur(20px); font-weight: 600; color: var(--text-primary); font-family: var(--f-body); }
-.intake-opt:hover { border-color: var(--accent); background: var(--surface-warm); transform: translateY(-3px); box-shadow: var(--shadow-md); color: var(--accent); }
-.intake-opt svg { width: 32px; height: 32px; margin-bottom: 1rem; stroke-width: 1.5; color: var(--accent); }
+.intake-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 2rem 0; }
+.intake-opt { background: var(--surface-card); border: 2px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.5rem; text-align: left; cursor: pointer; transition: all 0.2s var(--ease-spring); box-shadow: var(--shadow-sm), var(--inner-glow); backdrop-filter: blur(20px); display: flex; flex-direction: column; font-family: var(--f-body); }
+.intake-opt:hover, .intake-opt.selected { border-color: var(--accent); background: var(--accent-pale); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.intake-opt.selected { box-shadow: 0 0 0 2px var(--accent-glow); }
+.intake-opt__icon { font-size: 2rem; margin-bottom: 0.75rem; line-height: 1; }
+.intake-opt__label { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; }
+.intake-opt__sub { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; line-height: 1.4; }
 .intake-prog { height: 4px; background: var(--border-light); border-radius: 4px; width: 100%; max-width: 400px; margin: 0 auto 3rem auto; overflow: hidden; }
 .intake-prog-bar { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s var(--ease-out); }
 
@@ -696,55 +697,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
       <div class="container page-hero__inner">
         <nav class="page-hero__crumb"><a onclick="goTo('home')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('home')" tabindex="0" role="link">Home</a> <span style="margin:0 4px" aria-hidden="true">/</span> <span aria-current="page">Get Started</span></nav>
         <h1 class="page-hero__title reveal">Client <em>Assessment</em></h1>
-        <p class="page-hero__sub reveal reveal-delay-1">Answer 3 quick questions to instantly filter and find the exact resources you need.</p>
+        <p class="page-hero__sub reveal reveal-delay-1">Answer a few quick questions to instantly filter and find the exact resources you need.</p>
       </div>
     </div>
     <section class="section" style="padding-top:0;">
-      <div class="container" style="max-width: 800px;">
-        <div class="intake-prog reveal reveal-delay-2"><div class="intake-prog-bar" id="wizBar"></div></div>
-        
-        <div class="intake-step active reveal reveal-delay-2" id="wiz1">
-          <div class="s-header s-header--center"><h2 class="s-title">What is your primary need right now?</h2></div>
-          <div class="intake-grid">
-            <div class="intake-opt" onclick="nextWiz('need', 'emergency')" onkeydown="if(event.key==='Enter'||event.key===' ')nextWiz('need', 'emergency')" tabindex="0" role="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><br>Urgent Shelter</div>
-            <div class="intake-opt" onclick="nextWiz('need', 'housing')" onkeydown="if(event.key==='Enter'||event.key===' ')nextWiz('need', 'housing')" tabindex="0" role="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg><br>Long-Term Housing</div>
-            <div class="intake-opt" onclick="nextWiz('need', 'employment')" onkeydown="if(event.key==='Enter'||event.key===' ')nextWiz('need', 'employment')" tabindex="0" role="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><br>Find a Job</div>
-            <div class="intake-opt" onclick="nextWiz('need', 'health')" onkeydown="if(event.key==='Enter'||event.key===' ')nextWiz('need', 'health')" tabindex="0" role="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><br>Medical & Health</div>
-            <div class="intake-opt" onclick="nextWiz('need', 'basic')" onkeydown="if(event.key==='Enter'||event.key===' ')nextWiz('need', 'basic')" tabindex="0" role="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><br>Food & Basic Needs</div>
-          </div>
-        </div>
-
-        <div class="intake-step" id="wiz2">
-          <div class="s-header s-header--center"><h2 class="s-title">Where are you currently located?</h2></div>
-          <div class="intake-grid">
-            <div class="intake-opt" onclick="nextWiz('city', 'Murrieta')" onkeydown="if(event.key==='Enter'||event.key===' ')nextWiz('city', 'Murrieta')" tabindex="0" role="button">Murrieta</div>
-            <div class="intake-opt" onclick="nextWiz('city', 'Temecula')" onkeydown="if(event.key==='Enter'||event.key===' ')nextWiz('city', 'Temecula')" tabindex="0" role="button">Temecula</div>
-            <div class="intake-opt" onclick="nextWiz('city', 'Lake Elsinore')" onkeydown="if(event.key==='Enter'||event.key===' ')nextWiz('city', 'Lake Elsinore')" tabindex="0" role="button">Lake Elsinore</div>
-            <div class="intake-opt" onclick="nextWiz('city', 'Menifee')" onkeydown="if(event.key==='Enter'||event.key===' ')nextWiz('city', 'Menifee')" tabindex="0" role="button">Menifee</div>
-            <div class="intake-opt" onclick="nextWiz('city', 'Riverside')" onkeydown="if(event.key==='Enter'||event.key===' ')nextWiz('city', 'Riverside')" tabindex="0" role="button">Riverside</div>
-            <div class="intake-opt" onclick="nextWiz('city', 'Any')" onkeydown="if(event.key==='Enter'||event.key===' ')nextWiz('city', 'Any')" tabindex="0" role="button">Any / I don't mind</div>
-          </div>
-        </div>
-
-        <div class="intake-step" id="wiz3">
-          <div class="s-header s-header--center"><h2 class="s-title">Any specific circumstances?</h2></div>
-          <div class="intake-grid">
-            <div class="intake-opt" onclick="finishWiz('circumstance', 'Veterans')" onkeydown="if(event.key==='Enter'||event.key===' ')finishWiz('circumstance', 'Veterans')" tabindex="0" role="button">Military Veteran</div>
-            <div class="intake-opt" onclick="finishWiz('circumstance', 'Youth')" onkeydown="if(event.key==='Enter'||event.key===' ')finishWiz('circumstance', 'Youth')" tabindex="0" role="button">Youth (16-25)</div>
-            <div class="intake-opt" onclick="finishWiz('circumstance', 'Family')" onkeydown="if(event.key==='Enter'||event.key===' ')finishWiz('circumstance', 'Family')" tabindex="0" role="button">Family with Children</div>
-            <div class="intake-opt" onclick="finishWiz('circumstance', 'Senior')" onkeydown="if(event.key==='Enter'||event.key===' ')finishWiz('circumstance', 'Senior')" tabindex="0" role="button">Senior (55+)</div>
-            <div class="intake-opt" onclick="finishWiz('circumstance', 'None')" onkeydown="if(event.key==='Enter'||event.key===' ')finishWiz('circumstance', 'None')" tabindex="0" role="button">None of these apply</div>
-          </div>
-        </div>
-
-        <div class="intake-step" id="wiz4">
-          <div class="s-header s-header--center">
-            <h2 class="s-title">Your <em>Matches</em></h2>
-            <p class="s-desc">Based on your answers, here are the best starting points for you.</p>
-            <button class="btn btn--outline" style="margin-top:1rem" onclick="resetWiz()">Start Over</button>
-          </div>
-          <div id="wizResults" class="resource-grid"></div>
-        </div>
+      <div class="container" style="max-width: 900px;">
+        <div class="intake-prog reveal reveal-delay-2"><div class="intake-prog-bar" id="wizBar" style="width: 33%;"></div></div>
+        <div id="intakeDynamic" class="reveal reveal-delay-2"></div>
       </div>
     </section>
   </div>
@@ -1288,65 +1247,196 @@ document.getElementById('cmSearch')?.addEventListener('input', e => renderTeam(e
 renderTeam();
 
 /* ─── INTAKE QUESTIONNAIRE WIZARD (V2 UPGRADE) ────────────────────── */
-let wizState = { need: '', city: '', circumstance: '' };
+const Q_STEPS = {
+  need: {
+    eyebrow: 'Step 1 of 3',
+    title: 'What do you need help with?',
+    sub: 'Select your most urgent need and we\'ll guide you to the right resources.',
+    opts: [
+      {icon:'🏠', label:'Housing',          sub:'Shelters, transitional, affordable',  val:'housing'},
+      {icon:'🏥', label:'Healthcare',        sub:'Medical, mental health, recovery',    val:'healthcare'},
+      {icon:'💼', label:'Employment',        sub:'Job listings, staffing, career help', val:'employment'},
+      {icon:'🍎', label:'Food & Basics',     sub:'Food pantries, clothing, essentials', val:'food'},
+      {icon:'🆘', label:'Crisis Support',    sub:'Hotlines, immediate safety help',     val:'crisis'},
+      {icon:'⚖️', label:'Legal & Benefits',  sub:'Legal aid, public benefits, rights',  val:'legal'}
+    ]
+  },
+  housing_sub: {
+    eyebrow: 'Step 2 of 3 — Housing',
+    title: 'What\'s your current situation?',
+    sub: 'This helps us show you the most relevant housing options.',
+    opts: [
+      {icon:'🚨', label:'Need shelter tonight',       sub:'Emergency — I need a safe place now',        val:'emergency'},
+      {icon:'🏡', label:'Transitional / Sober Living', sub:'Short-term stable housing support',          val:'transitional'},
+      {icon:'🏘️', label:'Affordable Housing',          sub:'Longer-term affordable apartment search',     val:'affordable'},
+      {icon:'🤝', label:'Talk to a Case Manager',      sub:'Get personalized, one-on-one guidance',       val:'casemgr'}
+    ]
+  },
+  healthcare_sub: {
+    eyebrow: 'Step 2 of 3 — Healthcare',
+    title: 'What type of care do you need?',
+    sub: 'We\'ll connect you with the most appropriate providers.',
+    opts: [
+      {icon:'🩺', label:'Medical / Primary Care',     sub:'Clinics, urgent care, check-ups',             val:'medical'},
+      {icon:'🧠', label:'Mental Health',              sub:'Counseling, psychiatry, crisis support',       val:'behavioral'},
+      {icon:'💊', label:'Substance Use Recovery',     sub:'Treatment programs, MAT, sober living',        val:'behavioral'},
+      {icon:'✨', label:'Specialty Care',              sub:'Autism, HIV, IHSS, other specialty',           val:'specialty'}
+    ]
+  },
+  special: {
+    eyebrow: 'Step 3 of 3',
+    title: 'Any special circumstances?',
+    sub: 'We have targeted resources for specific communities.',
+    opts: [
+      {icon:'🎖️', label:'Veteran',              sub:'VA services & veteran programs',       val:'veteran'},
+      {icon:'🌈', label:'LGBTQ+',               sub:'Affirming, identity-safe services',    val:'lgbtq'},
+      {icon:'🌱', label:'Youth (16–25)',         sub:'Youth-specific housing & support',     val:'youth'},
+      {icon:'👨‍👩‍👧', label:'Women & Families',    sub:'Family shelter & safety resources',   val:'family'},
+      {icon:'🌟', label:'None of the above',     sub:'Show me all matching resources',       val:'none'}
+    ]
+  }
+};
 
-function nextWiz(key, val) {
-  wizState[key] = val;
-  const currStep = document.querySelector('.intake-step.active');
-  currStep.classList.remove('active');
-  const nextStep = currStep.nextElementSibling;
+let qState = { step: 1, need: null, sub: null, special: null };
+
+function renderQStep() {
+  const container = document.getElementById('intakeDynamic');
+  const bar = document.getElementById('wizBar');
   
-  // Update progress bar width
-  const steps = document.querySelectorAll('.intake-step').length - 1;
-  const idx = Array.from(currStep.parentNode.children).indexOf(nextStep) - 1; // subtract 1 for the prog bar div
-  document.getElementById('wizBar').style.width = `${(idx / steps) * 100}%`;
+  if (!container || !bar) return;
 
-  if (nextStep && nextStep.classList.contains('intake-step')) {
-    nextStep.classList.add('active');
-    attachReveal();
+  if (qState.step === 1) {
+    bar.style.width = '33%';
+    renderQOptions(container, Q_STEPS.need, 'need');
+  } else if (qState.step === 2) {
+    bar.style.width = '66%';
+    const stepDef = Q_STEPS[qState.need + '_sub'];
+    renderQOptions(container, stepDef, 'sub');
+  } else if (qState.step === 3) {
+    bar.style.width = '100%';
+    renderQOptions(container, Q_STEPS.special, 'special');
+  } else if (qState.step === 4) {
+    generateWizResults();
   }
 }
 
-function finishWiz(key, val) {
-  wizState[key] = val;
-  nextWiz(key, val);
-  generateWizResults();
+function renderQOptions(container, stepDef, answerKey) {
+  const showBack = qState.step > 1;
+  container.innerHTML = `
+    <div class="s-header s-header--center" style="animation: pageFadeIn 0.4s ease-out forwards;">
+      <div class="s-eyebrow s-eyebrow--center">${stepDef.eyebrow}</div>
+      <h2 class="s-title">${stepDef.title}</h2>
+      <p class="s-desc">${stepDef.sub}</p>
+    </div>
+    <div class="intake-grid" style="animation: pageFadeIn 0.4s ease-out forwards;" role="radiogroup" aria-label="${stepDef.title}">
+      ${stepDef.opts.map(o => `
+        <div class="intake-opt ${qState[answerKey]===o.val?'selected':''}" role="radio" aria-checked="${qState[answerKey]===o.val}" tabindex="0" onclick="selectQOption('${o.val}', '${answerKey}')" onkeydown="if(event.key==='Enter'||event.key===' ')selectQOption('${o.val}', '${answerKey}')">
+          <div class="intake-opt__icon" aria-hidden="true">${o.icon}</div>
+          <div class="intake-opt__label">${o.label}</div>
+          <div class="intake-opt__sub">${o.sub}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div style="display:flex; justify-content: space-between; margin-top: 2rem;">
+      ${showBack ? `<button class="btn btn--outline" onclick="qGoBack()">← Back</button>` : `<div></div>`}
+    </div>
+  `;
 }
 
-function resetWiz() {
-  wizState = { need: '', city: '', circumstance: '' };
-  document.querySelectorAll('.intake-step').forEach(s => s.classList.remove('active'));
-  document.getElementById('wiz1').classList.add('active');
-  document.getElementById('wizBar').style.width = '0%';
+function selectQOption(val, key) {
+  qState[key] = val;
+
+  // Immediate Skip Logic for Emergency
+  if (key === 'need' && val === 'crisis') {
+    qState.step = 4; 
+    renderQStep();
+    return;
+  }
+  if (key === 'sub' && val === 'emergency') {
+    qState.step = 4; 
+    renderQStep();
+    return;
+  }
+  
+  // Instant Route for Case Manager
+  if (key === 'sub' && val === 'casemgr') {
+    goTo('home', 'team-section');
+    return;
+  }
+
+  // Automatically advance with micro-delay for UX feel
+  setTimeout(() => {
+    if (key === 'need') {
+      if (['employment', 'food', 'legal'].includes(val)) {
+        qState.step = 3;
+      } else {
+        qState.step = 2;
+      }
+    } else if (key === 'sub') {
+      qState.step = 3;
+    } else if (key === 'special') {
+      qState.step = 4;
+    }
+    renderQStep();
+  }, 150);
+}
+
+function qGoBack() {
+  if (qState.step === 3 && ['employment', 'food', 'legal'].includes(qState.need)) {
+    qState.step = 1;
+  } else {
+    qState.step = Math.max(1, qState.step - 1);
+  }
+  renderQStep();
 }
 
 function generateWizResults() {
+  const container = document.getElementById('intakeDynamic');
+  container.innerHTML = `
+    <div class="s-header s-header--center" style="animation: pageFadeIn 0.4s ease-out forwards;">
+      <h2 class="s-title">Your <em>Matches</em></h2>
+      <p class="s-desc">Based on your answers, here are the best starting points for you.</p>
+      <button class="btn btn--outline" style="margin-top:1rem" onclick="qState.step=1; qState.need=null; qState.sub=null; qState.special=null; renderQStep()">Start Over</button>
+    </div>
+    <div id="wizResults" class="resource-grid" style="animation: pageFadeIn 0.4s ease-out forwards;"></div>
+  `;
+  
   const c = document.getElementById('wizResults');
   let results = [];
 
-  // Filter by primary need across the full V1 dataset
-  if (wizState.need === 'emergency') results = [...(housing.emergency||[])];
-  else if (wizState.need === 'housing') results = [...(housing.affordable||[]), ...(housing.transitional||[])];
-  else if (wizState.need === 'health') results = [...(healthcare.medical||[]), ...(healthcare.behavioral||[])];
-  else if (wizState.need === 'basic') results = [...(resources.food||[]), ...(resources.basic||[])];
-  else if (wizState.need === 'employment') {
+  if (qState.need === 'crisis') results = [...(resources.crisis||[])];
+  else if (qState.need === 'housing') {
+    if (qState.sub === 'emergency') results = [...(housing.emergency||[])];
+    else if (qState.sub === 'transitional') results = [...(housing.transitional||[]), ...(housing.sober||[])];
+    else if (qState.sub === 'affordable') results = [...(housing.affordable||[])];
+    else results = [...(housing.affordable||[]), ...(housing.transitional||[])];
+  }
+  else if (qState.need === 'healthcare') {
+    if (qState.sub === 'medical') results = [...(healthcare.medical||[])];
+    else if (qState.sub === 'behavioral') results = [...(healthcare.behavioral||[])];
+    else if (qState.sub === 'specialty') results = [...(healthcare.specialty||[])];
+    else results = [...(healthcare.medical||[]), ...(healthcare.behavioral||[])];
+  }
+  else if (qState.need === 'food') results = [...(resources.food||[])];
+  else if (qState.need === 'legal') results = [...(resources.legal||[])];
+  else if (qState.need === 'employment') {
     goTo('employment');
     return;
   }
 
-  // Filter by Circumstance if available
-  if (wizState.circumstance !== 'None') {
-    const tailored = results.filter(r => r.special && r.special.toLowerCase().includes(wizState.circumstance.toLowerCase()));
+  // Filter by Circumstance if not empty/none
+  if (qState.special && qState.special !== 'none') {
+    const tailored = results.filter(r => r.special && r.special.toLowerCase().includes(qState.special.toLowerCase()));
     if (tailored.length > 0) results = tailored;
   }
 
   // Fallback
-  if (results.length === 0) results = [...(housing.emergency||[]), ...(resources.food||[])];
+  if (results.length === 0) results = [...(housing.emergency||[]), ...(resources.crisis||[])];
 
-  // Render top 4 results
-  c.innerHTML = results.slice(0, 4).map(item => buildCard(item, 'medical', item.special||'Resource')).join('');
+  c.innerHTML = results.slice(0, 6).map(item => buildCard(item, 'medical', item.special||'Resource')).join('');
   attachReveal();
 }
+
 
 /* ─── JOB ENGINE & PROXY ─────────────────────────────────────── */
 let activeJobs = {}, totalJobs = 0;
@@ -1444,7 +1534,7 @@ function normalizeGoogleJob(data) {
           const unit = match[2];
           const now = Date.now();
           if (unit === 'day') postedDate = new Date(now - amount * 86400000).toISOString();
-          if (unit === 'hour') postedDate = new Date(now - amount * 3600000).toISOString();
+          if (unit === 'hour') postedDate = new Date(now - amount * 360000).toISOString();
           if (unit === 'minute') postedDate = new Date(now - amount * 60000).toISOString();
       }
   }
@@ -1589,7 +1679,7 @@ buildPanels(healthcare, 'hcPanels',
 
 buildPanels(resources, 'resPanels',
   {crisis:'emergency', basic:'basic', food:'food', legal:'legal', education:'education', animals:'animals'},
-  {crisis:'Emergency & Crisis', basic:'Basic Needs', food:'Food Pantries', legal:'Social & Legal Services', education:'Education', animals:'Animal Care'},
+  {crisis:'Emergency & Crisis', Basic:'Basic Needs', food:'Food Pantries', legal:'Social & Legal Services', education:'Education', animals:'Animal Care'},
   'resTabs');
 
 function renderAgencies() {
@@ -1622,7 +1712,7 @@ document.querySelectorAll('#empFilters .pill').forEach(btn => {
   });
 });
 
-/* ─── RESOURCE MAP (Feature 1 UPGRADE - CartoDB Invert) ───────────────────────────── */
+/* ─── RESOURCE MAP ───────────────────────────── */
 const MAP_COLORS = {
   housing:    '#0277b6',
   healthcare: '#0f766e',
@@ -1637,7 +1727,7 @@ const MAP_LABELS = {
   food:'Food Pantry', legal:'Legal & Social', basic:'Basic Needs'
 };
 
-// Only Riverside County specific cities based on user context / requested scope. 
+// Riverside County Limit Constraints 
 const CITY_BASE_COORDS = {
   'murrieta':               [33.5537, -117.2137],
   'temecula':               [33.4936, -117.1484],
@@ -1652,11 +1742,9 @@ const CITY_BASE_COORDS = {
   'perris':                 [33.7825, -117.2286],
   'indio':                  [33.7205, -116.2156],
   'march air reserve base': [33.8818, -117.2597],
-  'thousand palms':         [33.8261, -116.3717],
-  // Filtered out non-Riverside County locations if present. 
+  'thousand palms':         [33.8261, -116.3717]
 };
 
-// Deterministic offset so marker positions are stable across reloads
 function nameHash(str) {
   let h = 0;
   for (let i = 0; i < str.length; i++) { h = ((h << 5) - h) + str.charCodeAt(i); h |= 0; }
@@ -1667,10 +1755,9 @@ function getCoords(item) {
   if (!item.address) return null;
   const addr = item.address.toLowerCase();
   
-  // Strict Riverside County constraint applied here. 
+  // Enforce Riverside County limit
   let isRiversideCounty = false; 
   let matchedCity = null; 
-  
   for (const city of Object.keys(CITY_BASE_COORDS)) {
       if (addr.includes(city)) {
           isRiversideCounty = true; 
@@ -1678,8 +1765,6 @@ function getCoords(item) {
           break;
       }
   }
-  
-  // Additionally, ensure 'CA' or 'California' is in the address to be safe, though limiting by base coords generally works.
   if(!isRiversideCounty) return null; 
 
   const base = CITY_BASE_COORDS[matchedCity];
@@ -1687,7 +1772,6 @@ function getCoords(item) {
   const offLat = (((h & 0xFF) / 255) - 0.5) * 0.014;
   const offLng = ((((h >> 8) & 0xFF) / 255) - 0.5) * 0.014;
   return [base[0] + offLat, base[1] + offLng];
-
 }
 
 function buildMapResources() {
@@ -1822,18 +1906,18 @@ function setupMapFilters() {
 function initMap() {
   if (mapInstance) { mapInstance.invalidateSize(); return; }
 
-  // Set view constraints to limit panning/zooming outside of Riverside County
-  const bounds = L.latLngBounds(
-      [33.40, -117.70], // SouthWest corner (approx)
-      [34.15, -116.00]  // NorthEast corner (approx)
+  // Riverside County map bounds limit
+  const rcBounds = L.latLngBounds(
+      [33.30, -117.80], 
+      [34.20, -114.40]  
   );
 
   mapInstance = L.map('map-container', {
       zoomControl:true,
-      maxBounds: bounds, // Limit panning 
-      maxBoundsViscosity: 1.0, // Prevent bouncing outside bounds
-      minZoom: 9 // Prevent zooming too far out
-  }).setView([33.65, -117.28], 10);
+      maxBounds: rcBounds, 
+      maxBoundsViscosity: 1.0, 
+      minZoom: 9 
+  }).setView([33.75, -117.15], 10);
   
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
@@ -1881,10 +1965,11 @@ function goTo(page, scrollTo) {
   } else {
     window.scrollTo({top:0, behavior:'smooth'});
   }
-  setTimeout(attachReveal, 150);
-
-  // Initialize map lazily when map page is first opened
+  
+  if (page === 'intake') { qState.step = 1; renderQStep(); }
   if (page === 'map') { setTimeout(initMap, 200); }
+  
+  setTimeout(attachReveal, 150);
 }
 
 /* ─── MOBILE NAV ─────────────────────────────────────── */
