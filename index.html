@@ -763,7 +763,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
 ══════════════════════════════════════════════════════ */
 .intake-overlay { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 1rem; opacity: 0; transition: opacity 0.3s; will-change: opacity; }
 .intake-overlay.open { display: flex; opacity: 1; }
-.intake-modal { background: var(--surface-float); border: 1px solid var(--border-glass); border-radius: 32px; width: 100%; max-width: 560px; max-height: 90dvh; overflow-y: auto; box-shadow: var(--shadow-float); position: relative; transform: translateY(20px) scale(0.97); transition: transform 0.4s var(--ease-spring); will-change: transform; }
+.intake-modal { background: var(--surface-float); border: 1px solid var(--border-glass); border-radius: 32px; width: 100%; max-width: 560px; max-height: 90dvh; overflow: hidden; box-shadow: var(--shadow-float); position: relative; transform: translateY(20px) scale(0.97); transition: transform 0.4s var(--ease-spring); will-change: transform; }
 .intake-overlay.open .intake-modal { transform: translateY(0) scale(1); }
 .intake-modal__header { display: flex; align-items: center; justify-content: space-between; padding: 24px 28px 0; }
 .intake-modal__close { width: 44px; height: 44px; border-radius: 50%; background: var(--surface-warm); border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: all var(--dur-fast); cursor: pointer; }
@@ -776,7 +776,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
 .q-eyebrow { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
 .q-title { font-family: var(--f-display); font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; line-height: 1.2; letter-spacing: -0.01em; }
 .q-sub { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.5; }
-.q-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.q-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .q-btn { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); cursor: pointer; transition: all var(--dur-fast); text-align: left; width: 100%; }
 .q-btn:hover { border-color: var(--accent); background: var(--accent-pale); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(2,119,182,0.1); }
 .q-btn:active { transform: scale(0.98); }
@@ -819,6 +819,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
   .footer__bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
   .controls-row { flex-direction: column; align-items: stretch; }
   .searchbox { max-width: 100%; }
+}
+@media (max-width: 600px) {
+  .intake-modal { border-radius: 24px; }
+  .q-grid { grid-template-columns: 1fr; gap: 6px; }
+  .q-btn { padding: 8px 12px; border-radius: 12px; gap: 12px; }
+  .q-icon { width: 32px; height: 32px; font-size: 1rem; border-radius: 8px; }
+  .q-title { font-size: 1.25rem; margin-bottom: 4px; }
+  .q-sub { font-size: 0.85rem; margin-bottom: 12px; }
+  .intake-modal__body { padding: 12px 20px 20px; }
+  .q-nav { margin-top: 16px; }
 }
 </style>
 </head>
@@ -1988,16 +1998,16 @@ setInterval(fetchAndPopulateJobs, 300000);
 ───────────────────────────────────────────────────── */
 const Q_STEPS = {
   need: {
-    eyebrow: 'STEP 1 OF 3',
+    eyebrow: 'STEP 1',
     title: 'What do you need help with?',
     sub: 'Select your most urgent need and we\'ll guide you to the right resources.',
     opts: [
+      {icon:'🆘', label:'Crisis Support',          sub:'Hotlines, immediate safety help',     val:'crisis'},
       {icon:'🏠', label:'Housing',                 sub:'Shelters, transitional, affordable',  val:'housing'},
       {icon:'💼', label:'Employment',              sub:'Job listings, staffing, career help', val:'employment'},
       {icon:'🏥', label:'Healthcare',              sub:'Medical, mental health, recovery',    val:'healthcare'},
-      {icon:'🍎', label:'Food & Basics',           sub:'Food pantries, clothing, essentials', val:'food'},
-      {icon:'⚖️', label:'Legal & Social Services', sub:'Legal aid, public benefits',          val:'legal'},
-      {icon:'🆘', label:'Crisis Support',          sub:'Hotlines, immediate safety help',     val:'crisis'}
+      {icon:'🍎', label:'Food & Essentials',       sub:'Food pantries, clothing, essentials', val:'food'},
+      {icon:'⚖️', label:'Legal & Social Services', sub:'Legal aid, public benefits',          val:'legal'}
     ]
   },
   housing_sub: {
@@ -2061,15 +2071,15 @@ function updateQDots(step, totalSteps) {
 
 function renderQStep() {
   let stepDef, answerKey;
-  let totalSteps = 3;
+  let totalSteps = 1;
   
-  if (qState.need === 'healthcare' || (qState.need && !['housing', 'healthcare'].includes(qState.need))) {
-    totalSteps = 2;
-  }
+  if (qState.need === 'housing') totalSteps = 3;
+  else if (qState.need === 'healthcare') totalSteps = 2;
   
   if (qState.step === 1) {
     stepDef = Q_STEPS.need; answerKey = 'need';
-    stepDef.eyebrow = `STEP 1 OF ${totalSteps}`;
+    stepDef.eyebrow = `STEP 1`;
+    if (qState.need) stepDef.eyebrow += ` OF ${totalSteps}`;
   } else if (qState.step === 2) {
     if (qState.need === 'housing') {
       stepDef = Q_STEPS.housing_sub; answerKey = 'sub';
@@ -2077,9 +2087,6 @@ function renderQStep() {
     } else if (qState.need === 'healthcare') {
       stepDef = Q_STEPS.healthcare_sub; answerKey = 'sub';
       stepDef.eyebrow = `STEP 2 OF 2 — HEALTHCARE`;
-    } else {
-      stepDef = Q_STEPS.special; answerKey = 'special';
-      stepDef.eyebrow = `STEP 2 OF 2`;
     }
   } else if (qState.step === 3) {
     stepDef = Q_STEPS.special; answerKey = 'special';
