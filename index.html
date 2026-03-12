@@ -2217,6 +2217,8 @@ function intakeFinish() {
     legal:      { page: 'resources', tab: 'legal' }
   };
   const route = routeMap[intakeState.goal] || { page: 'home' };
+  
+  // Ensure we navigate and automatically activate the matching tab
   goTo(route.page, null, route.tab || null);
 }
 
