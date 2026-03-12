@@ -759,36 +759,34 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
 @media (max-width: 768px) { .map-layout { grid-template-columns: 1fr; grid-template-rows: 200px 1fr; height: auto; } .map-sidebar { border-right: none; border-bottom: 1px solid var(--border-light); max-height: 200px; } #map-container { height: 450px; } }
 
 /* ══════════════════════════════════════════════════════
-   RAPID INTAKE WIZARD (From Model 1)
+   RAPID INTAKE WIZARD (Questionnaire)
 ══════════════════════════════════════════════════════ */
 .intake-overlay { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 1rem; opacity: 0; transition: opacity 0.3s; will-change: opacity; }
 .intake-overlay.open { display: flex; opacity: 1; }
 .intake-modal { background: var(--surface-float); border: 1px solid var(--border-glass); border-radius: 32px; width: 100%; max-width: 560px; max-height: 90dvh; overflow-y: auto; box-shadow: var(--shadow-float); position: relative; transform: translateY(20px) scale(0.97); transition: transform 0.4s var(--ease-spring); will-change: transform; }
 .intake-overlay.open .intake-modal { transform: translateY(0) scale(1); }
 .intake-modal__header { display: flex; align-items: center; justify-content: space-between; padding: 24px 28px 0; }
-.intake-modal__title { font-family: var(--f-display); font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; }
 .intake-modal__close { width: 44px; height: 44px; border-radius: 50%; background: var(--surface-warm); border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: all var(--dur-fast); cursor: pointer; }
 .intake-modal__close:hover { background: var(--border-light); color: var(--text-primary); }
 .intake-modal__close:active { transform: scale(0.9); }
-
-.intake-progress { width: calc(100% - 56px); height: 6px; background: var(--border); border-radius: 3px; margin: 20px 28px 8px; overflow: hidden; }
-.intake-progress-bar { height: 100%; width: 25%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 3px; transition: width 0.4s var(--ease-spring); }
-
 .intake-modal__body { padding: 20px 28px 28px; position: relative; min-height: 300px; }
-.intake-step { display: none; position: absolute; inset: 20px 28px 28px; animation: intakeStepIn 0.3s var(--ease-out) forwards; }
-.intake-step.active { display: block; position: relative; inset: auto; }
-@keyframes intakeStepIn { from { opacity: 0; transform: translateX(15px); } to { opacity: 1; transform: translateX(0); } }
 
-.intake-step__label { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; line-height: 1.4; letter-spacing: -0.01em; }
-.intake-options { display: flex; flex-direction: column; gap: 8px; }
-.intake-option { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border: 1px solid var(--border); border-radius: 16px; cursor: pointer; transition: all var(--dur-fast); min-height: 64px; background: var(--surface); font-family: var(--f-body); font-size: 0.95rem; font-weight: 500; text-align: left; width: 100%; position: relative; overflow: hidden; }
-.intake-option:hover { border-color: var(--accent); background: var(--accent-pale); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(2,119,182,0.1); }
-.intake-option:active { transform: scale(0.98); }
-.intake-option.selected { border-color: var(--accent); background: linear-gradient(135deg, var(--accent-pale), rgba(2,119,182,0.15)); box-shadow: 0 0 0 2px var(--accent); }
-.intake-option__icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--surface-warm); transition: all var(--dur-fast); }
-.intake-option.selected .intake-option__icon { background: var(--accent); color: #fff !important; }
-.intake-option__icon svg { width: 20px; height: 20px; }
-.intake-nav { display: flex; justify-content: flex-start; margin-top: 1rem; }
+.q-step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all 0.4s var(--ease-spring); }
+.q-step-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
+.q-eyebrow { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.q-title { font-family: var(--f-display); font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; line-height: 1.2; letter-spacing: -0.01em; }
+.q-sub { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.5; }
+.q-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.q-btn { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); cursor: pointer; transition: all var(--dur-fast); text-align: left; width: 100%; }
+.q-btn:hover { border-color: var(--accent); background: var(--accent-pale); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(2,119,182,0.1); }
+.q-btn:active { transform: scale(0.98); }
+.q-btn.selected { border-color: var(--accent); background: linear-gradient(135deg, var(--accent-pale), rgba(2,119,182,0.15)); box-shadow: 0 0 0 2px var(--accent); }
+.q-icon { font-size: 1.25rem; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: var(--surface-warm); border-radius: 12px; flex-shrink: 0; transition: all var(--dur-fast); }
+.q-btn.selected .q-icon { background: var(--surface-card); box-shadow: var(--shadow-sm); }
+.q-label { font-family: var(--f-body); font-weight: 600; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 2px; }
+.q-desc { font-family: var(--f-body); font-size: 0.8rem; color: var(--text-secondary); }
+.q-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; gap: 16px; }
+.q-nav .btn { min-height: 44px; }
 
 /* ══════════════════════════════════════════════════════
    RESPONSIVE DESIGN (Master + Map Adjustments)
@@ -940,7 +938,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
         <h1 class="hero__headline reveal">Your partner on<br>the path to <em>housing.</em></h1>
         <p class="hero__sub reveal reveal-delay-1">Explore housing resources, find local job opportunities, and connect with your case manager — all in one place.</p>
         <div class="hero__actions reveal reveal-delay-2">
-          <button class="btn btn--solid" onclick="openIntake()">
+          <button class="btn btn--solid" onclick="openQuestionnaire()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             Get Started
           </button>
@@ -1314,110 +1312,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
   </div>
 </footer>
 
-<div class="intake-overlay" id="intakeOverlay" role="dialog" aria-modal="true" aria-label="Get Started Wizard">
+<div class="intake-overlay" id="qOverlay" role="dialog" aria-modal="true" aria-label="Get Started Questionnaire">
   <div class="intake-modal">
-    <div class="intake-modal__header">
-      <div class="intake-modal__title">How can we help?</div>
-      <button class="intake-modal__close" onclick="closeIntake()" aria-label="Close wizard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <div class="intake-modal__header" style="border-bottom: none; padding-bottom: 0;">
+      <div class="q-step-ind" style="display:flex; gap:6px; align-items:center;"></div>
+      <button class="intake-modal__close" onclick="closeQuestionnaire()" aria-label="Close wizard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
-    <div class="intake-progress" aria-hidden="true"><div class="intake-progress-bar" id="intakeProgress"></div></div>
-    <div class="intake-modal__body">
-      
-      <div class="intake-step active" id="intakeStep_step1">
-        <div class="intake-step__label">What is your primary need today?</div>
-        <div class="intake-options">
-          <button class="intake-option" onclick="intakeSelect('step1', 'goal', 'crisis', this)">
-            <div class="intake-option__icon" style="color:var(--signal-red)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-            Crisis Support
-          </button>
-          <button class="intake-option" onclick="intakeSelect('step1', 'goal', 'housing', this)">
-            <div class="intake-option__icon" style="color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-            Shelter or Housing
-          </button>
-          <button class="intake-option" onclick="intakeSelect('step1', 'goal', 'employment', this)">
-            <div class="intake-option__icon" style="color:var(--signal-green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-            Employment
-          </button>
-          <button class="intake-option" onclick="intakeSelect('step1', 'goal', 'healthcare', this)">
-            <div class="intake-option__icon" style="color:var(--signal-purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-            Healthcare
-          </button>
-          <button class="intake-option" onclick="intakeSelect('step1', 'goal', 'legal', this)">
-            <div class="intake-option__icon" style="color:var(--signal-amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div>
-            Social/Legal Services
-          </button>
-        </div>
-        <div class="intake-nav" style="justify-content: flex-end;">
-          <button class="btn btn--outline" style="border-color:transparent; color:var(--text-tertiary); min-height:44px; padding:0 12px;" onclick="intakeSelect('step1', 'goal', 'bypass', this)">Skip to all resources</button>
-        </div>
-      </div>
-
-      <div class="intake-step" id="intakeStep_stepHealth">
-        <div class="intake-step__label">What kind of care are you looking for?</div>
-        <div class="intake-options">
-          <button class="intake-option" onclick="intakeSelect('stepHealth', 'care', 'medical', this)">
-            <div class="intake-option__icon" style="color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-            Medical & Clinics
-          </button>
-          <button class="intake-option" onclick="intakeSelect('stepHealth', 'care', 'behavioral', this)">
-            <div class="intake-option__icon" style="color:var(--signal-purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></div>
-            Mental Health & Recovery
-          </button>
-          <button class="intake-option" onclick="intakeSelect('stepHealth', 'care', 'specialty', this)">
-            <div class="intake-option__icon" style="color:var(--signal-amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
-            Specialty Care
-          </button>
-        </div>
-        <div class="intake-nav"><button class="btn btn--outline" onclick="intakeBack()">Back</button></div>
-      </div>
-
-      <div class="intake-step" id="intakeStep_step2">
-        <div class="intake-step__label">Tell us a bit about who needs assistance:</div>
-        <div class="intake-options">
-          <button class="intake-option" onclick="intakeSelect('step2', 'who', 'single', this)">
-            <div class="intake-option__icon" style="color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-            Just me (Single Adult)
-          </button>
-          <button class="intake-option" onclick="intakeSelect('step2', 'who', 'family', this)">
-            <div class="intake-option__icon" style="color:var(--signal-amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            A family with children
-          </button>
-          <button class="intake-option" onclick="intakeSelect('step2', 'who', 'youth', this)">
-            <div class="intake-option__icon" style="color:var(--signal-green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M3 21v-2a7 7 0 0 1 14 0v2"/></svg></div>
-            Youth or young adult (16-25)
-          </button>
-          <button class="intake-option" onclick="intakeSelect('step2', 'who', 'veteran', this)">
-            <div class="intake-option__icon" style="color:var(--badge-bg-3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-            Military Veteran
-          </button>
-          <button class="intake-option" onclick="intakeSelect('step2', 'who', 'senior', this)">
-            <div class="intake-option__icon" style="color:var(--text-secondary)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-            Senior (55+)
-          </button>
-        </div>
-        <div class="intake-nav"><button class="btn btn--outline" onclick="intakeBack()">Back</button></div>
-      </div>
-
-      <div class="intake-step" id="intakeStep_step3">
-        <div class="intake-step__label">How soon do you need housing support?</div>
-        <div class="intake-options">
-          <button class="intake-option" onclick="intakeSelect('step3', 'urgency', 'today', this)">
-            <div class="intake-option__icon" style="color:var(--signal-red)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div>
-            Today / Emergency
-          </button>
-          <button class="intake-option" onclick="intakeSelect('step3', 'urgency', 'soon', this)">
-            <div class="intake-option__icon" style="color:var(--signal-amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-            Within a week
-          </button>
-          <button class="intake-option" onclick="intakeSelect('step3', 'urgency', 'planning', this)">
-            <div class="intake-option__icon" style="color:var(--signal-green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-            Just planning ahead / Flexible
-          </button>
-        </div>
-        <div class="intake-nav"><button class="btn btn--outline" onclick="intakeBack()">Back</button></div>
-      </div>
-      
-    </div>
+    <div class="intake-modal__body" id="qBody" style="padding-top: 12px;"></div>
   </div>
 </div>
 
@@ -2083,82 +1984,200 @@ fetchAndPopulateJobs();
 setInterval(fetchAndPopulateJobs, 300000);
 
 /* ─────────────────────────────────────────────────────
-   RAPID INTAKE WIZARD (Zero Friction)
+   RAPID INTAKE WIZARD (Questionnaire)
 ───────────────────────────────────────────────────── */
-let intakeState = { currentStepId: 'step1', goal: '', who: '', urgency: '', care: '' };
-let intakeHistory = [];
+const Q_STEPS = {
+  need: {
+    eyebrow: 'STEP 1 OF 3',
+    title: 'What do you need help with?',
+    sub: 'Select your most urgent need and we\'ll guide you to the right resources.',
+    opts: [
+      {icon:'🏠', label:'Housing',                 sub:'Shelters, transitional, affordable',  val:'housing'},
+      {icon:'💼', label:'Employment',              sub:'Job listings, staffing, career help', val:'employment'},
+      {icon:'🏥', label:'Healthcare',              sub:'Medical, mental health, recovery',    val:'healthcare'},
+      {icon:'🍎', label:'Food & Basics',           sub:'Food pantries, clothing, essentials', val:'food'},
+      {icon:'⚖️', label:'Legal & Social Services', sub:'Legal aid, public benefits',          val:'legal'},
+      {icon:'🆘', label:'Crisis Support',          sub:'Hotlines, immediate safety help',     val:'crisis'}
+    ]
+  },
+  housing_sub: {
+    eyebrow: 'STEP 2 OF 3 — HOUSING',
+    title: 'What\'s your current situation?',
+    sub: 'This helps us show you the most relevant housing options.',
+    opts: [
+      {icon:'🚨', label:'Need shelter tonight',        sub:'Emergency — I need a safe place now',        val:'emergency'},
+      {icon:'🏡', label:'Transitional / Sober Living', sub:'Short-term stable housing support',          val:'transitional'},
+      {icon:'🏘️', label:'Affordable Housing',          sub:'Longer-term affordable apartment search',    val:'affordable'},
+      {icon:'🤝', label:'Talk to a Case Manager',      sub:'Get personalized, one-on-one guidance',      val:'casemgr'}
+    ]
+  },
+  healthcare_sub: {
+    eyebrow: 'STEP 2 OF 2 — HEALTHCARE',
+    title: 'What type of care do you need?',
+    sub: 'We\'ll connect you with the most appropriate providers.',
+    opts: [
+      {icon:'🩺', label:'Medical / Primary Care',     sub:'Hospitals, clinics, urgent care',             val:'medical'},
+      {icon:'🧠', label:'Mental Health',              sub:'Counseling, psychiatry, crisis support',      val:'behavioral'},
+      {icon:'💊', label:'Substance Use Recovery',     sub:'Treatment programs, sober living',            val:'recovery'},
+      {icon:'✨', label:'Specialty Care',             sub:'Autism, HIV, IHSS, other specialty',          val:'specialty'}
+    ]
+  },
+  special: {
+    eyebrow: 'STEP 3 OF 3',
+    title: 'Any special circumstances?',
+    sub: 'We have targeted resources for specific communities.',
+    opts: [
+      {icon:'🌟',  label:'Adult (Single)',       sub:'Show me all matching resources',      val:'none'},
+      {icon:'👨‍👩‍👧', label:'Women & Families',     sub:'Family shelter & safety resources',   val:'family'},
+      {icon:'🌱',  label:'Youth (16–25)',        sub:'Youth-specific housing & support',    val:'youth'},
+      {icon:'🌈',  label:'LGBTQ+',               sub:'Affirming, identity-safe services',   val:'lgbtq'},
+      {icon:'🎖️',  label:'Veteran',              sub:'Veteran services & programs',         val:'veteran'}
+    ]
+  }
+};
 
-function openIntake() {
-  intakeState = { currentStepId: 'step1', goal: '', who: '', urgency: '', care: '' };
-  intakeHistory = [];
-  showStep('step1');
-  document.getElementById('intakeOverlay').classList.add('open');
+let qState = {step:1, need:null, sub:null, special:null};
+
+function openQuestionnaire() {
+  qState = {step:1, need:null, sub:null, special:null};
+  document.getElementById('qOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  document.querySelectorAll('.intake-option').forEach(o => o.classList.remove('selected'));
+  renderQStep();
 }
 
-function closeIntake() {
-  document.getElementById('intakeOverlay').classList.remove('open');
+function closeQuestionnaire() {
+  document.getElementById('qOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
 
-function showStep(stepId) {
-  document.querySelectorAll('.intake-step').forEach(s => s.classList.remove('active'));
-  const stepEl = document.getElementById('intakeStep_' + stepId);
-  if (stepEl) stepEl.classList.add('active');
-  intakeState.currentStepId = stepId;
-
-  const prog = document.getElementById('intakeProgress-bar');
-  if (prog) {
-    if (stepId === 'step1') prog.style.width = '25%';
-    else if (stepId === 'step2' || stepId === 'stepHealth') prog.style.width = '60%';
-    else if (stepId === 'step3') prog.style.width = '90%';
+function updateQDots(step, totalSteps) {
+  const ind = document.querySelector('.q-step-ind');
+  if(ind) {
+    ind.innerHTML = Array.from({length: totalSteps}, (_, i) => 
+      `<div class="q-step-dot ${i+1 === step ? 'active' : ''}" id="qDot${i+1}"></div>`
+    ).join('');
   }
 }
 
-function executeRoute(page, tab) { closeIntake(); goTo(page, null, tab); }
-
-function intakeSelect(stepId, key, value, el) {
-  const parent = el.closest('.intake-options') || el.closest('.intake-nav');
-  if(parent) parent.querySelectorAll('.intake-option').forEach(o => o.classList.remove('selected'));
-  if(el.classList.contains('intake-option')) el.classList.add('selected');
+function renderQStep() {
+  let stepDef, answerKey;
+  let totalSteps = 3;
   
-  intakeState[key] = value;
-
-  setTimeout(() => {
-    if (intakeState.currentStepId === stepId) {
-      intakeHistory.push(intakeState.currentStepId);
-      
-      if (stepId === 'step1') {
-        if (value === 'crisis') return executeRoute('resources', 'crisis');
-        if (value === 'employment') return executeRoute('employment');
-        if (value === 'legal') return executeRoute('resources', 'legal');
-        if (value === 'bypass') return executeRoute('home');
-        
-        if (value === 'housing') return showStep('step2');
-        if (value === 'healthcare') return showStep('stepHealth');
-      } 
-      else if (stepId === 'step2') return showStep('step3');
-      else if (stepId === 'step3') {
-        if (value === 'today') return executeRoute('housing', 'emergency');
-        if (value === 'soon') return executeRoute('housing', 'transitional');
-        if (value === 'planning') return executeRoute('housing', 'affordable');
-      }
-      else if (stepId === 'stepHealth') {
-        if (value === 'medical') return executeRoute('healthcare', 'medical');
-        if (value === 'behavioral') return executeRoute('healthcare', 'behavioral');
-        if (value === 'specialty') return executeRoute('healthcare', 'specialty');
-      }
+  if (qState.need === 'healthcare' || (qState.need && !['housing', 'healthcare'].includes(qState.need))) {
+    totalSteps = 2;
+  }
+  
+  if (qState.step === 1) {
+    stepDef = Q_STEPS.need; answerKey = 'need';
+    stepDef.eyebrow = `STEP 1 OF ${totalSteps}`;
+  } else if (qState.step === 2) {
+    if (qState.need === 'housing') {
+      stepDef = Q_STEPS.housing_sub; answerKey = 'sub';
+      stepDef.eyebrow = `STEP 2 OF 3 — HOUSING`;
+    } else if (qState.need === 'healthcare') {
+      stepDef = Q_STEPS.healthcare_sub; answerKey = 'sub';
+      stepDef.eyebrow = `STEP 2 OF 2 — HEALTHCARE`;
+    } else {
+      stepDef = Q_STEPS.special; answerKey = 'special';
+      stepDef.eyebrow = `STEP 2 OF 2`;
     }
-  }, 100);
+  } else if (qState.step === 3) {
+    stepDef = Q_STEPS.special; answerKey = 'special';
+    stepDef.eyebrow = `STEP 3 OF 3`;
+  }
+  
+  updateQDots(qState.step, totalSteps);
+  renderQOptions(stepDef, answerKey, totalSteps);
 }
 
-function intakeBack() {
-  if(intakeHistory.length > 0) { const prev = intakeHistory.pop(); showStep(prev); } 
-  else { openIntake(); }
+function renderQOptions(stepDef, answerKey, totalSteps) {
+  const body = document.getElementById('qBody');
+  const showBack = qState.step > 1;
+  const isLast = qState.step === totalSteps;
+  const btnText = isLast ? 'Show My Resources →' : 'Continue →';
+  
+  let html = `
+    <div class="q-eyebrow" aria-live="polite">${stepDef.eyebrow}</div>
+    <div class="q-title">${stepDef.title}</div>
+    <div class="q-sub">${stepDef.sub}</div>
+    <div class="q-grid" role="radiogroup">
+      ${stepDef.opts.map(opt => `
+        <button class="q-btn ${qState[answerKey] === opt.val ? 'selected' : ''}" 
+                role="radio" aria-checked="${qState[answerKey] === opt.val}"
+                onclick="qSelect('${answerKey}', '${opt.val}')">
+          <div class="q-icon" aria-hidden="true">${opt.icon}</div>
+          <div>
+            <div class="q-label">${opt.label}</div>
+            <div class="q-desc">${opt.sub}</div>
+          </div>
+        </button>
+      `).join('')}
+    </div>
+    <div class="q-nav">
+      ${showBack ? `<button class="btn btn--outline" onclick="qBack()" style="padding:10px 20px; border-color:transparent;">← Back</button>` : '<div></div>'}
+      <button class="btn btn--solid" onclick="qNext(${totalSteps})" ${!qState[answerKey] ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''}>${btnText}</button>
+    </div>
+  `;
+  body.innerHTML = html;
 }
 
-document.getElementById('intakeOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeIntake(); });
+function qSelect(key, val) {
+  qState[key] = val;
+  renderQStep();
+}
+
+function qBack() {
+  if (qState.step > 1) {
+    qState.step--;
+    if (qState.step === 1) {
+        qState.sub = null;
+        qState.special = null;
+    }
+    if (qState.step === 2) {
+        qState.special = null;
+    }
+    renderQStep();
+  }
+}
+
+function qNext(totalSteps) {
+  if (qState.step === totalSteps) {
+    finishQuestionnaire();
+  } else {
+    qState.step++;
+    renderQStep();
+  }
+}
+
+function finishQuestionnaire() {
+  closeQuestionnaire();
+  
+  if (qState.need === 'employment') return goTo('employment');
+  if (qState.need === 'food') return goTo('resources', 'food');
+  if (qState.need === 'legal') return goTo('resources', 'legal');
+  if (qState.need === 'crisis') return goTo('resources', 'crisis');
+  
+  if (qState.need === 'healthcare') {
+    if (qState.sub === 'medical') return goTo('healthcare', 'medical');
+    if (qState.sub === 'behavioral' || qState.sub === 'recovery') return goTo('healthcare', 'behavioral');
+    if (qState.sub === 'specialty') return goTo('healthcare', 'specialty');
+    return goTo('healthcare');
+  }
+  
+  if (qState.need === 'housing') {
+    if (qState.sub === 'emergency') return goTo('housing', 'emergency');
+    if (qState.sub === 'transitional') return goTo('housing', 'transitional');
+    if (qState.sub === 'affordable') return goTo('housing', 'affordable');
+    if (qState.sub === 'casemgr') return goTo('home', 'team-section');
+    return goTo('housing');
+  }
+  
+  goTo('home');
+}
+
+document.getElementById('qOverlay').addEventListener('click', e => { 
+    if (e.target === e.currentTarget) closeQuestionnaire(); 
+});
 
 
 /* ─────────────────────────────────────────────────────
