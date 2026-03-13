@@ -870,6 +870,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
               <div class="ndi-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
               <div><div class="ndi-title">Housing</div><div class="ndi-sub">Shelters &amp; affordable homes</div></div>
             </div>
+            <div class="nav-drop-item" onclick="goTo('employment')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('employment')" tabindex="0" role="menuitem">
+              <div class="ndi-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-3V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M8 7h8"/></svg></div>
+              <div><div class="ndi-title">Employment</div><div class="ndi-sub">Current openings &amp; job support</div></div>
+            </div>
             <div class="nav-drop-item" onclick="goTo('healthcare')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('healthcare')" tabindex="0" role="menuitem">
               <div class="ndi-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
               <div><div class="ndi-title">Healthcare</div><div class="ndi-sub">Clinics &amp; behavioral health</div></div>
@@ -878,13 +882,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
               <div class="ndi-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
               <div><div class="ndi-title">Additional Resources</div><div class="ndi-sub">Food, legal, education &amp; more</div></div>
             </div>
-            <div class="nav-drop-item" onclick="goTo('map')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('map')" tabindex="0" role="menuitem">
-              <div class="ndi-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div>
-              <div><div class="ndi-title">Resource Map</div><div class="ndi-sub">Find nearby resources visually</div></div>
-            </div>
           </div>
         </div>
-        <button class="nav-link" onclick="goTo('employment')" data-page="employment">Employment</button>
         <button class="nav-link" onclick="goTo('home','team-section')" data-page="team">Case Managers</button>
         <button class="btn btn--solid btn-cta" onclick="window.location.href='tel:9513903567'" aria-label="Call outreach line">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"></path></svg>
@@ -921,12 +920,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
     
     <div class="mobile-nav__group-label">Resources</div>
     <div class="mobile-nav__link" onclick="goTo('housing');closeMobileNav()" onkeydown="if(event.key==='Enter'||event.key===' '){goTo('housing');closeMobileNav()}" tabindex="0" role="menuitem" data-mpage="housing" style="padding-left:32px">Housing</div>
+    <div class="mobile-nav__link" onclick="goTo('employment');closeMobileNav()" onkeydown="if(event.key==='Enter'||event.key===' '){goTo('employment');closeMobileNav()}" tabindex="0" role="menuitem" data-mpage="employment" style="padding-left:32px">Employment</div>
     <div class="mobile-nav__link" onclick="goTo('healthcare');closeMobileNav()" onkeydown="if(event.key==='Enter'||event.key===' '){goTo('healthcare');closeMobileNav()}" tabindex="0" role="menuitem" data-mpage="healthcare" style="padding-left:32px">Healthcare</div>
     <div class="mobile-nav__link" onclick="goTo('resources');closeMobileNav()" onkeydown="if(event.key==='Enter'||event.key===' '){goTo('resources');closeMobileNav()}" tabindex="0" role="menuitem" data-mpage="resources" style="padding-left:32px">Additional Resources</div>
-    <div class="mobile-nav__link" onclick="goTo('map');closeMobileNav()" onkeydown="if(event.key==='Enter'||event.key===' '){goTo('map');closeMobileNav()}" tabindex="0" role="menuitem" data-mpage="map" style="padding-left:32px">Resource Map</div>
     <div style="height:1px; background:rgba(255,255,255,0.1); margin:1rem 20px;"></div>
     
-    <div class="mobile-nav__link" onclick="goTo('employment');closeMobileNav()" onkeydown="if(event.key==='Enter'||event.key===' '){goTo('employment');closeMobileNav()}" tabindex="0" role="menuitem" data-mpage="employment">Employment</div>
     <div class="mobile-nav__link" onclick="goTo('home','team-section');closeMobileNav()" onkeydown="if(event.key==='Enter'||event.key===' '){goTo('home','team-section');closeMobileNav()}" tabindex="0" role="menuitem">Case Managers</div>
   </div>
   <div class="mobile-nav__footer">
@@ -1141,7 +1139,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
       <div class="container page-hero__inner">
         <nav class="page-hero__crumb" aria-label="Breadcrumb"><a onclick="goTo('home')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('home')" tabindex="0" role="link">Home</a> <span style="margin:0 4px" aria-hidden="true">/</span> <span aria-current="page">Additional Resources</span></nav>
         <h1 class="page-hero__title reveal">Additional <em>Resources</em></h1>
-        <p class="page-hero__sub reveal reveal-delay-1">Community support ranging from food pantries to legal services, education, and pet care.</p>
+        <p class="page-hero__sub reveal reveal-delay-1">Explore housing, healthcare, and community support near you across Riverside County. Filter by category and click any pin to view details.</p>
       </div>
     </div>
     <div class="page-stats-wrapper">
@@ -1287,10 +1285,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
         <div class="footer__links">
           <a onclick="goTo('home')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('home')" tabindex="0" role="link">Home</a>
           <a onclick="goTo('housing')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('housing')" tabindex="0" role="link">Housing Resources</a>
+          <a onclick="goTo('employment')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('employment')" tabindex="0" role="link">Employment</a>
           <a onclick="goTo('healthcare')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('healthcare')" tabindex="0" role="link">Healthcare</a>
           <a onclick="goTo('resources')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('resources')" tabindex="0" role="link">Additional Resources</a>
-          <a onclick="goTo('map')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('map')" tabindex="0" role="link">Resource Map</a>
-          <a onclick="goTo('employment')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('employment')" tabindex="0" role="link">Employment</a>
           <a onclick="goTo('home','team-section')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('home','team-section')" tabindex="0" role="link">Case Managers</a>
         </div>
       </div>
