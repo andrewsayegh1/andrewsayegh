@@ -8,8 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <style>
 /* ══════════════════════════════════════════════════════
    ND STUDIO: ELITE DESIGN TOKENS (City Net Unified)
@@ -724,42 +722,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
 .footer .logo__sub { font-size: var(--size-xs); }
 
 /* ══════════════════════════════════════════════════════
-   RESOURCE MAP PAGE (From Model 2)
-══════════════════════════════════════════════════════ */
-.map-layout { display: grid; grid-template-columns: 300px 1fr; gap: 0; height: calc(100vh - 200px); min-height: 520px; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border-glass); }
-.map-sidebar { background: var(--surface-card); backdrop-filter: blur(32px); border-right: 1px solid var(--border-light); display: flex; flex-direction: column; overflow: hidden; }
-.map-sidebar__head { padding: 16px; border-bottom: 1px solid var(--border-light); background: var(--surface-warm); }
-.map-sidebar__head h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-primary); margin-bottom: 10px; }
-.map-filters { display: flex; flex-wrap: wrap; gap: 4px; }
-.map-pill { padding: 6px 12px; font-size: 11px; font-weight: 700; border-radius: 100px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); cursor: pointer; transition: all var(--dur-fast); white-space: nowrap; font-family: var(--f-body); }
-.map-pill:hover { color: var(--text-primary); border-color: var(--accent); }
-.map-pill.on { background: var(--btn-bg); color: var(--btn-text); border-color: var(--btn-bg); }
-.map-list { flex: 1; overflow-y: auto; padding: 8px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
-.map-list::-webkit-scrollbar { width: 4px; }
-.map-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-.map-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border-radius: var(--radius-md); cursor: pointer; transition: all var(--dur-fast); border: 1px solid transparent; margin-bottom: 4px; }
-.map-item:hover { background: var(--surface-warm); border-color: var(--border-light); }
-.map-item.active { background: var(--accent-pale); border-color: var(--accent-glow); }
-.map-item__dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
-.map-item__name { font-size: 12px; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
-.map-item__meta { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
-#map-container { flex: 1; min-height: 400px; z-index: 1; background: var(--surface-warm); }
-.map-popup { padding: 14px 16px; min-width: 200px; max-width: 280px; font-family: var(--f-body); }
-.map-popup__cat { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 4px; }
-.map-popup__name { font-family: var(--f-display); font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; line-height: 1.2; }
-.map-popup__detail { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; display: flex; gap: 6px; align-items: flex-start; line-height: 1.4; }
-.map-popup__link { display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; padding: 6px 12px; background: var(--btn-bg); color: #fff; border-radius: 100px; font-size: 11px; font-weight: 700; text-decoration: none; transition: all var(--dur-fast); }
-.map-popup__link:hover { background: var(--btn-hover); }
-.map-popup__call { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; margin-left: 4px; padding: 6px 12px; background: var(--signal-green-pale); color: var(--signal-green); border-radius: 100px; font-size: 11px; font-weight: 700; text-decoration: none; transition: all var(--dur-fast); }
-.leaflet-popup-content-wrapper { border-radius: 14px !important; box-shadow: 0 16px 48px rgba(15,23,42,0.12) !important; border: 1px solid var(--border-glass) !important; background: var(--surface-float) !important; backdrop-filter: blur(24px) !important; -webkit-backdrop-filter: blur(24px) !important; color: var(--text-primary) !important;}
-.leaflet-popup-tip { background: var(--surface-float) !important; border: 1px solid var(--border-glass) !important; border-top: none !important; border-left: none !important; }
-.leaflet-popup-content { margin: 0 !important; }
-.leaflet-popup-tip-container { opacity: 0.8; }
-.map-count-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: var(--surface-card); border: 1px solid var(--border-glass); border-radius: 100px; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 1rem; }
-@media (max-width: 1024px) { .map-layout { grid-template-columns: 240px 1fr; } }
-@media (max-width: 768px) { .map-layout { grid-template-columns: 1fr; grid-template-rows: 200px 1fr; height: auto; } .map-sidebar { border-right: none; border-bottom: 1px solid var(--border-light); max-height: 200px; } #map-container { height: 450px; } }
-
-/* ══════════════════════════════════════════════════════
    RAPID INTAKE WIZARD (Questionnaire)
 ══════════════════════════════════════════════════════ */
 .intake-overlay { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 1rem; opacity: 0; transition: opacity 0.3s; will-change: opacity; }
@@ -951,10 +913,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             Get Started
           </button>
-          <button class="btn btn--outline" onclick="goTo('map')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-            Resource Map
-          </button>
         </div>
       </div>
     </section>
@@ -1140,32 +1098,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
       <div class="container page-hero__inner">
         <nav class="page-hero__crumb" aria-label="Breadcrumb"><a onclick="goTo('home')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('home')" tabindex="0" role="link">Home</a> <span style="margin:0 4px" aria-hidden="true">/</span> <span aria-current="page">Additional Resources</span></nav>
         <h1 class="page-hero__title reveal">Additional <em>Resources</em></h1>
-        <section class="section" style="padding-top:1rem">
-          <div class="container">
-            <div class="map-count-badge reveal">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-              <span id="mapTotalCount">Loading resources…</span>
-            </div>
-            <div class="map-layout reveal reveal-delay-1" role="application" aria-label="Interactive resource map">
-              <div class="map-sidebar" role="complementary" aria-label="Resource filter and list">
-                <div class="map-sidebar__head">
-                  <h3>Filter by Category</h3>
-                  <div class="map-filters" id="mapFilters" role="group" aria-label="Category filters">
-                    <button class="map-pill on" data-cat="all" aria-pressed="true">All</button>
-                    <button class="map-pill" data-cat="housing" aria-pressed="false">Housing</button>
-                    <button class="map-pill" data-cat="healthcare" aria-pressed="false">Healthcare</button>
-                    <button class="map-pill" data-cat="crisis" aria-pressed="false">Crisis</button>
-                    <button class="map-pill" data-cat="food" aria-pressed="false">Food</button>
-                    <button class="map-pill" data-cat="legal" aria-pressed="false">Legal</button>
-                    <button class="map-pill" data-cat="basic" aria-pressed="false">Basic Needs</button>
-                  </div>
-                </div>
-                <div class="map-list" id="mapList" role="list" aria-label="Resource listings"></div>
-              </div>
-              <div id="map-container" aria-label="Map showing resource locations"></div>
-            </div>
-          </div>
-        </section>
       </div>
     </div>
     <div class="page-stats-wrapper">
@@ -1248,21 +1180,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
         </div>
       </div>
     </section>
-  </div>
-
-  <div class="page" id="page-map">
-    <div class="page-hero">
-      <div class="container page-hero__inner">
-        <nav class="page-hero__crumb" aria-label="Breadcrumb">
-          <a onclick="goTo('home')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('home')" tabindex="0" role="link">Home</a>
-          <span style="margin:0 4px" aria-hidden="true">/</span>
-          <span aria-current="page">Resource Map</span>
-        </nav>
-        <h1 class="page-hero__title reveal">Resource <em>Map</em></h1>
-        <p class="page-hero__sub reveal reveal-delay-1">Explore housing, healthcare, and community support near you across Riverside County. Filter by category and click any pin to view details.</p>
-      </div>
-    </div>
-
   </div>
 </main>
 
@@ -1799,7 +1716,7 @@ function goTo(page, scrollTo, activateTab) {
   const target = document.getElementById('page-'+page);
   if (target) target.classList.add('active');
 
-  const resPages = ['housing','healthcare','resources','map'];
+  const resPages = ['housing','healthcare','resources'];
 
   // Desktop Nav Links
   document.querySelectorAll('.nav-link[data-page]').forEach(l => {
@@ -1835,13 +1752,6 @@ function goTo(page, scrollTo, activateTab) {
          if (btn) btn.click();
       }
     }, 200);
-  }
-  
-  if (page === 'map') { 
-    setTimeout(() => {
-      initMap();
-      if(mapInstance) mapInstance.invalidateSize();
-    }, 200); 
   }
 }
 
@@ -2198,256 +2108,6 @@ function finishQuestionnaire() {
 document.getElementById('qOverlay').addEventListener('click', e => { 
     if (e.target === e.currentTarget) closeQuestionnaire(); 
 });
-
-
-/* ─────────────────────────────────────────────────────
-   RESOURCE MAP (Leaflet.js)
-───────────────────────────────────────────────────── */
-const MAP_COLORS = {
-  housing:    '#0277b6',
-  healthcare: '#0f766e',
-  crisis:     '#b91c1c',
-  food:       '#b45309',
-  legal:      '#6d28d9',
-  basic:      '#0096c7'
-};
-
-const MAP_LABELS = {
-  housing:'Housing', healthcare:'Healthcare', crisis:'Crisis Support',
-  food:'Food Pantry', legal:'Legal & Social', basic:'Basic Needs'
-};
-
-const CITY_BASE_COORDS = {
-  'murrieta':               [33.5537, -117.2137],
-  'temecula':               [33.4936, -117.1484],
-  'lake elsinore':          [33.6681, -117.3273],
-  'menifee':                [33.6971, -117.1853],
-  'wildomar':               [33.5989, -117.2795],
-  'riverside':              [33.9533, -117.3962],
-  'hemet':                  [33.7475, -116.9719],
-  'moreno valley':          [33.9374, -117.2306],
-  'corona':                 [33.8753, -117.5664],
-  'palm springs':           [33.8303, -116.5453],
-  'perris':                 [33.7825, -117.2286],
-  'indio':                  [33.7205, -116.2156],
-  'march air reserve base': [33.8818, -117.2597],
-  'thousand palms':         [33.8261, -116.3717],
-  'san bernardino':         [34.1083, -117.2898]
-};
-
-// Deterministic offset so marker positions are stable across reloads
-function nameHash(str) {
-  let h = 0;
-  for (let i = 0; i < str.length; i++) { h = ((h << 5) - h) + str.charCodeAt(i); h |= 0; }
-  return h;
-}
-
-function getCoords(item) {
-  if (!item.address) return null;
-  const addr = item.address.toLowerCase();
-  for (const [city, base] of Object.entries(CITY_BASE_COORDS)) {
-    if (addr.includes(city)) {
-      const h = nameHash(item.name);
-      const offLat = (((h & 0xFF) / 255) - 0.5) * 0.014;
-      const offLng = ((((h >> 8) & 0xFF) / 255) - 0.5) * 0.014;
-      return [base[0] + offLat, base[1] + offLng];
-    }
-  }
-  return null;
-}
-
-function buildMapResources() {
-  const all = [];
-  // Housing
-  ['referrals','emergency','transitional','psh','affordable','sober'].forEach(type => {
-    (housing[type]||[]).forEach(item => {
-      const coords = getCoords(item);
-      if (coords) all.push({...item, cat:'housing', coords});
-    });
-  });
-  // Healthcare
-  ['medical','behavioral','specialty'].forEach(type => {
-    (healthcare[type]||[]).forEach(item => {
-      const coords = getCoords(item);
-      if (coords) all.push({...item, cat:'healthcare', coords});
-    });
-  });
-  // Crisis
-  (resources.crisis||[]).forEach(item => {
-    const coords = getCoords(item);
-    if (coords) all.push({...item, cat:'crisis', coords});
-  });
-  // Food
-  (resources.food||[]).forEach(item => {
-    const coords = getCoords(item);
-    if (coords) all.push({...item, cat:'food', coords});
-  });
-  // Legal
-  (resources.legal||[]).forEach(item => {
-    const coords = getCoords(item);
-    if (coords) all.push({...item, cat:'legal', coords});
-  });
-  // Basic Needs, Education, Animals
-  ['basic', 'education', 'animals'].forEach(type => {
-    (resources[type]||[]).forEach(item => {
-      const coords = getCoords(item);
-      if (coords) all.push({...item, cat:'basic', coords});
-    });
-  });
-  return all;
-}
-
-let mapInstance = null;
-let mapTileLayer = null;
-let mapMarkers = [];
-let mapAllResources = [];
-let activeMapCat = 'all';
-
-function makeMapIcon(color) {
-  return L.divIcon({
-    html: `<div style="width:14px;height:14px;background:${color};border-radius:50%;border:2.5px solid rgba(255,255,255,0.95);box-shadow:0 2px 8px rgba(0,0,0,0.35)"></div>`,
-    className: 'map-marker-icon',
-    iconSize: [14, 14],
-    iconAnchor: [7, 7],
-    popupAnchor: [0, -10]
-  });
-}
-
-function setMapTheme(isDark) {
-  if (!mapInstance) return;
-  const tileUrl = isDark
-    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-    
-  if (mapTileLayer) {
-    mapTileLayer.setUrl(tileUrl);
-  } else {
-    mapTileLayer = L.tileLayer(tileUrl, {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
-      maxZoom: 19,
-      subdomains: 'abcd'
-    }).addTo(mapInstance);
-  }
-}
-
-// Watch for system theme changes dynamically
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-  setMapTheme(e.matches);
-});
-
-function renderMapMarkers(cat) {
-  mapMarkers.forEach(m => m.remove());
-  mapMarkers = [];
-  const filtered = cat === 'all' ? mapAllResources : mapAllResources.filter(r => r.cat === cat);
-  filtered.forEach(res => {
-    const color = MAP_COLORS[res.cat] || '#64748b';
-    const phoneClean = res.phone ? res.phone.replace(/[^0-9]/g,'') : '';
-    const phone = res.phone ? `<div class="map-popup__detail">📞&nbsp;<a href="tel:${phoneClean}" style="color:var(--accent)">${res.phone}</a></div>` : '';
-    const addr  = res.address ? `<div class="map-popup__detail">📍&nbsp;${res.address}</div>` : '';
-    const webBtn  = res.website ? `<a class="map-popup__link" href="${res.website}" target="_blank" rel="noopener noreferrer">Website ↗</a>` : '';
-    const callBtn = res.phone ? `<a class="map-popup__call" href="tel:${phoneClean}">Call</a>` : '';
-    const marker = L.marker(res.coords, {icon: makeMapIcon(color)});
-    marker.bindPopup(`<div class="map-popup">
-      <div class="map-popup__cat">${MAP_LABELS[res.cat]||res.cat}${res.special ? ' &middot; '+res.special : ''}</div>
-      <div class="map-popup__name">${res.name}</div>
-      ${addr}${phone}
-      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">${webBtn}${callBtn}</div>
-    </div>`, {maxWidth:310});
-    marker.addTo(mapInstance);
-    mapMarkers.push(marker);
-  });
-}
-
-function renderMapList(cat) {
-  const list = document.getElementById('mapList');
-  if (!list) return;
-  const filtered = cat === 'all' ? mapAllResources : mapAllResources.filter(r => r.cat === cat);
-  if (!filtered.length) {
-    list.innerHTML = '<div style="padding:24px 16px;text-align:center;color:var(--text-tertiary);font-size:13px;">No resources in this category with a known address.</div>';
-    return;
-  }
-  list.innerHTML = filtered.map((res, i) => {
-    const cityPart = res.address ? res.address.split(',').slice(-2).join(',').trim() : '';
-    const globalIdx = mapAllResources.indexOf(res);
-    return `<div class="map-item" role="listitem" tabindex="0"
-      onclick="focusMapItem(${globalIdx})"
-      onkeydown="if(event.key==='Enter'||event.key===' ')focusMapItem(${globalIdx})">
-      <div class="map-item__dot" style="background:${MAP_COLORS[res.cat]||'#64748b'}"></div>
-      <div>
-        <div class="map-item__name">${res.name}</div>
-        <div class="map-item__meta">${MAP_LABELS[res.cat]||res.cat}${cityPart ? ' &middot; '+cityPart : ''}</div>
-      </div>
-    </div>`;
-  }).join('');
-  
-  const badge = document.getElementById('mapTotalCount');
-  if (badge) badge.textContent = `${filtered.length} resource${filtered.length!==1?'s':''} shown`;
-}
-
-function focusMapItem(idx) {
-  const res = mapAllResources[idx];
-  if (!res || !mapInstance) return;
-  mapInstance.setView(res.coords, 14, {animate:true});
-  
-  mapMarkers.forEach(m => {
-    const ll = m.getLatLng();
-    if (Math.abs(ll.lat - res.coords[0]) < 0.0001 && Math.abs(ll.lng - res.coords[1]) < 0.0001) {
-      m.openPopup();
-    }
-  });
-  
-  document.querySelectorAll('.map-item').forEach((el, i) => {
-    const filtered = activeMapCat === 'all' ? mapAllResources : mapAllResources.filter(r => r.cat === activeMapCat);
-    el.classList.toggle('active', filtered[i] === res);
-  });
-}
-
-function setupMapFilters() {
-  document.querySelectorAll('#mapFilters .map-pill').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#mapFilters .map-pill').forEach(b => {
-        b.classList.remove('on');
-        b.setAttribute('aria-pressed','false');
-      });
-      btn.classList.add('on');
-      btn.setAttribute('aria-pressed','true');
-      activeMapCat = btn.dataset.cat;
-      renderMapMarkers(activeMapCat);
-      renderMapList(activeMapCat);
-    });
-  });
-}
-
-function initMap() {
-  if (typeof L === 'undefined') {
-    console.error("Leaflet failed to load.");
-    return;
-  }
-  if (mapInstance) { 
-    mapInstance.invalidateSize(); 
-    return; 
-  }
-
-  mapInstance = L.map('map-container', {zoomControl:true}).setView([33.65, -117.28], 10);
-  
-  const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  setMapTheme(darkMode);
-
-  mapAllResources = buildMapResources();
-  renderMapMarkers('all');
-  renderMapList('all');
-  setupMapFilters();
-
-  const badge = document.getElementById('mapTotalCount');
-  if (badge) badge.textContent = `${mapAllResources.length} resource${mapAllResources.length!==1?'s':''} shown`;
-}
-
-// Handle window resize cleanly for map adjustments
-window.addEventListener('resize', debounce(() => {
-  if (mapInstance && document.getElementById('page-map').classList.contains('active')) {
-    mapInstance.invalidateSize();
-  }
-}, 250));
 
 </script>
 </body>
