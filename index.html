@@ -2003,10 +2003,10 @@ const Q_STEPS = {
     sub: 'Select your most urgent need and we\'ll guide you to the right resources.',
     opts: [
       {icon:'🆘', label:'Crisis Support',          sub:'Hotlines, immediate help',            val:'crisis'},
-      {icon:'🏠', label:'Housing',                 sub:'Shelters, transitional, affordable',  val:'housing'},
+      {icon:'🏠', label:'Housing',                 sub:'Shelters, transitional, apartments',  val:'housing'},
       {icon:'💼', label:'Employment',              sub:'Job listings, staffing agencies',     val:'employment'},
       {icon:'🏥', label:'Healthcare',              sub:'Medical, mental health, recovery',    val:'healthcare'},
-      {icon:'🍎', label:'Food & Basics',           sub:'Food pantries, clothing, essentials', val:'food'},
+      {icon:'🍎', label:'Food & Essentials',           sub:'Food pantries, clothing, essentials', val:'food'},
       {icon:'⚖️', label:'Legal & Social Services', sub:'Legal aid, public benefits',          val:'legal'}
     ]
   },
@@ -2024,12 +2024,12 @@ const Q_STEPS = {
   healthcare_sub: {
     eyebrow: 'STEP 2 OF 2 — HEALTHCARE',
     title: 'What type of care do you need?',
-    sub: 'We\'ll connect you with the most appropriate providers.',
+    sub: 'We\'ll direct you to the most appropriate providers.',
     opts: [
-      {icon:'🩺', label:'Medical / Primary Care',     sub:'Hospitals, clinics, urgent care',             val:'medical'},
+      {icon:'🩺', label:'Medical & Primary Care',     sub:'Hospitals, clinics, urgent care',             val:'medical'},
       {icon:'🧠', label:'Mental Health',              sub:'Counseling, psychiatry, crisis support',      val:'behavioral'},
-      {icon:'💊', label:'Substance Use Recovery',     sub:'Treatment programs, sober living',            val:'recovery'},
-      {icon:'✨', label:'Specialty Care',             sub:'Autism, HIV, IHSS, other specialty',          val:'specialty'}
+      {icon:'💊', label:'Substance Use Recovery',     sub:'Rehab centers, treatment programs',            val:'recovery'},
+      {icon:'✨', label:'Specialty Care',             sub:'Autism, IHSS, other care',          val:'specialty'}
     ]
   },
   special: {
@@ -2038,7 +2038,7 @@ const Q_STEPS = {
     sub: 'We have targeted resources for specific communities.',
     opts: [
       {icon:'🌟',  label:'Adult (Single)',       sub:'Show me all matching resources',      val:'none'},
-      {icon:'👨‍👩‍👧', label:'Women & Families',     sub:'Family shelter & safety resources',   val:'family'},
+      {icon:'👨‍👩‍👧', label:'Women & Families',     sub:'Family shelter & housing resources',   val:'family'},
       {icon:'🌱',  label:'Youth (16–25)',        sub:'Youth-specific housing & support',    val:'youth'},
       {icon:'🌈',  label:'LGBTQ+',               sub:'Affirming, identity-safe services',   val:'lgbtq'},
       {icon:'🎖️',  label:'Veteran',              sub:'Veteran services & programs',         val:'veteran'}
