@@ -1139,7 +1139,32 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
       <div class="container page-hero__inner">
         <nav class="page-hero__crumb" aria-label="Breadcrumb"><a onclick="goTo('home')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('home')" tabindex="0" role="link">Home</a> <span style="margin:0 4px" aria-hidden="true">/</span> <span aria-current="page">Additional Resources</span></nav>
         <h1 class="page-hero__title reveal">Additional <em>Resources</em></h1>
-        <p class="page-hero__sub reveal reveal-delay-1">Explore housing, healthcare, and community support near you across Riverside County. Filter by category and click any pin to view details.</p>
+        <section class="section" style="padding-top:1rem">
+          <div class="container">
+            <div class="map-count-badge reveal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+              <span id="mapTotalCount">Loading resources…</span>
+            </div>
+            <div class="map-layout reveal reveal-delay-1" role="application" aria-label="Interactive resource map">
+              <div class="map-sidebar" role="complementary" aria-label="Resource filter and list">
+                <div class="map-sidebar__head">
+                  <h3>Filter by Category</h3>
+                  <div class="map-filters" id="mapFilters" role="group" aria-label="Category filters">
+                    <button class="map-pill on" data-cat="all" aria-pressed="true">All</button>
+                    <button class="map-pill" data-cat="housing" aria-pressed="false">Housing</button>
+                    <button class="map-pill" data-cat="healthcare" aria-pressed="false">Healthcare</button>
+                    <button class="map-pill" data-cat="crisis" aria-pressed="false">Crisis</button>
+                    <button class="map-pill" data-cat="food" aria-pressed="false">Food</button>
+                    <button class="map-pill" data-cat="legal" aria-pressed="false">Legal</button>
+                    <button class="map-pill" data-cat="basic" aria-pressed="false">Basic Needs</button>
+                  </div>
+                </div>
+                <div class="map-list" id="mapList" role="list" aria-label="Resource listings"></div>
+              </div>
+              <div id="map-container" aria-label="Map showing resource locations"></div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
     <div class="page-stats-wrapper">
@@ -1236,32 +1261,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
         <p class="page-hero__sub reveal reveal-delay-1">Explore housing, healthcare, and community support near you across Riverside County. Filter by category and click any pin to view details.</p>
       </div>
     </div>
-    <section class="section" style="padding-top:1rem">
-      <div class="container">
-        <div class="map-count-badge reveal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-          <span id="mapTotalCount">Loading resources…</span>
-        </div>
-        <div class="map-layout reveal reveal-delay-1" role="application" aria-label="Interactive resource map">
-          <div class="map-sidebar" role="complementary" aria-label="Resource filter and list">
-            <div class="map-sidebar__head">
-              <h3>Filter by Category</h3>
-              <div class="map-filters" id="mapFilters" role="group" aria-label="Category filters">
-                <button class="map-pill on" data-cat="all" aria-pressed="true">All</button>
-                <button class="map-pill" data-cat="housing" aria-pressed="false">Housing</button>
-                <button class="map-pill" data-cat="healthcare" aria-pressed="false">Healthcare</button>
-                <button class="map-pill" data-cat="crisis" aria-pressed="false">Crisis</button>
-                <button class="map-pill" data-cat="food" aria-pressed="false">Food</button>
-                <button class="map-pill" data-cat="legal" aria-pressed="false">Legal</button>
-                <button class="map-pill" data-cat="basic" aria-pressed="false">Basic Needs</button>
-              </div>
-            </div>
-            <div class="map-list" id="mapList" role="list" aria-label="Resource listings"></div>
-          </div>
-          <div id="map-container" aria-label="Map showing resource locations"></div>
-        </div>
-      </div>
-    </section>
+
   </div>
 </main>
 
