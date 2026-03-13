@@ -2173,21 +2173,21 @@ function finishQuestionnaire() {
   closeQuestionnaire();
   
   if (qState.need === 'employment') return goTo('employment');
-  if (qState.need === 'food') return goTo('resources', 'food');
-  if (qState.need === 'legal') return goTo('resources', 'legal');
-  if (qState.need === 'crisis') return goTo('resources', 'crisis');
+  if (qState.need === 'food') return goTo('resources', null, 'food');
+  if (qState.need === 'legal') return goTo('resources', null, 'legal');
+  if (qState.need === 'crisis') return goTo('resources', null, 'crisis');
   
   if (qState.need === 'healthcare') {
-    if (qState.sub === 'medical') return goTo('healthcare', 'medical');
-    if (qState.sub === 'behavioral' || qState.sub === 'recovery') return goTo('healthcare', 'behavioral');
-    if (qState.sub === 'specialty') return goTo('healthcare', 'specialty');
+    if (qState.sub === 'medical') return goTo('healthcare', null, 'medical');
+    if (qState.sub === 'behavioral' || qState.sub === 'recovery') return goTo('healthcare', null, 'behavioral');
+    if (qState.sub === 'specialty') return goTo('healthcare', null, 'specialty');
     return goTo('healthcare');
   }
   
   if (qState.need === 'housing') {
-    if (qState.sub === 'emergency') return goTo('housing', 'emergency');
-    if (qState.sub === 'transitional') return goTo('housing', 'transitional');
-    if (qState.sub === 'affordable') return goTo('housing', 'affordable');
+    if (qState.sub === 'emergency') return goTo('housing', null, 'emergency');
+    if (qState.sub === 'transitional') return goTo('housing', null, 'transitional');
+    if (qState.sub === 'affordable') return goTo('housing', null, 'affordable');
     if (qState.sub === 'casemgr') return goTo('home', 'team-section');
     return goTo('housing');
   }
