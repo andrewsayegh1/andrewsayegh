@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <style>
 /* ══════════════════════════════════════════════════════
    ND STUDIO: ELITE DESIGN TOKENS (City Net Unified)
@@ -852,7 +853,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
     <div class="container header__inner">
       <div class="logo" onclick="goTo('home')" onkeydown="if(event.key==='Enter'||event.key===' ')goTo('home')" tabindex="0" role="button" aria-label="City Net home">
         <div class="logo__mark">
-          <img src="https://images.squarespace-cdn.com/content/v1/5d7aabbf20f74311abd10693/1572561367590-17GJRM1XSH3Q4SSRBEAZ/City+Net+Logo+Icon+Full+Color.png" alt="City Net logo">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d7aabbf20f74311abd10693/1572561367590-17GJRM1XSH3Q4SSRBEAZ/City+Net+Logo+Icon+Full+Color.png" alt="City Net logo" loading="lazy">
         </div>
         <div class="logo__info">
           <div class="logo__text" style="font-family: var(--f-display);">City Net</div>
@@ -904,7 +905,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
   <div class="mobile-nav__head">
     <div class="logo logo--white">
       <div class="logo__mark">
-        <img src="https://images.squarespace-cdn.com/content/v1/5d7aabbf20f74311abd10693/1572561367590-17GJRM1XSH3Q4SSRBEAZ/City+Net+Logo+Icon+Full+Color.png" alt="City Net logo">
+        <img src="https://images.squarespace-cdn.com/content/v1/5d7aabbf20f74311abd10693/1572561367590-17GJRM1XSH3Q4SSRBEAZ/City+Net+Logo+Icon+Full+Color.png" alt="City Net logo" loading="lazy">
       </div>
       <div class="logo__info">
         <div class="logo__text" style="font-family: var(--f-display);">City Net</div>
@@ -1271,7 +1272,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
       <div>
         <div class="logo logo--white" style="cursor:default; transform:none; margin-bottom: 12px;">
           <div class="logo__mark" style="box-shadow:none;">
-            <img src="https://images.squarespace-cdn.com/content/v1/5d7aabbf20f74311abd10693/1572561367590-17GJRM1XSH3Q4SSRBEAZ/City+Net+Logo+Icon+Full+Color.png" alt="City Net logo">
+            <img src="https://images.squarespace-cdn.com/content/v1/5d7aabbf20f74311abd10693/1572561367590-17GJRM1XSH3Q4SSRBEAZ/City+Net+Logo+Icon+Full+Color.png" alt="City Net logo" loading="lazy">
           </div>
           <div class="logo__info">
             <div class="logo__text" style="font-family: var(--f-display); color: var(--text-primary);">City Net</div>
@@ -1331,6 +1332,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, div[role="button"]:f
 
 <script>
 'use strict';
+
+/* ─── UTILITY FUNCTIONS ────────────────────────────── */
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => { clearTimeout(timeout); func(...args); };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
 
 /* ─── DATA ─────────────────────────────────────────── */
 const caseManagers = [
@@ -1617,7 +1628,7 @@ function renderTeam(q='') {
       </div>
     </div>`).join('');
 }
-document.getElementById('cmSearch')?.addEventListener('input', e => renderTeam(e.target.value));
+document.getElementById('cmSearch')?.addEventListener('input', debounce(e => renderTeam(e.target.value), 300));
 renderTeam();
 
 /* ─── JOB ENGINE ─────────────────────────────────────── */
@@ -1826,7 +1837,12 @@ function goTo(page, scrollTo, activateTab) {
     }, 200);
   }
   
-  if (page === 'map') { setTimeout(initMap, 200); }
+  if (page === 'map') { 
+    setTimeout(() => {
+      initMap();
+      if(mapInstance) mapInstance.invalidateSize();
+    }, 200); 
+  }
 }
 
 /* ─── MOBILE NAV ─────────────────────────────────────── */
@@ -1999,7 +2015,7 @@ const Q_STEPS = {
     title: 'What do you need help with today?',
     sub: 'Select your most urgent need and we\'ll guide you to the right resources.',
     opts: [
-      {icon:'🆘', label:'Crisis Support',          sub:'Hotlines, immediate help',            val:'crisis'},
+      {icon:'🆘', label:'Crisis Support',          sub:'Hotlines, immediate help',          val:'crisis'},
       {icon:'🏠', label:'Housing',                 sub:'Shelters, transitional, apartments',  val:'housing'},
       {icon:'💼', label:'Employment',              sub:'Job listings, staffing agencies',     val:'employment'},
       {icon:'🏥', label:'Healthcare',              sub:'Medical, mental health, recovery',    val:'healthcare'},
@@ -2012,7 +2028,7 @@ const Q_STEPS = {
     title: 'What\'s your current situation?',
     sub: 'This helps us show you the most relevant housing options.',
     opts: [
-      {icon:'🚨', label:'Need shelter tonight',   sub:'Emergency shelters',                          val:'emergency'},
+      {icon:'🚨', label:'Need shelter tonight',   sub:'Emergency shelters',                           val:'emergency'},
       {icon:'🏘️', label:'Transitional Housing',   sub:'Stable, short-term housing support',          val:'transitional'},
       {icon:'🏡', label:'Affordable Housing',     sub:'Affordable, low-income apartments',           val:'affordable'},
       {icon:'🤝', label:'Talk to a Case Manager', sub:'Personalized, one-on-one housing navigation', val:'casemgr'}
@@ -2282,6 +2298,7 @@ function buildMapResources() {
 }
 
 let mapInstance = null;
+let mapTileLayer = null;
 let mapMarkers = [];
 let mapAllResources = [];
 let activeMapCat = 'all';
@@ -2295,6 +2312,28 @@ function makeMapIcon(color) {
     popupAnchor: [0, -10]
   });
 }
+
+function setMapTheme(isDark) {
+  if (!mapInstance) return;
+  const tileUrl = isDark
+    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+    
+  if (mapTileLayer) {
+    mapTileLayer.setUrl(tileUrl);
+  } else {
+    mapTileLayer = L.tileLayer(tileUrl, {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      maxZoom: 19,
+      subdomains: 'abcd'
+    }).addTo(mapInstance);
+  }
+}
+
+// Watch for system theme changes dynamically
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  setMapTheme(e.matches);
+});
 
 function renderMapMarkers(cat) {
   mapMarkers.forEach(m => m.remove());
@@ -2329,9 +2368,10 @@ function renderMapList(cat) {
   }
   list.innerHTML = filtered.map((res, i) => {
     const cityPart = res.address ? res.address.split(',').slice(-2).join(',').trim() : '';
+    const globalIdx = mapAllResources.indexOf(res);
     return `<div class="map-item" role="listitem" tabindex="0"
-      onclick="focusMapItem(${mapAllResources.indexOf(res)})"
-      onkeydown="if(event.key==='Enter'||event.key===' ')focusMapItem(${mapAllResources.indexOf(res)})">
+      onclick="focusMapItem(${globalIdx})"
+      onkeydown="if(event.key==='Enter'||event.key===' ')focusMapItem(${globalIdx})">
       <div class="map-item__dot" style="background:${MAP_COLORS[res.cat]||'#64748b'}"></div>
       <div>
         <div class="map-item__name">${res.name}</div>
@@ -2379,19 +2419,19 @@ function setupMapFilters() {
 }
 
 function initMap() {
-  if (mapInstance) { mapInstance.invalidateSize(); return; }
-
-  const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const tileUrl = darkMode
-    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+  if (typeof L === 'undefined') {
+    console.error("Leaflet failed to load.");
+    return;
+  }
+  if (mapInstance) { 
+    mapInstance.invalidateSize(); 
+    return; 
+  }
 
   mapInstance = L.map('map-container', {zoomControl:true}).setView([33.65, -117.28], 10);
-  L.tileLayer(tileUrl, {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
-    maxZoom: 19,
-    subdomains: 'abcd'
-  }).addTo(mapInstance);
+  
+  const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  setMapTheme(darkMode);
 
   mapAllResources = buildMapResources();
   renderMapMarkers('all');
@@ -2401,6 +2441,13 @@ function initMap() {
   const badge = document.getElementById('mapTotalCount');
   if (badge) badge.textContent = `${mapAllResources.length} resource${mapAllResources.length!==1?'s':''} shown`;
 }
+
+// Handle window resize cleanly for map adjustments
+window.addEventListener('resize', debounce(() => {
+  if (mapInstance && document.getElementById('page-map').classList.contains('active')) {
+    mapInstance.invalidateSize();
+  }
+}, 250));
 
 </script>
 </body>
