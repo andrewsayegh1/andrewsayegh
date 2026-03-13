@@ -1999,14 +1999,14 @@ setInterval(fetchAndPopulateJobs, 300000);
 const Q_STEPS = {
   need: {
     eyebrow: 'STEP 1',
-    title: 'What do you need help with?',
+    title: 'What do you need help with today?',
     sub: 'Select your most urgent need and we\'ll guide you to the right resources.',
     opts: [
-      {icon:'🆘', label:'Crisis Support',          sub:'Hotlines, immediate safety help',     val:'crisis'},
+      {icon:'🆘', label:'Crisis Support',          sub:'Hotlines, immediate help',            val:'crisis'},
       {icon:'🏠', label:'Housing',                 sub:'Shelters, transitional, affordable',  val:'housing'},
-      {icon:'💼', label:'Employment',              sub:'Job listings, staffing, career help', val:'employment'},
+      {icon:'💼', label:'Employment',              sub:'Job listings, staffing agencies',     val:'employment'},
       {icon:'🏥', label:'Healthcare',              sub:'Medical, mental health, recovery',    val:'healthcare'},
-      {icon:'🍎', label:'Food & Essentials',       sub:'Food pantries, clothing, essentials', val:'food'},
+      {icon:'🍎', label:'Food & Basics',           sub:'Food pantries, clothing, essentials', val:'food'},
       {icon:'⚖️', label:'Legal & Social Services', sub:'Legal aid, public benefits',          val:'legal'}
     ]
   },
@@ -2015,10 +2015,10 @@ const Q_STEPS = {
     title: 'What\'s your current situation?',
     sub: 'This helps us show you the most relevant housing options.',
     opts: [
-      {icon:'🚨', label:'Need shelter tonight',        sub:'Emergency — I need a safe place now',        val:'emergency'},
-      {icon:'🏡', label:'Transitional / Sober Living', sub:'Short-term stable housing support',          val:'transitional'},
-      {icon:'🏘️', label:'Affordable Housing',          sub:'Longer-term affordable apartment search',    val:'affordable'},
-      {icon:'🤝', label:'Talk to a Case Manager',      sub:'Get personalized, one-on-one guidance',      val:'casemgr'}
+      {icon:'🚨', label:'Need shelter tonight',   sub:'Emergency shelters',                          val:'emergency'},
+      {icon:'🏘️', label:'Transitional Housing',   sub:'Stable, short-term housing support',          val:'transitional'},
+      {icon:'🏡', label:'Affordable Housing',     sub:'Affordable, low-income apartments',           val:'affordable'},
+      {icon:'🤝', label:'Talk to a Case Manager', sub:'Personalized, one-on-one housing navigation', val:'casemgr'}
     ]
   },
   healthcare_sub: {
